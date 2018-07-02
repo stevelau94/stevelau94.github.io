@@ -5,18 +5,18 @@
     
     <title>在ubuntu gnome上 hexo的安装,配置及部署至gitpage | Octopi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="在ubuntu gnome上 hexo的安装,配置及部署至gitpage这算是自己第一个blog，其实以前也有写一些但是没有整理过因为懒吧终于不懒了，建个hexo也算是给自己一个记录的地方把这次搭建的过程记录了下来，希望可以帮到读者   其实整个下来的步骤超级简单，无脑复制粘贴应该就能成   我使用的环境是：Ubuntu+git+github之前我也在Windows10上面弄过，步骤基本一样">
+    <meta name="description" content="这算是自己第一个blog，其实以前也有写一些但是没有整理过因为懒吧终于不懒了，建个hexo也算是给自己一个记录的地方把这次搭建的过程记录了下来，希望可以帮到读者   其实整个下来的步骤超级简单，无脑复制粘贴应该就能成   我使用的环境是：Ubuntu+git+github之前我也在Windows10上面弄过，步骤基本一样   有一些前面需要注意的事：  github的SSHKey需要配置好 本地的">
 <meta name="keywords" content="ubuntu,hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在ubuntu gnome上 hexo的安装,配置及部署至gitpage">
 <meta property="og:url" content="http://yoursite.com/2018/07/02/hexo的安装与配置/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="在ubuntu gnome上 hexo的安装,配置及部署至gitpage这算是自己第一个blog，其实以前也有写一些但是没有整理过因为懒吧终于不懒了，建个hexo也算是给自己一个记录的地方把这次搭建的过程记录了下来，希望可以帮到读者   其实整个下来的步骤超级简单，无脑复制粘贴应该就能成   我使用的环境是：Ubuntu+git+github之前我也在Windows10上面弄过，步骤基本一样">
+<meta property="og:description" content="这算是自己第一个blog，其实以前也有写一些但是没有整理过因为懒吧终于不懒了，建个hexo也算是给自己一个记录的地方把这次搭建的过程记录了下来，希望可以帮到读者   其实整个下来的步骤超级简单，无脑复制粘贴应该就能成   我使用的环境是：Ubuntu+git+github之前我也在Windows10上面弄过，步骤基本一样   有一些前面需要注意的事：  github的SSHKey需要配置好 本地的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-02T14:12:45.248Z">
+<meta property="og:updated_time" content="2018-07-02T14:15:34.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在ubuntu gnome上 hexo的安装,配置及部署至gitpage">
-<meta name="twitter:description" content="在ubuntu gnome上 hexo的安装,配置及部署至gitpage这算是自己第一个blog，其实以前也有写一些但是没有整理过因为懒吧终于不懒了，建个hexo也算是给自己一个记录的地方把这次搭建的过程记录了下来，希望可以帮到读者   其实整个下来的步骤超级简单，无脑复制粘贴应该就能成   我使用的环境是：Ubuntu+git+github之前我也在Windows10上面弄过，步骤基本一样">
+<meta name="twitter:description" content="这算是自己第一个blog，其实以前也有写一些但是没有整理过因为懒吧终于不懒了，建个hexo也算是给自己一个记录的地方把这次搭建的过程记录了下来，希望可以帮到读者   其实整个下来的步骤超级简单，无脑复制粘贴应该就能成   我使用的环境是：Ubuntu+git+github之前我也在Windows10上面弄过，步骤基本一样   有一些前面需要注意的事：  github的SSHKey需要配置好 本地的">
     
 
     
@@ -84,7 +84,7 @@
             <div id="search-form-wrap">
 
     <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
         <button type="submit" class="search-form-submit"></button>
     </form>
     <div class="ins-search">
@@ -103,10 +103,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: 'Posts',
+            POSTS: 'Entradas',
             PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
             UNTITLED: '(Untitled)',
         },
         ROOT_URL: '/',
@@ -137,7 +137,7 @@
                 <td>
                     
     <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
     </div>
 
                 </td>
@@ -157,16 +157,16 @@
             <h2 id="name">Octopi lau</h2>
             <h3 id="title">pythoner &amp; DL</h3>
             <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>Hangzhou, China</span>
-            <a id="follow" target="_blank" href="https://github.com/stevelau94/">FOLLOW</a>
+            <a id="follow" target="_blank" href="https://github.com/stevelau94/">SEGUIR</a>
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
                 3
-                <span>posts</span>
+                <span>Entradas</span>
             </div>
             <div class="article-info-block">
                 3
-                <span>tags</span>
+                <span>Etiquetas</span>
             </div>
         </div>
         
@@ -256,7 +256,7 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h1 id="在ubuntu-gnome上-hexo的安装-配置及部署至gitpage"><a href="#在ubuntu-gnome上-hexo的安装-配置及部署至gitpage" class="headerlink" title="在ubuntu gnome上 hexo的安装,配置及部署至gitpage"></a>在ubuntu gnome上 hexo的安装,配置及部署至gitpage</h1><p>这算是自己第一个blog，其实以前也有写一些但是没有整理过<br>因为懒吧<br>终于不懒了，建个hexo也算是给自己一个记录的地方<br>把这次搭建的过程记录了下来，希望可以帮到读者  </p>
+            <p>这算是自己第一个blog，其实以前也有写一些但是没有整理过<br>因为懒吧<br>终于不懒了，建个hexo也算是给自己一个记录的地方<br>把这次搭建的过程记录了下来，希望可以帮到读者  </p>
 <p>其实整个下来的步骤超级简单，无脑复制粘贴应该就能成  </p>
 <p>我使用的环境是：Ubuntu+git+github<br>之前我也在Windows10上面弄过，步骤基本一样  </p>
 <p>有一些前面需要注意的事：</p>
@@ -305,7 +305,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/02/hexo的安装与配置/" data-id="cjj4cgn9m0001eohst6vp1hcg" class="article-share-link"><i class="fas fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2018/07/02/hexo的安装与配置/" data-id="cjj4ctd6t0005qmhs10v5lbgm" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -382,7 +382,7 @@
     
     
         <a href="/2018/07/01/first-test-blog/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
+            <strong class="article-nav-caption">Más viejo</strong>
             <div class="article-nav-title">first test blog</div>
         </a>
     
@@ -403,7 +403,7 @@
    
         
     <div class="widget-wrap">
-        <h3 class="widget-title">recent</h3>
+        <h3 class="widget-title">Recientes</h3>
         <div class="widget">
             <ul id="recent-post" class="">
                 
@@ -471,7 +471,7 @@
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">categories</h3>
+        <h3 class="widget-title">Categorias</h3>
         <div class="widget">
             <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GnomeUbuntu/">GnomeUbuntu</a><span class="category-list-count">1</span></li></ul>
         </div>
@@ -480,7 +480,7 @@
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">archives</h3>
+        <h3 class="widget-title">Archivos</h3>
         <div class="widget">
             <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">3</span></li></ul>
         </div>
@@ -489,7 +489,7 @@
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">tags</h3>
+        <h3 class="widget-title">Etiquetas</h3>
         <div class="widget">
             <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li></ul>
         </div>
@@ -498,7 +498,7 @@
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">tag cloud</h3>
+        <h3 class="widget-title">Nube de etiquetas</h3>
         <div class="widget tagcloud">
             <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a>
         </div>
@@ -507,7 +507,7 @@
     
         
     <div class="widget-wrap widget-list">
-        <h3 class="widget-title">links</h3>
+        <h3 class="widget-title">Links</h3>
         <div class="widget">
             <ul>
                 
