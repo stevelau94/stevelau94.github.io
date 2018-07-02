@@ -35,7 +35,7 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab 新标签打开链接
 filename_case: 0
 render_drafts: false # 显示草稿
-post_asset_folder: false
+post_asset_folder: ture
 relative_link: false # 把链接改为与根目录的相对位址
 future: true
 highlight:
