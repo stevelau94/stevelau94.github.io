@@ -1,5 +1,5 @@
 ---
-title: 在ubuntu gnome上 hexo的安装,配置及部署至gitpage
+title: 在GnomeUbuntu上安装hexo,配置及部署至gitpage
 date: 2018-07-02 21:49:15
 categories: "GnomeUbuntu"
 tags: 
