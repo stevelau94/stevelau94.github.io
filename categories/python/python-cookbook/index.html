@@ -3,20 +3,15 @@
 <head>
     <meta charset="utf-8">
     
-    <title>first test blog | Octopi</title>
+    <title>Category: python cookbook | Octopi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Here is my first hexo blog">
-<meta name="keywords" content="测试">
-<meta property="og:type" content="article">
-<meta property="og:title" content="first test blog">
-<meta property="og:url" content="http://yoursite.com/2018/07/01/first-test-blog/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Octopi">
+<meta property="og:url" content="http://yoursite.com/categories/python/python-cookbook/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="Here is my first hexo blog">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-01T15:37:06.475Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="first test blog">
-<meta name="twitter:description" content="Here is my first hexo blog">
+<meta name="twitter:title" content="Octopi">
     
 
     
@@ -209,155 +204,50 @@
 </aside>
 
             
-            <section id="main"><article id="post-first-test-blog" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
+            <section id="main">
+<div class="timeline timeline-wrap">
+    <div class="timeline-row timeline-row-major">
+        <span class="node"><i class="fas fa-folder"></i></span>
+        <h1 class="title">python cookbook</h1>
+    </div>
+    
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
                 
     
-        <h1 class="article-title" itemprop="name">
-            first test blog
+        <h1 itemprop="name">
+            <a class="timeline-article-title" href="/2018/07/10/python-数据结构与算法（1）/">python 数据结构与算法（1）</a>
         </h1>
     
 
-                
-                    <div class="article-meta">
-                        
+                <div class="article-meta">
+                    
     <div class="article-date">
         <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/01/first-test-blog/">
-            <time datetime="2018-07-01T15:30:25.000Z" itemprop="datePublished">2018-07-01</time>
+        <a href="/2018/07/10/python-数据结构与算法（1）/">
+            <time datetime="2018-07-10T15:13:45.000Z" itemprop="datePublished">2018-07-10</time>
         </a>
     </div>
 
 
-                        
-                        
+                    
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
+    </div>
+
+                    
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/测试/">测试</a>
+        <a class="tag-link" href="/tags/data-structure/">data structure</a>, <a class="tag-link" href="/tags/python/">python</a>
     </div>
 
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>Here is my first hexo blog</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2018/07/01/first-test-blog/" data-id="cjjfu8k8c0008ckhsgeq7cd3q" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/2018/07/02/hexo的安装与配置/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Newer</strong>
-            <div class="article-nav-title">
-                
-                    在GnomeUbuntu上安装hexo,配置及部署至gitpage
-                
+                </div>
             </div>
-        </a>
+        </div>
     
-    
-        <a href="/2018/07/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">Hello World</div>
-        </a>
-    
-</nav>
-
-
-    
-</article>
-
-
-    
-    
-
+</div>
 </section>
             
                 
