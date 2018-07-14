@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>python 文本处理 | Octopi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1.处理任意分隔符，拆分字符串字符串的split()无法处理多中分隔符的情况re.split()可以提供更强大的功能123456&amp;gt;&amp;gt;&amp;gt; L&apos;asd fee, fedjc;dww fexsa    wdca. dfefacx&apos;&amp;gt;&amp;gt;&amp;gt; import re&amp;gt;&amp;gt;&amp;gt; re.split(r&apos;[;,\s]\s*&apos;, L)[&apos;asd&apos;, &apos;fee&apos;, &apos;fed">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 文本处理">
+<meta property="og:url" content="http://yoursite.com/2018/07/13/python-文本处理/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="1.处理任意分隔符，拆分字符串字符串的split()无法处理多中分隔符的情况re.split()可以提供更强大的功能123456&amp;gt;&amp;gt;&amp;gt; L&apos;asd fee, fedjc;dww fexsa    wdca. dfefacx&apos;&amp;gt;&amp;gt;&amp;gt; import re&amp;gt;&amp;gt;&amp;gt; re.split(r&apos;[;,\s]\s*&apos;, L)[&apos;asd&apos;, &apos;fee&apos;, &apos;fed">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-14T18:06:34.859Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python 文本处理">
+<meta name="twitter:description" content="1.处理任意分隔符，拆分字符串字符串的split()无法处理多中分隔符的情况re.split()可以提供更强大的功能123456&amp;gt;&amp;gt;&amp;gt; L&apos;asd fee, fedjc;dww fexsa    wdca. dfefacx&apos;&amp;gt;&amp;gt;&amp;gt; import re&amp;gt;&amp;gt;&amp;gt; re.split(r&apos;[;,\s]\s*&apos;, L)[&apos;asd&apos;, &apos;fee&apos;, &apos;fed">
+    
+
+    
+        <link rel="alternate" href="/" title="Octopi" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/octopus_favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Octopi</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">主页</a>
+                
+                    <a class="main-nav-link" href="/archives">文章</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于我</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/octopus_avatar.png" />
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">主页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">文章</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于我</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/octopus_avatar.png" />
+            <h2 id="name">Octopi lau</h2>
+            <h3 id="title">pythoner &amp; DL</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>Hangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/stevelau94/">SEGUIR</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                10
+                <span>Entradas</span>
+            </div>
+            <div class="article-info-block">
+                6
+                <span>Etiquetas</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/stevelau94/" target="_blank" title="github" class=tooltip>
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="weibo" class=tooltip>
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="wechat" class=tooltip>
+                            <i class="fab fa-wechat"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fab fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-python-文本处理" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            python 文本处理
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="/2018/07/13/python-文本处理/">
+            <time datetime="2018-07-12T18:05:52.000Z" itemprop="datePublished">2018-07-13</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/python/">python</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="1-处理任意分隔符，拆分字符串"><a href="#1-处理任意分隔符，拆分字符串" class="headerlink" title="1.处理任意分隔符，拆分字符串"></a>1.处理任意分隔符，拆分字符串</h2><h3 id="字符串的split-无法处理多中分隔符的情况"><a href="#字符串的split-无法处理多中分隔符的情况" class="headerlink" title="字符串的split()无法处理多中分隔符的情况"></a>字符串的split()无法处理多中分隔符的情况</h3><h3 id="re-split-可以提供更强大的功能"><a href="#re-split-可以提供更强大的功能" class="headerlink" title="re.split()可以提供更强大的功能"></a>re.split()可以提供更强大的功能</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>L</span><br><span class="line"><span class="string">'asd fee, fedjc;dww fexsa    wdca. dfefacx'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'[;,\s]\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">'fee'</span>, <span class="string">'fedjc'</span>, <span class="string">'dww'</span>, <span class="string">'fexsa'</span>, <span class="string">'wdca.'</span>, <span class="string">'dfefacx'</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="注意re-split-的捕获组写法"><a href="#注意re-split-的捕获组写法" class="headerlink" title="注意re.split()的捕获组写法"></a>注意re.split()的捕获组写法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'[;|,|\s]\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">'fee'</span>, <span class="string">'fedjc'</span>, <span class="string">'dww'</span>, <span class="string">'fexsa'</span>, <span class="string">'wdca.'</span>, <span class="string">'dfefacx'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'(;,\s)\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd fee, fedjc;dww fexsa    wdca. dfefacx'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'(;|,|\s)\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">' '</span>, <span class="string">'fee'</span>, <span class="string">','</span>, <span class="string">'fedjc'</span>, <span class="string">';'</span>, <span class="string">'dww'</span>, <span class="string">' '</span>, <span class="string">'fexsa'</span>, <span class="string">' '</span>, <span class="string">'wdca.'</span>, <span class="string">' '</span>, <span class="string">'dfefacx'</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="进一步将值和分隔符解析出来"><a href="#进一步将值和分隔符解析出来" class="headerlink" title="进一步将值和分隔符解析出来"></a>进一步将值和分隔符解析出来</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">f = re.split(<span class="string">r'(;|,|\s)\s*'</span>, L)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">' '</span>, <span class="string">'fee'</span>, <span class="string">','</span>, <span class="string">'fedjc'</span>, <span class="string">';'</span>, <span class="string">'dww'</span>, <span class="string">' '</span>, <span class="string">'fexsa'</span>, <span class="string">' '</span>, <span class="string">'wdca.'</span>, <span class="string">' '</span>, <span class="string">'dfefacx'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = f[::<span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">'fee'</span>, <span class="string">'fedjc'</span>, <span class="string">'dww'</span>, <span class="string">'fexsa'</span>, <span class="string">'wdca.'</span>, <span class="string">'dfefacx'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>delimiters = f[<span class="number">1</span>::<span class="number">2</span>] + [<span class="string">''</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>delimiters</span><br><span class="line">[<span class="string">' '</span>, <span class="string">','</span>, <span class="string">';'</span>, <span class="string">' '</span>, <span class="string">' '</span>, <span class="string">' '</span>, <span class="string">''</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="用-…-使用非捕获组，不取分隔符"><a href="#用-…-使用非捕获组，不取分隔符" class="headerlink" title="用(?:…)使用非捕获组，不取分隔符"></a>用(?:…)使用非捕获组，不取分隔符</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = re.split(<span class="string">r'(;|,|\s)\s*'</span>, L)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">' '</span>, <span class="string">'fee'</span>, <span class="string">','</span>, <span class="string">'fedjc'</span>, <span class="string">';'</span>, <span class="string">'dww'</span>, <span class="string">' '</span>, <span class="string">'fexsa'</span>, <span class="string">' '</span>, <span class="string">'wdca.'</span>, <span class="string">' '</span>, <span class="string">'dfefacx'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = re.split(<span class="string">r'(?:;|,|\s)\s*'</span>, L)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">'fee'</span>, <span class="string">'fedjc'</span>, <span class="string">'dww'</span>, <span class="string">'fexsa'</span>, <span class="string">'wdca.'</span>, <span class="string">'dfefacx'</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="2-匹配字符串开头-结尾（文件匹配用的上）"><a href="#2-匹配字符串开头-结尾（文件匹配用的上）" class="headerlink" title="2.匹配字符串开头/结尾（文件匹配用的上）"></a>2.匹配字符串开头/结尾（文件匹配用的上）</h2><h3 id="str-startswith-amp-str-endswith"><a href="#str-startswith-amp-str-endswith" class="headerlink" title="str.startswith() &amp; str.endswith()"></a>str.startswith() &amp; str.endswith()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>filename = <span class="string">'file.txt'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>filename.startswith(<span class="string">'a'</span>)</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>filename.startswith(<span class="string">'f'</span>)</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>filename.endswith(<span class="string">'.sh'</span>)</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>filename.endswith(<span class="string">'.txt'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="传入多项检查，需要传入元组"><a href="#传入多项检查，需要传入元组" class="headerlink" title="传入多项检查，需要传入元组"></a>传入多项检查，需要传入元组</h3><p><strong>如果选项在list或集合中，需要先转为元组</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> os</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>filenames = os.listdir(<span class="string">'.'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>filenames</span><br><span class="line">[<span class="string">'ubuntu-shadowsocks.md'</span>, <span class="string">'ubuntu-hexo-cross-device-deploy.md'</span>, <span class="string">'ubuntu-xmind.md'</span>, <span class="string">'.git'</span>, <span class="string">'python_cookbook'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[file <span class="keyword">for</span> file <span class="keyword">in</span> filenames <span class="keyword">if</span> file.endswith(<span class="string">'.git'</span>)]</span><br><span class="line">[<span class="string">'.git'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>any(name.endswith(<span class="string">'.md'</span>) <span class="keyword">for</span> name <span class="keyword">in</span> filenames)</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="检查有无特定文件"><a href="#检查有无特定文件" class="headerlink" title="检查有无特定文件"></a>检查有无特定文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> any(name.endswith(<span class="string">'.py'</span>,<span class="string">'.h'</span>) <span class="keyword">for</span> name <span class="keyword">in</span> listdir(dirname))</span><br></pre></td></tr></table></figure>
+<h2 id="3-使用通配符进行字符串匹配"><a href="#3-使用通配符进行字符串匹配" class="headerlink" title="3.使用通配符进行字符串匹配"></a>3.使用通配符进行字符串匹配</h2><p>UNIX下，使用常见的通配符进行匹配(<em>.py, Dat[0-9]</em>.csv)</p>
+<h3 id="fnmatch-amp-fnmatchcase"><a href="#fnmatch-amp-fnmatchcase" class="headerlink" title="fnmatch() &amp; fnmatchcase()"></a>fnmatch() &amp; fnmatchcase()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> fnmatch <span class="keyword">import</span> fnmatch, fnmatchcase</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fnmatch(<span class="string">'foo.txt'</span>,<span class="string">'*.txt'</span>)</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fnmatch(<span class="string">'foo.txt'</span>,<span class="string">'*.TXT'</span>)</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fnmatchcase(<span class="string">'foo.txt'</span>,<span class="string">'*.TXT'</span>)</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names = [<span class="string">'Dat1.csv'</span>,<span class="string">'Dat34.csv'</span>, <span class="string">'add.py'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[name <span class="keyword">for</span> name <span class="keyword">in</span> names <span class="keyword">if</span> fnmatch(name, <span class="string">'Dat[0-9]*'</span>)]</span><br><span class="line">[<span class="string">'Dat1.csv'</span>, <span class="string">'Dat34.csv'</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="4-文本模式的匹配和查找"><a href="#4-文本模式的匹配和查找" class="headerlink" title="4.文本模式的匹配和查找"></a>4.文本模式的匹配和查找</h2><h3 id="简单匹配-str-find-str-endswith-str-startswith"><a href="#简单匹配-str-find-str-endswith-str-startswith" class="headerlink" title="简单匹配 str.find() str.endswith() str.startswith()"></a>简单匹配 str.find() str.endswith() str.startswith()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>text = <span class="string">'ad, erefea, fea, fge. sfe, fea'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text.startswith(<span class="string">'a'</span>)</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text.startswith(<span class="string">'ad'</span>)</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text.startswith(<span class="string">'ad,'</span>)</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text.startswith(<span class="string">'ad,e'</span>)</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text.find(<span class="string">'a'</span>)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text.find(<span class="string">'ad'</span>)</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text.find(<span class="string">'d'</span>)</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="re-match-re-findall-re-findite-re-compile"><a href="#re-match-re-findall-re-findite-re-compile" class="headerlink" title="re.match(), re.findall(), re.findite() re.compile()"></a>re.match(), re.findall(), re.findite() re.compile()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>text1 = <span class="string">'07/13/2018'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text2 = <span class="string">'Nov 13, 2018'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># re.match() 匹配第一个</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">if</span> re.match(<span class="string">r'\d+/\d+/\d+'</span>, text1):</span><br><span class="line"><span class="meta">... </span>    print(<span class="string">'yes'</span>)</span><br><span class="line"><span class="meta">... </span><span class="keyword">else</span>:</span><br><span class="line"><span class="meta">... </span>    print(<span class="string">'no'</span>)</span><br><span class="line">yes</span><br><span class="line"></span><br><span class="line"><span class="comment"># re.compile() 将正则表达式模式编译成一个模式对象</span></span><br><span class="line">datepat = re.compile(<span class="string">r'\d+/\d+/\d+'</span>)</span><br><span class="line"><span class="keyword">if</span> datepat.match(text1):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># re.findall() 全局找</span></span><br><span class="line">datepat.findall(text1)</span><br><span class="line">[<span class="string">'07/13/2018'</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="捕获组"><a href="#捕获组" class="headerlink" title="捕获组"></a>捕获组</h3><p>使用re.compile()编译模式对象的时候，用括号包起来可以引入捕获组  </p>
+<p>捕获组会方便之后的处理，因为每个组的内容可以单独提取</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">datepat = re.compile(<span class="string">r'(\d+)/(\d+)/(\d+)/'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m = datepat.match(<span class="string">'7/15/2018'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m.group(<span class="number">0</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">AttributeError: <span class="string">'NoneType'</span> object has no attribute <span class="string">'group'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 找不同，尾端不能多/</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>datepat = re.compile(<span class="string">r'(\d+)/(\d+)/(\d+)'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m = datepat.match(<span class="string">'7/15/2018'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m.group(<span class="number">0</span>)</span><br><span class="line"><span class="string">'7/15/2018'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m.group(<span class="number">2</span>)</span><br><span class="line"><span class="string">'15'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m.groups()</span><br><span class="line">(<span class="string">'7'</span>, <span class="string">'15'</span>, <span class="string">'2018'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="re"><a href="#re" class="headerlink" title="re"></a>re</h3><blockquote>
+<p>基本功能，首先用re.compile()对匹配模式进行编译<br>然后使用re.match(), re.findall(), re.finditer()<br>如果只是简单的文本匹配或者搜索，可以省略编译操作</p>
+</blockquote>
+<p><strong>精确匹配，需要在模式中包含一个结束标记 $</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>datepat_ = re.compile(<span class="string">r'(\d+)/(\d+)/(\d+)$'</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="5-文本查找和替换"><a href="#5-文本查找和替换" class="headerlink" title="5.文本查找和替换"></a>5.文本查找和替换</h2><h3 id="简单替换，str-replace"><a href="#简单替换，str-replace" class="headerlink" title="简单替换，str.replace()"></a>简单替换，str.replace()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>text = <span class="string">'asd,zxc'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text.replace(<span class="string">'asd'</span>, <span class="string">'yyy'</span>)</span><br><span class="line"><span class="string">'yyy,zxc'</span></span><br></pre></td></tr></table></figure>
+<h3 id="复杂替换，re-sub"><a href="#复杂替换，re-sub" class="headerlink" title="复杂替换，re.sub()"></a>复杂替换，re.sub()</h3><p>sub()第一个参数是匹配模式，第二个参数是要替换上去的模式  </p>
+<p><strong>第一个参数也可以是函数</strong></p>
+<p>如果模式经常使用，可以将匹配模式编译起来以便更好的性能  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text = <span class="string">'Today is 7/13/2018, FIIA is 7/15/2018'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.sub(<span class="string">r'(\d+)/(\d+)/(\d+)'</span>, <span class="string">r'\3-\1-\2'</span>, text)</span><br><span class="line"><span class="string">'Today is 2018-7-13, FIIA is 2018-7-15'</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-不区分大小写，对文本的查找和替换"><a href="#6-不区分大小写，对文本的查找和替换" class="headerlink" title="6.不区分大小写，对文本的查找和替换"></a>6.不区分大小写，对文本的查找和替换</h2><h3 id="re的各种操作都要加上re-IGNORECASE"><a href="#re的各种操作都要加上re-IGNORECASE" class="headerlink" title="re的各种操作都要加上re.IGNORECASE"></a>re的各种操作都要加上re.IGNORECASE</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>text = <span class="string">'UPPER python, lower python, Mixed Python'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.findall(<span class="string">'python'</span>, text)</span><br><span class="line">[<span class="string">'python'</span>, <span class="string">'python'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.findall(<span class="string">'python'</span>, text, flags=re.IGNORECASE)</span><br><span class="line">[<span class="string">'python'</span>, <span class="string">'python'</span>, <span class="string">'Python'</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="7-实现最短匹配"><a href="#7-实现最短匹配" class="headerlink" title="7.实现最短匹配"></a>7.实现最短匹配</h2><h3 id="出现自动匹配到长模式的问题举例"><a href="#出现自动匹配到长模式的问题举例" class="headerlink" title="出现自动匹配到长模式的问题举例"></a>出现自动匹配到长模式的问题举例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 匹配的目标是引号内的文本</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>str_pat = re.compile(<span class="string">r'\"(.*)\"'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text1 = <span class="string">'Computer say "no."'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>str_pat.findall(text1)</span><br><span class="line">[<span class="string">'no.'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text2 = <span class="string">'Computer say "no." Phone say "yes."'</span></span><br><span class="line"><span class="comment"># * 是贪心策略，所以匹配到了最长的</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>str_pat.findall(text2)</span><br><span class="line">[<span class="string">'no." Phone say "yes.'</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加上？ 不会贪心匹配</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text2 = <span class="string">'Computer say "no." Phone say "yes."'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>str_pat = re.compile(<span class="string">r'\"(.*?)\"'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>str_pat.findall(text2)</span><br><span class="line">[<span class="string">'no.'</span>, <span class="string">'yes.'</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>在模式中，句号除了换行符之外可以匹配到任意字符</strong><br>但是如果以开始和结束文本将句号括起来的话，匹配过程中将尝试找出最长的可能匹配结果<br><strong>在* +后面添加？，会强制将匹配算法调整为寻找最短匹配</strong></p>
+<h2 id="8-编写多行模式的正则"><a href="#8-编写多行模式的正则" class="headerlink" title="8.编写多行模式的正则"></a>8.编写多行模式的正则</h2><h3 id="多行匹配举例"><a href="#多行匹配举例" class="headerlink" title="多行匹配举例"></a>多行匹配举例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>comment = re.compile(<span class="string">r'/\*(.*?)\*/'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text1 = <span class="string">'/* this is a comment */'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text2 = <span class="string">'''/* this is a</span></span><br><span class="line"><span class="string"><span class="meta">... </span>     multiline comment */'''</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>comment.findall(text1)</span><br><span class="line">[<span class="string">' this is a comment '</span>]</span><br><span class="line"><span class="comment"># . 无法匹配到换行符</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>comment.findall(text2)</span><br><span class="line">[]</span><br><span class="line"></span><br><span class="line"><span class="comment"># (?:.|\n) 指定一个非捕获组</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>comment = re.compile(<span class="string">r'/\*((?:.|\n)*?)\*/'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>comment.findall(text2)</span><br><span class="line">[<span class="string">' this is a \n     multiline comment '</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="re-compile-中可以标记-re-DOTALL-让-匹配换行符"><a href="#re-compile-中可以标记-re-DOTALL-让-匹配换行符" class="headerlink" title="re.compile()中可以标记 re.DOTALL 让.匹配换行符"></a>re.compile()中可以标记 re.DOTALL 让.匹配换行符</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>comment = re.compile(<span class="string">r'/\*(.*?)\*/'</span>, re.DOTALL)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>comment.findall(text2)</span><br><span class="line">[<span class="string">' this is a \n     multiline comment '</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="9-Unicode文本统一表示为规范形式"><a href="#9-Unicode文本统一表示为规范形式" class="headerlink" title="9.Unicode文本统一表示为规范形式"></a>9.Unicode文本统一表示为规范形式</h2><p>对于一个字符串来说，同一个文本拥有多种不同的表示形式是个大问题，为了解决这个问题，需要将文本统一表示为规范形式</p>
+<p>NFC 表示字符应该是全组成的(如果可能的话就是用单个代码点)<br>NFD 表示应该使用组合字符，每个字符可以完全分解开</p>
+<h3 id="unicode解决字符串多表示问题"><a href="#unicode解决字符串多表示问题" class="headerlink" title="unicode解决字符串多表示问题"></a>unicode解决字符串多表示问题</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1 = <span class="string">'steve Jalape\u00f1o'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2 = <span class="string">'steve Jalapen\u0303o'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1</span><br><span class="line"><span class="string">'steve Jalapeño'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2</span><br><span class="line"><span class="string">'steve Jalapeño'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1 == s2</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(s1)</span><br><span class="line"><span class="number">14</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(s2)</span><br><span class="line"><span class="number">15</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> unicodedata</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t1 = unicodedata.normalize(<span class="string">'NFC'</span>, s1)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t2 = unicodedata.normalize(<span class="string">'NFC'</span>, s2)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t1 == t2</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(ascii(t1))</span><br><span class="line"><span class="string">'steve Jalape\xf1o'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t3 = unicodedata.normalize(<span class="string">'NFD'</span>, s1)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t4 = unicodedata.normalize(<span class="string">'NFD'</span>, s2)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>t3 == t4</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(ascii(t3))</span><br><span class="line"><span class="string">'steve Jalapen\u0303o'</span></span><br></pre></td></tr></table></figure>
+<h2 id="10-正则处理Unicode"><a href="#10-正则处理Unicode" class="headerlink" title="10.正则处理Unicode"></a>10.正则处理Unicode</h2><h3 id="Unicode加re是可怕的，需要使用更高级的RE工具"><a href="#Unicode加re是可怕的，需要使用更高级的RE工具" class="headerlink" title="Unicode加re是可怕的，需要使用更高级的RE工具"></a>Unicode加re是可怕的，需要使用更高级的RE工具</h3><h2 id="11-字符串中去掉不需要的字符"><a href="#11-字符串中去掉不需要的字符" class="headerlink" title="11.字符串中去掉不需要的字符"></a>11.字符串中去掉不需要的字符</h2><h3 id="strip-lstrip-rstrip"><a href="#strip-lstrip-rstrip" class="headerlink" title="strip(), lstrip(), rstrip()"></a>strip(), lstrip(), rstrip()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">'      hello     '</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.strip()</span><br><span class="line"><span class="string">'hello'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.lstrip()</span><br><span class="line"><span class="string">'hello     '</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.rstrip()</span><br><span class="line"><span class="string">'      hello'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">'      hello===='</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">'      hello===='</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.strip(<span class="string">' ='</span>)</span><br><span class="line"><span class="string">'hello'</span></span><br></pre></td></tr></table></figure>
+<h3 id="strip-不会处理字符串中间的文本起作用，需要其他辅助，如replace"><a href="#strip-不会处理字符串中间的文本起作用，需要其他辅助，如replace" class="headerlink" title="strip() 不会处理字符串中间的文本起作用，需要其他辅助，如replace()"></a>strip() 不会处理字符串中间的文本起作用，需要其他辅助，如replace()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">'hello      world'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.strip()</span><br><span class="line"><span class="string">'hello      world'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.replace(<span class="string">' '</span>,<span class="string">''</span>)</span><br><span class="line"><span class="string">'helloworld'</span></span><br></pre></td></tr></table></figure>
+<h2 id="12-文本过滤和清理"><a href="#12-文本过滤和清理" class="headerlink" title="12.文本过滤和清理"></a>12.文本过滤和清理</h2><h3 id="简单处理-str-upper-str-lower"><a href="#简单处理-str-upper-str-lower" class="headerlink" title="简单处理 str.upper() str.lower()"></a>简单处理 str.upper() str.lower()</h3><h3 id="简单替换-str-replace-re-sub"><a href="#简单替换-str-replace-re-sub" class="headerlink" title="简单替换 str.replace() re.sub()"></a>简单替换 str.replace() re.sub()</h3><h3 id="规范化文本-unicodedata-normalize"><a href="#规范化文本-unicodedata-normalize" class="headerlink" title="规范化文本 unicodedata.normalize()"></a>规范化文本 unicodedata.normalize()</h3><h3 id="str-translate-做清理-可以接受转换函数"><a href="#str-translate-做清理-可以接受转换函数" class="headerlink" title="str.translate() 做清理,可以接受转换函数"></a>str.translate() 做清理,可以接受转换函数</h3><h2 id="13-对齐文本字符串"><a href="#13-对齐文本字符串" class="headerlink" title="13.对齐文本字符串"></a>13.对齐文本字符串</h2><h3 id="ljust-rjust-center"><a href="#ljust-rjust-center" class="headerlink" title="ljust(), rjust() center()"></a>ljust(), rjust() center()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line"><span class="string">'helloworld'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.ljust(<span class="number">20</span>)</span><br><span class="line"><span class="string">'helloworld          '</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.rjust(<span class="number">20</span>)</span><br><span class="line"><span class="string">'          helloworld'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.center(<span class="number">20</span>)</span><br><span class="line"><span class="string">'     helloworld     '</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.rjust(<span class="number">20</span>, <span class="string">'='</span>)</span><br><span class="line"><span class="string">'==========helloworld'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.center(<span class="number">20</span>, <span class="string">'*'</span>)</span><br><span class="line"><span class="string">'*****helloworld*****'</span></span><br></pre></td></tr></table></figure>
+<h3 id="format"><a href="#format" class="headerlink" title="format()"></a>format()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 实现和ljust, rjust center同样功能</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line"><span class="string">'helloworld'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(s, <span class="string">'&gt;20'</span>)</span><br><span class="line"><span class="string">'          helloworld'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(s, <span class="string">'&lt;20'</span>)</span><br><span class="line"><span class="string">'helloworld          '</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(s, <span class="string">'^20'</span>)</span><br><span class="line"><span class="string">'     helloworld     '</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(s, <span class="string">'+^20'</span>)</span><br><span class="line"><span class="string">'+++++helloworld+++++'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多个值也可使用</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'&#123;:&gt;10s&#125;&#123;:&gt;10s&#125;'</span>.format(<span class="string">'hello'</span>,<span class="string">'world'</span>)</span><br><span class="line"><span class="string">'     hello     world'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 类型不局限于字符串</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(<span class="number">1.2354</span>, <span class="string">'&gt;10'</span>)</span><br><span class="line"><span class="string">'    1.2354'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(<span class="number">1.2354</span>, <span class="string">'^10'</span>)</span><br><span class="line"><span class="string">'  1.2354  '</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(<span class="number">1.2354</span>, <span class="string">'^10f'</span>)</span><br><span class="line"><span class="string">' 1.235400 '</span></span><br></pre></td></tr></table></figure>
+<h2 id="14-字符串连接及合并"><a href="#14-字符串连接及合并" class="headerlink" title="14.字符串连接及合并"></a>14.字符串连接及合并</h2><h3 id="简单合并字符串，用-或者-‘’-join-或者-format"><a href="#简单合并字符串，用-或者-‘’-join-或者-format" class="headerlink" title="简单合并字符串，用 + 或者 ‘’.join() 或者 format()"></a>简单合并字符串，用 + 或者 ‘’.join() 或者 format()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">'a'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="string">'b'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a + <span class="string">' '</span> + b</span><br><span class="line"><span class="string">'a b'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pa = [<span class="string">'asd'</span>, <span class="string">'qwr'</span>, <span class="string">'fd'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">''</span>.join(pa)</span><br><span class="line"><span class="string">'asdqwrfd'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'&#123;&#125; &#123;&#125;'</span>.format(a, b)</span><br><span class="line"><span class="string">'a b'</span></span><br></pre></td></tr></table></figure>
+<h3 id="合并是非常低效的，不适合大量字符串拼接"><a href="#合并是非常低效的，不适合大量字符串拼接" class="headerlink" title="+ 合并是非常低效的，不适合大量字符串拼接"></a>+ 合并是非常低效的，不适合大量字符串拼接</h3><h3 id="生成器是个重要的工具"><a href="#生成器是个重要的工具" class="headerlink" title="生成器是个重要的工具"></a>生成器是个重要的工具</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>data = [<span class="string">'ALL'</span>, <span class="number">2300</span>, <span class="number">098.2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">','</span>.join(str(d) <span class="keyword">for</span> d <span class="keyword">in</span> data)</span><br><span class="line"><span class="string">'ALL,2300,98.2'</span></span><br></pre></td></tr></table></figure>
+<h3 id="I-O与拼接同时存在是，需要根据业务判断适合的方案"><a href="#I-O与拼接同时存在是，需要根据业务判断适合的方案" class="headerlink" title="I/O与拼接同时存在是，需要根据业务判断适合的方案"></a>I/O与拼接同时存在是，需要根据业务判断适合的方案</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># version 1 str较小时，拼接开销小于I/O开销</span></span><br><span class="line">f.write(str)</span><br><span class="line"></span><br><span class="line"><span class="comment"># version 2 每部分str都很大时</span></span><br><span class="line">f.write(str1)</span><br><span class="line">f.write(str2)</span><br></pre></td></tr></table></figure>
+<h3 id="如果代码要从短字符串中构建输出，使用生成器"><a href="#如果代码要从短字符串中构建输出，使用生成器" class="headerlink" title="如果代码要从短字符串中构建输出，使用生成器"></a>如果代码要从短字符串中构建输出，使用生成器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">sample</span><span class="params">()</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">yield</span> <span class="string">'Is'</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">yield</span> <span class="string">'APPLE'</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">yield</span> <span class="string">'THE'</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">yield</span> <span class="string">'GREATEST'</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">yield</span> <span class="string">'?'</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text = <span class="string">''</span>.join(sample())</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text</span><br><span class="line"><span class="string">'IsAPPLETHEGREATEST?'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> part <span class="keyword">in</span> sample(): f.write(part)</span><br></pre></td></tr></table></figure>
+<h2 id="15-给字符串中变量名做替换处理"><a href="#15-给字符串中变量名做替换处理" class="headerlink" title="15.给字符串中变量名做替换处理"></a>15.给字符串中变量名做替换处理</h2><h3 id="format-模拟替换操作"><a href="#format-模拟替换操作" class="headerlink" title="format()模拟替换操作"></a>format()模拟替换操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">'&#123;name&#125; is &#123;n&#125;'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.format(name=<span class="string">'apple'</span>, n=<span class="number">234</span>)</span><br><span class="line"><span class="string">'apple is 234'</span></span><br></pre></td></tr></table></figure>
+<h2 id="16-以固定列数-重新格式化文本"><a href="#16-以固定列数-重新格式化文本" class="headerlink" title="16.以固定列数 重新格式化文本"></a>16.以固定列数 重新格式化文本</h2><h3 id="textwrap"><a href="#textwrap" class="headerlink" title="textwrap"></a>textwrap</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> textwrap</span><br><span class="line">s = <span class="string">'XXX'</span></span><br><span class="line"><span class="comment"># 定义宽度</span></span><br><span class="line">print(textwrap.fill(s, <span class="number">70</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="获取终端尺寸"><a href="#获取终端尺寸" class="headerlink" title="获取终端尺寸"></a>获取终端尺寸</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.get_terminal_size().columns</span><br></pre></td></tr></table></figure>
+<h2 id="17-处理HTML-XML"><a href="#17-处理HTML-XML" class="headerlink" title="17.处理HTML XML"></a>17.处理HTML XML</h2><h2 id="18-文本分词"><a href="#18-文本分词" class="headerlink" title="18.文本分词"></a>18.文本分词</h2><h2 id="19-字节串上执行文本操作"><a href="#19-字节串上执行文本操作" class="headerlink" title="19.字节串上执行文本操作"></a>19.字节串上执行文本操作</h2><p>字节串很多时候可以当做字符串处理，使用字符串的大部分函数</p>
+<h3 id="注意，字节串需要解码打印"><a href="#注意，字节串需要解码打印" class="headerlink" title="注意，字节串需要解码打印"></a>注意，字节串需要解码打印</h3><p>在打印的时候，需要加上.decode(‘ascii’)或者别的 解码为文本字符串<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">b'hello'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(s)</span><br><span class="line"><span class="string">b'hello'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(s.decode(<span class="string">'ascii'</span>))</span><br><span class="line">hello</span><br></pre></td></tr></table></figure></p>
+<h3 id="注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码-encode"><a href="#注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码-encode" class="headerlink" title="注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码(encode)"></a>注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码(encode)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'&#123;:10s&#125;&#123;:10d&#125;'</span>.format(<span class="string">'allp'</span>, <span class="number">100</span>).encode(<span class="string">'ascii'</span>)</span><br><span class="line"><span class="string">b'allp             100'</span></span><br></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2018/07/13/python-文本处理/" data-id="cjjlq3h5l0015avhshoa50bi5" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/07/11/python-数据结构与算法（2）/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">python 数据结构与算法（2）</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Recientes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/13/python-文本处理/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
+                            <p class="item-title"><a href="/2018/07/13/python-文本处理/" class="title">python 文本处理</a></p>
+                            <p class="item-date"><time datetime="2018-07-12T18:05:52.000Z" itemprop="datePublished">2018-07-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/11/python-数据结构与算法（2）/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
+                            <p class="item-title"><a href="/2018/07/11/python-数据结构与算法（2）/" class="title">python 数据结构与算法（2）</a></p>
+                            <p class="item-date"><time datetime="2018-07-11T13:37:40.000Z" itemprop="datePublished">2018-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/10/python-数据结构与算法（1）/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
+                            <p class="item-title"><a href="/2018/07/10/python-数据结构与算法（1）/" class="title">python 数据结构与算法（1）</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T15:13:45.000Z" itemprop="datePublished">2018-07-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a></p>
+                            <p class="item-title"><a href="/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/" class="title">Gnome Ubuntu上安装下载工具 uget+aria2</a></p>
+                            <p class="item-date"><time datetime="2018-07-05T14:11:05.000Z" itemprop="datePublished">2018-07-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://www.hdwallpapers.net/previews/hot-air-balloon-over-the-mountain-987.jpg)" alt="Gnome Ubuntu上安装 搜狗拼音" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a></p>
+                            <p class="item-title"><a href="/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/" class="title">Gnome Ubuntu上安装 搜狗拼音</a></p>
+                            <p class="item-date"><time datetime="2018-07-03T12:49:56.000Z" itemprop="datePublished">2018-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/python-cookbook/">python cookbook</a><span class="category-list-count">3</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Archivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">10</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Etiquetas</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-structure/">data structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python数据结构/">python数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Nube de etiquetas</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/data-structure/" style="font-size: 13.33px;">data structure</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/python数据结构/" style="font-size: 13.33px;">python数据结构</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Octopi Lau<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
