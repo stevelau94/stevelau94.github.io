@@ -7,6 +7,7 @@ categories:
 tags: 
     - python
     - data structure
+    - python数据结构
 ---
 
 ## 1.切片命名
