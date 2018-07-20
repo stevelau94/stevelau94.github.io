@@ -158,11 +158,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                10
+                12
                 <span>Entradas</span>
             </div>
             <div class="article-info-block">
-                6
+                7
                 <span>Etiquetas</span>
             </div>
         </div>
@@ -205,6 +205,330 @@
 
             
             <section id="main">
+    <article id="post-python-迭代器和生成器" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/07/17/python-迭代器和生成器/">python 迭代器和生成器</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="/2018/07/17/python-迭代器和生成器/">
+            <time datetime="2018-07-16T16:01:08.000Z" itemprop="datePublished">2018-07-17</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/itertools/">itertools</a>, <a class="tag-link" href="/tags/python/">python</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="0-可迭代对象，迭代器，生成器"><a href="#0-可迭代对象，迭代器，生成器" class="headerlink" title="0.可迭代对象，迭代器，生成器"></a>0.可迭代对象，迭代器，生成器</h2><p><strong>注意区分 可迭代对象 和 迭代器</strong></p>
+<p>可迭代对象,Iterable, <strong>iter</strong>,<strong>getitem</strong><br>迭代器,Iterator,<strong>next</strong><br>迭代,Iteration<br>生成器,Generators  </p>
+<h2 id="1-手动访问迭代器元素"><a href="#1-手动访问迭代器元素" class="headerlink" title="1.手动访问迭代器元素"></a>1.手动访问迭代器元素</h2><p><strong>可迭代对象需要转换成迭代器之后，才可以执行next()操作</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>items = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>it = iter(items)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>it</span><br><span class="line">&lt;list_iterator object at <span class="number">0x7f256ddc8d68</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-创建迭代器，内部有可迭代对象，执行迭代"><a href="#2-创建迭代器，内部有可迭代对象，执行迭代" class="headerlink" title="2.创建迭代器，内部有可迭代对象，执行迭代"></a>2.创建迭代器，内部有可迭代对象，执行迭代</h2><p><strong>使自定义的容器实现迭代，就是实现<strong>iter</strong></strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self._value = value</span><br><span class="line"><span class="meta">... </span>        self._children = []</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="string">'Node (&#123;!r&#125;)'</span>.format(self._value)</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">add_child</span><span class="params">(self, node)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self._children.append(node)</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> iter(self._children)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root = Node(<span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>child1 = Node(<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>child2 = Node(<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root.add_child(child1)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root.add_child(child2)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> ch <span class="keyword">in</span> root: print(ch)</span><br><span class="line">...</span><br><span class="line">Node (<span class="number">1</span>)</span><br><span class="line">Node (<span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
+<p>iter(s)实际上是调用s.__iter()来返回底层迭代器的　　</p>
+<h2 id="3-生成器，新的迭代模式"><a href="#3-生成器，新的迭代模式" class="headerlink" title="3.生成器，新的迭代模式"></a>3.生成器，新的迭代模式</h2><p><strong>有yield就会变成生成器</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">countdown</span><span class="params">(n)</span>:</span></span><br><span class="line"><span class="meta">... </span>    print(<span class="string">'Starting to count from'</span>, n)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">yield</span> n</span><br><span class="line"><span class="meta">... </span>        n -= <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    print(<span class="string">'Done!'</span>)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = countdown(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">&lt;generator object countdown at <span class="number">0x7f256b46caf0</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(c)</span><br><span class="line">Starting to count <span class="keyword">from</span> <span class="number">3</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(c)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(c)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(c)</span><br><span class="line">Done!</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure>
+<p>结束的时候会返回StopIteration</p>
+<h2 id="4-自定义可迭代对象-实现简单的迭代协议"><a href="#4-自定义可迭代对象-实现简单的迭代协议" class="headerlink" title="4.自定义可迭代对象(实现简单的迭代协议)"></a>4.自定义可迭代对象(实现简单的迭代协议)</h2><p><strong>推荐使用生成器来实现迭代器</strong></p>
+<p>因为，如果直接自定义迭代器，需要维护内部的<strong>next</strong>状态，非常繁琐</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self._value = value</span><br><span class="line"><span class="meta">... </span>        self._children = []</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="string">'Node (&#123;!r&#125;)'</span>.format(self._value)</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">add_child</span><span class="params">(self, node)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self._children.append(node)</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> iter(self._children)</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">depth_first</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">yield</span> self</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">for</span> c <span class="keyword">in</span> self:</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">yield</span> <span class="keyword">from</span> c.depth_first()</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root = Node(<span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>child1 = Node(<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>child2 = Node(<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root.add_child(child1)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root.add_child(child2)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>child1.add_child(Node(<span class="number">3</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>child1.add_child(Node(<span class="number">4</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>child1.add_child(Node(<span class="number">5</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> ch <span class="keyword">in</span> root.depth_first():print(ch)</span><br><span class="line">...</span><br><span class="line">Node (<span class="number">0</span>)</span><br><span class="line">Node (<span class="number">1</span>)</span><br><span class="line">Node (<span class="number">3</span>)</span><br><span class="line">Node (<span class="number">4</span>)</span><br><span class="line">Node (<span class="number">5</span>)</span><br><span class="line">Node (<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="5-反向迭代"><a href="#5-反向迭代" class="headerlink" title="5.反向迭代"></a>5.反向迭代</h2><p>反向迭代只有在待处理对象拥有可确定的大小，或者对象实现了<strong>reversed()</strong>方法才能奏效。<br>否则需要将对象转换为list</p>
+<h3 id="reversed-反向迭代"><a href="#reversed-反向迭代" class="headerlink" title="reversed()反向迭代"></a>reversed()反向迭代</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> reversed(a): print(x)</span><br><span class="line">...</span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="自定义类使用reversed-实现反向迭代"><a href="#自定义类使用reversed-实现反向迭代" class="headerlink" title="自定义类使用reversed()实现反向迭代"></a>自定义类使用<strong>reversed</strong>()实现反向迭代</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Countdown</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, start)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self.start = start</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        n = self.start</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">yield</span> n</span><br><span class="line"><span class="meta">... </span>            n -= <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__reversed__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        n = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">while</span> n &lt;= self.start:</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">yield</span> n</span><br><span class="line"><span class="meta">... </span>            n += <span class="number">1</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = Countdown(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">&lt;__main__.Countdown object at <span class="number">0x7f256b48cf28</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> c: print(x)</span><br><span class="line">...</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> reversed(c): print(x)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-生成器函数，有额外状态"><a href="#6-生成器函数，有额外状态" class="headerlink" title="6.生成器函数，有额外状态"></a>6.生成器函数，有额外状态</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">linehistory</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lines, histlen=<span class="number">3</span>)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self.lines = lines</span><br><span class="line"><span class="meta">... </span>        self.history = deque(maxlen=histlen)</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">for</span> lineno, line <span class="keyword">in</span> enumerate(self.lines, <span class="number">1</span>):</span><br><span class="line"><span class="meta">... </span>            self.history.append((lineno, line))</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">yield</span> line</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">clear</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self.history.clear()</span><br></pre></td></tr></table></figure>
+<h2 id="7-迭代器，切片操作"><a href="#7-迭代器，切片操作" class="headerlink" title="7.迭代器，切片操作"></a>7.迭代器，切片操作</h2><h3 id="itertools-islice"><a href="#itertools-islice" class="headerlink" title="itertools.islice()"></a>itertools.islice()</h3><p>islice()的结果是返回一个迭代器　　</p>
+<p>islice()会消耗原迭代器中的数据　　</p>
+<p>如果之后需要重新使用之前的数据，需要提前将数据转入list中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(n)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">yield</span> n</span><br><span class="line"><span class="meta">... </span>        n += <span class="number">1</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = count(<span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c[<span class="number">10</span>:<span class="number">20</span>]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: <span class="string">'generator'</span> object <span class="keyword">is</span> <span class="keyword">not</span> subscriptable</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> itertools</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> itertools.islice(c, <span class="number">10</span>, <span class="number">20</span>):print(x)</span><br><span class="line">...</span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="number">11</span></span><br><span class="line"><span class="number">12</span></span><br><span class="line"><span class="number">13</span></span><br><span class="line"><span class="number">14</span></span><br><span class="line"><span class="number">15</span></span><br><span class="line"><span class="number">16</span></span><br><span class="line"><span class="number">17</span></span><br><span class="line"><span class="number">18</span></span><br><span class="line"><span class="number">19</span></span><br></pre></td></tr></table></figure>
+<h2 id="8-跳过可迭代对象的前一部分"><a href="#8-跳过可迭代对象的前一部分" class="headerlink" title="8.跳过可迭代对象的前一部分"></a>8.跳过可迭代对象的前一部分</h2><h3 id="itertools-dropwhile"><a href="#itertools-dropwhile" class="headerlink" title="itertools.dropwhile()"></a>itertools.dropwhile()</h3><p>满足条件的都会丢弃知道有元素不满足为止</p>
+<h3 id="itertools-islice-1"><a href="#itertools-islice-1" class="headerlink" title="itertools.islice()"></a>itertools.islice()</h3><p>在知道需要剔除的数量的时候，可以使用这个函数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> islice</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>it = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">65</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> islice(it, <span class="number">4</span>, <span class="keyword">None</span>):print(x)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">65</span></span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="9-迭代所有可能的组合和排列"><a href="#9-迭代所有可能的组合和排列" class="headerlink" title="9.迭代所有可能的组合和排列"></a>9.迭代所有可能的组合和排列</h2><h3 id="itertools-permutations"><a href="#itertools-permutations" class="headerlink" title="itertools.permutations()"></a>itertools.permutations()</h3><p>接受一个元素序列，将其中所有的元素重新排列为所有可能的情况<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> permutations</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> p <span class="keyword">in</span> permutations(items):print(p)</span><br><span class="line">...</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'c'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'a'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'a'</span>)</span><br><span class="line">(<span class="string">'c'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'c'</span>, <span class="string">'b'</span>, <span class="string">'a'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> p <span class="keyword">in</span> permutations(items, <span class="number">2</span>):print(p)</span><br><span class="line">...</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'a'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'c'</span>, <span class="string">'a'</span>)</span><br><span class="line">(<span class="string">'c'</span>, <span class="string">'b'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="itertools-combinations"><a href="#itertools-combinations" class="headerlink" title="itertools.combinations()"></a>itertools.combinations()</h3><p>可产生输入序列中的所有元素的全部组合（与顺序无关）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> combinations</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> p <span class="keyword">in</span> combinations(items, <span class="number">3</span>):print(p)</span><br><span class="line">...</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> p <span class="keyword">in</span> combinations(items, <span class="number">2</span>):print(p)</span><br><span class="line">...</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'c'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="itertools-combinations-with-replacement"><a href="#itertools-combinations-with-replacement" class="headerlink" title="itertools.combinations_with_replacement()"></a>itertools.combinations_with_replacement()</h3><p>可产生输入序列中的所有元素的全部组合（相同元素可以得到多次选择）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> combinations_with_replacement</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> p <span class="keyword">in</span> combinations_with_replacement(items, <span class="number">2</span>):print(p)</span><br><span class="line">...</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'a'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'a'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'b'</span>)</span><br><span class="line">(<span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line">(<span class="string">'c'</span>, <span class="string">'c'</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="10-迭代序列，并记录索引"><a href="#10-迭代序列，并记录索引" class="headerlink" title="10.迭代序列，并记录索引"></a>10.迭代序列，并记录索引</h2><h3 id="enumerate"><a href="#enumerate" class="headerlink" title="enumerate()"></a>enumerate()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> index,value <span class="keyword">in</span> enumerate(items):print(index,value)</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span> a</span><br><span class="line"><span class="number">1</span> b</span><br><span class="line"><span class="number">2</span> c</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> index,value <span class="keyword">in</span> enumerate(items, <span class="number">100</span>):print(index,value)</span><br><span class="line">...</span><br><span class="line"><span class="number">100</span> a</span><br><span class="line"><span class="number">101</span> b</span><br><span class="line"><span class="number">102</span> c</span><br></pre></td></tr></table></figure>
+<p>enumerate()返回是一个enumerate对象实例，是一个迭代器，可返回连续的元祖。</p>
+<p>元祖由索引值和传入调用next()得到的值组成</p>
+<h3 id="处理嵌套序列"><a href="#处理嵌套序列" class="headerlink" title="处理嵌套序列"></a>处理嵌套序列</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>data = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i, (x,y) <span class="keyword">in</span> enumerate(data):print(i,(x,y))</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span> (<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="number">1</span> (<span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="11-同时迭代多个序列"><a href="#11-同时迭代多个序列" class="headerlink" title="11.同时迭代多个序列"></a>11.同时迭代多个序列</h2><h3 id="zip-按照短的序列迭代"><a href="#zip-按照短的序列迭代" class="headerlink" title="zip() 按照短的序列迭代"></a>zip() 按照短的序列迭代</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">5357</span>, <span class="number">13</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">234</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">235</span>, <span class="number">87</span>, <span class="number">100</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(a),len(b)</span><br><span class="line">(<span class="number">7</span>, <span class="number">7</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">[<span class="number">1</span>, <span class="number">43</span>, <span class="number">67</span>, <span class="number">8</span>, <span class="number">34</span>, <span class="number">4</span>, <span class="number">67</span>, <span class="number">100</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(c)</span><br><span class="line"><span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x,y <span class="keyword">in</span> zip(a,b):print(x,y)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span> <span class="number">234</span></span><br><span class="line"><span class="number">4</span> <span class="number">6</span></span><br><span class="line"><span class="number">7</span> <span class="number">7</span></span><br><span class="line"><span class="number">5</span> <span class="number">8</span></span><br><span class="line"><span class="number">3</span> <span class="number">235</span></span><br><span class="line"><span class="number">5357</span> <span class="number">87</span></span><br><span class="line"><span class="number">13</span> <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x,y <span class="keyword">in</span> zip(a,c):print(x,y)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">4</span> <span class="number">43</span></span><br><span class="line"><span class="number">7</span> <span class="number">67</span></span><br><span class="line"><span class="number">5</span> <span class="number">8</span></span><br><span class="line"><span class="number">3</span> <span class="number">34</span></span><br><span class="line"><span class="number">5357</span> <span class="number">4</span></span><br><span class="line"><span class="number">13</span> <span class="number">67</span></span><br></pre></td></tr></table></figure>
+<p>可以接受多于两个序列<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x,y,z <span class="keyword">in</span> zip(a,c,b):print(x,y,z)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span> <span class="number">1</span> <span class="number">234</span></span><br><span class="line"><span class="number">4</span> <span class="number">43</span> <span class="number">6</span></span><br><span class="line"><span class="number">7</span> <span class="number">67</span> <span class="number">7</span></span><br><span class="line"><span class="number">5</span> <span class="number">8</span> <span class="number">8</span></span><br><span class="line"><span class="number">3</span> <span class="number">34</span> <span class="number">235</span></span><br><span class="line"><span class="number">5357</span> <span class="number">4</span> <span class="number">87</span></span><br><span class="line"><span class="number">13</span> <span class="number">67</span> <span class="number">100</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="itertools-zip-longest-按照长的迭代"><a href="#itertools-zip-longest-按照长的迭代" class="headerlink" title="itertools.zip_longest() 按照长的迭代"></a>itertools.zip_longest() 按照长的迭代</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x,y <span class="keyword">in</span> zip_longest(a,c):print(x,y)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">4</span> <span class="number">43</span></span><br><span class="line"><span class="number">7</span> <span class="number">67</span></span><br><span class="line"><span class="number">5</span> <span class="number">8</span></span><br><span class="line"><span class="number">3</span> <span class="number">34</span></span><br><span class="line"><span class="number">5357</span> <span class="number">4</span></span><br><span class="line"><span class="number">13</span> <span class="number">67</span></span><br><span class="line"><span class="keyword">None</span> <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置fillvalue</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x,y <span class="keyword">in</span> zip_longest(a,c, fillvalue=<span class="number">99999</span>):print(x,y)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">4</span> <span class="number">43</span></span><br><span class="line"><span class="number">7</span> <span class="number">67</span></span><br><span class="line"><span class="number">5</span> <span class="number">8</span></span><br><span class="line"><span class="number">3</span> <span class="number">34</span></span><br><span class="line"><span class="number">5357</span> <span class="number">4</span></span><br><span class="line"><span class="number">13</span> <span class="number">67</span></span><br><span class="line"><span class="number">99999</span> <span class="number">100</span></span><br></pre></td></tr></table></figure>
+<h2 id="12-迭代不同的容器"><a href="#12-迭代不同的容器" class="headerlink" title="12.迭代不同的容器"></a>12.迭代不同的容器</h2><h3 id="itertools-chain"><a href="#itertools-chain" class="headerlink" title="itertools.chain()"></a>itertools.chain()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> chain</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = [<span class="string">'x'</span>, <span class="string">'f'</span>, <span class="string">'s'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> chain(a, b): print(x)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line">x</span><br><span class="line">f</span><br><span class="line">s</span><br></pre></td></tr></table></figure>
+<h3 id="chain常见的用途是一次性对所有元素执行某项特定的操作"><a href="#chain常见的用途是一次性对所有元素执行某项特定的操作" class="headerlink" title="chain常见的用途是一次性对所有元素执行某项特定的操作"></a>chain常见的用途是一次性对所有元素执行某项特定的操作</h3><p>chain()可接受多个可迭代对象作为参数，然后会创建一个迭代器，该迭代器可连续访问并返回每个可迭代对象的元素</p>
+<p>使用chain比将各序列合并之后再迭代高效</p>
+<h2 id="13-创建处理数据的管道"><a href="#13-创建处理数据的管道" class="headerlink" title="13.创建处理数据的管道"></a>13.创建处理数据的管道</h2><h2 id="14-嵌套序列的扁平化处理"><a href="#14-嵌套序列的扁平化处理" class="headerlink" title="14.嵌套序列的扁平化处理"></a>14.嵌套序列的扁平化处理</h2><h3 id="yield-from"><a href="#yield-from" class="headerlink" title="yield from"></a>yield from</h3><h2 id="15-合并多个有序序列，并迭代整个有序序列"><a href="#15-合并多个有序序列，并迭代整个有序序列" class="headerlink" title="15.合并多个有序序列，并迭代整个有序序列"></a>15.合并多个有序序列，并迭代整个有序序列</h2><h3 id="heapq-merge"><a href="#heapq-merge" class="headerlink" title="heapq.merge()"></a>heapq.merge()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=[<span class="number">2</span>,<span class="number">5</span>,<span class="number">8</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> c <span class="keyword">in</span> heapq.merge(a, b):print(c)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p>heapq.merge开销很小，但是要求输入的数据必须有序</p>
+<h2 id="16-迭代器取代while循环"><a href="#16-迭代器取代while循环" class="headerlink" title="16.迭代器取代while循环"></a>16.迭代器取代while循环</h2>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2018/07/17/python-迭代器和生成器/" data-id="cjju6azfb001fc4hsq5bxjr8y" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-python处理数值，日期和时间" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/07/15/python处理数值，日期和时间/">python处理数值，日期和时间</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="/2018/07/15/python处理数值，日期和时间/">
+            <time datetime="2018-07-15T15:59:39.000Z" itemprop="datePublished">2018-07-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/python/">python</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="1-数值，取整"><a href="#1-数值，取整" class="headerlink" title="1.数值，取整"></a>1.数值，取整</h2><h3 id="round"><a href="#round" class="headerlink" title="round()"></a>round()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.23</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.23</span>, <span class="number">12</span>)</span><br><span class="line"><span class="number">1.23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">-1.5</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">-1.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">-1.5</span>)</span><br><span class="line"><span class="number">-2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.25</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.25</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.2</span></span><br></pre></td></tr></table></figure>
+<h3 id="注意进位问题"><a href="#注意进位问题" class="headerlink" title="注意进位问题"></a>注意进位问题</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.254</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.244</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.2</span></span><br></pre></td></tr></table></figure>
+<h3 id="反向取近似"><a href="#反向取近似" class="headerlink" title="反向取近似"></a>反向取近似</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(a, <span class="number">-1</span>)</span><br><span class="line"><span class="number">12340</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(a, <span class="number">-2</span>)</span><br><span class="line"><span class="number">12300</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-数值，精确的小数"><a href="#2-数值，精确的小数" class="headerlink" title="2.数值，精确的小数"></a>2.数值，精确的小数</h2><p>浮点数是有误差的</p>
+<h3 id="decimal"><a href="#decimal" class="headerlink" title="decimal"></a>decimal</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">4.32</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="number">3.23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = a + b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line"><span class="number">7.550000000000001</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> decimal <span class="keyword">import</span> Decimal</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = Decimal(<span class="string">'4.32'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = Decimal(<span class="string">'3.23'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = a+b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">Decimal(<span class="string">'7.55'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="decimal-使用上下文环境-localcontext-对运算进行控制"><a href="#decimal-使用上下文环境-localcontext-对运算进行控制" class="headerlink" title="decimal 使用上下文环境 localcontext 对运算进行控制"></a>decimal 使用上下文环境 localcontext 对运算进行控制</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> decimal <span class="keyword">import</span> Decimal</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = Decimal(<span class="string">'4.32'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = Decimal(<span class="string">'3.23'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> decimal <span class="keyword">import</span> localcontext</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> localcontext() <span class="keyword">as</span> ctx:</span><br><span class="line"><span class="meta">... </span>    ctx.prec = <span class="number">3</span></span><br><span class="line"><span class="meta">... </span>    print(a / b)</span><br><span class="line">...</span><br><span class="line"><span class="number">1.34</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> localcontext() <span class="keyword">as</span> ctx:</span><br><span class="line"><span class="meta">... </span>    ctx.prec = <span class="number">50</span></span><br><span class="line"><span class="meta">... </span>    print(a / b)</span><br><span class="line">...</span><br><span class="line"><span class="number">1.3374613003095975232198142414860681114551083591331</span></span><br></pre></td></tr></table></figure>
+<p><strong>decimal比float性能低很多</strong></p>
+<h2 id="3-数值，格式化输出"><a href="#3-数值，格式化输出" class="headerlink" title="3.数值，格式化输出"></a>3.数值，格式化输出</h2><h3 id="format（）"><a href="#format（）" class="headerlink" title="format（）"></a>format（）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="number">123.45678</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(x, <span class="string">'0.2f'</span>)</span><br><span class="line"><span class="string">'123.46'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(x, <span class="string">'&gt;10.1f'</span>)</span><br><span class="line"><span class="string">'     123.5'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(x, <span class="string">'^10.1f'</span>)</span><br><span class="line"><span class="string">'  123.5   '</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="number">123643.45678</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(x, <span class="string">','</span>)</span><br><span class="line"><span class="string">'123,643.45678'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(x, <span class="string">'e'</span>)</span><br><span class="line"><span class="string">'1.236435e+05'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(x, <span class="string">'.2e'</span>)</span><br><span class="line"><span class="string">'1.24e+05'</span></span><br></pre></td></tr></table></figure>
+<p><strong>当限制数值的位数时，数值会根据round()取整</strong></p>
+<h2 id="4-数值，各种进制"><a href="#4-数值，各种进制" class="headerlink" title="4.数值，各种进制"></a>4.数值，各种进制</h2><p><strong>八进制前缀0o</strong></p>
+<h3 id="bin-oct-hex"><a href="#bin-oct-hex" class="headerlink" title="bin(),oct(),hex()"></a>bin(),oct(),hex()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>bin(x)</span><br><span class="line"><span class="string">'0b10011010010'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>oct(x)</span><br><span class="line"><span class="string">'0o2322'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>hex(x)</span><br><span class="line"><span class="string">'0x4d2'</span></span><br></pre></td></tr></table></figure>
+<h3 id="去掉前缀，format"><a href="#去掉前缀，format" class="headerlink" title="去掉前缀，format()"></a>去掉前缀，format()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(x, <span class="string">'b'</span>)</span><br><span class="line"><span class="string">'10011010010'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(x, <span class="string">'o'</span>)</span><br><span class="line"><span class="string">'2322'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(x, <span class="string">'x'</span>)</span><br><span class="line"><span class="string">'4d2'</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-数值，大整数-字节串处理"><a href="#5-数值，大整数-字节串处理" class="headerlink" title="5.数值，大整数 字节串处理"></a>5.数值，大整数 字节串处理</h2><h3 id="字节串和大整数转换"><a href="#字节串和大整数转换" class="headerlink" title="字节串和大整数转换"></a>字节串和大整数转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>data = <span class="string">b'\x00\x124V\x00x\x90\xab\x00\xcd\xef\x01\x00#\x004'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data</span><br><span class="line"><span class="string">b'\x00\x124V\x00x\x90\xab\x00\xcd\xef\x01\x00#\x004'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(data)</span><br><span class="line"><span class="number">16</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>int.from_bytes(data, <span class="string">'little'</span>)</span><br><span class="line"><span class="number">69120565665751139577663547927094891008</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>int.from_bytes(data, <span class="string">'big'</span>)</span><br><span class="line"><span class="number">94522842520747284487117727783387188</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="number">94522842520747284487117727783387188</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.to_bytes(<span class="number">16</span>, <span class="string">'big'</span>)</span><br><span class="line"><span class="string">b'\x00\x124V\x00x\x90\xab\x00\xcd\xef\x01\x00#\x004'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.to_bytes(<span class="number">16</span>, <span class="string">'little'</span>)</span><br><span class="line"><span class="string">b'4\x00#\x00\x01\xef\xcd\x00\xab\x90x\x00V4\x12\x00'</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-数值，复数"><a href="#6-数值，复数" class="headerlink" title="6.数值，复数"></a>6.数值，复数</h2><h3 id="complex-real-image"><a href="#complex-real-image" class="headerlink" title="complex(real, image)"></a>complex(real, image)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = complex(<span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">(<span class="number">2</span>+<span class="number">4j</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="number">3</span> <span class="number">-5j</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">(<span class="number">3</span><span class="number">-5j</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.real</span><br><span class="line"><span class="number">2.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.imag</span><br><span class="line"><span class="number">-5.0</span></span><br><span class="line"><span class="comment"># 可以进行算数操作</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>abs(a)</span><br><span class="line"><span class="number">4.47213595499958</span></span><br></pre></td></tr></table></figure>
+<h3 id="numpy可以直接创建复数"><a href="#numpy可以直接创建复数" class="headerlink" title="numpy可以直接创建复数"></a>numpy可以直接创建复数</h3><h3 id="复数的函数操作需要使用cmath"><a href="#复数的函数操作需要使用cmath" class="headerlink" title="复数的函数操作需要使用cmath"></a>复数的函数操作需要使用cmath</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> cmath</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>cmath.sin(a)</span><br><span class="line">(<span class="number">24.83130584894638</span><span class="number">-11.356612711218173j</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="math无法实现复数的操作"><a href="#math无法实现复数的操作" class="headerlink" title="math无法实现复数的操作"></a>math无法实现复数的操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> math</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>math.sqrt(<span class="number">-1</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">ValueError: math domain error</span><br></pre></td></tr></table></figure>
+<h2 id="7-inf和NaN-无穷大和空"><a href="#7-inf和NaN-无穷大和空" class="headerlink" title="7.inf和NaN　(无穷大和空)"></a>7.inf和NaN　(无穷大和空)</h2><h3 id="inf"><a href="#inf" class="headerlink" title="inf"></a>inf</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = float(<span class="string">'inf'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = float(<span class="string">'-inf'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">inf</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">-inf</span><br></pre></td></tr></table></figure>
+<h3 id="nan"><a href="#nan" class="headerlink" title="nan"></a>nan</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = float(<span class="string">'nan'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">nan</span><br></pre></td></tr></table></figure>
+<h3 id="inf＆nan-可传递"><a href="#inf＆nan-可传递" class="headerlink" title="inf＆nan　可传递"></a>inf＆nan　可传递</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a + <span class="number">267</span></span><br><span class="line">inf</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a * <span class="number">267</span></span><br><span class="line">inf</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">10</span> / a</span><br><span class="line"><span class="number">0.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c +<span class="number">1234</span></span><br><span class="line">nan</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c /<span class="number">2</span></span><br><span class="line">nan</span><br></pre></td></tr></table></figure>
+<h2 id="8-数值，分数"><a href="#8-数值，分数" class="headerlink" title="8.数值，分数"></a>8.数值，分数</h2><h3 id="fractions"><a href="#fractions" class="headerlink" title="fractions"></a>fractions</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> fractions <span class="keyword">import</span> Fraction</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = Fraction(<span class="number">5</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = Fraction(<span class="number">7</span>, <span class="number">16</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">Fraction(<span class="number">5</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">Fraction(<span class="number">7</span>, <span class="number">16</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a+b)</span><br><span class="line"><span class="number">27</span>/<span class="number">16</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a*b)</span><br><span class="line"><span class="number">35</span>/<span class="number">64</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = a*b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">Fraction(<span class="number">35</span>, <span class="number">64</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.numerator</span><br><span class="line"><span class="number">35</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.denominator</span><br><span class="line"><span class="number">64</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>float(c)</span><br><span class="line"><span class="number">0.546875</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="number">4.5677</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y = Fraction(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y</span><br><span class="line">Fraction(<span class="number">2571386502242527</span>, <span class="number">562949953421312</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y = Fraction(x.as_integer_ratio())</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">"/usr/lib/python3.5/fractions.py"</span>, line <span class="number">169</span>, <span class="keyword">in</span> __new__</span><br><span class="line">    <span class="keyword">raise</span> TypeError(<span class="string">"argument should be a string "</span></span><br><span class="line">TypeError: argument should be a string <span class="keyword">or</span> a Rational instance</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y = Fraction(*x.as_integer_ratio())</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y</span><br><span class="line">Fraction(<span class="number">2571386502242527</span>, <span class="number">562949953421312</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="9-numpy，大型数组"><a href="#9-numpy，大型数组" class="headerlink" title="9.numpy，大型数组"></a>9.numpy，大型数组</h2><h2 id="10-numpy，矩阵和线性代数"><a href="#10-numpy，矩阵和线性代数" class="headerlink" title="10.numpy，矩阵和线性代数"></a>10.numpy，矩阵和线性代数</h2><h2 id="11-随机数"><a href="#11-随机数" class="headerlink" title="11.随机数"></a>11.随机数</h2><h3 id="随机挑一个，random-choice-iter"><a href="#随机挑一个，random-choice-iter" class="headerlink" title="随机挑一个，random.choice(iter)"></a>随机挑一个，random.choice(iter)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> random</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>v = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">76</span>, <span class="number">7</span> ,<span class="number">8</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.choice(v)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.choice(v)</span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.choice(v)</span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure>
+<h3 id="随机挑N个，random-sample-iter-N"><a href="#随机挑N个，random-sample-iter-N" class="headerlink" title="随机挑Ｎ个，random.sample(iter, N)"></a>随机挑Ｎ个，random.sample(iter, N)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> random</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>v = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">76</span>, <span class="number">7</span> ,<span class="number">8</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.sample(v, <span class="number">4</span>)</span><br><span class="line">[<span class="number">5</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.sample(v, <span class="number">4</span>)</span><br><span class="line">[<span class="number">7</span>, <span class="number">5</span>, <span class="number">76</span>, <span class="number">8</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="随机打乱顺序，random-shuffle-iter"><a href="#随机打乱顺序，random-shuffle-iter" class="headerlink" title="随机打乱顺序，random.shuffle(iter)"></a>随机打乱顺序，random.shuffle(iter)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.shuffle(v)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>v</span><br><span class="line">[<span class="number">8</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">76</span>, <span class="number">1</span>, <span class="number">7</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.shuffle(v)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>v</span><br><span class="line">[<span class="number">8</span>, <span class="number">7</span>, <span class="number">76</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="随机生成整数，random-randint"><a href="#随机生成整数，random-randint" class="headerlink" title="随机生成整数，random.randint()"></a>随机生成整数，random.randint()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.randint(<span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.randint(<span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.randint(<span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+<h3 id="产生０－１均匀分布，random-random"><a href="#产生０－１均匀分布，random-random" class="headerlink" title="产生０－１均匀分布，random.random()"></a>产生０－１均匀分布，random.random()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.random()</span><br><span class="line"><span class="number">0.38724656594495876</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.random()</span><br><span class="line"><span class="number">0.29254861331979654</span></span><br></pre></td></tr></table></figure>
+<h3 id="生成N个比特位整数，random-getrandbits"><a href="#生成N个比特位整数，random-getrandbits" class="headerlink" title="生成Ｎ个比特位整数，random.getrandbits()"></a>生成Ｎ个比特位整数，random.getrandbits()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.getrandbits(<span class="number">4</span>)</span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.getrandbits(<span class="number">200</span>)</span><br><span class="line"><span class="number">1590692804788838728577302013081218164430847841095397859330670</span></span><br></pre></td></tr></table></figure>
+<h2 id="12-日期时间，时间换算"><a href="#12-日期时间，时间换算" class="headerlink" title="12.日期时间，时间换算"></a>12.日期时间，时间换算</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = timedelta(days=<span class="number">2</span>, hours=<span class="number">6</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = timedelta(hours=<span class="number">4.5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = a+ b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">datetime.timedelta(<span class="number">2</span>, <span class="number">37800</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.days</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.hours</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">AttributeError: <span class="string">'datetime.timedelta'</span> object has no attribute <span class="string">'hours'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.seconds</span><br><span class="line"><span class="number">37800</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.seconds / <span class="number">3600</span></span><br><span class="line"><span class="number">10.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.total_seconds() / <span class="number">360</span></span><br><span class="line"><span class="number">585.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.total_seconds() / <span class="number">3600</span></span><br><span class="line"><span class="number">58.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = datetime(<span class="number">2018</span>,<span class="number">7</span>,<span class="number">18</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a + timedelta(days=<span class="number">10</span>))</span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-28</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a + timedelta(days=<span class="number">30</span>))</span><br><span class="line"><span class="number">2018</span><span class="number">-08</span><span class="number">-17</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = datetime(<span class="number">2018</span>,<span class="number">8</span>,<span class="number">19</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = b - a</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">datetime.timedelta(<span class="number">32</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d.days</span><br><span class="line"><span class="number">32</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>now = datetime.today()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>now</span><br><span class="line">datetime.datetime(<span class="number">2018</span>, <span class="number">7</span>, <span class="number">18</span>, <span class="number">22</span>, <span class="number">49</span>, <span class="number">44</span>, <span class="number">579282</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="13-日期时间，计算上周某日的日期"><a href="#13-日期时间，计算上周某日的日期" class="headerlink" title="13.日期时间，计算上周某日的日期"></a>13.日期时间，计算上周某日的日期</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime,timedelta</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>weekdays = [<span class="string">'Monday'</span>,<span class="string">'Tuesday'</span>,<span class="string">'Wednesday'</span>,<span class="string">'Thursday'</span>,<span class="string">'Friday'</span>,<span class="string">'Saturday'</span>,<span class="string">'Sunday'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">get_previous_byday</span><span class="params">(dayname, start_date=None)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> start_date <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line"><span class="meta">... </span>        start_date = datetime.today()</span><br><span class="line"><span class="meta">... </span>    day_num = start_date.weekday()</span><br><span class="line"><span class="meta">... </span>    day_num_target = weekdays.index(dayname)</span><br><span class="line"><span class="meta">... </span>    days_ago = (<span class="number">7</span> + day_num - day_num_target) % <span class="number">7</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> days_ago == <span class="number">0</span>:</span><br><span class="line"><span class="meta">... </span>        days_ago = <span class="number">7</span></span><br><span class="line"><span class="meta">... </span>    target_date = start_date - timedelta(days=days_ago)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> target_date</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>datetime.today()</span><br><span class="line">datetime.datetime(<span class="number">2018</span>, <span class="number">7</span>, <span class="number">18</span>, <span class="number">22</span>, <span class="number">56</span>, <span class="number">3</span>, <span class="number">292476</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>get_previous_byday(<span class="string">'Monday'</span>)</span><br><span class="line">datetime.datetime(<span class="number">2018</span>, <span class="number">7</span>, <span class="number">16</span>, <span class="number">22</span>, <span class="number">56</span>, <span class="number">23</span>, <span class="number">420262</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>get_previous_byday(<span class="string">'Sunday'</span>)</span><br><span class="line">datetime.datetime(<span class="number">2018</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">22</span>, <span class="number">56</span>, <span class="number">27</span>, <span class="number">960619</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="14-日期时间，当月日期范围"><a href="#14-日期时间，当月日期范围" class="headerlink" title="14.日期时间，当月日期范围"></a>14.日期时间，当月日期范围</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">get_month_range</span><span class="params">(start_date=None)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> start_date <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line"><span class="meta">... </span>        start_date = date.today().replace(day=<span class="number">1</span>)</span><br><span class="line"><span class="meta">... </span>        _,days_in_month = calendar.monthrange(start_date.year, start_date.month)</span><br><span class="line"><span class="meta">... </span>        end_date = start_date + timedelta(days=days_in_month)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> (start_date, end_date)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a_day = timedelta(days=<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>first_day, last_day = get_month_range()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">while</span> first_day &lt; last_day:</span><br><span class="line"><span class="meta">... </span>    print(first_day)</span><br><span class="line"><span class="meta">... </span>    first_day += a_day</span><br><span class="line">...</span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-01</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-02</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-03</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-04</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-05</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-06</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-07</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-08</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-09</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-10</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-11</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-12</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-13</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-14</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-15</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-16</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-17</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-18</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-19</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-20</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-21</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-22</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-23</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-24</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-25</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-26</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-27</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-28</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-29</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-30</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-31</span></span><br></pre></td></tr></table></figure>
+<h2 id="15-日期时间，字符串转换为日期"><a href="#15-日期时间，字符串转换为日期" class="headerlink" title="15.日期时间，字符串转换为日期"></a>15.日期时间，字符串转换为日期</h2><h3 id="datetime-strptime"><a href="#datetime-strptime" class="headerlink" title="datetime.strptime()"></a>datetime.strptime()</h3><h3 id="datetime-strftime"><a href="#datetime-strftime" class="headerlink" title="datetime.strftime()"></a>datetime.strftime()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>z</span><br><span class="line">datetime.datetime(<span class="number">2018</span>, <span class="number">7</span>, <span class="number">20</span>, <span class="number">23</span>, <span class="number">53</span>, <span class="number">4</span>, <span class="number">150624</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>nice_z = datetime.strftime(z, <span class="string">'%A %B %d, %Y'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>nice_z</span><br><span class="line"><span class="string">'Friday July 20, 2018'</span></span><br></pre></td></tr></table></figure>
+<h2 id="16-日期时间，时区问题"><a href="#16-日期时间，时区问题" class="headerlink" title="16.日期时间，时区问题"></a>16.日期时间，时区问题</h2>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2018/07/15/python处理数值，日期和时间/" data-id="cjju6azck000mc4hs1o43dj0x" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-python-文本处理" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -303,7 +627,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/13/python-文本处理/" data-id="cjjlq3h5l0015avhshoa50bi5" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
+    <a data-url="http://yoursite.com/2018/07/13/python-文本处理/" data-id="cjju6azfa001dc4hsepd6t9bs" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -463,7 +787,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/11/python-数据结构与算法（2）/" data-id="cjjlq3h5m0016avhskvn7v5kf" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
+    <a data-url="http://yoursite.com/2018/07/11/python-数据结构与算法（2）/" data-id="cjju6azf9001cc4hsbqeupa1b" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -619,7 +943,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/10/python-数据结构与算法（1）/" data-id="cjjlq3h280009avhs61av7ztu" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
+    <a data-url="http://yoursite.com/2018/07/10/python-数据结构与算法（1）/" data-id="cjju6azck000kc4hsd00rpji3" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -753,7 +1077,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/" data-id="cjjlq3h1z0002avhseu1365s7" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
+    <a data-url="http://yoursite.com/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/" data-id="cjju6azc90008c4hsqr0aqf0y" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -891,7 +1215,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/" data-id="cjjlq3h270008avhs2prhqctn" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
+    <a data-url="http://yoursite.com/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/" data-id="cjju6azc70006c4hssj35y28t" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1023,7 +1347,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/03/Gnome-Ubuntu上安装chrome/" data-id="cjjlq3h1t0000avhsuj62yy6c" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
+    <a data-url="http://yoursite.com/2018/07/03/Gnome-Ubuntu上安装chrome/" data-id="cjju6azbx0000c4hsm84o8g8p" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1159,7 +1483,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/03/Gnome-Ubuntu上安装git/" data-id="cjjlq3h250006avhsqenb2gkb" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
+    <a data-url="http://yoursite.com/2018/07/03/Gnome-Ubuntu上安装git/" data-id="cjju6azc30002c4hs67yw76la" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1327,7 +1651,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/02/hexo的安装与配置/" data-id="cjjlq3h2i000kavhsvljpk0tx" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
+    <a data-url="http://yoursite.com/2018/07/02/hexo的安装与配置/" data-id="cjju6azch000fc4hs7tuphldm" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1403,258 +1727,9 @@
 
 
 
-    <article id="post-first-test-blog" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/07/01/first-test-blog/">first test blog</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/01/first-test-blog/">
-            <time datetime="2018-07-01T15:30:25.000Z" itemprop="datePublished">2018-07-01</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/测试/">测试</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>Here is my first hexo blog</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2018/07/01/first-test-blog/" data-id="cjjlq3h2c000davhs2oz7w3lt" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/07/01/hello-world/">Hello World</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/01/hello-world/">
-            <time datetime="2018-07-01T10:25:49.427Z" itemprop="datePublished">2018-07-01</time>
-        </a>
-    </div>
-
-
-                        
-                        
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2018/07/01/hello-world/" data-id="cjjlq3h2f000favhs0gvh6ipg" class="article-share-link"><i class="fas fa-share"></i>Compartir</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
+    <nav id="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Siguiente  &raquo;</a>
+    </nav>
 </section>
             
                 
@@ -1665,6 +1740,44 @@
         <h3 class="widget-title">Recientes</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/17/python-迭代器和生成器/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
+                            <p class="item-title"><a href="/2018/07/17/python-迭代器和生成器/" class="title">python 迭代器和生成器</a></p>
+                            <p class="item-date"><time datetime="2018-07-16T16:01:08.000Z" itemprop="datePublished">2018-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/15/python处理数值，日期和时间/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
+                            <p class="item-title"><a href="/2018/07/15/python处理数值，日期和时间/" class="title">python处理数值，日期和时间</a></p>
+                            <p class="item-date"><time datetime="2018-07-15T15:59:39.000Z" itemprop="datePublished">2018-07-15</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1723,44 +1836,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a></p>
-                            <p class="item-title"><a href="/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/" class="title">Gnome Ubuntu上安装下载工具 uget+aria2</a></p>
-                            <p class="item-date"><time datetime="2018-07-05T14:11:05.000Z" itemprop="datePublished">2018-07-05</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://www.hdwallpapers.net/previews/hot-air-balloon-over-the-mountain-987.jpg)" alt="Gnome Ubuntu上安装 搜狗拼音" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a></p>
-                            <p class="item-title"><a href="/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/" class="title">Gnome Ubuntu上安装 搜狗拼音</a></p>
-                            <p class="item-date"><time datetime="2018-07-03T12:49:56.000Z" itemprop="datePublished">2018-07-03</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1770,7 +1845,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">Categorias</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/python-cookbook/">python cookbook</a><span class="category-list-count">3</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/python-cookbook/">python cookbook</a><span class="category-list-count">5</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -1779,7 +1854,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">Archivos</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">10</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">12</span></li></ul>
         </div>
     </div>
 
@@ -1788,7 +1863,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">Etiquetas</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-structure/">data structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python数据结构/">python数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-structure/">data structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python数据结构/">python数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1797,7 +1872,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">Nube de etiquetas</h3>
         <div class="widget tagcloud">
-            <a href="/tags/data-structure/" style="font-size: 13.33px;">data structure</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/python数据结构/" style="font-size: 13.33px;">python数据结构</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a>
+            <a href="/tags/data-structure/" style="font-size: 15px;">data structure</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/itertools/" style="font-size: 10px;">itertools</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python数据结构/" style="font-size: 15px;">python数据结构</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a>
         </div>
     </div>
 
