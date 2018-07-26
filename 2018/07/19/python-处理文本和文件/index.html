@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>python 处理文本和文件 | Octopi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1.file,读写文本数据with open() as f:1234567891011121314151617181920212223242526272829# 读取# Read the entire file as a single stringwith open(&apos;somefile.txt&apos;, &apos;rt&apos;) as f:    data = f.read()# Iterate over the l">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 处理文本和文件">
+<meta property="og:url" content="http://yoursite.com/2018/07/19/python-处理文本和文件/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="1.file,读写文本数据with open() as f:1234567891011121314151617181920212223242526272829# 读取# Read the entire file as a single stringwith open(&apos;somefile.txt&apos;, &apos;rt&apos;) as f:    data = f.read()# Iterate over the l">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-26T14:17:52.185Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python 处理文本和文件">
+<meta name="twitter:description" content="1.file,读写文本数据with open() as f:1234567891011121314151617181920212223242526272829# 读取# Read the entire file as a single stringwith open(&apos;somefile.txt&apos;, &apos;rt&apos;) as f:    data = f.read()# Iterate over the l">
+    
+
+    
+        <link rel="alternate" href="/" title="Octopi" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/octopus_favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Octopi</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">主页</a>
+                
+                    <a class="main-nav-link" href="/archives">文章</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于我</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/octopus_avatar.png" />
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">主页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">文章</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于我</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/octopus_avatar.png" />
+            <h2 id="name">Octopi lau</h2>
+            <h3 id="title">pythoner &amp; DL</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>Hangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/stevelau94/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                13
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                7
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/stevelau94/" target="_blank" title="github" class=tooltip>
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="weibo" class=tooltip>
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="wechat" class=tooltip>
+                            <i class="fab fa-wechat"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fab fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-python-处理文本和文件" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            python 处理文本和文件
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="/2018/07/19/python-处理文本和文件/">
+            <time datetime="2018-07-19T14:16:51.000Z" itemprop="datePublished">2018-07-19</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/python/">python</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="1-file-读写文本数据"><a href="#1-file-读写文本数据" class="headerlink" title="1.file,读写文本数据"></a>1.file,读写文本数据</h2><h3 id="with-open-as-f"><a href="#with-open-as-f" class="headerlink" title="with open() as f:"></a>with open() as f:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取</span></span><br><span class="line"><span class="comment"># Read the entire file as a single string</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Iterate over the lines of the file</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        <span class="comment"># process line</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入</span></span><br><span class="line"><span class="comment"># Write chunks of text data</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text1)</span><br><span class="line">    f.write(text2)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># Redirected print statement</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(line1, file=f)</span><br><span class="line">    print(line2, file=f)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 追加</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'at'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text1)</span><br><span class="line">    f.write(text2)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>, encoding=<span class="string">'latin-1'</span>) <span class="keyword">as</span> f:</span><br></pre></td></tr></table></figure>
+<h3 id="wt-rt-at中的t指以文本文件的形式写入"><a href="#wt-rt-at中的t指以文本文件的形式写入" class="headerlink" title="wt,rt,at中的t指以文本文件的形式写入"></a>wt,rt,at中的t指以文本文件的形式写入</h3><p>在输出时会将换行符 \n 转换为系统默认的换行符</p>
+<p>如果不希望这种默认的处理方式，可以给 open() 函数传入参数 newline=’’<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Read with disabled newline translation</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> f:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<h3 id="errors处理编码错误"><a href="#errors处理编码错误" class="headerlink" title="errors处理编码错误"></a>errors处理编码错误</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Replace bad chars with Unicode U+fffd replacement char</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'sample.txt'</span>, <span class="string">'rt'</span>, encoding=<span class="string">'ascii'</span>, errors=<span class="string">'replace'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.read()</span><br><span class="line"><span class="string">'Spicy Jalape?o!'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Ignore bad chars entirely</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g = open(<span class="string">'sample.txt'</span>, <span class="string">'rt'</span>, encoding=<span class="string">'ascii'</span>, errors=<span class="string">'ignore'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g.read()</span><br><span class="line"><span class="string">'Spicy Jalapeo!'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-print-打印输出至文件中"><a href="#2-print-打印输出至文件中" class="headerlink" title="2.print(),打印输出至文件中"></a>2.print(),打印输出至文件中</h2><h3 id="在-print-函数中指定-file-关键字参数，将输出重定向到一个文件中"><a href="#在-print-函数中指定-file-关键字参数，将输出重定向到一个文件中" class="headerlink" title="在 print() 函数中指定 file 关键字参数，将输出重定向到一个文件中"></a>在 print() 函数中指定 file 关键字参数，将输出重定向到一个文件中</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'d:/work/test.txt'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(<span class="string">'Hello World!'</span>, file=f)</span><br></pre></td></tr></table></figure>
+<h2 id="3-print-使用其他分隔符或行终止符打印"><a href="#3-print-使用其他分隔符或行终止符打印" class="headerlink" title="3.print(),使用其他分隔符或行终止符打印"></a>3.print(),使用其他分隔符或行终止符打印</h2><h3 id="print-函数中使用-sep-和-end-关键字参数"><a href="#print-函数中使用-sep-和-end-关键字参数" class="headerlink" title="print() 函数中使用 sep 和 end 关键字参数"></a>print() 函数中使用 sep 和 end 关键字参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'ACME'</span>, <span class="number">50</span>, <span class="number">91.5</span>)</span><br><span class="line">ACME <span class="number">50</span> <span class="number">91.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'ACME'</span>, <span class="number">50</span>, <span class="number">91.5</span>, sep=<span class="string">','</span>)</span><br><span class="line">ACME,<span class="number">50</span>,<span class="number">91.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'ACME'</span>, <span class="number">50</span>, <span class="number">91.5</span>, sep=<span class="string">','</span>, end=<span class="string">'!!\n'</span>)</span><br><span class="line">ACME,<span class="number">50</span>,<span class="number">91.5</span>!!</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="使用-end-参数也可以在输出中禁止换行"><a href="#使用-end-参数也可以在输出中禁止换行" class="headerlink" title="使用 end 参数也可以在输出中禁止换行"></a>使用 end 参数也可以在输出中禁止换行</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line"><span class="meta">... </span>    print(i)</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line"><span class="meta">... </span>    print(i, end=<span class="string">' '</span>)</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> &gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4-file-读写字节数据"><a href="#4-file-读写字节数据" class="headerlink" title="4.file,读写字节数据"></a>4.file,读写字节数据</h2><h3 id="rb-或-wb-的-open-函数来读取或写入二进制数"><a href="#rb-或-wb-的-open-函数来读取或写入二进制数" class="headerlink" title="rb 或 wb 的 open() 函数来读取或写入二进制数"></a>rb 或 wb 的 open() 函数来读取或写入二进制数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Read the entire file as a single byte string</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.bin'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Write binary data to a file</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.bin'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">b'Hello World'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="从二进制模式的文件中读取或写入文本数据，必须确保要进行解码和编码操作"><a href="#从二进制模式的文件中读取或写入文本数据，必须确保要进行解码和编码操作" class="headerlink" title="从二进制模式的文件中读取或写入文本数据，必须确保要进行解码和编码操作"></a>从二进制模式的文件中读取或写入文本数据，必须确保要进行解码和编码操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.bin'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = f.read(<span class="number">16</span>)</span><br><span class="line">    text = data.decode(<span class="string">'utf-8'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.bin'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    text = <span class="string">'Hello World'</span></span><br><span class="line">    f.write(text.encode(<span class="string">'utf-8'</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="很多对象还允许通过使用文件对象的-readinto-方法直接读取二进制数据到其底层的内存中去"><a href="#很多对象还允许通过使用文件对象的-readinto-方法直接读取二进制数据到其底层的内存中去" class="headerlink" title="很多对象还允许通过使用文件对象的 readinto() 方法直接读取二进制数据到其底层的内存中去"></a>很多对象还允许通过使用文件对象的 readinto() 方法直接读取二进制数据到其底层的内存中去</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> array</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = array.array(<span class="string">'i'</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'data.bin'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>    f.readinto(a)</span><br><span class="line">...</span><br><span class="line"><span class="number">16</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array(<span class="string">'i'</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="5-file-文件不存在才能写入"><a href="#5-file-文件不存在才能写入" class="headerlink" title="5.file,文件不存在才能写入"></a>5.file,文件不存在才能写入</h2><p><strong>不允许覆盖已存在的文件内容</strong></p>
+<h3 id="open-函数中使用-x-模式来代替-w-模式"><a href="#open-函数中使用-x-模式来代替-w-模式" class="headerlink" title="open() 函数中使用 x 模式来代替 w 模式"></a>open() 函数中使用 x 模式来代替 w 模式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'somefile'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>    f.write(<span class="string">'Hello\n'</span>)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'somefile'</span>, <span class="string">'xt'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>    f.write(<span class="string">'Hello\n'</span>)</span><br><span class="line">...</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">FileExistsError: [Errno <span class="number">17</span>] File exists: <span class="string">'somefile'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="6-字符串的I-O操作"><a href="#6-字符串的I-O操作" class="headerlink" title="6.字符串的I/O操作"></a>6.字符串的I/O操作</h2><h3 id="io-StringIO-和-io-BytesIO-类来创建类文件对象操作字符串数据"><a href="#io-StringIO-和-io-BytesIO-类来创建类文件对象操作字符串数据" class="headerlink" title="io.StringIO() 和 io.BytesIO() 类来创建类文件对象操作字符串数据"></a>io.StringIO() 和 io.BytesIO() 类来创建类文件对象操作字符串数据</h3><p><strong>io.StringIO 只能用于文本。要操作二进制数据，要使用 io.BytesIO 类来代替</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = io.StringIO()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.write(<span class="string">'Hello World\n'</span>)</span><br><span class="line"><span class="number">12</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'This is a test'</span>, file=s)</span><br><span class="line"><span class="number">15</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Get all of the data written so far</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.getvalue()</span><br><span class="line"><span class="string">'Hello World\nThis is a test\n'</span></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Wrap a file interface around an existing string</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = io.StringIO(<span class="string">'Hello\nWorld\n'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.read(<span class="number">4</span>)</span><br><span class="line"><span class="string">'Hell'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.read()</span><br><span class="line"><span class="string">'o\nWorld\n'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是， StringIO 和 BytesIO 实例并没有正确的整数类型的文件描述符。 因此，它们不能在那些需要使用真实的系统级文件如文件，管道或者是套接字的程序中使用。</p>
+<h2 id="7-file-读写压缩文件-gzip-和-bz2"><a href="#7-file-读写压缩文件-gzip-和-bz2" class="headerlink" title="7.file,读写压缩文件(gzip 和 bz2)"></a>7.file,读写压缩文件(gzip 和 bz2)</h2><h3 id="以文本形式读取压缩文件"><a href="#以文本形式读取压缩文件" class="headerlink" title="以文本形式读取压缩文件"></a>以文本形式读取压缩文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gzip compression</span></span><br><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"><span class="keyword">with</span> gzip.open(<span class="string">'somefile.gz'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    text = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># bz2 compression</span></span><br><span class="line"><span class="keyword">import</span> bz2</span><br><span class="line"><span class="keyword">with</span> bz2.open(<span class="string">'somefile.bz2'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    text = f.read()</span><br></pre></td></tr></table></figure>
+<h3 id="写入压缩数据"><a href="#写入压缩数据" class="headerlink" title="写入压缩数据"></a>写入压缩数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gzip compression</span></span><br><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"><span class="keyword">with</span> gzip.open(<span class="string">'somefile.gz'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text)</span><br><span class="line"></span><br><span class="line"><span class="comment"># bz2 compression</span></span><br><span class="line"><span class="keyword">import</span> bz2</span><br><span class="line"><span class="keyword">with</span> bz2.open(<span class="string">'somefile.bz2'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text)</span><br></pre></td></tr></table></figure>
+<p><strong>要注意的是选择一个正确的文件模式是非常重要的</strong></p>
+<h3 id="当写入压缩数据时，可以使用-compresslevel-这个可选的关键字参数来指定一个压缩级别"><a href="#当写入压缩数据时，可以使用-compresslevel-这个可选的关键字参数来指定一个压缩级别" class="headerlink" title="当写入压缩数据时，可以使用 compresslevel 这个可选的关键字参数来指定一个压缩级别"></a>当写入压缩数据时，可以使用 compresslevel 这个可选的关键字参数来指定一个压缩级别</h3><p><strong>默认的等级是9，也是最高的压缩等级。等级越低性能越好，但是数据压缩程度也越低</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> gzip.open(<span class="string">'somefile.gz'</span>, <span class="string">'wt'</span>, compresslevel=<span class="number">5</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text)</span><br></pre></td></tr></table></figure>
+<h3 id="gzip-open-和-bz2-open-可以作用在一个已存在并以二进制模式打开的文件上"><a href="#gzip-open-和-bz2-open-可以作用在一个已存在并以二进制模式打开的文件上" class="headerlink" title="gzip.open() 和 bz2.open()可以作用在一个已存在并以二进制模式打开的文件上"></a>gzip.open() 和 bz2.open()可以作用在一个已存在并以二进制模式打开的文件上</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line">f = open(<span class="string">'somefile.gz'</span>, <span class="string">'rb'</span>)</span><br><span class="line"><span class="keyword">with</span> gzip.open(f, <span class="string">'rt'</span>) <span class="keyword">as</span> g:</span><br><span class="line">    text = g.read()</span><br></pre></td></tr></table></figure>
+<h2 id="固定大小记录的文件迭代"><a href="#固定大小记录的文件迭代" class="headerlink" title="固定大小记录的文件迭代"></a>固定大小记录的文件迭代</h2><h3 id="使用-iter-和-functools-partial-函数"><a href="#使用-iter-和-functools-partial-函数" class="headerlink" title="使用 iter 和 functools.partial() 函数"></a>使用 iter 和 functools.partial() 函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> partial</span><br><span class="line"></span><br><span class="line">RECORD_SIZE = <span class="number">32</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.data'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># records 对象是一个可迭代对象，它会不断的产生固定大小的数据块，直到文件末尾</span></span><br><span class="line">    records = iter(partial(f.read, RECORD_SIZE), <span class="string">b''</span>)</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> records:</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+<p><strong>iter() 函数有一个鲜为人知的特性就是，如果你给它传递一个可调用对象和一个标记值，它会创建一个迭代器</strong></p>
+<h2 id="9-读取二进制数据到可变缓冲区中"><a href="#9-读取二进制数据到可变缓冲区中" class="headerlink" title="9.读取二进制数据到可变缓冲区中"></a>9.读取二进制数据到可变缓冲区中</h2><h3 id="读取数据到一个可变数组中，使用文件对象的-readinto"><a href="#读取数据到一个可变数组中，使用文件对象的-readinto" class="headerlink" title="读取数据到一个可变数组中，使用文件对象的 readinto()"></a>读取数据到一个可变数组中，使用文件对象的 readinto()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_into_buffer</span><span class="params">(filename)</span>:</span></span><br><span class="line">    buf = bytearray(os.path.getsize(filename))</span><br><span class="line">    <span class="keyword">with</span> open(filename, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.readinto(buf)</span><br><span class="line">    <span class="keyword">return</span> buf</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Write a sample file</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'sample.bin'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>    f.write(<span class="string">b'Hello World'</span>)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>buf = read_into_buffer(<span class="string">'sample.bin'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>buf</span><br><span class="line">bytearray(<span class="string">b'Hello World'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>buf[<span class="number">0</span>:<span class="number">5</span>] = <span class="string">b'Hallo'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>buf</span><br><span class="line">bytearray(<span class="string">b'Hallo World'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'newsample.bin'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>    f.write(buf)</span><br><span class="line">...</span><br><span class="line"><span class="number">11</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>readinto() 方法能被用来为预先分配内存的数组填充数据，甚至包括由 array 模块或 numpy 库创建的数组</strong></p>
+<p>readinto() 填充已存在的缓冲区而不是为新对象重新分配内存再返回它们。 因此可以使用它来避免大量的内存分配操作</p>
+<p><strong>使用 f.readinto() 时需要注意的是，你必须检查它的返回值，也就是实际读取的字节数</strong></p>
+<h3 id="memoryview"><a href="#memoryview" class="headerlink" title="memoryview"></a>memoryview</h3><p>可以通过零复制的方式对已存在的缓冲区执行切片操作，甚至还能修改它的内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>buf</span><br><span class="line">bytearray(<span class="string">b'Hello World'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m1 = memoryview(buf)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m2 = m1[<span class="number">-5</span>:]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m2</span><br><span class="line">&lt;memory at <span class="number">0x100681390</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m2[:] = <span class="string">b'WORLD'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>buf</span><br><span class="line">bytearray(<span class="string">b'Hello WORLD'</span>)</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="10-file-内存映射的二进制文件"><a href="#10-file-内存映射的二进制文件" class="headerlink" title="10.file,内存映射的二进制文件"></a>10.file,内存映射的二进制文件</h2><p>想内存映射一个二进制文件到一个可变字节数组中，目的可能是为了随机访问它的内容或者是原地做些修改</p>
+<h3 id="使用-mmap-模块来内存映射文件"><a href="#使用-mmap-模块来内存映射文件" class="headerlink" title="使用 mmap 模块来内存映射文件"></a>使用 mmap 模块来内存映射文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> mmap</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">memory_map</span><span class="params">(filename, access=mmap.ACCESS_WRITE)</span>:</span></span><br><span class="line">    size = os.path.getsize(filename)</span><br><span class="line">    fd = os.open(filename, os.O_RDWR)</span><br><span class="line">    <span class="keyword">return</span> mmap.mmap(fd, size, access=access)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>size = <span class="number">1000000</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'data'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>    f.seek(size<span class="number">-1</span>)</span><br><span class="line"><span class="meta">... </span>    f.write(<span class="string">b'\x00'</span>)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m = memory_map(<span class="string">'data'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(m)</span><br><span class="line"><span class="number">1000000</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m[<span class="number">0</span>:<span class="number">10</span>]</span><br><span class="line"><span class="string">b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m[<span class="number">0</span>]</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Reassign a slice</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m[<span class="number">0</span>:<span class="number">11</span>] = <span class="string">b'Hello World'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m.close()</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Verify that changes were made</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'data'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>print(f.read(<span class="number">11</span>))</span><br><span class="line">...</span><br><span class="line"><span class="string">b'Hello World'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="mmap-返回的-mmap-对象同样也可以作为一个上下文管理器"><a href="#mmap-返回的-mmap-对象同样也可以作为一个上下文管理器" class="headerlink" title="mmap() 返回的 mmap 对象同样也可以作为一个上下文管理器"></a>mmap() 返回的 mmap 对象同样也可以作为一个上下文管理器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> memory_map(<span class="string">'data'</span>) <span class="keyword">as</span> m:</span><br><span class="line"><span class="meta">... </span>    print(len(m))</span><br><span class="line"><span class="meta">... </span>    print(m[<span class="number">0</span>:<span class="number">10</span>])</span><br><span class="line">...</span><br><span class="line"><span class="number">1000000</span></span><br><span class="line"><span class="string">b'Hello World'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m.closed</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>默认情况下， memeory_map() 函数打开的文件同时支持读和写操作。 任何的修改内容都会复制回原来的文件中</strong></p>
+<p>如果需要只读的访问模式，可以给参数 access 赋值为 mmap.ACCESS_READ</p>
+<p>想在本地修改数据，但是又不想将修改写回到原始文件中，可以使用 mmap.ACCESS_COPY</p>
+<p>内存映射一个文件并不会导致整个文件被读取到内存中。 也就是说，文件并没有被复制到内存缓存或数组中。相反，操作系统仅仅为文件内容保留了一段虚拟内存。 当你访问文件的不同区域时，这些区域的内容才根据需要被读取并映射到内存区域中。 而那些从没被访问到的部分还是留在磁盘上</p>
+<h2 id="11-file-文件路径名的操作"><a href="#11-file-文件路径名的操作" class="headerlink" title="11.file,文件路径名的操作"></a>11.file,文件路径名的操作</h2><h3 id="os-path"><a href="#os-path" class="headerlink" title="os.path"></a>os.path</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> os</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>path = <span class="string">'/Users/beazley/Data/data.csv'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Get the last component of the path</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.basename(path)</span><br><span class="line"><span class="string">'data.csv'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Get the directory name</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.dirname(path)</span><br><span class="line"><span class="string">'/Users/beazley/Data'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Join path components together</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.join(<span class="string">'tmp'</span>, <span class="string">'data'</span>, os.path.basename(path))</span><br><span class="line"><span class="string">'tmp/data/data.csv'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Expand the user's home directory</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>path = <span class="string">'~/Data/data.csv'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.expanduser(path)</span><br><span class="line"><span class="string">'/Users/beazley/Data/data.csv'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Split the file extension</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.splitext(path)</span><br><span class="line">(<span class="string">'~/Data/data'</span>, <span class="string">'.csv'</span>)</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="12-file-测试文件是否存在"><a href="#12-file-测试文件是否存在" class="headerlink" title="12.file,测试文件是否存在"></a>12.file,测试文件是否存在</h2><h3 id="os-path测试一个文件或目录是否存在"><a href="#os-path测试一个文件或目录是否存在" class="headerlink" title="os.path测试一个文件或目录是否存在"></a>os.path测试一个文件或目录是否存在</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> os</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.exists(<span class="string">'/etc/passwd'</span>)</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.exists(<span class="string">'/tmp/spam'</span>)</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="os-path测试这个文件是什么类型"><a href="#os-path测试这个文件是什么类型" class="headerlink" title="os.path测试这个文件是什么类型"></a>os.path测试这个文件是什么类型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Is a regular file</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.isfile(<span class="string">'/etc/passwd'</span>)</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Is a directory</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.isdir(<span class="string">'/etc/passwd'</span>)</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Is a symbolic link</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.islink(<span class="string">'/usr/local/bin/python3'</span>)</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Get the file linked to</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.realpath(<span class="string">'/usr/local/bin/python3'</span>)</span><br><span class="line"><span class="string">'/usr/local/bin/python3.3'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="os-path获取元数据"><a href="#os-path获取元数据" class="headerlink" title="os.path获取元数据"></a>os.path获取元数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.getsize(<span class="string">'/etc/passwd'</span>)</span><br><span class="line"><span class="number">3669</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.getmtime(<span class="string">'/etc/passwd'</span>)</span><br><span class="line"><span class="number">1272478234.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> time</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.ctime(os.path.getmtime(<span class="string">'/etc/passwd'</span>))</span><br><span class="line"><span class="string">'Wed Apr 28 13:10:34 2010'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="13-file-获取文件夹中的文件列"><a href="#13-file-获取文件夹中的文件列" class="headerlink" title="13.file,获取文件夹中的文件列"></a>13.file,获取文件夹中的文件列</h2><h3 id="os-listdir-函数来获取某个目录中的文件列表"><a href="#os-listdir-函数来获取某个目录中的文件列表" class="headerlink" title="os.listdir() 函数来获取某个目录中的文件列表"></a>os.listdir() 函数来获取某个目录中的文件列表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get all regular files</span></span><br><span class="line">names = [name <span class="keyword">for</span> name <span class="keyword">in</span> os.listdir(<span class="string">'somedir'</span>)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(os.path.join(<span class="string">'somedir'</span>, name))]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get all dirs</span></span><br><span class="line">dirnames = [name <span class="keyword">for</span> name <span class="keyword">in</span> os.listdir(<span class="string">'somedir'</span>)</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(os.path.join(<span class="string">'somedir'</span>, name))]</span><br></pre></td></tr></table></figure>
+<h3 id="取其他的元信息os-path-os-stat"><a href="#取其他的元信息os-path-os-stat" class="headerlink" title="取其他的元信息os.path / os.stat()"></a>取其他的元信息os.path / os.stat()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example of getting a directory listing</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"></span><br><span class="line">pyfiles = glob.glob(<span class="string">'*.py'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get file sizes and modification dates</span></span><br><span class="line">name_sz_date = [(name, os.path.getsize(name), os.path.getmtime(name))</span><br><span class="line">                <span class="keyword">for</span> name <span class="keyword">in</span> pyfiles]</span><br><span class="line"><span class="keyword">for</span> name, size, mtime <span class="keyword">in</span> name_sz_date:</span><br><span class="line">    print(name, size, mtime)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Alternative: Get file metadata</span></span><br><span class="line">file_metadata = [(name, os.stat(name)) <span class="keyword">for</span> name <span class="keyword">in</span> pyfiles]</span><br><span class="line"><span class="keyword">for</span> name, meta <span class="keyword">in</span> file_metadata:</span><br><span class="line">    print(name, meta.st_size, meta.st_mtime)</span><br></pre></td></tr></table></figure>
+<h2 id="14-file-忽略文件名编码"><a href="#14-file-忽略文件名编码" class="headerlink" title="14.file,忽略文件名编码"></a>14.file,忽略文件名编码</h2><p>默认情况下，所有的文件名都会根据 sys.getfilesystemencoding() 返回的文本编码来编码或解码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.getfilesystemencoding()</span><br><span class="line"><span class="string">'utf-8'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>某种原因你想忽略这种编码，可以使用一个原始字节字符串来指定一个文件名即可<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Wrte a file using a unicode filename</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'jalape\xf1o.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>    f.write(<span class="string">'Spicy!'</span>)</span><br><span class="line">...</span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Directory listing (decoded)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> os</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.listdir(<span class="string">'.'</span>)</span><br><span class="line">[<span class="string">'jalapeño.txt'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Directory listing (raw)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.listdir(<span class="string">b'.'</span>) <span class="comment"># Note: byte string</span></span><br><span class="line">[<span class="string">b'jalapen\xcc\x83o.txt'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Open file with raw filename</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">b'jalapen\xcc\x83o.txt'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>    print(f.read())</span><br><span class="line">...</span><br><span class="line">Spicy!</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="15-file-打印不合法的文件名"><a href="#15-file-打印不合法的文件名" class="headerlink" title="15.file,打印不合法的文件名"></a>15.file,打印不合法的文件名</h2><p>程序获取了一个目录中的文件名列表，但是当它试着去打印文件名的时候程序崩溃， 出现了 UnicodeEncodeError 异常和一条奇怪的消息—— surrogates not allowed</p>
+<h3 id="避免"><a href="#避免" class="headerlink" title="避免"></a>避免</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bad_filename</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> repr(filename)[<span class="number">1</span>:<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    print(filename)</span><br><span class="line"><span class="keyword">except</span> UnicodeEncodeError:</span><br><span class="line">    print(bad_filename(filename))</span><br></pre></td></tr></table></figure>
+<h2 id="16-file-增加或改变已打开文件的编码"><a href="#16-file-增加或改变已打开文件的编码" class="headerlink" title="16.file,增加或改变已打开文件的编码"></a>16.file,增加或改变已打开文件的编码</h2><h3 id="io-TextIOWrapper"><a href="#io-TextIOWrapper" class="headerlink" title="io.TextIOWrapper()"></a>io.TextIOWrapper()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"></span><br><span class="line">u = urllib.request.urlopen(<span class="string">'http://www.python.org'</span>)</span><br><span class="line">f = io.TextIOWrapper(u, encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">text = f.read()</span><br></pre></td></tr></table></figure>
+<h3 id="detach"><a href="#detach" class="headerlink" title="detach()"></a>detach()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.stdout.encoding</span><br><span class="line"><span class="string">'UTF-8'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding=<span class="string">'latin-1'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.stdout.encoding</span><br><span class="line"><span class="string">'latin-1'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="I-O系统由一系列的层次构建"><a href="#I-O系统由一系列的层次构建" class="headerlink" title="I/O系统由一系列的层次构建"></a>I/O系统由一系列的层次构建</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'sample.txt'</span>,<span class="string">'w'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f</span><br><span class="line">&lt;_io.TextIOWrapper name=<span class="string">'sample.txt'</span> mode=<span class="string">'w'</span> encoding=<span class="string">'UTF-8'</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.buffer</span><br><span class="line">&lt;_io.BufferedWriter name=<span class="string">'sample.txt'</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.buffer.raw</span><br><span class="line">&lt;_io.FileIO name=<span class="string">'sample.txt'</span> mode=<span class="string">'wb'</span>&gt;</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>io.TextIOWrapper 是一个编码和解码Unicode的文本处理层   </p>
+<p>io.BufferedWriter 是一个处理二进制数据的带缓冲的I/O层  </p>
+<p>io.FileIO 是一个表示操作系统底层文件描述符的原始文件</p>
+<h2 id="17-file-将字节写入文本文件"><a href="#17-file-将字节写入文本文件" class="headerlink" title="17.file,将字节写入文本文件"></a>17.file,将字节写入文本文件</h2><h3 id="将字节数据直接写入文件的缓冲区"><a href="#将字节数据直接写入文件的缓冲区" class="headerlink" title="将字节数据直接写入文件的缓冲区"></a>将字节数据直接写入文件的缓冲区</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.stdout.write(<span class="string">b'Hello\n'</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">    File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: must be str, <span class="keyword">not</span> bytes</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.stdout.buffer.write(<span class="string">b'Hello\n'</span>)</span><br><span class="line">Hello</span><br><span class="line"><span class="number">5</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>文本文件是通过在一个拥有缓冲的二进制模式文件上增加一个Unicode编码/解码层来创建。 buffer 属性指向对应的底层文件。如果你直接访问它的话就会绕过文本编码/解码层</p>
+<h2 id="18-file-将文件描述符包装成文件对象"><a href="#18-file-将文件描述符包装成文件对象" class="headerlink" title="18.file,将文件描述符包装成文件对象"></a>18.file,将文件描述符包装成文件对象</h2><p>一个文件描述符和一个打开的普通文件是不一样的。 文件描述符仅仅是一个由操作系统指定的整数，用来指代某个系统的I/O通道。 </p>
+<h3 id="文件描述符可以使用-open-函数来将其包装为一个Python的文件对象"><a href="#文件描述符可以使用-open-函数来将其包装为一个Python的文件对象" class="headerlink" title="文件描述符可以使用 open() 函数来将其包装为一个Python的文件对象"></a>文件描述符可以使用 open() 函数来将其包装为一个Python的文件对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Open a low-level file descriptor</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">fd = os.open(<span class="string">'somefile.txt'</span>, os.O_WRONLY | os.O_CREAT)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Turn into a proper file</span></span><br><span class="line">f = open(fd, <span class="string">'wt'</span>)</span><br><span class="line">f.write(<span class="string">'hello world\n'</span>)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当高层的文件对象被关闭或者破坏的时候，底层的文件描述符也会被关闭。 </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以给 open() 函数传递一个可选的 colsefd=False 阻止这种行为</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a file object, but don't close underlying fd when done</span></span><br><span class="line">f = open(fd, <span class="string">'wt'</span>, closefd=<span class="keyword">False</span>)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h2 id="19-file-创建临时文件和文件夹"><a href="#19-file-创建临时文件和文件夹" class="headerlink" title="19.file,创建临时文件和文件夹"></a>19.file,创建临时文件和文件夹</h2><h3 id="tempfile-模块"><a href="#tempfile-模块" class="headerlink" title="tempfile 模块"></a>tempfile 模块</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tempfile <span class="keyword">import</span> TemporaryFile</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> TemporaryFile(<span class="string">'w+t'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># Read/write to the file</span></span><br><span class="line">    f.write(<span class="string">'Hello World\n'</span>)</span><br><span class="line">    f.write(<span class="string">'Testing\n'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Seek back to beginning and read the data</span></span><br><span class="line">    f.seek(<span class="number">0</span>)</span><br><span class="line">    data = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Temporary file is destroyed</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第二种用法</span></span><br><span class="line">f = TemporaryFile(<span class="string">'w+t'</span>)</span><br><span class="line"><span class="comment"># Use the temporary file</span></span><br><span class="line">...</span><br><span class="line">f.close()</span><br><span class="line"><span class="comment"># File is destroyed</span></span><br></pre></td></tr></table></figure>
+<h3 id="NamedTemporaryFile"><a href="#NamedTemporaryFile" class="headerlink" title="NamedTemporaryFile()"></a>NamedTemporaryFile()</h3><p>在大多数Unix系统上，通过 TemporaryFile() 创建的文件都是匿名的，甚至连目录都没有。 如果你想打破这个限制，可以使用 NamedTemporaryFile() 来代替</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tempfile <span class="keyword">import</span> NamedTemporaryFile</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> NamedTemporaryFile(<span class="string">'w+t'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(<span class="string">'filename is:'</span>, f.name)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># File automatically destroyed</span></span><br></pre></td></tr></table></figure>
+<h3 id="tempfile-TemporaryDirectory-创建一个临时目录"><a href="#tempfile-TemporaryDirectory-创建一个临时目录" class="headerlink" title="tempfile.TemporaryDirectory()创建一个临时目录"></a>tempfile.TemporaryDirectory()创建一个临时目录</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tempfile <span class="keyword">import</span> TemporaryDirectory</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> TemporaryDirectory() <span class="keyword">as</span> dirname:</span><br><span class="line">    print(<span class="string">'dirname is:'</span>, dirname)</span><br><span class="line">    <span class="comment"># Use the directory</span></span><br><span class="line">    ...</span><br><span class="line"><span class="comment"># Directory and all contents destroyed</span></span><br></pre></td></tr></table></figure>
+<h2 id="20-与串行端口的数据通信"><a href="#20-与串行端口的数据通信" class="headerlink" title="20.与串行端口的数据通信"></a>20.与串行端口的数据通信</h2><h3 id="pySerial包"><a href="#pySerial包" class="headerlink" title="pySerial包"></a>pySerial包</h3><p>典型场景就是和一些硬件设备打交道(比如一个机器人或传感器)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> serial</span><br><span class="line">ser = serial.Serial(<span class="string">'/dev/tty.usbmodem641'</span>, <span class="comment"># Device name varies</span></span><br><span class="line">                    baudrate=<span class="number">9600</span>,</span><br><span class="line">                    bytesize=<span class="number">8</span>,</span><br><span class="line">                    parity=<span class="string">'N'</span>,</span><br><span class="line">                    stopbits=<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="21-序列化Python对象"><a href="#21-序列化Python对象" class="headerlink" title="21.序列化Python对象"></a>21.序列化Python对象</h2><h3 id="pickle"><a href="#pickle" class="headerlink" title="pickle"></a>pickle</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line">data = ... <span class="comment"># Some Python object</span></span><br><span class="line">f = open(<span class="string">'somefile'</span>, <span class="string">'wb'</span>)</span><br><span class="line">pickle.dump(data, f)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转存成字符串 pickle.dumps()</span></span><br><span class="line">s = pickle.dumps(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从字节流中恢复一个对象，使用 picle.load() 或 pickle.loads() 函数</span></span><br><span class="line"><span class="comment"># Restore from a file</span></span><br><span class="line">f = open(<span class="string">'somefile'</span>, <span class="string">'rb'</span>)</span><br><span class="line">data = pickle.load(f)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Restore from a string</span></span><br><span class="line">data = pickle.loads(s)</span><br></pre></td></tr></table></figure>
+<p><strong>千万不要对不信任的数据使用pickle.load()</strong></p>
+<p>pickle 对于大型的数据结构比如使用 array 或 numpy 模块创建的二进制数组效率并不是一个高效的编码方式。 如果你需要移动大量的数组数据，你最好是先在一个文件中将其保存为数组数据块或使用更高级的标准编码方式如HDF5 (需要第三方库的支持)</p>
+<p>由于 pickle 是Python特有的并且附着在源码上，所有如果需要长期存储数据的时候不应该选用它。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2018/07/19/python-处理文本和文件/" data-id="cjk2n7jh5001iiuhsgehizu2r" class="article-share-link"><i class="fas fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/07/17/python-迭代器和生成器/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">python 迭代器和生成器</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/19/python-处理文本和文件/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
+                            <p class="item-title"><a href="/2018/07/19/python-处理文本和文件/" class="title">python 处理文本和文件</a></p>
+                            <p class="item-date"><time datetime="2018-07-19T14:16:51.000Z" itemprop="datePublished">2018-07-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/17/python-迭代器和生成器/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
+                            <p class="item-title"><a href="/2018/07/17/python-迭代器和生成器/" class="title">python 迭代器和生成器</a></p>
+                            <p class="item-date"><time datetime="2018-07-16T16:01:08.000Z" itemprop="datePublished">2018-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/15/python处理数值，日期和时间/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
+                            <p class="item-title"><a href="/2018/07/15/python处理数值，日期和时间/" class="title">python处理数值，日期和时间</a></p>
+                            <p class="item-date"><time datetime="2018-07-15T15:59:39.000Z" itemprop="datePublished">2018-07-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/13/python-文本处理/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
+                            <p class="item-title"><a href="/2018/07/13/python-文本处理/" class="title">python 文本处理</a></p>
+                            <p class="item-date"><time datetime="2018-07-12T18:05:52.000Z" itemprop="datePublished">2018-07-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/11/python-数据结构与算法（2）/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
+                            <p class="item-title"><a href="/2018/07/11/python-数据结构与算法（2）/" class="title">python 数据结构与算法（2）</a></p>
+                            <p class="item-date"><time datetime="2018-07-11T13:37:40.000Z" itemprop="datePublished">2018-07-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/python-cookbook/">python cookbook</a><span class="category-list-count">6</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">13</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-structure/">data structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python数据结构/">python数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/data-structure/" style="font-size: 13.33px;">data structure</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/itertools/" style="font-size: 10px;">itertools</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python数据结构/" style="font-size: 13.33px;">python数据结构</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Octopi Lau<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
