@@ -1,11 +1,85 @@
 <!DOCTYPE html>
-<html lang=zh>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-    <meta charset="utf-8">
-    
-    <title>python处理数值，日期和时间 | Octopi</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="1.数值，取整round()123456789101112&amp;gt;&amp;gt;&amp;gt; round(1.23, 1)1.2&amp;gt;&amp;gt;&amp;gt; round(1.23, 12)1.23&amp;gt;&amp;gt;&amp;gt; round(-1.5, 1)-1.5&amp;gt;&amp;gt;&amp;gt; round(-1.5)-2&amp;gt;&amp;gt;&amp;gt; round(1.25)1&amp;gt;&amp;gt;&amp;gt; round(1.25, 1)">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.数值，取整round()123456789101112&amp;gt;&amp;gt;&amp;gt; round(1.23, 1)1.2&amp;gt;&amp;gt;&amp;gt; round(1.23, 12)1.23&amp;gt;&amp;gt;&amp;gt; round(-1.5, 1)-1.5&amp;gt;&amp;gt;&amp;gt; round(-1.5)-2&amp;gt;&amp;gt;&amp;gt; round(1.25)1&amp;gt;&amp;gt;&amp;gt; round(1.25, 1)">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python处理数值，日期和时间">
@@ -17,242 +91,249 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python处理数值，日期和时间">
 <meta name="twitter:description" content="1.数值，取整round()123456789101112&amp;gt;&amp;gt;&amp;gt; round(1.23, 1)1.2&amp;gt;&amp;gt;&amp;gt; round(1.23, 12)1.23&amp;gt;&amp;gt;&amp;gt; round(-1.5, 1)-1.5&amp;gt;&amp;gt;&amp;gt; round(-1.5)-2&amp;gt;&amp;gt;&amp;gt; round(1.25)1&amp;gt;&amp;gt;&amp;gt; round(1.25, 1)">
-    
 
-    
-        <link rel="alternate" href="/" title="Octopi" type="application/atom+xml" />
-    
 
-    
-        <link rel="icon" href="/css/images/octopus_favicon.png" />
-    
 
-    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
-    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
-    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
-    <link rel="stylesheet" href="/libs/open-sans/styles.css">
-    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
 
-    <link rel="stylesheet" href="/css/style.css">
 
-    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
-    
-    
-        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
-    
-    
-        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
-    
-    
-    
-    
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/15/python处理数值，日期和时间/"/>
+
+
+
+
+
+  <title>python处理数值，日期和时间 | Octopi</title>
+  
+
+
+
+
+
+
 
 
 </head>
 
-<body>
-    <div id="container">
-        <header id="header">
-    <div id="header-main" class="header-inner">
-        <div class="outer">
-            <a href="/" id="logo">
-                <i class="logo"></i>
-                <span class="site-title">Octopi</span>
-            </a>
-            <nav id="main-nav">
-                
-                    <a class="main-nav-link" href="/.">主页</a>
-                
-                    <a class="main-nav-link" href="/archives">文章</a>
-                
-                    <a class="main-nav-link" href="/categories">分类</a>
-                
-                    <a class="main-nav-link" href="/tags">标签</a>
-                
-                    <a class="main-nav-link" href="/about">关于我</a>
-                
-            </nav>
-            
-                
-                <nav id="sub-nav">
-                    <div class="profile" id="profile-nav">
-                        <a id="profile-anchor" href="javascript:;">
-                            <img class="avatar" src="/css/images/octopus_avatar.png" />
-                            <i class="fas fa-caret-down"></i>
-                        </a>
-                    </div>
-                </nav>
-            
-            <div id="search-form-wrap">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-    <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
-        <button type="submit" class="search-form-submit"></button>
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." />
-            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: 'Posts',
-            PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
-            UNTITLED: '(Untitled)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
-
-</div>
-        </div>
-    </div>
-    <div id="main-nav-mobile" class="header-sub header-inner">
-        <table class="menu outer">
-            <tr>
-                
-                    <td><a class="main-nav-link" href="/.">主页</a></td>
-                
-                    <td><a class="main-nav-link" href="/archives">文章</a></td>
-                
-                    <td><a class="main-nav-link" href="/categories">分类</a></td>
-                
-                    <td><a class="main-nav-link" href="/tags">标签</a></td>
-                
-                    <td><a class="main-nav-link" href="/about">关于我</a></td>
-                
-                <td>
-                    
-    <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
-    </div>
-
-                </td>
-            </tr>
-        </table>
-    </div>
-</header>
-
-        <div class="outer">
-            
-                
-
-<aside id="profile" class="profile-fixed">
-    <div class="inner profile-inner">
-        <div class="base-info profile-block">
-            <img id="avatar" src="/css/images/octopus_avatar.png" />
-            <h2 id="name">Octopi lau</h2>
-            <h3 id="title">pythoner &amp; DL</h3>
-            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>Hangzhou, China</span>
-            <a id="follow" target="_blank" href="https://github.com/stevelau94/">FOLLOW</a>
-        </div>
-        <div class="article-info profile-block">
-            <div class="article-info-block">
-                13
-                <span>posts</span>
-            </div>
-            <div class="article-info-block">
-                7
-                <span>tags</span>
-            </div>
-        </div>
-        
-        <div class="profile-block social-links">
-            <table>
-                <tr>
-                    
-                    
-                    <td>
-                        <a href="http://github.com/stevelau94/" target="_blank" title="github" class=tooltip>
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="weibo" class=tooltip>
-                            <i class="fab fa-weibo"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="wechat" class=tooltip>
-                            <i class="fab fa-wechat"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="rss" class=tooltip>
-                            <i class="fab fa-rss"></i>
-                        </a>
-                    </td>
-                    
-                </tr>
-            </table>
-        </div>
-        
-    </div>
-</aside>
-
-            
-            <section id="main"><article id="post-python处理数值，日期和时间" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
+  
+  
     
-        <h1 class="article-title" itemprop="name">
-            python处理数值，日期和时间
-        </h1>
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
     
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/15/python处理数值，日期和时间/">
-            <time datetime="2018-07-15T15:59:39.000Z" itemprop="datePublished">2018-07-15</time>
-        </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
-    </div>
+<nav class="site-nav">
+  
 
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/python/">python</a>
-    </div>
-
-                    </div>
-                
-            </header>
+  
+    <ul id="menu" class="menu">
+      
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-            <h2 id="1-数值，取整"><a href="#1-数值，取整" class="headerlink" title="1.数值，取整"></a>1.数值，取整</h2><h3 id="round"><a href="#round" class="headerlink" title="round()"></a>round()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.23</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.23</span>, <span class="number">12</span>)</span><br><span class="line"><span class="number">1.23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">-1.5</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">-1.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">-1.5</span>)</span><br><span class="line"><span class="number">-2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.25</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.25</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.2</span></span><br></pre></td></tr></table></figure>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/python处理数值，日期和时间/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python处理数值，日期和时间</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-15T23:59:39+08:00">
+                2018-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/python-cookbook/" itemprop="url" rel="index">
+                    <span itemprop="name">python cookbook</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-数值，取整"><a href="#1-数值，取整" class="headerlink" title="1.数值，取整"></a>1.数值，取整</h2><h3 id="round"><a href="#round" class="headerlink" title="round()"></a>round()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.23</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.23</span>, <span class="number">12</span>)</span><br><span class="line"><span class="number">1.23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">-1.5</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">-1.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">-1.5</span>)</span><br><span class="line"><span class="number">-2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.25</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.25</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.2</span></span><br></pre></td></tr></table></figure>
 <h3 id="注意进位问题"><a href="#注意进位问题" class="headerlink" title="注意进位问题"></a>注意进位问题</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.254</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.244</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.2</span></span><br></pre></td></tr></table></figure>
 <h3 id="反向取近似"><a href="#反向取近似" class="headerlink" title="反向取近似"></a>反向取近似</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(a, <span class="number">-1</span>)</span><br><span class="line"><span class="number">12340</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(a, <span class="number">-2</span>)</span><br><span class="line"><span class="number">12300</span></span><br></pre></td></tr></table></figure>
 <h2 id="2-数值，精确的小数"><a href="#2-数值，精确的小数" class="headerlink" title="2.数值，精确的小数"></a>2.数值，精确的小数</h2><p>浮点数是有误差的</p>
@@ -283,315 +364,383 @@
 <h2 id="14-日期时间，当月日期范围"><a href="#14-日期时间，当月日期范围" class="headerlink" title="14.日期时间，当月日期范围"></a>14.日期时间，当月日期范围</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">get_month_range</span><span class="params">(start_date=None)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> start_date <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line"><span class="meta">... </span>        start_date = date.today().replace(day=<span class="number">1</span>)</span><br><span class="line"><span class="meta">... </span>        _,days_in_month = calendar.monthrange(start_date.year, start_date.month)</span><br><span class="line"><span class="meta">... </span>        end_date = start_date + timedelta(days=days_in_month)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> (start_date, end_date)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a_day = timedelta(days=<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>first_day, last_day = get_month_range()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">while</span> first_day &lt; last_day:</span><br><span class="line"><span class="meta">... </span>    print(first_day)</span><br><span class="line"><span class="meta">... </span>    first_day += a_day</span><br><span class="line">...</span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-01</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-02</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-03</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-04</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-05</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-06</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-07</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-08</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-09</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-10</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-11</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-12</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-13</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-14</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-15</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-16</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-17</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-18</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-19</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-20</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-21</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-22</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-23</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-24</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-25</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-26</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-27</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-28</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-29</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-30</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-31</span></span><br></pre></td></tr></table></figure>
 <h2 id="15-日期时间，字符串转换为日期"><a href="#15-日期时间，字符串转换为日期" class="headerlink" title="15.日期时间，字符串转换为日期"></a>15.日期时间，字符串转换为日期</h2><h3 id="datetime-strptime"><a href="#datetime-strptime" class="headerlink" title="datetime.strptime()"></a>datetime.strptime()</h3><h3 id="datetime-strftime"><a href="#datetime-strftime" class="headerlink" title="datetime.strftime()"></a>datetime.strftime()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>z</span><br><span class="line">datetime.datetime(<span class="number">2018</span>, <span class="number">7</span>, <span class="number">20</span>, <span class="number">23</span>, <span class="number">53</span>, <span class="number">4</span>, <span class="number">150624</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>nice_z = datetime.strftime(z, <span class="string">'%A %B %d, %Y'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>nice_z</span><br><span class="line"><span class="string">'Friday July 20, 2018'</span></span><br></pre></td></tr></table></figure>
 <h2 id="16-日期时间，时区问题"><a href="#16-日期时间，时区问题" class="headerlink" title="16.日期时间，时区问题"></a>16.日期时间，时区问题</h2>
-        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/13/python-文本处理/" rel="next" title="python 文本处理">
+                <i class="fa fa-chevron-left"></i> python 文本处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/17/python-迭代器和生成器/" rel="prev" title="python 迭代器和生成器">
+                python 迭代器和生成器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
 
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-数值，取整"><span class="nav-number">1.</span> <span class="nav-text">1.数值，取整</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#round"><span class="nav-number">1.1.</span> <span class="nav-text">round()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意进位问题"><span class="nav-number">1.2.</span> <span class="nav-text">注意进位问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向取近似"><span class="nav-number">1.3.</span> <span class="nav-text">反向取近似</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-数值，精确的小数"><span class="nav-number">2.</span> <span class="nav-text">2.数值，精确的小数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#decimal"><span class="nav-number">2.1.</span> <span class="nav-text">decimal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decimal-使用上下文环境-localcontext-对运算进行控制"><span class="nav-number">2.2.</span> <span class="nav-text">decimal 使用上下文环境 localcontext 对运算进行控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-数值，格式化输出"><span class="nav-number">3.</span> <span class="nav-text">3.数值，格式化输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#format（）"><span class="nav-number">3.1.</span> <span class="nav-text">format（）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-数值，各种进制"><span class="nav-number">4.</span> <span class="nav-text">4.数值，各种进制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bin-oct-hex"><span class="nav-number">4.1.</span> <span class="nav-text">bin(),oct(),hex()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去掉前缀，format"><span class="nav-number">4.2.</span> <span class="nav-text">去掉前缀，format()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-数值，大整数-字节串处理"><span class="nav-number">5.</span> <span class="nav-text">5.数值，大整数 字节串处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字节串和大整数转换"><span class="nav-number">5.1.</span> <span class="nav-text">字节串和大整数转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-数值，复数"><span class="nav-number">6.</span> <span class="nav-text">6.数值，复数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#complex-real-image"><span class="nav-number">6.1.</span> <span class="nav-text">complex(real, image)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy可以直接创建复数"><span class="nav-number">6.2.</span> <span class="nav-text">numpy可以直接创建复数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复数的函数操作需要使用cmath"><span class="nav-number">6.3.</span> <span class="nav-text">复数的函数操作需要使用cmath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#math无法实现复数的操作"><span class="nav-number">6.4.</span> <span class="nav-text">math无法实现复数的操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-inf和NaN-无穷大和空"><span class="nav-number">7.</span> <span class="nav-text">7.inf和NaN　(无穷大和空)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#inf"><span class="nav-number">7.1.</span> <span class="nav-text">inf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nan"><span class="nav-number">7.2.</span> <span class="nav-text">nan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inf＆nan-可传递"><span class="nav-number">7.3.</span> <span class="nav-text">inf＆nan　可传递</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-数值，分数"><span class="nav-number">8.</span> <span class="nav-text">8.数值，分数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fractions"><span class="nav-number">8.1.</span> <span class="nav-text">fractions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-numpy，大型数组"><span class="nav-number">9.</span> <span class="nav-text">9.numpy，大型数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-numpy，矩阵和线性代数"><span class="nav-number">10.</span> <span class="nav-text">10.numpy，矩阵和线性代数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-随机数"><span class="nav-number">11.</span> <span class="nav-text">11.随机数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#随机挑一个，random-choice-iter"><span class="nav-number">11.1.</span> <span class="nav-text">随机挑一个，random.choice(iter)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机挑N个，random-sample-iter-N"><span class="nav-number">11.2.</span> <span class="nav-text">随机挑Ｎ个，random.sample(iter, N)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机打乱顺序，random-shuffle-iter"><span class="nav-number">11.3.</span> <span class="nav-text">随机打乱顺序，random.shuffle(iter)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机生成整数，random-randint"><span class="nav-number">11.4.</span> <span class="nav-text">随机生成整数，random.randint()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产生０－１均匀分布，random-random"><span class="nav-number">11.5.</span> <span class="nav-text">产生０－１均匀分布，random.random()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成N个比特位整数，random-getrandbits"><span class="nav-number">11.6.</span> <span class="nav-text">生成Ｎ个比特位整数，random.getrandbits()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-日期时间，时间换算"><span class="nav-number">12.</span> <span class="nav-text">12.日期时间，时间换算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-日期时间，计算上周某日的日期"><span class="nav-number">13.</span> <span class="nav-text">13.日期时间，计算上周某日的日期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-日期时间，当月日期范围"><span class="nav-number">14.</span> <span class="nav-text">14.日期时间，当月日期范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-日期时间，字符串转换为日期"><span class="nav-number">15.</span> <span class="nav-text">15.日期时间，字符串转换为日期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#datetime-strptime"><span class="nav-number">15.1.</span> <span class="nav-text">datetime.strptime()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#datetime-strftime"><span class="nav-number">15.2.</span> <span class="nav-text">datetime.strftime()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-日期时间，时区问题"><span class="nav-number">16.</span> <span class="nav-text">16.日期时间，时区问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/15/python处理数值，日期和时间/" data-id="cjk2n7jg2000siuhsh1eag18s" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
 
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
-            if ($('#' + id).length) {
-                box = $('#' + id);
 
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
 
-              box = $(html);
+  <span class="post-meta-divider">|</span>
 
-              $('body').append(box);
-            }
 
-            $('.article-share-box.on').hide();
 
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
 
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
-            
-    
-
-        </footer>
-    </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/2018/07/17/python-迭代器和生成器/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Newer</strong>
-            <div class="article-nav-title">
-                
-                    python 迭代器和生成器
-                
-            </div>
-        </a>
-    
-    
-        <a href="/2018/07/13/python-文本处理/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">python 文本处理</div>
-        </a>
-    
-</nav>
-
-
-    
-</article>
-
-
-    
-    
-
-</section>
-            
-                
-<aside id="sidebar">
-   
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">recent</h3>
-        <div class="widget">
-            <ul id="recent-post" class="">
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/19/python-处理文本和文件/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/19/python-处理文本和文件/" class="title">python 处理文本和文件</a></p>
-                            <p class="item-date"><time datetime="2018-07-19T14:16:51.000Z" itemprop="datePublished">2018-07-19</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/17/python-迭代器和生成器/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/17/python-迭代器和生成器/" class="title">python 迭代器和生成器</a></p>
-                            <p class="item-date"><time datetime="2018-07-16T16:01:08.000Z" itemprop="datePublished">2018-07-17</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/15/python处理数值，日期和时间/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/15/python处理数值，日期和时间/" class="title">python处理数值，日期和时间</a></p>
-                            <p class="item-date"><time datetime="2018-07-15T15:59:39.000Z" itemprop="datePublished">2018-07-15</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/13/python-文本处理/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/13/python-文本处理/" class="title">python 文本处理</a></p>
-                            <p class="item-date"><time datetime="2018-07-12T18:05:52.000Z" itemprop="datePublished">2018-07-13</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/11/python-数据结构与算法（2）/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/11/python-数据结构与算法（2）/" class="title">python 数据结构与算法（2）</a></p>
-                            <p class="item-date"><time datetime="2018-07-11T13:37:40.000Z" itemprop="datePublished">2018-07-11</time></p>
-                        </div>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">categories</h3>
-        <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/python-cookbook/">python cookbook</a><span class="category-list-count">6</span></li></ul></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">archives</h3>
-        <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">13</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">tags</h3>
-        <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-structure/">data structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python数据结构/">python数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">tag cloud</h3>
-        <div class="widget tagcloud">
-            <a href="/tags/data-structure/" style="font-size: 13.33px;">data structure</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/itertools/" style="font-size: 10px;">itertools</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python数据结构/" style="font-size: 13.33px;">python数据结构</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title">links</h3>
-        <div class="widget">
-            <ul>
-                
-                    <li>
-                        <a href="http://hexo.io">Hexo</a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-
-    
-    <div id="toTop" class="fas fa-angle-up"></div>
-</aside>
-
-            
-        </div>
-        <footer id="footer">
-    <div class="outer">
-        <div id="footer-info" class="inner">
-            &copy; 2018 Octopi Lau<br>
-            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
-        </div>
-    </div>
-</footer>
-        
-
-
-    
-        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
-    
-    
-        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
-    
-    
 
 
 
-<!-- Custom Scripts -->
-<script src="/js/main.js"></script>
 
-    </div>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>

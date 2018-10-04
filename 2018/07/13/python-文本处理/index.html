@@ -1,11 +1,85 @@
 <!DOCTYPE html>
-<html lang=zh>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-    <meta charset="utf-8">
-    
-    <title>python 文本处理 | Octopi</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="1.处理任意分隔符，拆分字符串字符串的split()无法处理多中分隔符的情况re.split()可以提供更强大的功能123456&amp;gt;&amp;gt;&amp;gt; L&apos;asd fee, fedjc;dww fexsa    wdca. dfefacx&apos;&amp;gt;&amp;gt;&amp;gt; import re&amp;gt;&amp;gt;&amp;gt; re.split(r&apos;[;,\s]\s*&apos;, L)[&apos;asd&apos;, &apos;fee&apos;, &apos;fed">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.处理任意分隔符，拆分字符串字符串的split()无法处理多中分隔符的情况re.split()可以提供更强大的功能123456&amp;gt;&amp;gt;&amp;gt; L&apos;asd fee, fedjc;dww fexsa    wdca. dfefacx&apos;&amp;gt;&amp;gt;&amp;gt; import re&amp;gt;&amp;gt;&amp;gt; re.split(r&apos;[;,\s]\s*&apos;, L)[&apos;asd&apos;, &apos;fee&apos;, &apos;fed">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python 文本处理">
@@ -17,242 +91,249 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python 文本处理">
 <meta name="twitter:description" content="1.处理任意分隔符，拆分字符串字符串的split()无法处理多中分隔符的情况re.split()可以提供更强大的功能123456&amp;gt;&amp;gt;&amp;gt; L&apos;asd fee, fedjc;dww fexsa    wdca. dfefacx&apos;&amp;gt;&amp;gt;&amp;gt; import re&amp;gt;&amp;gt;&amp;gt; re.split(r&apos;[;,\s]\s*&apos;, L)[&apos;asd&apos;, &apos;fee&apos;, &apos;fed">
-    
 
-    
-        <link rel="alternate" href="/" title="Octopi" type="application/atom+xml" />
-    
 
-    
-        <link rel="icon" href="/css/images/octopus_favicon.png" />
-    
 
-    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
-    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
-    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
-    <link rel="stylesheet" href="/libs/open-sans/styles.css">
-    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
 
-    <link rel="stylesheet" href="/css/style.css">
 
-    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
-    
-    
-        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
-    
-    
-        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
-    
-    
-    
-    
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/13/python-文本处理/"/>
+
+
+
+
+
+  <title>python 文本处理 | Octopi</title>
+  
+
+
+
+
+
+
 
 
 </head>
 
-<body>
-    <div id="container">
-        <header id="header">
-    <div id="header-main" class="header-inner">
-        <div class="outer">
-            <a href="/" id="logo">
-                <i class="logo"></i>
-                <span class="site-title">Octopi</span>
-            </a>
-            <nav id="main-nav">
-                
-                    <a class="main-nav-link" href="/.">主页</a>
-                
-                    <a class="main-nav-link" href="/archives">文章</a>
-                
-                    <a class="main-nav-link" href="/categories">分类</a>
-                
-                    <a class="main-nav-link" href="/tags">标签</a>
-                
-                    <a class="main-nav-link" href="/about">关于我</a>
-                
-            </nav>
-            
-                
-                <nav id="sub-nav">
-                    <div class="profile" id="profile-nav">
-                        <a id="profile-anchor" href="javascript:;">
-                            <img class="avatar" src="/css/images/octopus_avatar.png" />
-                            <i class="fas fa-caret-down"></i>
-                        </a>
-                    </div>
-                </nav>
-            
-            <div id="search-form-wrap">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-    <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
-        <button type="submit" class="search-form-submit"></button>
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." />
-            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: 'Posts',
-            PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
-            UNTITLED: '(Untitled)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
-
-</div>
-        </div>
-    </div>
-    <div id="main-nav-mobile" class="header-sub header-inner">
-        <table class="menu outer">
-            <tr>
-                
-                    <td><a class="main-nav-link" href="/.">主页</a></td>
-                
-                    <td><a class="main-nav-link" href="/archives">文章</a></td>
-                
-                    <td><a class="main-nav-link" href="/categories">分类</a></td>
-                
-                    <td><a class="main-nav-link" href="/tags">标签</a></td>
-                
-                    <td><a class="main-nav-link" href="/about">关于我</a></td>
-                
-                <td>
-                    
-    <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
-    </div>
-
-                </td>
-            </tr>
-        </table>
-    </div>
-</header>
-
-        <div class="outer">
-            
-                
-
-<aside id="profile" class="profile-fixed">
-    <div class="inner profile-inner">
-        <div class="base-info profile-block">
-            <img id="avatar" src="/css/images/octopus_avatar.png" />
-            <h2 id="name">Octopi lau</h2>
-            <h3 id="title">pythoner &amp; DL</h3>
-            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>Hangzhou, China</span>
-            <a id="follow" target="_blank" href="https://github.com/stevelau94/">FOLLOW</a>
-        </div>
-        <div class="article-info profile-block">
-            <div class="article-info-block">
-                13
-                <span>posts</span>
-            </div>
-            <div class="article-info-block">
-                7
-                <span>tags</span>
-            </div>
-        </div>
-        
-        <div class="profile-block social-links">
-            <table>
-                <tr>
-                    
-                    
-                    <td>
-                        <a href="http://github.com/stevelau94/" target="_blank" title="github" class=tooltip>
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="weibo" class=tooltip>
-                            <i class="fab fa-weibo"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="wechat" class=tooltip>
-                            <i class="fab fa-wechat"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="rss" class=tooltip>
-                            <i class="fab fa-rss"></i>
-                        </a>
-                    </td>
-                    
-                </tr>
-            </table>
-        </div>
-        
-    </div>
-</aside>
-
-            
-            <section id="main"><article id="post-python-文本处理" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
+  
+  
     
-        <h1 class="article-title" itemprop="name">
-            python 文本处理
-        </h1>
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
     
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/13/python-文本处理/">
-            <time datetime="2018-07-12T18:05:52.000Z" itemprop="datePublished">2018-07-13</time>
-        </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
-    </div>
+<nav class="site-nav">
+  
 
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/python/">python</a>
-    </div>
-
-                    </div>
-                
-            </header>
+  
+    <ul id="menu" class="menu">
+      
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-            <h2 id="1-处理任意分隔符，拆分字符串"><a href="#1-处理任意分隔符，拆分字符串" class="headerlink" title="1.处理任意分隔符，拆分字符串"></a>1.处理任意分隔符，拆分字符串</h2><h3 id="字符串的split-无法处理多中分隔符的情况"><a href="#字符串的split-无法处理多中分隔符的情况" class="headerlink" title="字符串的split()无法处理多中分隔符的情况"></a>字符串的split()无法处理多中分隔符的情况</h3><h3 id="re-split-可以提供更强大的功能"><a href="#re-split-可以提供更强大的功能" class="headerlink" title="re.split()可以提供更强大的功能"></a>re.split()可以提供更强大的功能</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>L</span><br><span class="line"><span class="string">'asd fee, fedjc;dww fexsa    wdca. dfefacx'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'[;,\s]\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">'fee'</span>, <span class="string">'fedjc'</span>, <span class="string">'dww'</span>, <span class="string">'fexsa'</span>, <span class="string">'wdca.'</span>, <span class="string">'dfefacx'</span>]</span><br></pre></td></tr></table></figure>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/python-文本处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python 文本处理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-13T02:05:52+08:00">
+                2018-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/python-cookbook/" itemprop="url" rel="index">
+                    <span itemprop="name">python cookbook</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-处理任意分隔符，拆分字符串"><a href="#1-处理任意分隔符，拆分字符串" class="headerlink" title="1.处理任意分隔符，拆分字符串"></a>1.处理任意分隔符，拆分字符串</h2><h3 id="字符串的split-无法处理多中分隔符的情况"><a href="#字符串的split-无法处理多中分隔符的情况" class="headerlink" title="字符串的split()无法处理多中分隔符的情况"></a>字符串的split()无法处理多中分隔符的情况</h3><h3 id="re-split-可以提供更强大的功能"><a href="#re-split-可以提供更强大的功能" class="headerlink" title="re.split()可以提供更强大的功能"></a>re.split()可以提供更强大的功能</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>L</span><br><span class="line"><span class="string">'asd fee, fedjc;dww fexsa    wdca. dfefacx'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'[;,\s]\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">'fee'</span>, <span class="string">'fedjc'</span>, <span class="string">'dww'</span>, <span class="string">'fexsa'</span>, <span class="string">'wdca.'</span>, <span class="string">'dfefacx'</span>]</span><br></pre></td></tr></table></figure>
 <h3 id="注意re-split-的捕获组写法"><a href="#注意re-split-的捕获组写法" class="headerlink" title="注意re.split()的捕获组写法"></a>注意re.split()的捕获组写法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'[;|,|\s]\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">'fee'</span>, <span class="string">'fedjc'</span>, <span class="string">'dww'</span>, <span class="string">'fexsa'</span>, <span class="string">'wdca.'</span>, <span class="string">'dfefacx'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'(;,\s)\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd fee, fedjc;dww fexsa    wdca. dfefacx'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'(;|,|\s)\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">' '</span>, <span class="string">'fee'</span>, <span class="string">','</span>, <span class="string">'fedjc'</span>, <span class="string">';'</span>, <span class="string">'dww'</span>, <span class="string">' '</span>, <span class="string">'fexsa'</span>, <span class="string">' '</span>, <span class="string">'wdca.'</span>, <span class="string">' '</span>, <span class="string">'dfefacx'</span>]</span><br></pre></td></tr></table></figure>
 <h3 id="进一步将值和分隔符解析出来"><a href="#进一步将值和分隔符解析出来" class="headerlink" title="进一步将值和分隔符解析出来"></a>进一步将值和分隔符解析出来</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">f = re.split(<span class="string">r'(;|,|\s)\s*'</span>, L)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">' '</span>, <span class="string">'fee'</span>, <span class="string">','</span>, <span class="string">'fedjc'</span>, <span class="string">';'</span>, <span class="string">'dww'</span>, <span class="string">' '</span>, <span class="string">'fexsa'</span>, <span class="string">' '</span>, <span class="string">'wdca.'</span>, <span class="string">' '</span>, <span class="string">'dfefacx'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = f[::<span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">'fee'</span>, <span class="string">'fedjc'</span>, <span class="string">'dww'</span>, <span class="string">'fexsa'</span>, <span class="string">'wdca.'</span>, <span class="string">'dfefacx'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>delimiters = f[<span class="number">1</span>::<span class="number">2</span>] + [<span class="string">''</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>delimiters</span><br><span class="line">[<span class="string">' '</span>, <span class="string">','</span>, <span class="string">';'</span>, <span class="string">' '</span>, <span class="string">' '</span>, <span class="string">' '</span>, <span class="string">''</span>]</span><br></pre></td></tr></table></figure>
 <h3 id="用-…-使用非捕获组，不取分隔符"><a href="#用-…-使用非捕获组，不取分隔符" class="headerlink" title="用(?:…)使用非捕获组，不取分隔符"></a>用(?:…)使用非捕获组，不取分隔符</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = re.split(<span class="string">r'(;|,|\s)\s*'</span>, L)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">' '</span>, <span class="string">'fee'</span>, <span class="string">','</span>, <span class="string">'fedjc'</span>, <span class="string">';'</span>, <span class="string">'dww'</span>, <span class="string">' '</span>, <span class="string">'fexsa'</span>, <span class="string">' '</span>, <span class="string">'wdca.'</span>, <span class="string">' '</span>, <span class="string">'dfefacx'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = re.split(<span class="string">r'(?:;|,|\s)\s*'</span>, L)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">'fee'</span>, <span class="string">'fedjc'</span>, <span class="string">'dww'</span>, <span class="string">'fexsa'</span>, <span class="string">'wdca.'</span>, <span class="string">'dfefacx'</span>]</span><br></pre></td></tr></table></figure>
@@ -298,315 +379,383 @@
 <h2 id="17-处理HTML-XML"><a href="#17-处理HTML-XML" class="headerlink" title="17.处理HTML XML"></a>17.处理HTML XML</h2><h2 id="18-文本分词"><a href="#18-文本分词" class="headerlink" title="18.文本分词"></a>18.文本分词</h2><h2 id="19-字节串上执行文本操作"><a href="#19-字节串上执行文本操作" class="headerlink" title="19.字节串上执行文本操作"></a>19.字节串上执行文本操作</h2><p>字节串很多时候可以当做字符串处理，使用字符串的大部分函数</p>
 <h3 id="注意，字节串需要解码打印"><a href="#注意，字节串需要解码打印" class="headerlink" title="注意，字节串需要解码打印"></a>注意，字节串需要解码打印</h3><p>在打印的时候，需要加上.decode(‘ascii’)或者别的 解码为文本字符串<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">b'hello'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(s)</span><br><span class="line"><span class="string">b'hello'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(s.decode(<span class="string">'ascii'</span>))</span><br><span class="line">hello</span><br></pre></td></tr></table></figure></p>
 <h3 id="注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码-encode"><a href="#注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码-encode" class="headerlink" title="注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码(encode)"></a>注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码(encode)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'&#123;:10s&#125;&#123;:10d&#125;'</span>.format(<span class="string">'allp'</span>, <span class="number">100</span>).encode(<span class="string">'ascii'</span>)</span><br><span class="line"><span class="string">b'allp             100'</span></span><br></pre></td></tr></table></figure>
-        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/11/python-数据结构与算法（2）/" rel="next" title="python 数据结构与算法（2）">
+                <i class="fa fa-chevron-left"></i> python 数据结构与算法（2）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/15/python处理数值，日期和时间/" rel="prev" title="python处理数值，日期和时间">
+                python处理数值，日期和时间 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
 
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-处理任意分隔符，拆分字符串"><span class="nav-number">1.</span> <span class="nav-text">1.处理任意分隔符，拆分字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串的split-无法处理多中分隔符的情况"><span class="nav-number">1.1.</span> <span class="nav-text">字符串的split()无法处理多中分隔符的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#re-split-可以提供更强大的功能"><span class="nav-number">1.2.</span> <span class="nav-text">re.split()可以提供更强大的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意re-split-的捕获组写法"><span class="nav-number">1.3.</span> <span class="nav-text">注意re.split()的捕获组写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进一步将值和分隔符解析出来"><span class="nav-number">1.4.</span> <span class="nav-text">进一步将值和分隔符解析出来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用-…-使用非捕获组，不取分隔符"><span class="nav-number">1.5.</span> <span class="nav-text">用(?:…)使用非捕获组，不取分隔符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-匹配字符串开头-结尾（文件匹配用的上）"><span class="nav-number">2.</span> <span class="nav-text">2.匹配字符串开头/结尾（文件匹配用的上）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#str-startswith-amp-str-endswith"><span class="nav-number">2.1.</span> <span class="nav-text">str.startswith() &amp; str.endswith()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传入多项检查，需要传入元组"><span class="nav-number">2.2.</span> <span class="nav-text">传入多项检查，需要传入元组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查有无特定文件"><span class="nav-number">2.3.</span> <span class="nav-text">检查有无特定文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用通配符进行字符串匹配"><span class="nav-number">3.</span> <span class="nav-text">3.使用通配符进行字符串匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fnmatch-amp-fnmatchcase"><span class="nav-number">3.1.</span> <span class="nav-text">fnmatch() &amp; fnmatchcase()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-文本模式的匹配和查找"><span class="nav-number">4.</span> <span class="nav-text">4.文本模式的匹配和查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单匹配-str-find-str-endswith-str-startswith"><span class="nav-number">4.1.</span> <span class="nav-text">简单匹配 str.find() str.endswith() str.startswith()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#re-match-re-findall-re-findite-re-compile"><span class="nav-number">4.2.</span> <span class="nav-text">re.match(), re.findall(), re.findite() re.compile()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#捕获组"><span class="nav-number">4.3.</span> <span class="nav-text">捕获组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#re"><span class="nav-number">4.4.</span> <span class="nav-text">re</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-文本查找和替换"><span class="nav-number">5.</span> <span class="nav-text">5.文本查找和替换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单替换，str-replace"><span class="nav-number">5.1.</span> <span class="nav-text">简单替换，str.replace()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂替换，re-sub"><span class="nav-number">5.2.</span> <span class="nav-text">复杂替换，re.sub()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-不区分大小写，对文本的查找和替换"><span class="nav-number">6.</span> <span class="nav-text">6.不区分大小写，对文本的查找和替换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#re的各种操作都要加上re-IGNORECASE"><span class="nav-number">6.1.</span> <span class="nav-text">re的各种操作都要加上re.IGNORECASE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-实现最短匹配"><span class="nav-number">7.</span> <span class="nav-text">7.实现最短匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#出现自动匹配到长模式的问题举例"><span class="nav-number">7.1.</span> <span class="nav-text">出现自动匹配到长模式的问题举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-编写多行模式的正则"><span class="nav-number">8.</span> <span class="nav-text">8.编写多行模式的正则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多行匹配举例"><span class="nav-number">8.1.</span> <span class="nav-text">多行匹配举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#re-compile-中可以标记-re-DOTALL-让-匹配换行符"><span class="nav-number">8.2.</span> <span class="nav-text">re.compile()中可以标记 re.DOTALL 让.匹配换行符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Unicode文本统一表示为规范形式"><span class="nav-number">9.</span> <span class="nav-text">9.Unicode文本统一表示为规范形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#unicode解决字符串多表示问题"><span class="nav-number">9.1.</span> <span class="nav-text">unicode解决字符串多表示问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-正则处理Unicode"><span class="nav-number">10.</span> <span class="nav-text">10.正则处理Unicode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unicode加re是可怕的，需要使用更高级的RE工具"><span class="nav-number">10.1.</span> <span class="nav-text">Unicode加re是可怕的，需要使用更高级的RE工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-字符串中去掉不需要的字符"><span class="nav-number">11.</span> <span class="nav-text">11.字符串中去掉不需要的字符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#strip-lstrip-rstrip"><span class="nav-number">11.1.</span> <span class="nav-text">strip(), lstrip(), rstrip()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strip-不会处理字符串中间的文本起作用，需要其他辅助，如replace"><span class="nav-number">11.2.</span> <span class="nav-text">strip() 不会处理字符串中间的文本起作用，需要其他辅助，如replace()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-文本过滤和清理"><span class="nav-number">12.</span> <span class="nav-text">12.文本过滤和清理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单处理-str-upper-str-lower"><span class="nav-number">12.1.</span> <span class="nav-text">简单处理 str.upper() str.lower()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单替换-str-replace-re-sub"><span class="nav-number">12.2.</span> <span class="nav-text">简单替换 str.replace() re.sub()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规范化文本-unicodedata-normalize"><span class="nav-number">12.3.</span> <span class="nav-text">规范化文本 unicodedata.normalize()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-translate-做清理-可以接受转换函数"><span class="nav-number">12.4.</span> <span class="nav-text">str.translate() 做清理,可以接受转换函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-对齐文本字符串"><span class="nav-number">13.</span> <span class="nav-text">13.对齐文本字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ljust-rjust-center"><span class="nav-number">13.1.</span> <span class="nav-text">ljust(), rjust() center()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#format"><span class="nav-number">13.2.</span> <span class="nav-text">format()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-字符串连接及合并"><span class="nav-number">14.</span> <span class="nav-text">14.字符串连接及合并</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单合并字符串，用-或者-‘’-join-或者-format"><span class="nav-number">14.1.</span> <span class="nav-text">简单合并字符串，用 + 或者 ‘’.join() 或者 format()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并是非常低效的，不适合大量字符串拼接"><span class="nav-number">14.2.</span> <span class="nav-text">+ 合并是非常低效的，不适合大量字符串拼接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成器是个重要的工具"><span class="nav-number">14.3.</span> <span class="nav-text">生成器是个重要的工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-O与拼接同时存在是，需要根据业务判断适合的方案"><span class="nav-number">14.4.</span> <span class="nav-text">I/O与拼接同时存在是，需要根据业务判断适合的方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果代码要从短字符串中构建输出，使用生成器"><span class="nav-number">14.5.</span> <span class="nav-text">如果代码要从短字符串中构建输出，使用生成器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-给字符串中变量名做替换处理"><span class="nav-number">15.</span> <span class="nav-text">15.给字符串中变量名做替换处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#format-模拟替换操作"><span class="nav-number">15.1.</span> <span class="nav-text">format()模拟替换操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-以固定列数-重新格式化文本"><span class="nav-number">16.</span> <span class="nav-text">16.以固定列数 重新格式化文本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#textwrap"><span class="nav-number">16.1.</span> <span class="nav-text">textwrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取终端尺寸"><span class="nav-number">16.2.</span> <span class="nav-text">获取终端尺寸</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-处理HTML-XML"><span class="nav-number">17.</span> <span class="nav-text">17.处理HTML XML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-文本分词"><span class="nav-number">18.</span> <span class="nav-text">18.文本分词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-字节串上执行文本操作"><span class="nav-number">19.</span> <span class="nav-text">19.字节串上执行文本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意，字节串需要解码打印"><span class="nav-number">19.1.</span> <span class="nav-text">注意，字节串需要解码打印</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码-encode"><span class="nav-number">19.2.</span> <span class="nav-text">注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码(encode)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/13/python-文本处理/" data-id="cjk2n7jh4001fiuhsljhyg3n5" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
 
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
-            if ($('#' + id).length) {
-                box = $('#' + id);
 
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
 
-              box = $(html);
+  <span class="post-meta-divider">|</span>
 
-              $('body').append(box);
-            }
 
-            $('.article-share-box.on').hide();
 
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
 
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
-            
-    
-
-        </footer>
-    </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/2018/07/15/python处理数值，日期和时间/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Newer</strong>
-            <div class="article-nav-title">
-                
-                    python处理数值，日期和时间
-                
-            </div>
-        </a>
-    
-    
-        <a href="/2018/07/11/python-数据结构与算法（2）/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">python 数据结构与算法（2）</div>
-        </a>
-    
-</nav>
-
-
-    
-</article>
-
-
-    
-    
-
-</section>
-            
-                
-<aside id="sidebar">
-   
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">recent</h3>
-        <div class="widget">
-            <ul id="recent-post" class="">
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/19/python-处理文本和文件/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/19/python-处理文本和文件/" class="title">python 处理文本和文件</a></p>
-                            <p class="item-date"><time datetime="2018-07-19T14:16:51.000Z" itemprop="datePublished">2018-07-19</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/17/python-迭代器和生成器/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/17/python-迭代器和生成器/" class="title">python 迭代器和生成器</a></p>
-                            <p class="item-date"><time datetime="2018-07-16T16:01:08.000Z" itemprop="datePublished">2018-07-17</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/15/python处理数值，日期和时间/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/15/python处理数值，日期和时间/" class="title">python处理数值，日期和时间</a></p>
-                            <p class="item-date"><time datetime="2018-07-15T15:59:39.000Z" itemprop="datePublished">2018-07-15</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/13/python-文本处理/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/13/python-文本处理/" class="title">python 文本处理</a></p>
-                            <p class="item-date"><time datetime="2018-07-12T18:05:52.000Z" itemprop="datePublished">2018-07-13</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/11/python-数据结构与算法（2）/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/11/python-数据结构与算法（2）/" class="title">python 数据结构与算法（2）</a></p>
-                            <p class="item-date"><time datetime="2018-07-11T13:37:40.000Z" itemprop="datePublished">2018-07-11</time></p>
-                        </div>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">categories</h3>
-        <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/python-cookbook/">python cookbook</a><span class="category-list-count">6</span></li></ul></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">archives</h3>
-        <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">13</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">tags</h3>
-        <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-structure/">data structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python数据结构/">python数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">tag cloud</h3>
-        <div class="widget tagcloud">
-            <a href="/tags/data-structure/" style="font-size: 13.33px;">data structure</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/itertools/" style="font-size: 10px;">itertools</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python数据结构/" style="font-size: 13.33px;">python数据结构</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title">links</h3>
-        <div class="widget">
-            <ul>
-                
-                    <li>
-                        <a href="http://hexo.io">Hexo</a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-
-    
-    <div id="toTop" class="fas fa-angle-up"></div>
-</aside>
-
-            
-        </div>
-        <footer id="footer">
-    <div class="outer">
-        <div id="footer-info" class="inner">
-            &copy; 2018 Octopi Lau<br>
-            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
-        </div>
-    </div>
-</footer>
-        
-
-
-    
-        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
-    
-    
-        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
-    
-    
 
 
 
-<!-- Custom Scripts -->
-<script src="/js/main.js"></script>
 
-    </div>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>

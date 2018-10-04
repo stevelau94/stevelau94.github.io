@@ -1,11 +1,85 @@
 <!DOCTYPE html>
-<html lang=zh>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-    <meta charset="utf-8">
-    
-    <title>python 数据结构与算法（1） | Octopi</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="1.对象分解将含N个元素的元祖或序列分解成单独变量12data = [&apos;steve&apos;, 18, 100, (2017.7.7)]name, age, weight, date = data 一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分123s = &apos;hello&apos;# 可以使用 _ 方式丢弃指定值a, b, c, e, _ = s 2.任意长度对象分解分解对象长度太长‘*’表达式可以">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,data structure,python数据结构," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.对象分解将含N个元素的元祖或序列分解成单独变量12data = [&apos;steve&apos;, 18, 100, (2017.7.7)]name, age, weight, date = data 一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分123s = &apos;hello&apos;# 可以使用 _ 方式丢弃指定值a, b, c, e, _ = s 2.任意长度对象分解分解对象长度太长‘*’表达式可以">
 <meta name="keywords" content="python,data structure,python数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python 数据结构与算法（1）">
@@ -17,242 +91,249 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python 数据结构与算法（1）">
 <meta name="twitter:description" content="1.对象分解将含N个元素的元祖或序列分解成单独变量12data = [&apos;steve&apos;, 18, 100, (2017.7.7)]name, age, weight, date = data 一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分123s = &apos;hello&apos;# 可以使用 _ 方式丢弃指定值a, b, c, e, _ = s 2.任意长度对象分解分解对象长度太长‘*’表达式可以">
-    
 
-    
-        <link rel="alternate" href="/" title="Octopi" type="application/atom+xml" />
-    
 
-    
-        <link rel="icon" href="/css/images/octopus_favicon.png" />
-    
 
-    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
-    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
-    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
-    <link rel="stylesheet" href="/libs/open-sans/styles.css">
-    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
 
-    <link rel="stylesheet" href="/css/style.css">
 
-    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
-    
-    
-        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
-    
-    
-        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
-    
-    
-    
-    
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/10/python-数据结构与算法（1）/"/>
+
+
+
+
+
+  <title>python 数据结构与算法（1） | Octopi</title>
+  
+
+
+
+
+
+
 
 
 </head>
 
-<body>
-    <div id="container">
-        <header id="header">
-    <div id="header-main" class="header-inner">
-        <div class="outer">
-            <a href="/" id="logo">
-                <i class="logo"></i>
-                <span class="site-title">Octopi</span>
-            </a>
-            <nav id="main-nav">
-                
-                    <a class="main-nav-link" href="/.">主页</a>
-                
-                    <a class="main-nav-link" href="/archives">文章</a>
-                
-                    <a class="main-nav-link" href="/categories">分类</a>
-                
-                    <a class="main-nav-link" href="/tags">标签</a>
-                
-                    <a class="main-nav-link" href="/about">关于我</a>
-                
-            </nav>
-            
-                
-                <nav id="sub-nav">
-                    <div class="profile" id="profile-nav">
-                        <a id="profile-anchor" href="javascript:;">
-                            <img class="avatar" src="/css/images/octopus_avatar.png" />
-                            <i class="fas fa-caret-down"></i>
-                        </a>
-                    </div>
-                </nav>
-            
-            <div id="search-form-wrap">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-    <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
-        <button type="submit" class="search-form-submit"></button>
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." />
-            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: 'Posts',
-            PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
-            UNTITLED: '(Untitled)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
-
-</div>
-        </div>
-    </div>
-    <div id="main-nav-mobile" class="header-sub header-inner">
-        <table class="menu outer">
-            <tr>
-                
-                    <td><a class="main-nav-link" href="/.">主页</a></td>
-                
-                    <td><a class="main-nav-link" href="/archives">文章</a></td>
-                
-                    <td><a class="main-nav-link" href="/categories">分类</a></td>
-                
-                    <td><a class="main-nav-link" href="/tags">标签</a></td>
-                
-                    <td><a class="main-nav-link" href="/about">关于我</a></td>
-                
-                <td>
-                    
-    <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
-    </div>
-
-                </td>
-            </tr>
-        </table>
-    </div>
-</header>
-
-        <div class="outer">
-            
-                
-
-<aside id="profile" class="profile-fixed">
-    <div class="inner profile-inner">
-        <div class="base-info profile-block">
-            <img id="avatar" src="/css/images/octopus_avatar.png" />
-            <h2 id="name">Octopi lau</h2>
-            <h3 id="title">pythoner &amp; DL</h3>
-            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>Hangzhou, China</span>
-            <a id="follow" target="_blank" href="https://github.com/stevelau94/">FOLLOW</a>
-        </div>
-        <div class="article-info profile-block">
-            <div class="article-info-block">
-                13
-                <span>posts</span>
-            </div>
-            <div class="article-info-block">
-                7
-                <span>tags</span>
-            </div>
-        </div>
-        
-        <div class="profile-block social-links">
-            <table>
-                <tr>
-                    
-                    
-                    <td>
-                        <a href="http://github.com/stevelau94/" target="_blank" title="github" class=tooltip>
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="weibo" class=tooltip>
-                            <i class="fab fa-weibo"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="wechat" class=tooltip>
-                            <i class="fab fa-wechat"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="rss" class=tooltip>
-                            <i class="fab fa-rss"></i>
-                        </a>
-                    </td>
-                    
-                </tr>
-            </table>
-        </div>
-        
-    </div>
-</aside>
-
-            
-            <section id="main"><article id="post-python-数据结构与算法（1）" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
+  
+  
     
-        <h1 class="article-title" itemprop="name">
-            python 数据结构与算法（1）
-        </h1>
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
     
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/10/python-数据结构与算法（1）/">
-            <time datetime="2018-07-10T15:13:45.000Z" itemprop="datePublished">2018-07-10</time>
-        </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
-    </div>
+<nav class="site-nav">
+  
 
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/data-structure/">data structure</a>, <a class="tag-link" href="/tags/python/">python</a>, <a class="tag-link" href="/tags/python数据结构/">python数据结构</a>
-    </div>
-
-                    </div>
-                
-            </header>
+  
+    <ul id="menu" class="menu">
+      
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-            <h2 id="1-对象分解"><a href="#1-对象分解" class="headerlink" title="1.对象分解"></a>1.对象分解</h2><h3 id="将含N个元素的元祖或序列分解成单独变量"><a href="#将含N个元素的元祖或序列分解成单独变量" class="headerlink" title="将含N个元素的元祖或序列分解成单独变量"></a>将含N个元素的元祖或序列分解成单独变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="string">'steve'</span>, <span class="number">18</span>, <span class="number">100</span>, (<span class="number">2017.7</span><span class="number">.7</span>)]</span><br><span class="line">name, age, weight, date = data</span><br></pre></td></tr></table></figure>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/python-数据结构与算法（1）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python 数据结构与算法（1）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-10T23:13:45+08:00">
+                2018-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/python-cookbook/" itemprop="url" rel="index">
+                    <span itemprop="name">python cookbook</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-对象分解"><a href="#1-对象分解" class="headerlink" title="1.对象分解"></a>1.对象分解</h2><h3 id="将含N个元素的元祖或序列分解成单独变量"><a href="#将含N个元素的元祖或序列分解成单独变量" class="headerlink" title="将含N个元素的元祖或序列分解成单独变量"></a>将含N个元素的元祖或序列分解成单独变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="string">'steve'</span>, <span class="number">18</span>, <span class="number">100</span>, (<span class="number">2017.7</span><span class="number">.7</span>)]</span><br><span class="line">name, age, weight, date = data</span><br></pre></td></tr></table></figure>
 <h3 id="一切可迭代的对象-字符串，文件，迭代器，生成器-都可以这样拆分"><a href="#一切可迭代的对象-字符串，文件，迭代器，生成器-都可以这样拆分" class="headerlink" title="一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分"></a>一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'hello'</span></span><br><span class="line"><span class="comment"># 可以使用 _ 方式丢弃指定值</span></span><br><span class="line">a, b, c, e, _ = s</span><br></pre></td></tr></table></figure>
 <h2 id="2-任意长度对象分解"><a href="#2-任意长度对象分解" class="headerlink" title="2.任意长度对象分解"></a>2.任意长度对象分解</h2><h3 id="分解对象长度太长"><a href="#分解对象长度太长" class="headerlink" title="分解对象长度太长"></a>分解对象长度太长</h3><p><strong>‘*’表达式可以解决</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 适用于python3</span></span><br><span class="line">record = (<span class="string">'steve'</span>, <span class="string">'steve@gmail.com'</span>, <span class="string">'1234566-88'</span>, <span class="string">'9876543=99'</span>)</span><br><span class="line">name, email, *phone = record</span><br></pre></td></tr></table></figure></p>
 <h3 id="迭代变长序列"><a href="#迭代变长序列" class="headerlink" title="迭代变长序列"></a>迭代变长序列</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">records = [</span><br><span class="line">    (<span class="string">'foo'</span>, <span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line">    (<span class="string">'bar'</span>, <span class="string">'hello'</span>),</span><br><span class="line">    (<span class="string">'foo'</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_foo</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    print(<span class="string">'foo'</span>, x, y)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_bar</span><span class="params">(s)</span>:</span></span><br><span class="line">    print(<span class="string">'bar'</span>, s)</span><br><span class="line"><span class="keyword">for</span> tag, *args <span class="keyword">in</span> records:</span><br><span class="line">    <span class="keyword">if</span> tag == <span class="string">'foo'</span>:</span><br><span class="line">        do_foo(*args)</span><br><span class="line">    <span class="keyword">elif</span> tag == <span class="string">'bar'</span>:</span><br><span class="line">        do_bar(*args)</span><br></pre></td></tr></table></figure>
@@ -280,315 +361,387 @@
 <h3 id="如果序列中的值不可哈希"><a href="#如果序列中的值不可哈希" class="headerlink" title="如果序列中的值不可哈希"></a>如果序列中的值不可哈希</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">deduque</span><span class="params">(items, key=None)</span>:</span></span><br><span class="line"><span class="meta">... </span>    seen = set()</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">            val = item <span class="keyword">if</span> key <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">else</span> key(item)</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">if</span> val <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">yield</span> item</span><br><span class="line"><span class="meta">... </span>            seen.add(val)</span><br></pre></td></tr></table></figure>
 <h3 id="如果只是去重"><a href="#如果只是去重" class="headerlink" title="如果只是去重"></a>如果只是去重</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>set(a)</span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">9</span>&#125;</span><br></pre></td></tr></table></figure>
 
-        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/data-structure/" rel="tag"># data structure</a>
+          
+            <a href="/tags/python数据结构/" rel="tag"># python数据结构</a>
+          
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/" rel="next" title="Gnome Ubuntu上安装下载工具 uget+aria2">
+                <i class="fa fa-chevron-left"></i> Gnome Ubuntu上安装下载工具 uget+aria2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/11/python-数据结构与算法（2）/" rel="prev" title="python 数据结构与算法（2）">
+                python 数据结构与算法（2） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
 
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-对象分解"><span class="nav-number">1.</span> <span class="nav-text">1.对象分解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将含N个元素的元祖或序列分解成单独变量"><span class="nav-number">1.1.</span> <span class="nav-text">将含N个元素的元祖或序列分解成单独变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一切可迭代的对象-字符串，文件，迭代器，生成器-都可以这样拆分"><span class="nav-number">1.2.</span> <span class="nav-text">一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-任意长度对象分解"><span class="nav-number">2.</span> <span class="nav-text">2.任意长度对象分解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分解对象长度太长"><span class="nav-number">2.1.</span> <span class="nav-text">分解对象长度太长</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代变长序列"><span class="nav-number">2.2.</span> <span class="nav-text">迭代变长序列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-保存最后N个元素"><span class="nav-number">3.</span> <span class="nav-text">3.保存最后N个元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#保存有限的历史记录是collections-deuqe的完美使用场景"><span class="nav-number">3.1.</span> <span class="nav-text">保存有限的历史记录是collections.deuqe的完美使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deque"><span class="nav-number">3.2.</span> <span class="nav-text">deque</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-找到最大-小的N个元素"><span class="nav-number">4.</span> <span class="nav-text">4.找到最大/小的N个元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#heapq模块中的-nlargest-amp-nsmallest"><span class="nav-number">4.1.</span> <span class="nav-text">heapq模块中的 nlargest() &amp; nsmallest()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两个函数可以通过key加lambda函数实现复杂功能"><span class="nav-number">4.2.</span> <span class="nav-text">两个函数可以通过key加lambda函数实现复杂功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-优先级队列"><span class="nav-number">5.</span> <span class="nav-text">5.优先级队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-字典，键映射到多个值"><span class="nav-number">6.</span> <span class="nav-text">6.字典，键映射到多个值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原生dict实现多值字典"><span class="nav-number">6.1.</span> <span class="nav-text">原生dict实现多值字典</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#collections-defaultdict"><span class="nav-number">6.2.</span> <span class="nav-text">collections.defaultdict</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-字典，保持有序"><span class="nav-number">7.</span> <span class="nav-text">7.字典，保持有序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#collections-OrderedDict"><span class="nav-number">7.1.</span> <span class="nav-text">collections.OrderedDict</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进一步理解-OrderedDict"><span class="nav-number">7.2.</span> <span class="nav-text">进一步理解 OrderedDict</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-字典，相关计算问题"><span class="nav-number">8.</span> <span class="nav-text">8.字典，相关计算问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字典，最大值-最小值-排序"><span class="nav-number">8.1.</span> <span class="nav-text">字典，最大值/最小值/排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-字典，找出相同-键-值"><span class="nav-number">9.</span> <span class="nav-text">9.字典，找出相同(键/值)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对-keys-items-进行集合操作"><span class="nav-number">9.1.</span> <span class="nav-text">对 keys/items 进行集合操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去除序列中重复项，保持元素间顺序不变"><span class="nav-number">10.</span> <span class="nav-text">去除序列中重复项，保持元素间顺序不变</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如果序列中的值可哈希"><span class="nav-number">10.1.</span> <span class="nav-text">如果序列中的值可哈希</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果序列中的值不可哈希"><span class="nav-number">10.2.</span> <span class="nav-text">如果序列中的值不可哈希</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果只是去重"><span class="nav-number">10.3.</span> <span class="nav-text">如果只是去重</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/10/python-数据结构与算法（1）/" data-id="cjk2n7jfy000miuhsj4v5x640" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
 
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
-            if ($('#' + id).length) {
-                box = $('#' + id);
 
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
 
-              box = $(html);
+  <span class="post-meta-divider">|</span>
 
-              $('body').append(box);
-            }
 
-            $('.article-share-box.on').hide();
 
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
 
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
-            
-    
-
-        </footer>
-    </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/2018/07/11/python-数据结构与算法（2）/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Newer</strong>
-            <div class="article-nav-title">
-                
-                    python 数据结构与算法（2）
-                
-            </div>
-        </a>
-    
-    
-        <a href="/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">Gnome Ubuntu上安装下载工具 uget+aria2</div>
-        </a>
-    
-</nav>
-
-
-    
-</article>
-
-
-    
-    
-
-</section>
-            
-                
-<aside id="sidebar">
-   
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">recent</h3>
-        <div class="widget">
-            <ul id="recent-post" class="">
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/19/python-处理文本和文件/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/19/python-处理文本和文件/" class="title">python 处理文本和文件</a></p>
-                            <p class="item-date"><time datetime="2018-07-19T14:16:51.000Z" itemprop="datePublished">2018-07-19</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/17/python-迭代器和生成器/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/17/python-迭代器和生成器/" class="title">python 迭代器和生成器</a></p>
-                            <p class="item-date"><time datetime="2018-07-16T16:01:08.000Z" itemprop="datePublished">2018-07-17</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/15/python处理数值，日期和时间/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/15/python处理数值，日期和时间/" class="title">python处理数值，日期和时间</a></p>
-                            <p class="item-date"><time datetime="2018-07-15T15:59:39.000Z" itemprop="datePublished">2018-07-15</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/13/python-文本处理/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/13/python-文本处理/" class="title">python 文本处理</a></p>
-                            <p class="item-date"><time datetime="2018-07-12T18:05:52.000Z" itemprop="datePublished">2018-07-13</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/11/python-数据结构与算法（2）/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/11/python-数据结构与算法（2）/" class="title">python 数据结构与算法（2）</a></p>
-                            <p class="item-date"><time datetime="2018-07-11T13:37:40.000Z" itemprop="datePublished">2018-07-11</time></p>
-                        </div>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">categories</h3>
-        <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/python-cookbook/">python cookbook</a><span class="category-list-count">6</span></li></ul></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">archives</h3>
-        <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">13</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">tags</h3>
-        <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-structure/">data structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python数据结构/">python数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">tag cloud</h3>
-        <div class="widget tagcloud">
-            <a href="/tags/data-structure/" style="font-size: 13.33px;">data structure</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/itertools/" style="font-size: 10px;">itertools</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python数据结构/" style="font-size: 13.33px;">python数据结构</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title">links</h3>
-        <div class="widget">
-            <ul>
-                
-                    <li>
-                        <a href="http://hexo.io">Hexo</a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-
-    
-    <div id="toTop" class="fas fa-angle-up"></div>
-</aside>
-
-            
-        </div>
-        <footer id="footer">
-    <div class="outer">
-        <div id="footer-info" class="inner">
-            &copy; 2018 Octopi Lau<br>
-            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
-        </div>
-    </div>
-</footer>
-        
-
-
-    
-        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
-    
-    
-        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
-    
-    
 
 
 
-<!-- Custom Scripts -->
-<script src="/js/main.js"></script>
 
-    </div>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>

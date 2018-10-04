@@ -1,253 +1,508 @@
 <!DOCTYPE html>
-<html lang=zh>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-    <meta charset="utf-8">
-    
-    <title>Octopi</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta property="og:type" content="website">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
 <meta property="og:title" content="Octopi">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="Octopi">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Octopi">
-    
 
-    
-        <link rel="alternate" href="/" title="Octopi" type="application/atom+xml" />
-    
 
-    
-        <link rel="icon" href="/css/images/octopus_favicon.png" />
-    
 
-    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
-    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
-    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
-    <link rel="stylesheet" href="/libs/open-sans/styles.css">
-    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
 
-    <link rel="stylesheet" href="/css/style.css">
 
-    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
-    
-    
-        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
-    
-    
-        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
-    
-    
-    
-    
+
+  <link rel="canonical" href="http://yoursite.com/"/>
+
+
+
+
+
+  <title>Octopi</title>
+  
+
+
+
+
+
+
 
 
 </head>
 
-<body>
-    <div id="container">
-        <header id="header">
-    <div id="header-main" class="header-inner">
-        <div class="outer">
-            <a href="/" id="logo">
-                <i class="logo"></i>
-                <span class="site-title">Octopi</span>
-            </a>
-            <nav id="main-nav">
-                
-                    <a class="main-nav-link" href="/.">主页</a>
-                
-                    <a class="main-nav-link" href="/archives">文章</a>
-                
-                    <a class="main-nav-link" href="/categories">分类</a>
-                
-                    <a class="main-nav-link" href="/tags">标签</a>
-                
-                    <a class="main-nav-link" href="/about">关于我</a>
-                
-            </nav>
-            
-                
-                <nav id="sub-nav">
-                    <div class="profile" id="profile-nav">
-                        <a id="profile-anchor" href="javascript:;">
-                            <img class="avatar" src="/css/images/octopus_avatar.png" />
-                            <i class="fas fa-caret-down"></i>
-                        </a>
-                    </div>
-                </nav>
-            
-            <div id="search-form-wrap">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-    <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
-        <button type="submit" class="search-form-submit"></button>
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." />
-            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: 'Posts',
-            PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
-            UNTITLED: '(Untitled)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
-
-</div>
-        </div>
-    </div>
-    <div id="main-nav-mobile" class="header-sub header-inner">
-        <table class="menu outer">
-            <tr>
-                
-                    <td><a class="main-nav-link" href="/.">主页</a></td>
-                
-                    <td><a class="main-nav-link" href="/archives">文章</a></td>
-                
-                    <td><a class="main-nav-link" href="/categories">分类</a></td>
-                
-                    <td><a class="main-nav-link" href="/tags">标签</a></td>
-                
-                    <td><a class="main-nav-link" href="/about">关于我</a></td>
-                
-                <td>
-                    
-    <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
-    </div>
-
-                </td>
-            </tr>
-        </table>
-    </div>
-</header>
-
-        <div class="outer">
-            
-                
-
-<aside id="profile" class="profile-fixed">
-    <div class="inner profile-inner">
-        <div class="base-info profile-block">
-            <img id="avatar" src="/css/images/octopus_avatar.png" />
-            <h2 id="name">Octopi lau</h2>
-            <h3 id="title">pythoner &amp; DL</h3>
-            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>Hangzhou, China</span>
-            <a id="follow" target="_blank" href="https://github.com/stevelau94/">FOLLOW</a>
-        </div>
-        <div class="article-info profile-block">
-            <div class="article-info-block">
-                13
-                <span>posts</span>
-            </div>
-            <div class="article-info-block">
-                7
-                <span>tags</span>
-            </div>
-        </div>
-        
-        <div class="profile-block social-links">
-            <table>
-                <tr>
-                    
-                    
-                    <td>
-                        <a href="http://github.com/stevelau94/" target="_blank" title="github" class=tooltip>
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="weibo" class=tooltip>
-                            <i class="fab fa-weibo"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="wechat" class=tooltip>
-                            <i class="fab fa-wechat"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="rss" class=tooltip>
-                            <i class="fab fa-rss"></i>
-                        </a>
-                    </td>
-                    
-                </tr>
-            </table>
-        </div>
-        
-    </div>
-</aside>
-
-            
-            <section id="main">
-    <article id="post-python-处理文本和文件" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
+  
+  
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/07/19/python-处理文本和文件/">python 处理文本和文件</a>
-        </h1>
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
     
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/19/python-处理文本和文件/">
-            <time datetime="2018-07-19T14:16:51.000Z" itemprop="datePublished">2018-07-19</time>
-        </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
-    </div>
+<nav class="site-nav">
+  
 
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/python/">python</a>
-    </div>
-
-                    </div>
-                
-            </header>
+  
+    <ul id="menu" class="menu">
+      
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/01/cs231n-第一节深度学习发展历程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/01/cs231n-第一节深度学习发展历程/" itemprop="url">cs231n 第一节深度学习发展历程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-01T21:38:03+08:00">
+                2018-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deeplearning/" itemprop="url" rel="index">
+                    <span itemprop="name">deeplearning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deeplearning/cs231n/" itemprop="url" rel="index">
+                    <span itemprop="name">cs231n</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在上半年曾在刚进入工作的阶段听过cs231n，对我理解和掌握深度学习知识有着极大的帮助。最近打算再听一遍，希望留下一些类似与笔记的东西以备使用。</p>
+<h2 id="为什么计算机视觉如此重要？"><a href="#为什么计算机视觉如此重要？" class="headerlink" title="为什么计算机视觉如此重要？"></a>为什么计算机视觉如此重要？</h2><h3 id="视觉信息处理是当今亟需解决的问题"><a href="#视觉信息处理是当今亟需解决的问题" class="headerlink" title="视觉信息处理是当今亟需解决的问题"></a>视觉信息处理是当今亟需解决的问题</h3><p>视觉信息难以用算法解读，所以业界需要自动解析视觉信息的算法</p>
+<h3 id="视觉的出现对生物的发展尤为重要"><a href="#视觉的出现对生物的发展尤为重要" class="headerlink" title="视觉的出现对生物的发展尤为重要"></a>视觉的出现对生物的发展尤为重要</h3><p>物种大爆炸，很重要的原因是由于视觉能力的发展，视力的出现迫使生物进行生存竞争，并不断进化。　　</p>
+<h2 id="机器如何获得视觉能力？"><a href="#机器如何获得视觉能力？" class="headerlink" title="机器如何获得视觉能力？"></a>机器如何获得视觉能力？</h2><p>动物和人类的视觉能力对计算机领域的视觉算法发展提供了重要的启发。　　</p>
+<p>计算机科学家从60年代就开始探索处理视觉信息的方法；70年代视觉专家提出使用简单图形将复杂物体表达出来；80年代，视觉专家提出使用边缘识别物体</p>
+<p>但是，当时这些早起的对识别物体的尝试和探索，缺少数据并且没法输出可以使用的视觉处理方案</p>
+<h2 id="逐步发展"><a href="#逐步发展" class="headerlink" title="逐步发展"></a>逐步发展</h2><p>90年代，语义分割出现；千禧年，面部检测出现，统计机器学习蓬勃发展，Adaboost可以进行实时的面部检测而且已经出现了可以使用的产品；并且新世纪的前十年里，科学家提出使用特征提取来识别物体</p>
+<p>目标识别的首要目标成为了在目标上确认这些关键的特征，对特征的比较比对整个物体的比较简单了很多</p>
+<h2 id="数据集的出现和机器学习方法的使用"><a href="#数据集的出现和机器学习方法的使用" class="headerlink" title="数据集的出现和机器学习方法的使用"></a>数据集的出现和机器学习方法的使用</h2><p>从60年代计算机视觉专家开始探索直到如今的21世纪，有一件事一直在变化：图片的质量。  </p>
+<p>目标识别(object recognition)</p>
+<p>直到21世纪才开始有标注的高质量的数据集，如PASCAL数据集，20个分类<br>PASCAL比赛的识别质量从06年到12年持续攀升，但是不曾达到50%</p>
+<p>另一个数据集：IMAGENET，提供了更庞大是数据集，几乎包含了世间的所有物体22K分类</p>
+<h2 id="机器学习的问题：过拟合"><a href="#机器学习的问题：过拟合" class="headerlink" title="机器学习的问题：过拟合"></a>机器学习的问题：过拟合</h2><p>在IMAGENET比赛中，曾经的机器学习算法都很容易过拟合。</p>
+<p>由于图像信息太过复杂，导致模型维度极高</p>
+<h2 id="2012年，里程碑：神经网络崭露头角"><a href="#2012年，里程碑：神经网络崭露头角" class="headerlink" title="2012年，里程碑：神经网络崭露头角"></a>2012年，里程碑：神经网络崭露头角</h2><p>IMAGENET比赛的错误率从11年的25%一下子以上降低了10%到达了16%，这一显著的成果是由于算法使用了卷及神经网络模型(Alexnet)  </p>
+<p>卷积神经网络(convolutional neural network)也常被成为深度学习(convnet)展现了强大的模型容量和能力，在图像识别(computer vision)，自然语言处理(natural language processing)和语音识别(speech recognition)等领域  </p>
+<p>cs231n主要关注图像分类(image classfication)以及目标检测(object detection)和图像摘要(image captioning)</p>
+<p>一些更复杂的领域：语义分割(semantic segmentation)和知觉分组(perceptual grouping)：理解图像中的每个像素和动作识别</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/19/python-处理文本和文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/19/python-处理文本和文件/" itemprop="url">python 处理文本和文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T22:16:51+08:00">
+                2018-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/python-cookbook/" itemprop="url" rel="index">
+                    <span itemprop="name">python cookbook</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
             <h2 id="1-file-读写文本数据"><a href="#1-file-读写文本数据" class="headerlink" title="1.file,读写文本数据"></a>1.file,读写文本数据</h2><h3 id="with-open-as-f"><a href="#with-open-as-f" class="headerlink" title="with open() as f:"></a>with open() as f:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取</span></span><br><span class="line"><span class="comment"># Read the entire file as a single string</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Iterate over the lines of the file</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        <span class="comment"># process line</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入</span></span><br><span class="line"><span class="comment"># Write chunks of text data</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text1)</span><br><span class="line">    f.write(text2)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># Redirected print statement</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(line1, file=f)</span><br><span class="line">    print(line2, file=f)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 追加</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'at'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text1)</span><br><span class="line">    f.write(text2)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 <h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>, encoding=<span class="string">'latin-1'</span>) <span class="keyword">as</span> f:</span><br></pre></td></tr></table></figure>
 <h3 id="wt-rt-at中的t指以文本文件的形式写入"><a href="#wt-rt-at中的t指以文本文件的形式写入" class="headerlink" title="wt,rt,at中的t指以文本文件的形式写入"></a>wt,rt,at中的t指以文本文件的形式写入</h3><p>在输出时会将换行符 \n 转换为系统默认的换行符</p>
@@ -316,134 +571,157 @@
 <p>pickle 对于大型的数据结构比如使用 array 或 numpy 模块创建的二进制数组效率并不是一个高效的编码方式。 如果你需要移动大量的数组数据，你最好是先在一个文件中将其保存为数组数据块或使用更高级的标准编码方式如HDF5 (需要第三方库的支持)</p>
 <p>由于 pickle 是Python特有的并且附着在源码上，所有如果需要长期存储数据的时候不应该选用它。</p>
 
+          
         
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/python-迭代器和生成器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/17/python-迭代器和生成器/" itemprop="url">python 迭代器和生成器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T00:01:08+08:00">
+                2018-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/python-cookbook/" itemprop="url" rel="index">
+                    <span itemprop="name">python cookbook</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2018/07/19/python-处理文本和文件/" data-id="cjk2n7jh5001iiuhsgehizu2r" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
+      </header>
     
 
-        </footer>
-    </div>
     
-</article>
-
-
-
-    <article id="post-python-迭代器和生成器" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/07/17/python-迭代器和生成器/">python 迭代器和生成器</a>
-        </h1>
     
+    <div class="post-body" itemprop="articleBody">
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/17/python-迭代器和生成器/">
-            <time datetime="2018-07-16T16:01:08.000Z" itemprop="datePublished">2018-07-17</time>
-        </a>
-    </div>
+      
+      
 
-
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/itertools/">itertools</a>, <a class="tag-link" href="/tags/python/">python</a>
-    </div>
-
-                    </div>
-                
-            </header>
+      
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
+          
             <h2 id="0-可迭代对象，迭代器，生成器"><a href="#0-可迭代对象，迭代器，生成器" class="headerlink" title="0.可迭代对象，迭代器，生成器"></a>0.可迭代对象，迭代器，生成器</h2><p><strong>注意区分 可迭代对象 和 迭代器</strong></p>
 <p>可迭代对象,Iterable, <strong>iter</strong>,<strong>getitem</strong><br>迭代器,Iterator,<strong>next</strong><br>迭代,Iteration<br>生成器,Generators  </p>
 <h2 id="1-手动访问迭代器元素"><a href="#1-手动访问迭代器元素" class="headerlink" title="1.手动访问迭代器元素"></a>1.手动访问迭代器元素</h2><p><strong>可迭代对象需要转换成迭代器之后，才可以执行next()操作</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>items = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>it = iter(items)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>it</span><br><span class="line">&lt;list_iterator object at <span class="number">0x7f256ddc8d68</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure></p>
@@ -481,134 +759,157 @@
 <h2 id="13-创建处理数据的管道"><a href="#13-创建处理数据的管道" class="headerlink" title="13.创建处理数据的管道"></a>13.创建处理数据的管道</h2><h2 id="14-嵌套序列的扁平化处理"><a href="#14-嵌套序列的扁平化处理" class="headerlink" title="14.嵌套序列的扁平化处理"></a>14.嵌套序列的扁平化处理</h2><h3 id="yield-from"><a href="#yield-from" class="headerlink" title="yield from"></a>yield from</h3><h2 id="15-合并多个有序序列，并迭代整个有序序列"><a href="#15-合并多个有序序列，并迭代整个有序序列" class="headerlink" title="15.合并多个有序序列，并迭代整个有序序列"></a>15.合并多个有序序列，并迭代整个有序序列</h2><h3 id="heapq-merge"><a href="#heapq-merge" class="headerlink" title="heapq.merge()"></a>heapq.merge()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=[<span class="number">2</span>,<span class="number">5</span>,<span class="number">8</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> c <span class="keyword">in</span> heapq.merge(a, b):print(c)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure>
 <p>heapq.merge开销很小，但是要求输入的数据必须有序</p>
 <h2 id="16-迭代器取代while循环"><a href="#16-迭代器取代while循环" class="headerlink" title="16.迭代器取代while循环"></a>16.迭代器取代while循环</h2>
+          
         
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/python处理数值，日期和时间/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/15/python处理数值，日期和时间/" itemprop="url">python处理数值，日期和时间</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-15T23:59:39+08:00">
+                2018-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/python-cookbook/" itemprop="url" rel="index">
+                    <span itemprop="name">python cookbook</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2018/07/17/python-迭代器和生成器/" data-id="cjk2n7jh3001diuhsqxehl202" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
+      </header>
     
 
-        </footer>
-    </div>
     
-</article>
-
-
-
-    <article id="post-python处理数值，日期和时间" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/07/15/python处理数值，日期和时间/">python处理数值，日期和时间</a>
-        </h1>
     
+    <div class="post-body" itemprop="articleBody">
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/15/python处理数值，日期和时间/">
-            <time datetime="2018-07-15T15:59:39.000Z" itemprop="datePublished">2018-07-15</time>
-        </a>
-    </div>
+      
+      
 
-
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/python/">python</a>
-    </div>
-
-                    </div>
-                
-            </header>
+      
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
+          
             <h2 id="1-数值，取整"><a href="#1-数值，取整" class="headerlink" title="1.数值，取整"></a>1.数值，取整</h2><h3 id="round"><a href="#round" class="headerlink" title="round()"></a>round()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.23</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.23</span>, <span class="number">12</span>)</span><br><span class="line"><span class="number">1.23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">-1.5</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">-1.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">-1.5</span>)</span><br><span class="line"><span class="number">-2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.25</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.25</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.2</span></span><br></pre></td></tr></table></figure>
 <h3 id="注意进位问题"><a href="#注意进位问题" class="headerlink" title="注意进位问题"></a>注意进位问题</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.254</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.244</span>, <span class="number">1</span>)</span><br><span class="line"><span class="number">1.2</span></span><br></pre></td></tr></table></figure>
 <h3 id="反向取近似"><a href="#反向取近似" class="headerlink" title="反向取近似"></a>反向取近似</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(a, <span class="number">-1</span>)</span><br><span class="line"><span class="number">12340</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(a, <span class="number">-2</span>)</span><br><span class="line"><span class="number">12300</span></span><br></pre></td></tr></table></figure>
@@ -640,134 +941,157 @@
 <h2 id="14-日期时间，当月日期范围"><a href="#14-日期时间，当月日期范围" class="headerlink" title="14.日期时间，当月日期范围"></a>14.日期时间，当月日期范围</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">get_month_range</span><span class="params">(start_date=None)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> start_date <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line"><span class="meta">... </span>        start_date = date.today().replace(day=<span class="number">1</span>)</span><br><span class="line"><span class="meta">... </span>        _,days_in_month = calendar.monthrange(start_date.year, start_date.month)</span><br><span class="line"><span class="meta">... </span>        end_date = start_date + timedelta(days=days_in_month)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> (start_date, end_date)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a_day = timedelta(days=<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>first_day, last_day = get_month_range()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">while</span> first_day &lt; last_day:</span><br><span class="line"><span class="meta">... </span>    print(first_day)</span><br><span class="line"><span class="meta">... </span>    first_day += a_day</span><br><span class="line">...</span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-01</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-02</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-03</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-04</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-05</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-06</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-07</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-08</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-09</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-10</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-11</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-12</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-13</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-14</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-15</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-16</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-17</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-18</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-19</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-20</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-21</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-22</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-23</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-24</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-25</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-26</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-27</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-28</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-29</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-30</span></span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-31</span></span><br></pre></td></tr></table></figure>
 <h2 id="15-日期时间，字符串转换为日期"><a href="#15-日期时间，字符串转换为日期" class="headerlink" title="15.日期时间，字符串转换为日期"></a>15.日期时间，字符串转换为日期</h2><h3 id="datetime-strptime"><a href="#datetime-strptime" class="headerlink" title="datetime.strptime()"></a>datetime.strptime()</h3><h3 id="datetime-strftime"><a href="#datetime-strftime" class="headerlink" title="datetime.strftime()"></a>datetime.strftime()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>z</span><br><span class="line">datetime.datetime(<span class="number">2018</span>, <span class="number">7</span>, <span class="number">20</span>, <span class="number">23</span>, <span class="number">53</span>, <span class="number">4</span>, <span class="number">150624</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>nice_z = datetime.strftime(z, <span class="string">'%A %B %d, %Y'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>nice_z</span><br><span class="line"><span class="string">'Friday July 20, 2018'</span></span><br></pre></td></tr></table></figure>
 <h2 id="16-日期时间，时区问题"><a href="#16-日期时间，时区问题" class="headerlink" title="16.日期时间，时区问题"></a>16.日期时间，时区问题</h2>
+          
         
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/python-文本处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/13/python-文本处理/" itemprop="url">python 文本处理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-13T02:05:52+08:00">
+                2018-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/python-cookbook/" itemprop="url" rel="index">
+                    <span itemprop="name">python cookbook</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2018/07/15/python处理数值，日期和时间/" data-id="cjk2n7jg2000siuhsh1eag18s" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
+      </header>
     
 
-        </footer>
-    </div>
     
-</article>
-
-
-
-    <article id="post-python-文本处理" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/07/13/python-文本处理/">python 文本处理</a>
-        </h1>
     
+    <div class="post-body" itemprop="articleBody">
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/13/python-文本处理/">
-            <time datetime="2018-07-12T18:05:52.000Z" itemprop="datePublished">2018-07-13</time>
-        </a>
-    </div>
+      
+      
 
-
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/python/">python</a>
-    </div>
-
-                    </div>
-                
-            </header>
+      
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
+          
             <h2 id="1-处理任意分隔符，拆分字符串"><a href="#1-处理任意分隔符，拆分字符串" class="headerlink" title="1.处理任意分隔符，拆分字符串"></a>1.处理任意分隔符，拆分字符串</h2><h3 id="字符串的split-无法处理多中分隔符的情况"><a href="#字符串的split-无法处理多中分隔符的情况" class="headerlink" title="字符串的split()无法处理多中分隔符的情况"></a>字符串的split()无法处理多中分隔符的情况</h3><h3 id="re-split-可以提供更强大的功能"><a href="#re-split-可以提供更强大的功能" class="headerlink" title="re.split()可以提供更强大的功能"></a>re.split()可以提供更强大的功能</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>L</span><br><span class="line"><span class="string">'asd fee, fedjc;dww fexsa    wdca. dfefacx'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'[;,\s]\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">'fee'</span>, <span class="string">'fedjc'</span>, <span class="string">'dww'</span>, <span class="string">'fexsa'</span>, <span class="string">'wdca.'</span>, <span class="string">'dfefacx'</span>]</span><br></pre></td></tr></table></figure>
 <h3 id="注意re-split-的捕获组写法"><a href="#注意re-split-的捕获组写法" class="headerlink" title="注意re.split()的捕获组写法"></a>注意re.split()的捕获组写法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'[;|,|\s]\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">'fee'</span>, <span class="string">'fedjc'</span>, <span class="string">'dww'</span>, <span class="string">'fexsa'</span>, <span class="string">'wdca.'</span>, <span class="string">'dfefacx'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'(;,\s)\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd fee, fedjc;dww fexsa    wdca. dfefacx'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.split(<span class="string">r'(;|,|\s)\s*'</span>, L)</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">' '</span>, <span class="string">'fee'</span>, <span class="string">','</span>, <span class="string">'fedjc'</span>, <span class="string">';'</span>, <span class="string">'dww'</span>, <span class="string">' '</span>, <span class="string">'fexsa'</span>, <span class="string">' '</span>, <span class="string">'wdca.'</span>, <span class="string">' '</span>, <span class="string">'dfefacx'</span>]</span><br></pre></td></tr></table></figure>
 <h3 id="进一步将值和分隔符解析出来"><a href="#进一步将值和分隔符解析出来" class="headerlink" title="进一步将值和分隔符解析出来"></a>进一步将值和分隔符解析出来</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">f = re.split(<span class="string">r'(;|,|\s)\s*'</span>, L)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">' '</span>, <span class="string">'fee'</span>, <span class="string">','</span>, <span class="string">'fedjc'</span>, <span class="string">';'</span>, <span class="string">'dww'</span>, <span class="string">' '</span>, <span class="string">'fexsa'</span>, <span class="string">' '</span>, <span class="string">'wdca.'</span>, <span class="string">' '</span>, <span class="string">'dfefacx'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = f[::<span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values</span><br><span class="line">[<span class="string">'asd'</span>, <span class="string">'fee'</span>, <span class="string">'fedjc'</span>, <span class="string">'dww'</span>, <span class="string">'fexsa'</span>, <span class="string">'wdca.'</span>, <span class="string">'dfefacx'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>delimiters = f[<span class="number">1</span>::<span class="number">2</span>] + [<span class="string">''</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>delimiters</span><br><span class="line">[<span class="string">' '</span>, <span class="string">','</span>, <span class="string">';'</span>, <span class="string">' '</span>, <span class="string">' '</span>, <span class="string">' '</span>, <span class="string">''</span>]</span><br></pre></td></tr></table></figure>
@@ -814,134 +1138,157 @@
 <h2 id="17-处理HTML-XML"><a href="#17-处理HTML-XML" class="headerlink" title="17.处理HTML XML"></a>17.处理HTML XML</h2><h2 id="18-文本分词"><a href="#18-文本分词" class="headerlink" title="18.文本分词"></a>18.文本分词</h2><h2 id="19-字节串上执行文本操作"><a href="#19-字节串上执行文本操作" class="headerlink" title="19.字节串上执行文本操作"></a>19.字节串上执行文本操作</h2><p>字节串很多时候可以当做字符串处理，使用字符串的大部分函数</p>
 <h3 id="注意，字节串需要解码打印"><a href="#注意，字节串需要解码打印" class="headerlink" title="注意，字节串需要解码打印"></a>注意，字节串需要解码打印</h3><p>在打印的时候，需要加上.decode(‘ascii’)或者别的 解码为文本字符串<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">b'hello'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(s)</span><br><span class="line"><span class="string">b'hello'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(s.decode(<span class="string">'ascii'</span>))</span><br><span class="line">hello</span><br></pre></td></tr></table></figure></p>
 <h3 id="注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码-encode"><a href="#注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码-encode" class="headerlink" title="注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码(encode)"></a>注意，字节串在进行格式化的时候，需要使用文本字符串然后再编码(encode)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'&#123;:10s&#125;&#123;:10d&#125;'</span>.format(<span class="string">'allp'</span>, <span class="number">100</span>).encode(<span class="string">'ascii'</span>)</span><br><span class="line"><span class="string">b'allp             100'</span></span><br></pre></td></tr></table></figure>
+          
         
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/python-数据结构与算法（2）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/11/python-数据结构与算法（2）/" itemprop="url">python 数据结构与算法（2）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-11T21:37:40+08:00">
+                2018-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/python-cookbook/" itemprop="url" rel="index">
+                    <span itemprop="name">python cookbook</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2018/07/13/python-文本处理/" data-id="cjk2n7jh4001fiuhsljhyg3n5" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
+      </header>
     
 
-        </footer>
-    </div>
     
-</article>
-
-
-
-    <article id="post-python-数据结构与算法（2）" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/07/11/python-数据结构与算法（2）/">python 数据结构与算法（2）</a>
-        </h1>
     
+    <div class="post-body" itemprop="articleBody">
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/11/python-数据结构与算法（2）/">
-            <time datetime="2018-07-11T13:37:40.000Z" itemprop="datePublished">2018-07-11</time>
-        </a>
-    </div>
+      
+      
 
-
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/data-structure/">data structure</a>, <a class="tag-link" href="/tags/python/">python</a>, <a class="tag-link" href="/tags/python数据结构/">python数据结构</a>
-    </div>
-
-                    </div>
-                
-            </header>
+      
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
+          
             <h2 id="1-切片命名"><a href="#1-切片命名" class="headerlink" title="1.切片命名"></a>1.切片命名</h2><p><strong>主要目的是为了减少硬编码</strong></p>
 <h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h3><p>slice会创建切片对象，可以用在任何允许切片的地方</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>items = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = slice(<span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">slice(<span class="number">2</span>, <span class="number">4</span>, <span class="keyword">None</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items[a]</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items[<span class="number">2</span>:<span class="number">4</span>]</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items[a] = [<span class="number">10</span>, <span class="number">11</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> items[a]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
@@ -974,134 +1321,157 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> ChainMap</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = &#123;<span class="string">'a'</span>:<span class="number">1</span>, <span class="string">'c'</span>:<span class="number">3</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = &#123;<span class="string">'b'</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D = ChainMap(a, b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D</span><br><span class="line">ChainMap(&#123;<span class="string">'c'</span>: <span class="number">3</span>, <span class="string">'a'</span>: <span class="number">1</span>&#125;, &#123;<span class="string">'b'</span>: <span class="number">2</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D[<span class="string">'a'</span>]</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D[<span class="string">'c'</span>]</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
 <h3 id="ChainMap的表现会随着接受的映射变化而变化（浅复制，与ChainMap实现有关）"><a href="#ChainMap的表现会随着接受的映射变化而变化（浅复制，与ChainMap实现有关）" class="headerlink" title="ChainMap的表现会随着接受的映射变化而变化（浅复制，与ChainMap实现有关）"></a>ChainMap的表现会随着接受的映射变化而变化（浅复制，与ChainMap实现有关）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="string">'a'</span>] = <span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D</span><br><span class="line">ChainMap(&#123;<span class="string">'c'</span>: <span class="number">3</span>, <span class="string">'a'</span>: <span class="number">100</span>&#125;, &#123;<span class="string">'b'</span>: <span class="number">2</span>&#125;)</span><br></pre></td></tr></table></figure>
 <h3 id="ChainMap在与带作用域的值一起工作时很有用"><a href="#ChainMap在与带作用域的值一起工作时很有用" class="headerlink" title="ChainMap在与带作用域的值一起工作时很有用"></a>ChainMap在与带作用域的值一起工作时很有用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = ChainMap()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>] = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = values.new_child()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>] = <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = values.new_child()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>] = <span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values</span><br><span class="line">ChainMap(&#123;<span class="string">'x'</span>: <span class="number">3</span>&#125;, &#123;<span class="string">'x'</span>: <span class="number">2</span>&#125;, &#123;<span class="string">'x'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>]</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = values.parents</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>]</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = values.parents</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>]</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values</span><br><span class="line">ChainMap(&#123;<span class="string">'x'</span>: <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+          
         
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/python-数据结构与算法（1）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/10/python-数据结构与算法（1）/" itemprop="url">python 数据结构与算法（1）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-10T23:13:45+08:00">
+                2018-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/python-cookbook/" itemprop="url" rel="index">
+                    <span itemprop="name">python cookbook</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2018/07/11/python-数据结构与算法（2）/" data-id="cjk2n7jh2001ciuhsz6owe6vl" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
+      </header>
     
 
-        </footer>
-    </div>
     
-</article>
-
-
-
-    <article id="post-python-数据结构与算法（1）" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/07/10/python-数据结构与算法（1）/">python 数据结构与算法（1）</a>
-        </h1>
     
+    <div class="post-body" itemprop="articleBody">
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/10/python-数据结构与算法（1）/">
-            <time datetime="2018-07-10T15:13:45.000Z" itemprop="datePublished">2018-07-10</time>
-        </a>
-    </div>
+      
+      
 
-
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/data-structure/">data structure</a>, <a class="tag-link" href="/tags/python/">python</a>, <a class="tag-link" href="/tags/python数据结构/">python数据结构</a>
-    </div>
-
-                    </div>
-                
-            </header>
+      
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
+          
             <h2 id="1-对象分解"><a href="#1-对象分解" class="headerlink" title="1.对象分解"></a>1.对象分解</h2><h3 id="将含N个元素的元祖或序列分解成单独变量"><a href="#将含N个元素的元祖或序列分解成单独变量" class="headerlink" title="将含N个元素的元祖或序列分解成单独变量"></a>将含N个元素的元祖或序列分解成单独变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="string">'steve'</span>, <span class="number">18</span>, <span class="number">100</span>, (<span class="number">2017.7</span><span class="number">.7</span>)]</span><br><span class="line">name, age, weight, date = data</span><br></pre></td></tr></table></figure>
 <h3 id="一切可迭代的对象-字符串，文件，迭代器，生成器-都可以这样拆分"><a href="#一切可迭代的对象-字符串，文件，迭代器，生成器-都可以这样拆分" class="headerlink" title="一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分"></a>一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'hello'</span></span><br><span class="line"><span class="comment"># 可以使用 _ 方式丢弃指定值</span></span><br><span class="line">a, b, c, e, _ = s</span><br></pre></td></tr></table></figure>
 <h2 id="2-任意长度对象分解"><a href="#2-任意长度对象分解" class="headerlink" title="2.任意长度对象分解"></a>2.任意长度对象分解</h2><h3 id="分解对象长度太长"><a href="#分解对象长度太长" class="headerlink" title="分解对象长度太长"></a>分解对象长度太长</h3><p><strong>‘*’表达式可以解决</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 适用于python3</span></span><br><span class="line">record = (<span class="string">'steve'</span>, <span class="string">'steve@gmail.com'</span>, <span class="string">'1234566-88'</span>, <span class="string">'9876543=99'</span>)</span><br><span class="line">name, email, *phone = record</span><br></pre></td></tr></table></figure></p>
@@ -1130,268 +1500,292 @@
 <h3 id="如果序列中的值不可哈希"><a href="#如果序列中的值不可哈希" class="headerlink" title="如果序列中的值不可哈希"></a>如果序列中的值不可哈希</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">deduque</span><span class="params">(items, key=None)</span>:</span></span><br><span class="line"><span class="meta">... </span>    seen = set()</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">            val = item <span class="keyword">if</span> key <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">else</span> key(item)</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">if</span> val <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">yield</span> item</span><br><span class="line"><span class="meta">... </span>            seen.add(val)</span><br></pre></td></tr></table></figure>
 <h3 id="如果只是去重"><a href="#如果只是去重" class="headerlink" title="如果只是去重"></a>如果只是去重</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>set(a)</span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">9</span>&#125;</span><br></pre></td></tr></table></figure>
 
+          
         
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/" itemprop="url">Gnome Ubuntu上安装下载工具 uget+aria2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T22:11:05+08:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Gnome-Ubuntu/" itemprop="url" rel="index">
+                    <span itemprop="name">Gnome Ubuntu</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2018/07/10/python-数据结构与算法（1）/" data-id="cjk2n7jfy000miuhsj4v5x640" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
+      </header>
     
 
-        </footer>
-    </div>
     
-</article>
-
-
-
-    <article id="post-Gnome-Ubuntu上安装下载工具uget-aria2" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/">Gnome Ubuntu上安装下载工具 uget+aria2</a>
-        </h1>
     
+    <div class="post-body" itemprop="articleBody">
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/">
-            <time datetime="2018-07-05T14:11:05.000Z" itemprop="datePublished">2018-07-05</time>
-        </a>
-    </div>
+      
+      
 
-
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/ubuntu/">ubuntu</a>
-    </div>
-
-                    </div>
-                
-            </header>
+      
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
+          
             <h3 id="安装-uget-amp-aria2"><a href="#安装-uget-amp-aria2" class="headerlink" title="安装 uget &amp; aria2"></a>安装 uget &amp; aria2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install uget</span><br><span class="line"></span><br><span class="line">sudo apt-get install aria2</span><br></pre></td></tr></table></figure>
 <h3 id="将-uget-的下载设置为-aria2"><a href="#将-uget-的下载设置为-aria2" class="headerlink" title="将 uget 的下载设置为 aria2"></a>将 uget 的下载设置为 aria2</h3><p>open uget<br>edit –&gt; setting –&gt; plug-in<br>plug-in matching order: aria2</p>
 <h3 id="配置-firefox"><a href="#配置-firefox" class="headerlink" title="配置 firefox"></a>配置 firefox</h3><p>进入附加组件管理页面<br>搜索并安装flashgot  </p>
 <h3 id="配置-chrome"><a href="#配置-chrome" class="headerlink" title="配置 chrome"></a>配置 chrome</h3><p>安装 uGet Integration</p>
 <p><a href="https://blog.csdn.net/xiaohouye/article/details/54603198" target="_blank" rel="noopener">ref</a></p>
 
+          
         
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/" itemprop="url">Gnome Ubuntu上安装 搜狗拼音</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-03T20:49:56+08:00">
+                2018-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Gnome-Ubuntu/" itemprop="url" rel="index">
+                    <span itemprop="name">Gnome Ubuntu</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/" data-id="cjk2n7jco0001iuhswknznzha" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
+      </header>
     
 
-        </footer>
-    </div>
     
-</article>
-
-
-
-    <article id="post-Gnome-Ubuntu上安装搜狗拼音" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/">Gnome Ubuntu上安装 搜狗拼音</a>
-        </h1>
     
+    <div class="post-body" itemprop="articleBody">
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/">
-            <time datetime="2018-07-03T12:49:56.000Z" itemprop="datePublished">2018-07-03</time>
-        </a>
-    </div>
+      
+      
 
-
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/ubuntu/">ubuntu</a>
-    </div>
-
-                    </div>
-                
-            </header>
+      
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
+          
             <p>安装sougou pinyin有点烦，因为网上的Ubuntu16.04安装sougou的教程都是unity图形界面的，而我是用的是gnome Ubuntu 16.04 所以安装搜狗不大一样</p>
 <p>我先在搜狗官网下载了deb包<br>然后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br></pre></td></tr></table></figure></p>
 <p>但是好像有error 没有装上</p>
@@ -1402,562 +1796,473 @@
 <p>再重启就可以使用搜狗了</p>
 <p><a href="https://www.cnblogs.com/darklights/p/7722861.html" target="_blank" rel="noopener">ref</a></p>
 
+          
         
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/03/Gnome-Ubuntu上安装chrome/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/03/Gnome-Ubuntu上安装chrome/" itemprop="url">Gnome Ubuntu上安装 chrome</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-03T20:46:38+08:00">
+                2018-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Gnome-Ubuntu/" itemprop="url" rel="index">
+                    <span itemprop="name">Gnome Ubuntu</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/" data-id="cjk2n7jcu0005iuhs0c9lmh6l" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
+      </header>
     
 
-        </footer>
-    </div>
     
-</article>
-
-
-
-    <article id="post-Gnome-Ubuntu上安装chrome" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/07/03/Gnome-Ubuntu上安装chrome/">Gnome Ubuntu上安装 chrome</a>
-        </h1>
     
+    <div class="post-body" itemprop="articleBody">
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/03/Gnome-Ubuntu上安装chrome/">
-            <time datetime="2018-07-03T12:46:38.000Z" itemprop="datePublished">2018-07-03</time>
-        </a>
-    </div>
+      
+      
 
-
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/ubuntu/">ubuntu</a>
-    </div>
-
-                    </div>
-                
-            </header>
+      
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
+          
             <h3 id="获取-source-list"><a href="#获取-source-list" class="headerlink" title="获取 source list"></a>获取 source list</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/</span><br><span class="line"></span><br><span class="line">wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -</span><br></pre></td></tr></table></figure>
 <h3 id="然后直接安装就行"><a href="#然后直接安装就行" class="headerlink" title="然后直接安装就行"></a>然后直接安装就行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install google-chrome-stable</span><br></pre></td></tr></table></figure>
 <p><a href="https://blog.csdn.net/qq551551/article/details/78885704" target="_blank" rel="noopener">ref</a></p>
 
+          
         
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
 
 
+        
+      </div>
+    </main>
 
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
 </div>
 
-    <a data-url="http://yoursite.com/2018/07/03/Gnome-Ubuntu上安装chrome/" data-id="cjk2n7jch0000iuhsdjvs49o4" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
 
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
-            if ($('#' + id).length) {
-                box = $('#' + id);
 
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
 
-              box = $(html);
+  <span class="post-meta-divider">|</span>
 
-              $('body').append(box);
-            }
 
-            $('.article-share-box.on').hide();
 
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
 
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
 
 
 
-    <article id="post-Gnome-Ubuntu上安装git" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/07/03/Gnome-Ubuntu上安装git/">Gnome Ubuntu上安装 git</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/07/03/Gnome-Ubuntu上安装git/">
-            <time datetime="2018-07-03T12:32:41.000Z" itemprop="datePublished">2018-07-03</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/ubuntu/">ubuntu</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h3 id="安装-git"><a href="#安装-git" class="headerlink" title="安装 git"></a>安装 git</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo add-apt-repository ppa:git-core/ppa</span><br><span class="line"></span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
-<p>验证是否安装成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure></p>
-<h3 id="Git-config-设置"><a href="#Git-config-设置" class="headerlink" title="Git config 设置"></a>Git config 设置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &apos;username&apos;</span><br><span class="line"></span><br><span class="line">git config --global user.email &apos;username@gmail.com&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="Git-SSH-Key-设置"><a href="#Git-SSH-Key-设置" class="headerlink" title="Git SSH Key 设置"></a>Git SSH Key 设置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># generate the sshkey</span><br><span class="line">ssh-keygen -t rsa -C &apos;username@gmail.com&apos;</span><br><span class="line"></span><br><span class="line"># 获取 public key</span><br><span class="line"># paste it to github</span><br><span class="line">cat ~/.ssh/id_rsa.pub </span><br><span class="line"></span><br><span class="line"># 这个是 priviate key</span><br><span class="line">cat ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
-<h3 id="测试-ssh-key-是否设置成功"><a href="#测试-ssh-key-是否设置成功" class="headerlink" title="测试 ssh key 是否设置成功"></a>测试 ssh key 是否设置成功</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<h3 id="如果成功连接上github会返回"><a href="#如果成功连接上github会返回" class="headerlink" title="如果成功连接上github会返回"></a>如果成功连接上github会返回</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;Hi username! You&apos;ve successfully authenticated&apos;</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.linuxidc.com/Linux/2016-11/136769.htm" target="_blank" rel="noopener">ref</a><br><a href="https://www.cnblogs.com/visugar/p/6821777.html" target="_blank" rel="noopener">ref</a></p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
 
 
 
-</div>
 
-    <a data-url="http://yoursite.com/2018/07/03/Gnome-Ubuntu上安装git/" data-id="cjk2n7jct0004iuhsriz026pt" class="article-share-link"><i class="fas fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
 
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fab fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fab fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fab fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fab fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
+  
 
 
 
-    <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-</section>
-            
-                
-<aside id="sidebar">
-   
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">recent</h3>
-        <div class="widget">
-            <ul id="recent-post" class="">
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/19/python-处理文本和文件/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/19/python-处理文本和文件/" class="title">python 处理文本和文件</a></p>
-                            <p class="item-date"><time datetime="2018-07-19T14:16:51.000Z" itemprop="datePublished">2018-07-19</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/17/python-迭代器和生成器/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/17/python-迭代器和生成器/" class="title">python 迭代器和生成器</a></p>
-                            <p class="item-date"><time datetime="2018-07-16T16:01:08.000Z" itemprop="datePublished">2018-07-17</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/15/python处理数值，日期和时间/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/15/python处理数值，日期和时间/" class="title">python处理数值，日期和时间</a></p>
-                            <p class="item-date"><time datetime="2018-07-15T15:59:39.000Z" itemprop="datePublished">2018-07-15</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/13/python-文本处理/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/13/python-文本处理/" class="title">python 文本处理</a></p>
-                            <p class="item-date"><time datetime="2018-07-12T18:05:52.000Z" itemprop="datePublished">2018-07-13</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/11/python-数据结构与算法（2）/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/python/">python</a><i class="fas fa-angle-right"></i><a class="article-category-link" href="/categories/python/python-cookbook/">python cookbook</a></p>
-                            <p class="item-title"><a href="/2018/07/11/python-数据结构与算法（2）/" class="title">python 数据结构与算法（2）</a></p>
-                            <p class="item-date"><time datetime="2018-07-11T13:37:40.000Z" itemprop="datePublished">2018-07-11</time></p>
-                        </div>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">categories</h3>
-        <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Gnome-Ubuntu/">Gnome Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/python-cookbook/">python cookbook</a><span class="category-list-count">6</span></li></ul></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">archives</h3>
-        <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">13</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">tags</h3>
-        <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-structure/">data structure</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python数据结构/">python数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">tag cloud</h3>
-        <div class="widget tagcloud">
-            <a href="/tags/data-structure/" style="font-size: 13.33px;">data structure</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/itertools/" style="font-size: 10px;">itertools</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python数据结构/" style="font-size: 13.33px;">python数据结构</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title">links</h3>
-        <div class="widget">
-            <ul>
-                
-                    <li>
-                        <a href="http://hexo.io">Hexo</a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-
-    
-    <div id="toTop" class="fas fa-angle-up"></div>
-</aside>
-
-            
-        </div>
-        <footer id="footer">
-    <div class="outer">
-        <div id="footer-info" class="inner">
-            &copy; 2018 Octopi Lau<br>
-            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
-        </div>
-    </div>
-</footer>
-        
-
-
-    
-        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
-    
-    
-        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
-    
-    
 
 
 
-<!-- Custom Scripts -->
-<script src="/js/main.js"></script>
 
-    </div>
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
