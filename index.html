@@ -249,7 +249,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/cs231n-第二节近邻算法和线性分类器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Octopi Lau">
@@ -268,7 +268,202 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/05/cs231n-第二节近邻算法和线性分类器/" itemprop="url">cs231n 第二节近邻算法和线性分类器</a></h1>
+                <a class="post-title-link" href="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/" itemprop="url">CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-15T19:02:50+08:00">
+                2018-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deeplearning/" itemprop="url" rel="index">
+                    <span itemprop="name">deeplearning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deeplearning/cs231n/" itemprop="url" rel="index">
+                    <span itemprop="name">cs231n</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function"></a>loss function</h2><p> 简单理解就是衡量W的好坏的函数</p>
+<p> 损失函数的通用公式：<br> <img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/loss_function.png" alt="loss function"></p>
+<p> x : 图片(输入数据)<br> y : 标签(输出结果)，通常是个表示标签的整数</p>
+<p> 损失函数计算所有样本损失的平均</p>
+<h3 id="Multiclass-SVM-loss"><a href="#Multiclass-SVM-loss" class="headerlink" title="Multiclass SVM loss"></a>Multiclass SVM loss</h3><p>公式：<br><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/MulticlassSVM_loss.png" alt="ulticlassSVM_loss"></p>
+<p> 详解一个多分类ＳＶＭ的计算过程：</p>
+<p>首先问题是判断３张图片的分类，目前我们的算法得到了一些结果，我们由这些数据来进行loss func的计算　　</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/exp_of_loss.png" alt="exp_of_loss"></p>
+<p>从图像来看，这个函数是个合页损失函数(Hinge loss)，因为在达到一定阈值之后，损失会变成０</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/Hinge_loss.png" alt="Hinge_loss"></p>
+<p>对第一个样本进行损失计算：　<br>　<br><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/01trainloss.png" alt="01trainloss"></p>
+<p>对第二个样本进行损失计算：　　</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/02trainloss.png" alt="02trainloss"></p>
+<p>对第三个样本进行损失计算：　　</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/03trainloss.png" alt="03trainloss"></p>
+<p>最后计算总的损失：</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/fullloss.png" alt="fullloss"></p>
+<h3 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h3><p>为了防止过拟合，需要添加正则化项:<br>换句话说是减轻模型的复杂程度，避免过度拟合数据　　</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/Regularization.png" alt="Regularization"></p>
+<p>这是一些常用的正则化方法:<br><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/common_use_regularization.png" alt="common_use_regularization"></p>
+<h3 id="Softmax-Classifier-Multinomial-Logistic-Regression"><a href="#Softmax-Classifier-Multinomial-Logistic-Regression" class="headerlink" title="Softmax Classifier (Multinomial Logistic Regression)"></a>Softmax Classifier (Multinomial Logistic Regression)</h3><p>在SVM中，我们得到的结果Ｙ通常是没有什么含义的。在softmax中，将会赋予这些输出结果一些含义。</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/Softmax.png" alt="Softmax"></p>
+<p>之所以使用log是因为，log是一个单调升的函数，通过log处理之后可以方便找出最接近１的结果。　　</p>
+<p>又由于损失函数是计算算法损失的，所有对于正确性来说我们在公式中加上了负号。　　</p>
+<p>一个计算过程：　　</p>
+<p>输出结果Ｙ经过exp(目的是转换为正值)处理，在通过归一化(使他们成为和为１的概率)</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/exp_of_softmax.png" alt="exp_of_softmax"></p>
+<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><h3 id="gradient"><a href="#gradient" class="headerlink" title="gradient"></a>gradient</h3><p>一维数据的梯度就是导数：<br><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/derivative_of_1D.png" alt="derivative_of_1D"></p>
+<p>对于多维数据(高位矩阵)每一位的偏导组成的向量就是梯度</p>
+<p>梯度与原始的x(vector)有着相同的shape  </p>
+<p>每一位的梯度的含义是在此点上函数的斜率</p>
+<p>所以通过这种方法可以找到指向函数增长最快的方向  </p>
+<p>所以负的梯度值就指向了函数下降最快的方向  </p>
+<p>所以函数从整体上看每个位置的斜率就可以通过梯度和该点的向量的点积(dot product)进行计算</p>
+<h3 id="Numerical-gradient-amp-Analytic-gradient"><a href="#Numerical-gradient-amp-Analytic-gradient" class="headerlink" title="Numerical gradient &amp; Analytic gradient"></a>Numerical gradient &amp; Analytic gradient</h3><p>常使用解析梯度而非数值梯度(因为计算繁琐)</p>
+<p>但是可以使用数值梯度进行检查</p>
+<h3 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h3><p>简单来说，就是随机设定一个W，然后计算损失和梯度，然后向梯度的反方向对W进行调整(利用每一步的梯度，决定下一步的方向)</p>
+<p>步长(学习率，learning rate)是个超参数  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Vanilla Gradient Descent</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">  weights_grad = evaluate_gradient(loss_fun, data, weights)</span><br><span class="line">  weights += - step_size * weights_grad <span class="comment"># perform parameter update</span></span><br></pre></td></tr></table></figure>
+<h3 id="Stochastic-Gradient-Descent-SGD"><a href="#Stochastic-Gradient-Descent-SGD" class="headerlink" title="Stochastic Gradient Descent (SGD)"></a>Stochastic Gradient Descent (SGD)</h3><p>当样本量N极大时，使用随机梯度下降可以显著减少计算量  </p>
+<p>随机梯度使用小批量样本进行计算(minibatch),然后根据在此小批量样本上计算出的结果估计整体的误差和梯度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Vanilla Minibatch Gradient Descent</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">  data_batch = sample_training_data(data, <span class="number">256</span>) <span class="comment"># sample 256 examples</span></span><br><span class="line">  weights_grad = evaluate_gradient(loss_fun, data_batch, weights)</span><br><span class="line">  weights += - step_size * weights_grad <span class="comment"># perform parameter update</span></span><br></pre></td></tr></table></figure>
+<p><a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture3.pdf" target="_blank" rel="noopener">slide</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/" itemprop="url">CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器</a></h1>
         
 
         <div class="post-meta">
@@ -376,7 +571,7 @@
 <h2 id="Nearest-Neighbor"><a href="#Nearest-Neighbor" class="headerlink" title="Nearest Neighbor"></a>Nearest Neighbor</h2><h3 id="Train"><a href="#Train" class="headerlink" title="Train"></a>Train</h3><p>几乎不做任何事情，单纯的记住数据和标签</p>
 <h3 id="predict"><a href="#predict" class="headerlink" title="predict"></a>predict</h3><p>输入新图片，找到最类似的</p>
 <h3 id="数据集：CIFAR10"><a href="#数据集：CIFAR10" class="headerlink" title="数据集：CIFAR10"></a>数据集：CIFAR10</h3><p>10类<br>50000 训练图片<br>10000 测试图片</p>
-<h3 id="Distance-Metric-L1-distance-Manhattan-distance"><a href="#Distance-Metric-L1-distance-Manhattan-distance" class="headerlink" title="Distance Metric: L1 distance/Manhattan distance"></a>Distance Metric: L1 distance/Manhattan distance</h3><p><img src="/2018/08/05/cs231n-第二节近邻算法和线性分类器/L1_func.png" alt="L1"> </p>
+<h3 id="Distance-Metric-L1-distance-Manhattan-distance"><a href="#Distance-Metric-L1-distance-Manhattan-distance" class="headerlink" title="Distance Metric: L1 distance/Manhattan distance"></a>Distance Metric: L1 distance/Manhattan distance</h3><p><img src="/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/L1_func.png" alt="L1"> </p>
 <p>简单来说就是测试值和训练值的像素差的绝对值的和</p>
 <h3 id="最近邻代码"><a href="#最近邻代码" class="headerlink" title="最近邻代码"></a>最近邻代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NearestNeighbor</span><span class="params">(object)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, X, y)</span>:</span></span><br><span class="line">    <span class="string">""" X is N x D where each row is an example. Y is 1-dimension of size N """</span></span><br><span class="line">    <span class="comment"># the nearest neighbor classifier simply remembers all the training data</span></span><br><span class="line">    self.Xtr = X</span><br><span class="line">    self.ytr = y</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X)</span>:</span></span><br><span class="line">    <span class="string">""" X is N x D where each row is an example we wish to predict label for """</span></span><br><span class="line">    num_test = X.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># lets make sure that the output type matches the input type</span></span><br><span class="line">    Ypred = np.zeros(num_test, dtype = self.ytr.dtype)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># loop over all test rows</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(num_test):</span><br><span class="line">      <span class="comment"># find the nearest training image to the i'th test image</span></span><br><span class="line">      <span class="comment"># using the L1 distance (sum of absolute value differences)</span></span><br><span class="line">      distances = np.sum(np.abs(self.Xtr - X[i,:]), axis = <span class="number">1</span>)</span><br><span class="line">      min_index = np.argmin(distances) <span class="comment"># get the index with smallest distance</span></span><br><span class="line">      Ypred[i] = self.ytr[min_index] <span class="comment"># predict the label of the nearest example</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Ypred</span><br></pre></td></tr></table></figure>
 <p>L1 distance:<br>np.sum(np.abs(按位取差), axis=1)</p>
@@ -384,18 +579,18 @@
 <p>这是不能接受的<br>在工程中，可以接受训练时间slow，但是预测时间必须fast</p>
 <h2 id="K-Nearest-Neighbors-KNN"><a href="#K-Nearest-Neighbors-KNN" class="headerlink" title="K-Nearest Neighbors(KNN)"></a>K-Nearest Neighbors(KNN)</h2><p>不只是寻找最近的点，根据距离度量，寻找到距离最近的K个点(通过多数投票majorty vote的方式)</p>
 <p>随着K值的变大，分类的边界会变得更平滑</p>
-<h3 id="Distance-Metric-L2-distance-Euclidean-distance"><a href="#Distance-Metric-L2-distance-Euclidean-distance" class="headerlink" title="Distance Metric: L2 distance/Euclidean distance"></a>Distance Metric: L2 distance/Euclidean distance</h3><p><img src="/2018/08/05/cs231n-第二节近邻算法和线性分类器/L2_func.png" alt="L2"> </p>
+<h3 id="Distance-Metric-L2-distance-Euclidean-distance"><a href="#Distance-Metric-L2-distance-Euclidean-distance" class="headerlink" title="Distance Metric: L2 distance/Euclidean distance"></a>Distance Metric: L2 distance/Euclidean distance</h3><p><img src="/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/L2_func.png" alt="L2"> </p>
 <p>简单来说就是平方和的平方根</p>
-<h3 id="L1-amp-L2"><a href="#L1-amp-L2" class="headerlink" title="L1 &amp; L2"></a>L1 &amp; L2</h3><p><img src="/2018/08/05/cs231n-第二节近邻算法和线性分类器/Distance_Metric.png" alt="Distance Metric"> </p>
+<h3 id="L1-amp-L2"><a href="#L1-amp-L2" class="headerlink" title="L1 &amp; L2"></a>L1 &amp; L2</h3><p><img src="/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/Distance_Metric.png" alt="Distance Metric"> </p>
 <p>两种距离公式的使用场景有一个重要的差别在于，L2是对某点的等量距离取值，也就是说没有特殊性，取值不会随着坐标轴的变化而变化；<br>而L1相对来说适用于特征向量中一些特殊的值</p>
 <h3 id="超参数-Hyperparameters"><a href="#超参数-Hyperparameters" class="headerlink" title="超参数 Hyperparameters"></a>超参数 Hyperparameters</h3><blockquote>
 <p>Hyperparameters:choices about the algorithm that we set rather than learn</p>
 </blockquote>
 <p>超参数无法从数据中学习出来，需要提前设定好  </p>
 <p>超参数的设定，目前的办法一般是：多尝试。。。。。 - -！</p>
-<h3 id="拆分数据集（为了交叉验证）"><a href="#拆分数据集（为了交叉验证）" class="headerlink" title="拆分数据集（为了交叉验证）"></a>拆分数据集（为了交叉验证）</h3><p><img src="/2018/08/05/cs231n-第二节近邻算法和线性分类器/divide_dataset.png" alt="dataset"></p>
+<h3 id="拆分数据集（为了交叉验证）"><a href="#拆分数据集（为了交叉验证）" class="headerlink" title="拆分数据集（为了交叉验证）"></a>拆分数据集（为了交叉验证）</h3><p><img src="/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/divide_dataset.png" alt="dataset"></p>
 <p>设定超参需要验证，需要将数据集拆分成三份，一份训练，一份验证还有一份测试(这与我之前的做法有一些出入)<br>由于需要验证算法和超参在<strong>新数据</strong>上的表现是否最佳，如果只将数据拆成两份(train&amp;test)，那么找出的超参很可能只是适用于此组测试数据(而非新数据)的</p>
-<h2 id="Linear-Classification"><a href="#Linear-Classification" class="headerlink" title="Linear Classification"></a>Linear Classification</h2><p><img src="/2018/08/05/cs231n-第二节近邻算法和线性分类器/Linear_Classifier.png" alt="Linear Classifier"></p>
+<h2 id="Linear-Classification"><a href="#Linear-Classification" class="headerlink" title="Linear Classification"></a>Linear Classification</h2><p><img src="/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/Linear_Classifier.png" alt="Linear Classifier"></p>
 <h3 id="parametric-model"><a href="#parametric-model" class="headerlink" title="parametric model"></a>parametric model</h3><p>线性分类器是最简单的参数模型(parametric model)<br>参数模型通常函数主要的两部分：</p>
 <ol>
 <li>x : 输入数据</li>
@@ -403,12 +598,12 @@
 </ol>
 <p>与K近邻不同的重要一点在于，线性分类器没有保存所有的信息，而是将训练过程中获得的”知识(W)”保留了下来</p>
 <p>最简单的线性分类器例子:W与x相乘</p>
-<p><img src="/2018/08/05/cs231n-第二节近邻算法和线性分类器/Example_of_linearclassifier.png" alt="Example_of_linearclassifier"></p>
+<p><img src="/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/Example_of_linearclassifier.png" alt="Example_of_linearclassifier"></p>
 <h3 id="Interpreting-LinearClassifier"><a href="#Interpreting-LinearClassifier" class="headerlink" title="Interpreting LinearClassifier"></a>Interpreting LinearClassifier</h3><p>可以这样理解线性分类器：<br>其实就是在空间中，使用线将类别划分出来</p>
-<p><img src="/2018/08/05/cs231n-第二节近邻算法和线性分类器/Interpreting_LinearClassifier.png" alt="Interpreting_LinearClassifier"></p>
+<p><img src="/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/Interpreting_LinearClassifier.png" alt="Interpreting_LinearClassifier"></p>
 <h3 id="Hardcases-for-linearclassifier"><a href="#Hardcases-for-linearclassifier" class="headerlink" title="Hardcases for linearclassifier"></a>Hardcases for linearclassifier</h3><p>正由于线性分类器这样的特征，有一些情况线性分类器无法解决</p>
 <p>如：异或问题，多分类问题等  </p>
-<p><img src="/2018/08/05/cs231n-第二节近邻算法和线性分类器/Hardcases_for_linearclassifier.png" alt="Hardcases_for_linearclassifier"></p>
+<p><img src="/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/Hardcases_for_linearclassifier.png" alt="Hardcases_for_linearclassifier"></p>
 <p><a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture2.pdf" target="_blank" rel="noopener">slides</a></p>
 
           
@@ -458,7 +653,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/01/cs231n-第一节深度学习发展历程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/01/CS231n-Lecture-1-Course-Introduction-深度学习发展历程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Octopi Lau">
@@ -477,7 +672,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/01/cs231n-第一节深度学习发展历程/" itemprop="url">cs231n 第一节深度学习发展历程</a></h1>
+                <a class="post-title-link" href="/2018/08/01/CS231n-Lecture-1-Course-Introduction-深度学习发展历程/" itemprop="url">CS231n Lecture 1 Course Introduction(深度学习发展历程)</a></h1>
         
 
         <div class="post-meta">
@@ -1909,156 +2104,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Octopi Lau">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Octopi">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/" itemprop="url">Gnome Ubuntu上安装 搜狗拼音</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-03T20:49:56+08:00">
-                2018-07-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Gnome-Ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">Gnome Ubuntu</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>安装sougou pinyin有点烦，因为网上的Ubuntu16.04安装sougou的教程都是unity图形界面的，而我是用的是gnome Ubuntu 16.04 所以安装搜狗不大一样</p>
-<p>我先在搜狗官网下载了deb包<br>然后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br></pre></td></tr></table></figure></p>
-<p>但是好像有error 没有装上</p>
-<p>然后我执行了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -f</span><br></pre></td></tr></table></figure></p>
-<p>显示安装了一堆东西，其中好像有fctix</p>
-<p>然后重启 我发现左下角就有fctix了（微懵）</p>
-<p>然后我在fctix的设置里面选择的sougou pinyin安装的 </p>
-<p>再重启就可以使用搜狗了</p>
-<p><a href="https://www.cnblogs.com/darklights/p/7722861.html" target="_blank" rel="noopener">ref</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2109,7 +2154,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

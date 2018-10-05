@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/images/octopus_favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="deeplearning,深度学习,cs231n," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="loss function 简单理解就是衡量W的好坏的函数  损失函数的通用公式：   x : 图片(输入数据) y : 标签(输出结果)，通常是个表示标签的整数  损失函数计算所有样本损失的平均 Multiclass SVM loss公式：  详解一个多分类ＳＶＭ的计算过程： 首先问题是判断３张图片的分类，目前我们的算法得到了一些结果，我们由这些数据来进行loss func的计算　　  从图像来">
+<meta name="keywords" content="deeplearning,深度学习,cs231n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)">
+<meta property="og:url" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="loss function 简单理解就是衡量W的好坏的函数  损失函数的通用公式：   x : 图片(输入数据) y : 标签(输出结果)，通常是个表示标签的整数  损失函数计算所有样本损失的平均 Multiclass SVM loss公式：  详解一个多分类ＳＶＭ的计算过程： 首先问题是判断３张图片的分类，目前我们的算法得到了一些结果，我们由这些数据来进行loss func的计算　　  从图像来">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/loss_function.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/MulticlassSVM_loss.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/exp_of_loss.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/Hinge_loss.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/01trainloss.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/02trainloss.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/03trainloss.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/fullloss.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/Regularization.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/common_use_regularization.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/Softmax.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/exp_of_softmax.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/derivative_of_1D.png">
+<meta property="og:updated_time" content="2018-10-05T11:06:28.359Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)">
+<meta name="twitter:description" content="loss function 简单理解就是衡量W的好坏的函数  损失函数的通用公式：   x : 图片(输入数据) y : 标签(输出结果)，通常是个表示标签的整数  损失函数计算所有样本损失的平均 Multiclass SVM loss公式：  详解一个多分类ＳＶＭ的计算过程： 首先问题是判断３张图片的分类，目前我们的算法得到了一些结果，我们由这些数据来进行loss func的计算　　  从图像来">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/loss_function.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/"/>
+
+
+
+
+
+  <title>CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化) | Octopi</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-15T19:02:50+08:00">
+                2018-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deeplearning/" itemprop="url" rel="index">
+                    <span itemprop="name">deeplearning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deeplearning/cs231n/" itemprop="url" rel="index">
+                    <span itemprop="name">cs231n</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function"></a>loss function</h2><p> 简单理解就是衡量W的好坏的函数</p>
+<p> 损失函数的通用公式：<br> <img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/loss_function.png" alt="loss function"></p>
+<p> x : 图片(输入数据)<br> y : 标签(输出结果)，通常是个表示标签的整数</p>
+<p> 损失函数计算所有样本损失的平均</p>
+<h3 id="Multiclass-SVM-loss"><a href="#Multiclass-SVM-loss" class="headerlink" title="Multiclass SVM loss"></a>Multiclass SVM loss</h3><p>公式：<br><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/MulticlassSVM_loss.png" alt="ulticlassSVM_loss"></p>
+<p> 详解一个多分类ＳＶＭ的计算过程：</p>
+<p>首先问题是判断３张图片的分类，目前我们的算法得到了一些结果，我们由这些数据来进行loss func的计算　　</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/exp_of_loss.png" alt="exp_of_loss"></p>
+<p>从图像来看，这个函数是个合页损失函数(Hinge loss)，因为在达到一定阈值之后，损失会变成０</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/Hinge_loss.png" alt="Hinge_loss"></p>
+<p>对第一个样本进行损失计算：　<br>　<br><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/01trainloss.png" alt="01trainloss"></p>
+<p>对第二个样本进行损失计算：　　</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/02trainloss.png" alt="02trainloss"></p>
+<p>对第三个样本进行损失计算：　　</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/03trainloss.png" alt="03trainloss"></p>
+<p>最后计算总的损失：</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/fullloss.png" alt="fullloss"></p>
+<h3 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h3><p>为了防止过拟合，需要添加正则化项:<br>换句话说是减轻模型的复杂程度，避免过度拟合数据　　</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/Regularization.png" alt="Regularization"></p>
+<p>这是一些常用的正则化方法:<br><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/common_use_regularization.png" alt="common_use_regularization"></p>
+<h3 id="Softmax-Classifier-Multinomial-Logistic-Regression"><a href="#Softmax-Classifier-Multinomial-Logistic-Regression" class="headerlink" title="Softmax Classifier (Multinomial Logistic Regression)"></a>Softmax Classifier (Multinomial Logistic Regression)</h3><p>在SVM中，我们得到的结果Ｙ通常是没有什么含义的。在softmax中，将会赋予这些输出结果一些含义。</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/Softmax.png" alt="Softmax"></p>
+<p>之所以使用log是因为，log是一个单调升的函数，通过log处理之后可以方便找出最接近１的结果。　　</p>
+<p>又由于损失函数是计算算法损失的，所有对于正确性来说我们在公式中加上了负号。　　</p>
+<p>一个计算过程：　　</p>
+<p>输出结果Ｙ经过exp(目的是转换为正值)处理，在通过归一化(使他们成为和为１的概率)</p>
+<p><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/exp_of_softmax.png" alt="exp_of_softmax"></p>
+<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><h3 id="gradient"><a href="#gradient" class="headerlink" title="gradient"></a>gradient</h3><p>一维数据的梯度就是导数：<br><img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/derivative_of_1D.png" alt="derivative_of_1D"></p>
+<p>对于多维数据(高位矩阵)每一位的偏导组成的向量就是梯度</p>
+<p>梯度与原始的x(vector)有着相同的shape  </p>
+<p>每一位的梯度的含义是在此点上函数的斜率</p>
+<p>所以通过这种方法可以找到指向函数增长最快的方向  </p>
+<p>所以负的梯度值就指向了函数下降最快的方向  </p>
+<p>所以函数从整体上看每个位置的斜率就可以通过梯度和该点的向量的点积(dot product)进行计算</p>
+<h3 id="Numerical-gradient-amp-Analytic-gradient"><a href="#Numerical-gradient-amp-Analytic-gradient" class="headerlink" title="Numerical gradient &amp; Analytic gradient"></a>Numerical gradient &amp; Analytic gradient</h3><p>常使用解析梯度而非数值梯度(因为计算繁琐)</p>
+<p>但是可以使用数值梯度进行检查</p>
+<h3 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h3><p>简单来说，就是随机设定一个W，然后计算损失和梯度，然后向梯度的反方向对W进行调整(利用每一步的梯度，决定下一步的方向)</p>
+<p>步长(学习率，learning rate)是个超参数  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Vanilla Gradient Descent</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">  weights_grad = evaluate_gradient(loss_fun, data, weights)</span><br><span class="line">  weights += - step_size * weights_grad <span class="comment"># perform parameter update</span></span><br></pre></td></tr></table></figure>
+<h3 id="Stochastic-Gradient-Descent-SGD"><a href="#Stochastic-Gradient-Descent-SGD" class="headerlink" title="Stochastic Gradient Descent (SGD)"></a>Stochastic Gradient Descent (SGD)</h3><p>当样本量N极大时，使用随机梯度下降可以显著减少计算量  </p>
+<p>随机梯度使用小批量样本进行计算(minibatch),然后根据在此小批量样本上计算出的结果估计整体的误差和梯度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Vanilla Minibatch Gradient Descent</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">  data_batch = sample_training_data(data, <span class="number">256</span>) <span class="comment"># sample 256 examples</span></span><br><span class="line">  weights_grad = evaluate_gradient(loss_fun, data_batch, weights)</span><br><span class="line">  weights += - step_size * weights_grad <span class="comment"># perform parameter update</span></span><br></pre></td></tr></table></figure>
+<p><a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture3.pdf" target="_blank" rel="noopener">slide</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/deeplearning/" rel="tag"># deeplearning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/cs231n/" rel="tag"># cs231n</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/" rel="next" title="CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器">
+                <i class="fa fa-chevron-left"></i> CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://github.com/stevelau94/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#loss-function"><span class="nav-number">1.</span> <span class="nav-text">loss function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiclass-SVM-loss"><span class="nav-number">1.1.</span> <span class="nav-text">Multiclass SVM loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Regularization"><span class="nav-number">1.2.</span> <span class="nav-text">Regularization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Softmax-Classifier-Multinomial-Logistic-Regression"><span class="nav-number">1.3.</span> <span class="nav-text">Softmax Classifier (Multinomial Logistic Regression)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimization"><span class="nav-number">2.</span> <span class="nav-text">Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gradient"><span class="nav-number">2.1.</span> <span class="nav-text">gradient</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Numerical-gradient-amp-Analytic-gradient"><span class="nav-number">2.2.</span> <span class="nav-text">Numerical gradient &amp; Analytic gradient</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradient-Descent"><span class="nav-number">2.3.</span> <span class="nav-text">Gradient Descent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stochastic-Gradient-Descent-SGD"><span class="nav-number">2.4.</span> <span class="nav-text">Stochastic Gradient Descent (SGD)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
