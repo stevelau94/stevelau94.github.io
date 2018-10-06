@@ -249,6 +249,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/" itemprop="url">CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-25T19:43:45+08:00">
+                2018-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deeplearning/" itemprop="url" rel="index">
+                    <span itemprop="name">deeplearning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deeplearning/cs231n/" itemprop="url" rel="index">
+                    <span itemprop="name">cs231n</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这节课第一部分首先介绍了计算图模型的概念，可以用来直观感受计算过程，之后很长的时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)；</p>
+<p>第二部分主要介绍了神经网络的概念和一些经常使用的激活函数</p>
+<h2 id="Computational-graphs"><a href="#Computational-graphs" class="headerlink" title="Computational graphs"></a>Computational graphs</h2><p>课程这里介绍了计算图的概念，使用计算图可以更加直观的解析复杂的运算。</p>
+<h2 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h2><blockquote>
+<p>反向传播 : 递归的使用链式法则计算计算图中任意节点的梯度</p>
+</blockquote>
+<p>课堂上详细介绍了一个标量的反向传播逐步计算的例子：<br><img src="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/example_gradient.png" alt="example_gradient"></p>
+<p>在计算图中有一些模式被总结出来：</p>
+<p><img src="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/Patterns_in_backwardflow.png" alt="Patterns_in_backwardflow"></p>
+<blockquote>
+<p>Jacobian matrix : 对输入向量的每个元素分别求偏导的结果 </p>
+</blockquote>
+<p>由于Jacobian matrix是对角矩阵(diagonal matrix),所以不需要计算整个矩阵</p>
+<p>一个向量的反向传播的例子：<br><img src="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/vectorized_example.png" alt="vectorized_example"></p>
+<p>需要注意的点:</p>
+<ol>
+<li>向量的梯度总是与原向量的size相同</li>
+<li>每个梯度的元素代表着这个元素对最终函数影响的大小</li>
+</ol>
+<h2 id="Neural-Networks"><a href="#Neural-Networks" class="headerlink" title="Neural Networks"></a>Neural Networks</h2><p>神经网络是又简单函数构成的一组函数，在顶层堆叠在一起形成一个复杂的非线性函数，是一个对阶段分层计算</p>
+<h3 id="activation-function"><a href="#activation-function" class="headerlink" title="activation function"></a>activation function</h3><p><img src="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/activation_function.png" alt="activation_function"></p>
+<p><a href="http://cs231n.stanford.edu/slides/2018/cs231n_2018_lectureCS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络.pdf" target="_blank" rel="noopener">2018 slide</a></p>
+<p><a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture4.pdf" target="_blank" rel="noopener">2017 slide</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1958,152 +2133,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Octopi Lau">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Octopi">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/" itemprop="url">Gnome Ubuntu上安装下载工具 uget+aria2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T22:11:05+08:00">
-                2018-07-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Gnome-Ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">Gnome Ubuntu</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="安装-uget-amp-aria2"><a href="#安装-uget-amp-aria2" class="headerlink" title="安装 uget &amp; aria2"></a>安装 uget &amp; aria2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install uget</span><br><span class="line"></span><br><span class="line">sudo apt-get install aria2</span><br></pre></td></tr></table></figure>
-<h3 id="将-uget-的下载设置为-aria2"><a href="#将-uget-的下载设置为-aria2" class="headerlink" title="将 uget 的下载设置为 aria2"></a>将 uget 的下载设置为 aria2</h3><p>open uget<br>edit –&gt; setting –&gt; plug-in<br>plug-in matching order: aria2</p>
-<h3 id="配置-firefox"><a href="#配置-firefox" class="headerlink" title="配置 firefox"></a>配置 firefox</h3><p>进入附加组件管理页面<br>搜索并安装flashgot  </p>
-<h3 id="配置-chrome"><a href="#配置-chrome" class="headerlink" title="配置 chrome"></a>配置 chrome</h3><p>安装 uGet Integration</p>
-<p><a href="https://blog.csdn.net/xiaohouye/article/details/54603198" target="_blank" rel="noopener">ref</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2154,7 +2183,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

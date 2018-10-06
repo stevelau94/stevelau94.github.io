@@ -79,18 +79,23 @@
 
 
 
-<meta name="description" content="在上半年曾在刚进入工作的阶段听过cs231n，对我理解和掌握深度学习知识有着极大的帮助。最近打算再听一遍，希望留下一些类似与笔记的东西以备使用。 为什么计算机视觉如此重要？视觉信息处理是当今亟需解决的问题视觉信息难以用算法解读，所以业界需要自动解析视觉信息的算法 视觉的出现对生物的发展尤为重要物种大爆炸，很重要的原因是由于视觉能力的发展，视力的出现迫使生物进行生存竞争，并不断进化。　　 机器如何获">
+<meta name="description" content="这节课第一部分首先介绍了计算图模型的概念，可以用来直观感受计算过程，之后很长的时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)； 第二部分主要介绍了神经网络的概念和一些经常使用的激活函数 Computational graphs课程这里介绍了计算图的概念，使用计算图可以更加直观的解析复杂的运算。 Backpropagation 反向传播 : 递归的使用链式法则计算计算图中任意">
 <meta name="keywords" content="deeplearning,深度学习,cs231n">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CS231n Lecture 1 Course Introduction(深度学习发展历程)">
-<meta property="og:url" content="http://yoursite.com/2018/08/01/CS231n-Lecture-1-Course-Introduction-深度学习发展历程/index.html">
+<meta property="og:title" content="CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络)">
+<meta property="og:url" content="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="在上半年曾在刚进入工作的阶段听过cs231n，对我理解和掌握深度学习知识有着极大的帮助。最近打算再听一遍，希望留下一些类似与笔记的东西以备使用。 为什么计算机视觉如此重要？视觉信息处理是当今亟需解决的问题视觉信息难以用算法解读，所以业界需要自动解析视觉信息的算法 视觉的出现对生物的发展尤为重要物种大爆炸，很重要的原因是由于视觉能力的发展，视力的出现迫使生物进行生存竞争，并不断进化。　　 机器如何获">
+<meta property="og:description" content="这节课第一部分首先介绍了计算图模型的概念，可以用来直观感受计算过程，之后很长的时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)； 第二部分主要介绍了神经网络的概念和一些经常使用的激活函数 Computational graphs课程这里介绍了计算图的概念，使用计算图可以更加直观的解析复杂的运算。 Backpropagation 反向传播 : 递归的使用链式法则计算计算图中任意">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-05T11:06:24.551Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/example_gradient.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/Patterns_in_backwardflow.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/vectorized_example.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/activation_function.png">
+<meta property="og:updated_time" content="2018-10-06T11:46:08.249Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CS231n Lecture 1 Course Introduction(深度学习发展历程)">
-<meta name="twitter:description" content="在上半年曾在刚进入工作的阶段听过cs231n，对我理解和掌握深度学习知识有着极大的帮助。最近打算再听一遍，希望留下一些类似与笔记的东西以备使用。 为什么计算机视觉如此重要？视觉信息处理是当今亟需解决的问题视觉信息难以用算法解读，所以业界需要自动解析视觉信息的算法 视觉的出现对生物的发展尤为重要物种大爆炸，很重要的原因是由于视觉能力的发展，视力的出现迫使生物进行生存竞争，并不断进化。　　 机器如何获">
+<meta name="twitter:title" content="CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络)">
+<meta name="twitter:description" content="这节课第一部分首先介绍了计算图模型的概念，可以用来直观感受计算过程，之后很长的时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)； 第二部分主要介绍了神经网络的概念和一些经常使用的激活函数 Computational graphs课程这里介绍了计算图的概念，使用计算图可以更加直观的解析复杂的运算。 Backpropagation 反向传播 : 递归的使用链式法则计算计算图中任意">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/example_gradient.png">
 
 
 
@@ -120,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/01/CS231n-Lecture-1-Course-Introduction-深度学习发展历程/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/"/>
 
 
 
 
 
-  <title>CS231n Lecture 1 Course Introduction(深度学习发展历程) | Octopi</title>
+  <title>CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络) | Octopi</title>
   
 
 
@@ -253,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/01/CS231n-Lecture-1-Course-Introduction-深度学习发展历程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Octopi Lau">
@@ -270,7 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CS231n Lecture 1 Course Introduction(深度学习发展历程)</h1>
+          <h1 class="post-title" itemprop="name headline">CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络)</h1>
         
 
         <div class="post-meta">
@@ -282,8 +287,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-01T21:38:03+08:00">
-                2018-08-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-25T19:43:45+08:00">
+                2018-08-25
               </time>
             
 
@@ -353,24 +358,29 @@
       
 
       
-        <p>在上半年曾在刚进入工作的阶段听过cs231n，对我理解和掌握深度学习知识有着极大的帮助。最近打算再听一遍，希望留下一些类似与笔记的东西以备使用。</p>
-<h2 id="为什么计算机视觉如此重要？"><a href="#为什么计算机视觉如此重要？" class="headerlink" title="为什么计算机视觉如此重要？"></a>为什么计算机视觉如此重要？</h2><h3 id="视觉信息处理是当今亟需解决的问题"><a href="#视觉信息处理是当今亟需解决的问题" class="headerlink" title="视觉信息处理是当今亟需解决的问题"></a>视觉信息处理是当今亟需解决的问题</h3><p>视觉信息难以用算法解读，所以业界需要自动解析视觉信息的算法</p>
-<h3 id="视觉的出现对生物的发展尤为重要"><a href="#视觉的出现对生物的发展尤为重要" class="headerlink" title="视觉的出现对生物的发展尤为重要"></a>视觉的出现对生物的发展尤为重要</h3><p>物种大爆炸，很重要的原因是由于视觉能力的发展，视力的出现迫使生物进行生存竞争，并不断进化。　　</p>
-<h2 id="机器如何获得视觉能力？"><a href="#机器如何获得视觉能力？" class="headerlink" title="机器如何获得视觉能力？"></a>机器如何获得视觉能力？</h2><p>动物和人类的视觉能力对计算机领域的视觉算法发展提供了重要的启发。　　</p>
-<p>计算机科学家从60年代就开始探索处理视觉信息的方法；70年代视觉专家提出使用简单图形将复杂物体表达出来；80年代，视觉专家提出使用边缘识别物体</p>
-<p>但是，当时这些早起的对识别物体的尝试和探索，缺少数据并且没法输出可以使用的视觉处理方案</p>
-<h2 id="逐步发展"><a href="#逐步发展" class="headerlink" title="逐步发展"></a>逐步发展</h2><p>90年代，语义分割出现；千禧年，面部检测出现，统计机器学习蓬勃发展，Adaboost可以进行实时的面部检测而且已经出现了可以使用的产品；并且新世纪的前十年里，科学家提出使用特征提取来识别物体</p>
-<p>目标识别的首要目标成为了在目标上确认这些关键的特征，对特征的比较比对整个物体的比较简单了很多</p>
-<h2 id="数据集的出现和机器学习方法的使用"><a href="#数据集的出现和机器学习方法的使用" class="headerlink" title="数据集的出现和机器学习方法的使用"></a>数据集的出现和机器学习方法的使用</h2><p>从60年代计算机视觉专家开始探索直到如今的21世纪，有一件事一直在变化：图片的质量。  </p>
-<p>目标识别(object recognition)</p>
-<p>直到21世纪才开始有标注的高质量的数据集，如PASCAL数据集，20个分类<br>PASCAL比赛的识别质量从06年到12年持续攀升，但是不曾达到50%</p>
-<p>另一个数据集：IMAGENET，提供了更庞大是数据集，几乎包含了世间的所有物体22K分类</p>
-<h2 id="机器学习的问题：过拟合"><a href="#机器学习的问题：过拟合" class="headerlink" title="机器学习的问题：过拟合"></a>机器学习的问题：过拟合</h2><p>在IMAGENET比赛中，曾经的机器学习算法都很容易过拟合。</p>
-<p>由于图像信息太过复杂，导致模型维度极高</p>
-<h2 id="2012年，里程碑：神经网络崭露头角"><a href="#2012年，里程碑：神经网络崭露头角" class="headerlink" title="2012年，里程碑：神经网络崭露头角"></a>2012年，里程碑：神经网络崭露头角</h2><p>IMAGENET比赛的错误率从11年的25%一下子以上降低了10%到达了16%，这一显著的成果是由于算法使用了卷及神经网络模型(Alexnet)  </p>
-<p>卷积神经网络(convolutional neural network)也常被成为深度学习(convnet)展现了强大的模型容量和能力，在图像识别(computer vision)，自然语言处理(natural language processing)和语音识别(speech recognition)等领域  </p>
-<p>cs231n主要关注图像分类(image classfication)以及目标检测(object detection)和图像摘要(image captioning)</p>
-<p>一些更复杂的领域：语义分割(semantic segmentation)和知觉分组(perceptual grouping)：理解图像中的每个像素和动作识别</p>
+        <p>这节课第一部分首先介绍了计算图模型的概念，可以用来直观感受计算过程，之后很长的时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)；</p>
+<p>第二部分主要介绍了神经网络的概念和一些经常使用的激活函数</p>
+<h2 id="Computational-graphs"><a href="#Computational-graphs" class="headerlink" title="Computational graphs"></a>Computational graphs</h2><p>课程这里介绍了计算图的概念，使用计算图可以更加直观的解析复杂的运算。</p>
+<h2 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h2><blockquote>
+<p>反向传播 : 递归的使用链式法则计算计算图中任意节点的梯度</p>
+</blockquote>
+<p>课堂上详细介绍了一个标量的反向传播逐步计算的例子：<br><img src="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/example_gradient.png" alt="example_gradient"></p>
+<p>在计算图中有一些模式被总结出来：</p>
+<p><img src="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/Patterns_in_backwardflow.png" alt="Patterns_in_backwardflow"></p>
+<blockquote>
+<p>Jacobian matrix : 对输入向量的每个元素分别求偏导的结果 </p>
+</blockquote>
+<p>由于Jacobian matrix是对角矩阵(diagonal matrix),所以不需要计算整个矩阵</p>
+<p>一个向量的反向传播的例子：<br><img src="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/vectorized_example.png" alt="vectorized_example"></p>
+<p>需要注意的点:</p>
+<ol>
+<li>向量的梯度总是与原向量的size相同</li>
+<li>每个梯度的元素代表着这个元素对最终函数影响的大小</li>
+</ol>
+<h2 id="Neural-Networks"><a href="#Neural-Networks" class="headerlink" title="Neural Networks"></a>Neural Networks</h2><p>神经网络是又简单函数构成的一组函数，在顶层堆叠在一起形成一个复杂的非线性函数，是一个对阶段分层计算</p>
+<h3 id="activation-function"><a href="#activation-function" class="headerlink" title="activation function"></a>activation function</h3><p><img src="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/activation_function.png" alt="activation_function"></p>
+<p><a href="http://cs231n.stanford.edu/slides/2018/cs231n_2018_lectureCS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络.pdf" target="_blank" rel="noopener">2018 slide</a></p>
+<p><a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture4.pdf" target="_blank" rel="noopener">2017 slide</a></p>
 
       
     </div>
@@ -405,8 +415,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/19/python-处理文本和文件/" rel="next" title="python 处理文本和文件">
-                <i class="fa fa-chevron-left"></i> python 处理文本和文件
+              <a href="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/" rel="next" title="CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)">
+                <i class="fa fa-chevron-left"></i> CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)
               </a>
             
           </div>
@@ -414,10 +424,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/" rel="prev" title="CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器">
-                CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -559,7 +565,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么计算机视觉如此重要？"><span class="nav-number">1.</span> <span class="nav-text">为什么计算机视觉如此重要？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#视觉信息处理是当今亟需解决的问题"><span class="nav-number">1.1.</span> <span class="nav-text">视觉信息处理是当今亟需解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视觉的出现对生物的发展尤为重要"><span class="nav-number">1.2.</span> <span class="nav-text">视觉的出现对生物的发展尤为重要</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器如何获得视觉能力？"><span class="nav-number">2.</span> <span class="nav-text">机器如何获得视觉能力？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逐步发展"><span class="nav-number">3.</span> <span class="nav-text">逐步发展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据集的出现和机器学习方法的使用"><span class="nav-number">4.</span> <span class="nav-text">数据集的出现和机器学习方法的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习的问题：过拟合"><span class="nav-number">5.</span> <span class="nav-text">机器学习的问题：过拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2012年，里程碑：神经网络崭露头角"><span class="nav-number">6.</span> <span class="nav-text">2012年，里程碑：神经网络崭露头角</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Computational-graphs"><span class="nav-number">1.</span> <span class="nav-text">Computational graphs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Backpropagation"><span class="nav-number">2.</span> <span class="nav-text">Backpropagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Networks"><span class="nav-number">3.</span> <span class="nav-text">Neural Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#activation-function"><span class="nav-number">3.1.</span> <span class="nav-text">activation function</span></a></li></ol></li></ol></div>
             
 
           </div>
