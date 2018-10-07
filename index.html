@@ -249,6 +249,262 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/" itemprop="url">CS231n Lecture 6 : Training Neural Networks, Part I(激活函数,数据预处理,BN和超参数设置)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-01T15:33:05+08:00">
+                2018-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Training-Neural-Networks-Overview"><a href="#Training-Neural-Networks-Overview" class="headerlink" title="Training Neural Networks Overview"></a>Training Neural Networks Overview</h2><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Overview.png" alt="Overview"></p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Part_1.png" alt="PART I"></p>
+<h2 id="Activation-Functions-激活函数"><a href="#Activation-Functions-激活函数" class="headerlink" title="Activation Functions(激活函数)"></a>Activation Functions(激活函数)</h2><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Activation_Functions.png" alt="Activation Functions"></p>
+<h3 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h3><p>公式: </p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Sigmoid公式.png" alt="Sigmoid公式"></p>
+<p>图像：</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Sigmoid图像.png" alt="Sigmoid图像"></p>
+<p>效果:</p>
+<p>每个元素被压缩到[0,1]之间</p>
+<p>问题:</p>
+<p><strong>Sigmoid导致梯度消失</strong>  </p>
+<p>当输入数值很大的正值或者很大的负值的时候，会导致梯度成为0，从而无法得到梯度flow的反馈</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/sigmoid_kill_gradients.png" alt="“kill” the gradients"></p>
+<p><strong>sigmoid是非零中心函数</strong></p>
+<p>如果输入数值全部大于零或全部小于零，会导致梯度下降的非常低效(下降方向被固定住了)</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/sigmoid_anti_zero-centered.png" alt="zero-centered"></p>
+<p><strong>存在exp()，计算成本高</strong> (不是很重要的一点，因为卷积运算才是大头)</p>
+<h3 id="tanh-x"><a href="#tanh-x" class="headerlink" title="tanh(x)"></a>tanh(x)</h3><p>图像：</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/tanh(x" alt="tanh(x)图像">图像.png)</p>
+<p>效果:</p>
+<p>每个元素被压缩到[-1,1]之间</p>
+<p>tanh(x)是zero-centered(零中心)函数</p>
+<p>问题:</p>
+<p><strong>导致梯度消失</strong>  (与sigmoid类似，从图像可以看出)</p>
+<h3 id="ReLU-Rectified-Linear-Unit"><a href="#ReLU-Rectified-Linear-Unit" class="headerlink" title="ReLU (Rectified Linear Unit)"></a>ReLU (Rectified Linear Unit)</h3><p>公式: </p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/ReLU公式.png" alt="ReLU公式"></p>
+<p>图像：</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/ReLU图像.png" alt="ReLU图像"></p>
+<p>效果:</p>
+<p>在正区域不会出现饱和的情况</p>
+<p>计算高效(大概是sigmoid的6x)</p>
+<p>与sigmoid相比更具有生物学上的合理性</p>
+<p>问题:</p>
+<p><strong>ReLU是非零中心函数</strong></p>
+<p><strong>dead ReLU情况</strong><br>dead ReLU不会被激活和更新</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/ReLU_dead.png" alt="dead ReLU"></p>
+<p>出现此情况的一些原因：</p>
+<ol>
+<li>初始化不好，权重设置的差</li>
+<li>学习率太大的时候</li>
+</ol>
+<p>可以使用较小的正偏置来初始化ReLU，以增加其在初始化时被激活的可能性，并获得更新(但是是否有用存在争议，多数情况下还是设为0)</p>
+<h3 id="Leaky-ReLU"><a href="#Leaky-ReLU" class="headerlink" title="Leaky ReLU"></a>Leaky ReLU</h3><p>公式: </p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Leaky_ReLU公式.png" alt="Leaky ReLU公式"></p>
+<p>图像：</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Leaky_ReLU图像.png" alt="Leaky ReLU图像"></p>
+<p>效果:</p>
+<p>在正/负区域都不会出现饱和的情况</p>
+<p>计算高效(大概是sigmoid的6x)</p>
+<p><strong>没有dead ReLU情况</strong></p>
+<h3 id="Parametric-Rectifier-PReLU"><a href="#Parametric-Rectifier-PReLU" class="headerlink" title="Parametric Rectifier (PReLU)"></a>Parametric Rectifier (PReLU)</h3><p>将alpha值当成一个学习参数而非设成固定值</p>
+<p>公式: </p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/PReLU公式.png" alt="PReLU公式"></p>
+<h3 id="Exponential-Linear-Units-ELU"><a href="#Exponential-Linear-Units-ELU" class="headerlink" title="Exponential Linear Units (ELU)"></a>Exponential Linear Units (ELU)</h3><p>公式: </p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/ELU公式.png" alt="ELU公式"></p>
+<p>图像：</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/ELU图像.png" alt="ELU图像"></p>
+<p>效果:</p>
+<p>所有ReLU的有点ELU都有</p>
+<p>实际上是介于ReLU和Leaky ReLU之间的</p>
+<h3 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h3><p>公式: </p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Maxout.png" alt="Maxout公式"></p>
+<p>效果:</p>
+<p>没有开始的点乘操作</p>
+<p>是泛化的ReLU 和 Leaky ReLU </p>
+<p>线性机制的操作</p>
+<p>不会饱和</p>
+<p>没有’dead‘情况</p>
+<p>问题:</p>
+<p>参数数量会翻倍</p>
+<h3 id="激活函数的使用经验"><a href="#激活函数的使用经验" class="headerlink" title="激活函数的使用经验"></a>激活函数的使用经验</h3><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/TLDR_of_ActivationFunctions.png" alt="TLDR"></p>
+<h2 id="Data-Preprocessing-数据预处理"><a href="#Data-Preprocessing-数据预处理" class="headerlink" title="Data Preprocessing(数据预处理)"></a>Data Preprocessing(数据预处理)</h2><h3 id="常见的处理方法"><a href="#常见的处理方法" class="headerlink" title="常见的处理方法"></a>常见的处理方法</h3><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/DataPreprocessing.png" alt="Data Preprocessing"></p>
+<h3 id="DL中只使用zero-mean-零均值化"><a href="#DL中只使用zero-mean-零均值化" class="headerlink" title="DL中只使用zero-mean(零均值化)"></a>DL中只使用zero-mean(零均值化)</h3><p>在DL中，主要就使用 <strong>zero-mean(零均值化)</strong> 处理就好了</p>
+<ol>
+<li>zero-mean data(零均值化)<br><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/zero-mean.png" alt="zero-mean"><br>如果不将数据零中心处理，获得的梯度都将是次最优的优化</li>
+<li>normalized(归一化) DL不常用<br><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/normalized.png" alt="normalized"><br>通常归一化处理是在特征处于范围差别较大的情况下使用的，深度学习的特征一般都在一个小范围内，所以对归一化的使用不像一般的ML那么频繁</li>
+</ol>
+<p>还有ML中常见的其他的更复杂的预处理方法，DL中一般都不会使用，因为对于图像信息来说，不希望将这些信息映射到更低维的空间中。通常DL算法希望直接使用卷积运算并且得到原图像的空间结构。</p>
+<h3 id="数据预处理的使用经验"><a href="#数据预处理的使用经验" class="headerlink" title="数据预处理的使用经验"></a>数据预处理的使用经验</h3><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/TLDR_of_DataPreprocessing.png" alt="TLDR"></p>
+<h2 id="Weight-Initialization-初始化权重值"><a href="#Weight-Initialization-初始化权重值" class="headerlink" title="Weight Initialization(初始化权重值)"></a>Weight Initialization(初始化权重值)</h2><h3 id="当把所有权重值都初始化为0-不使用"><a href="#当把所有权重值都初始化为0-不使用" class="headerlink" title="当把所有权重值都初始化为0(不使用)"></a>当把所有权重值都初始化为0(不使用)</h3><p>这样的话所有神经元都会做同样的事情，会有相同的梯度，都将会以相同的方式更新，这会导致所有神经元都是些相同的(而我们需要神经元学习到不同的东西)</p>
+<p>所以不要用相同的权重值来初始化，这会导致无法打破参数对称问题</p>
+<h3 id="所有权重都是小的随机数-不使用"><a href="#所有权重都是小的随机数-不使用" class="headerlink" title="所有权重都是小的随机数(不使用)"></a>所有权重都是小的随机数(不使用)</h3><p>假如用0.01乘标准高斯分布</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Small_randomnumbers.png" alt="Small_randomnumbers"></p>
+<p>这种做法在浅层网络有效，但是在深层网络效果不好  </p>
+<p>在深层网络中会导致无法持续激活</p>
+<p>而且从反向传播来看，由于权值接近于零，会导致每层的梯度非常下，所以会导致基本上没什么更新</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/activations_become_zero.png" alt="activations_become_zero"></p>
+<h3 id="所有权重都是大的随机数-不使用"><a href="#所有权重都是大的随机数-不使用" class="headerlink" title="所有权重都是大的随机数(不使用)"></a>所有权重都是大的随机数(不使用)</h3><p>假如用1乘标准高斯分布</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Big_randomnumbers.png" alt="Big_randomnumbers"></p>
+<p>由于所有权值都很大，这会导致每层都处于饱和状态</p>
+<p>而且所有梯队都会成为0，也会导致权值不会被更新</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/all_neurons_completely_saturated.png" alt="all_neurons_completely_saturated"></p>
+<h3 id="Xavier-initialization-推荐"><a href="#Xavier-initialization-推荐" class="headerlink" title="Xavier initialization(推荐)"></a>Xavier initialization(推荐)</h3><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Xavier_initialization.png" alt="Xavier_initialization"></p>
+<p>这种初始化方法效果不错：</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Xavier_initialization_good.png" alt="Xavier_initialization_good"></p>
+<p>存在的问题是，当使用ReLU作为激活函数时，会有问题</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Xavier_initialization_ReLU.png" alt="Xavier_initialization_ReLU"></p>
+<h3 id="Xavier-initialization-fix-ReLU-problem-推荐"><a href="#Xavier-initialization-fix-ReLU-problem-推荐" class="headerlink" title="Xavier initialization fix ReLU problem(推荐)"></a>Xavier initialization fix ReLU problem(推荐)</h3><p>这好像是何凯明大大的论文！</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Xavier_initialization_fix_ReLUproblem.png" alt="Xavier_initialization_fix_ReLUproblem"></p>
+<p>效果不错：</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Xavier_initialization_fix_ReLUproblem_.png" alt="Xavier_initialization_fix_ReLUproblem"></p>
+<h2 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h2><p>在每一层batch(批量)激活，取目前batch处理的mean(均值)和方差来进行normalize(归一化)</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Batch_Normalization.png" alt="Batch Normalization"></p>
+<p>在训练开始时设置这个值而不是权值初始化的时候，以便可以在每一层都获得较好的高斯分布，并在训练时可以一直保持。</p>
+<p>假设我们在当前的batch中，有N个样本，维度是D:</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Batch_Normalization_.png" alt="Batch Normalization"></p>
+<p>对每个维度都独立计算mean(均值)和variance(方差)</p>
+<p>然后对其进行normalize(归一化)</p>
+<p>Batch Normalization通常是在FC层或者Conv layer后，并且是在nonlinearity(非线性)处理之前插入的</p>
+<p>在进行Batch Normalization之后，需要进行一次额外的缩放操作来恢复恒等函数。</p>
+<p>整体的Batch Normalization过程:</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Batch_Normalization_process.png" alt="Batch_Normalization_process"></p>
+<p>批量归一化的好处:</p>
+<ol>
+<li>改进了网络整体的梯度流</li>
+<li>提升了robust(鲁棒性)</li>
+<li>可以再更广范围的学习率和不同的初始值下工作</li>
+<li>可以作为一种正则化方法</li>
+</ol>
+<h2 id="Babysitting-the-Learning-Process"><a href="#Babysitting-the-Learning-Process" class="headerlink" title="Babysitting the Learning Process"></a>Babysitting the Learning Process</h2><p>Step 1: Preprocess the data<br>Step 2: Choose the architecture</p>
+<p>接下来的部分，老师介绍了一个网络训练的流程<br>一些要点：</p>
+<ol>
+<li>disable regularizationr然后查看losss会否合理</li>
+<li>crank up regularizationr然后查看loss是否如预期有所提升</li>
+<li>Make sure that you can overfit very small portion of the training dataz在数据量较小的情况下，loss是否是0，换句话说accuracy能不能为1，就是看在小数据量的情况下，模型应该完美的拟合</li>
+<li>loss not going down/Loss barely changing如果loss变化很小的话，可能是学习率设置的太小了</li>
+<li>loss exploding的话，可能是学习率设置太大了</li>
+<li>通常设置的学习率在[1e-3 … 1e-5]之间 learning rate we should be cross-validating is somewhere [1e-3 … 1e-5]</li>
+</ol>
+<h2 id="Hyperparameter-Optimization"><a href="#Hyperparameter-Optimization" class="headerlink" title="Hyperparameter Optimization"></a>Hyperparameter Optimization</h2><p>通常使用交叉验证来设置超参数或者学习率</p>
+<h3 id="Cross-validation-strategy"><a href="#Cross-validation-strategy" class="headerlink" title="Cross-validation strategy"></a>Cross-validation strategy</h3><p>在训练集上面使用超参数，然后在验证集上观察这些超参数的实验效果</p>
+<p>可以使用Random Search,在循环训练中，可以先初步的观察参数导致的交叉验证度，首先粗选一下，再进行细选。除了这种筛选方法之外还可以使用Grid Search</p>
+<p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/2_Search.png" alt="2 type search"></p>
+<h3 id="学习率"><a href="#学习率" class="headerlink" title="学习率"></a>学习率</h3><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/learningh_rate.png" alt="learningh_rate"></p>
+<h3 id="准确率"><a href="#准确率" class="headerlink" title="准确率"></a>准确率</h3><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/accuracy.png" alt="accuracy"></p>
+<h2 id="TLDRs"><a href="#TLDRs" class="headerlink" title="TLDRs"></a>TLDRs</h2><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/TLDRs.png" alt="TLDRs"></p>
+<p><a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture6.pdf" target="_blank" rel="noopener">slides</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1950,189 +2206,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/python-数据结构与算法（2）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Octopi Lau">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Octopi">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/11/python-数据结构与算法（2）/" itemprop="url">python 数据结构与算法（2）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-11T21:37:40+08:00">
-                2018-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/python-cookbook/" itemprop="url" rel="index">
-                    <span itemprop="name">python cookbook</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-切片命名"><a href="#1-切片命名" class="headerlink" title="1.切片命名"></a>1.切片命名</h2><p><strong>主要目的是为了减少硬编码</strong></p>
-<h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h3><p>slice会创建切片对象，可以用在任何允许切片的地方</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>items = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = slice(<span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">slice(<span class="number">2</span>, <span class="number">4</span>, <span class="keyword">None</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items[a]</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items[<span class="number">2</span>:<span class="number">4</span>]</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items[a] = [<span class="number">10</span>, <span class="number">11</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> items[a]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
-<h2 id="2-序列中，出现次数最多的元素"><a href="#2-序列中，出现次数最多的元素" class="headerlink" title="2.序列中，出现次数最多的元素"></a>2.序列中，出现次数最多的元素</h2><h3 id="collections-Counter"><a href="#collections-Counter" class="headerlink" title="collections.Counter"></a>collections.Counter</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>words = [<span class="string">'look'</span>,<span class="string">'into'</span>,<span class="string">'me'</span>,<span class="string">'look'</span>,<span class="string">'eye'</span>,<span class="string">'look'</span>,<span class="string">'me'</span>,<span class="string">'sleep'</span>,<span class="string">'into'</span>,<span class="string">'yes'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>word_counter = Counter(words)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>word_counter</span><br><span class="line">Counter(&#123;<span class="string">'look'</span>: <span class="number">3</span>, <span class="string">'into'</span>: <span class="number">2</span>, <span class="string">'me'</span>: <span class="number">2</span>, <span class="string">'yes'</span>: <span class="number">1</span>, <span class="string">'sleep'</span>: <span class="number">1</span>, <span class="string">'eye'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>top_3 = word_counter.most_common(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>top_3</span><br><span class="line">[(<span class="string">'look'</span>, <span class="number">3</span>), (<span class="string">'into'</span>, <span class="number">2</span>), (<span class="string">'me'</span>, <span class="number">2</span>)]</span><br></pre></td></tr></table></figure>
-<h3 id="Counter-可以使用数学运算操作"><a href="#Counter-可以使用数学运算操作" class="headerlink" title="Counter 可以使用数学运算操作"></a>Counter 可以使用数学运算操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>words = [<span class="string">'look'</span>,<span class="string">'into'</span>,<span class="string">'me'</span>,<span class="string">'look'</span>,<span class="string">'eye'</span>,<span class="string">'look'</span>,<span class="string">'me'</span>,<span class="string">'sleep'</span>,<span class="string">'into'</span>,<span class="string">'yes'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = Counter(words)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>morewords = [<span class="string">'why'</span>,<span class="string">'are'</span>,<span class="string">'you'</span>,<span class="string">'not'</span>,<span class="string">'in'</span>,<span class="string">'this'</span>,<span class="string">'is'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = Counter(morewords)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">Counter(&#123;<span class="string">'look'</span>: <span class="number">3</span>, <span class="string">'into'</span>: <span class="number">2</span>, <span class="string">'me'</span>: <span class="number">2</span>, <span class="string">'yes'</span>: <span class="number">1</span>, <span class="string">'sleep'</span>: <span class="number">1</span>, <span class="string">'eye'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">Counter(&#123;<span class="string">'you'</span>: <span class="number">1</span>, <span class="string">'in'</span>: <span class="number">1</span>, <span class="string">'this'</span>: <span class="number">1</span>, <span class="string">'not'</span>: <span class="number">1</span>, <span class="string">'is'</span>: <span class="number">1</span>, <span class="string">'are'</span>: <span class="number">1</span>, <span class="string">'why'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = a+b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">Counter(&#123;<span class="string">'look'</span>: <span class="number">3</span>, <span class="string">'into'</span>: <span class="number">2</span>, <span class="string">'me'</span>: <span class="number">2</span>, <span class="string">'yes'</span>: <span class="number">1</span>, <span class="string">'in'</span>: <span class="number">1</span>, <span class="string">'this'</span>: <span class="number">1</span>, <span class="string">'not'</span>: <span class="number">1</span>, <span class="string">'is'</span>: <span class="number">1</span>, <span class="string">'why'</span>: <span class="number">1</span>, <span class="string">'are'</span>: <span class="number">1</span>, <span class="string">'you'</span>: <span class="number">1</span>, <span class="string">'sleep'</span>: <span class="number">1</span>, <span class="string">'eye'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = a - b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">Counter(&#123;<span class="string">'look'</span>: <span class="number">3</span>, <span class="string">'into'</span>: <span class="number">2</span>, <span class="string">'me'</span>: <span class="number">2</span>, <span class="string">'yes'</span>: <span class="number">1</span>, <span class="string">'sleep'</span>: <span class="number">1</span>, <span class="string">'eye'</span>: <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
-<p><strong>任何需要对数据制表或者计算的问题，Counter都是优秀的工具</strong></p>
-<h2 id="3-字典组成的列表，根据字典的一个或多个值对列表进行排序-operator-itemgetter"><a href="#3-字典组成的列表，根据字典的一个或多个值对列表进行排序-operator-itemgetter" class="headerlink" title="3.字典组成的列表，根据字典的一个或多个值对列表进行排序 (operator.itemgetter)"></a>3.字典组成的列表，根据字典的一个或多个值对列表进行排序 (operator.itemgetter)</h2><h3 id="operator-itemgetter"><a href="#operator-itemgetter" class="headerlink" title="operator.itemgetter"></a>operator.itemgetter</h3><p>itemgetter接受的参数是可作为查询的标记</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows = [</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'fname'</span>:<span class="string">'steve'</span>, <span class="string">'lname'</span>:<span class="string">'jobs'</span>, <span class="string">'age'</span>:<span class="number">23</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'fname'</span>:<span class="string">'david'</span>, <span class="string">'lname'</span>:<span class="string">'jobs'</span>, <span class="string">'age'</span>:<span class="number">33</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'fname'</span>:<span class="string">'jhon'</span>, <span class="string">'lname'</span>:<span class="string">'cleese'</span>, <span class="string">'age'</span>:<span class="number">13</span>&#125;]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows_by_fname = sorted(rows, key=itemgetter(<span class="string">'fname'</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows_by_age = sorted(rows, key=itemgetter(<span class="string">'age'</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows_by_fname</span><br><span class="line">[&#123;<span class="string">'fname'</span>: <span class="string">'david'</span>, <span class="string">'lname'</span>: <span class="string">'jobs'</span>, <span class="string">'age'</span>: <span class="number">33</span>&#125;, </span><br><span class="line">&#123;<span class="string">'fname'</span>: <span class="string">'jhon'</span>, <span class="string">'lname'</span>: <span class="string">'cleese'</span>, <span class="string">'age'</span>: <span class="number">13</span>&#125;, </span><br><span class="line">&#123;<span class="string">'fname'</span>: <span class="string">'steve'</span>, <span class="string">'lname'</span>: <span class="string">'jobs'</span>, <span class="string">'age'</span>: <span class="number">23</span>&#125;]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows_by_age</span><br><span class="line">[&#123;<span class="string">'fname'</span>: <span class="string">'jhon'</span>, <span class="string">'lname'</span>: <span class="string">'cleese'</span>, <span class="string">'age'</span>: <span class="number">13</span>&#125;, </span><br><span class="line">&#123;<span class="string">'fname'</span>: <span class="string">'steve'</span>, <span class="string">'lname'</span>: <span class="string">'jobs'</span>, <span class="string">'age'</span>: <span class="number">23</span>&#125;, </span><br><span class="line">&#123;<span class="string">'fname'</span>: <span class="string">'david'</span>, <span class="string">'lname'</span>: <span class="string">'jobs'</span>, <span class="string">'age'</span>: <span class="number">33</span>&#125;]</span><br></pre></td></tr></table></figure>
-<h3 id="lambda-amp-itemgetter"><a href="#lambda-amp-itemgetter" class="headerlink" title="lambda &amp; itemgetter"></a>lambda &amp; itemgetter</h3><p><strong>itemgetter速度更快！！！</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> timeit <span class="keyword">import</span> timeit <span class="keyword">as</span> timeit </span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">    rows = [</span><br><span class="line">        &#123;<span class="string">'fname'</span>:<span class="string">'steve'</span>, <span class="string">'lname'</span>:<span class="string">'jobs'</span>, <span class="string">'age'</span>:<span class="number">23</span>&#125;,</span><br><span class="line">        &#123;<span class="string">'fname'</span>:<span class="string">'david'</span>, <span class="string">'lname'</span>:<span class="string">'jobs'</span>, <span class="string">'age'</span>:<span class="number">33</span>&#125;,</span><br><span class="line">        &#123;<span class="string">'fname'</span>:<span class="string">'jhon'</span>, <span class="string">'lname'</span>:<span class="string">'cleese'</span>, <span class="string">'age'</span>:<span class="number">13</span>&#125;</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">    time_start=time.time()</span><br><span class="line">    sorted(rows, key=itemgetter(<span class="string">'fname'</span>))</span><br><span class="line">    time_end=time.time()</span><br><span class="line">    print(<span class="string">'time cost'</span>,time_end-time_start,<span class="string">'s'</span>)</span><br><span class="line"></span><br><span class="line">    time_start=time.time()</span><br><span class="line">    sorted(rows, key=<span class="keyword">lambda</span> r:r[<span class="string">'fname'</span>])</span><br><span class="line">    time_end=time.time()</span><br><span class="line">    print(<span class="string">'time cost'</span>,time_end-time_start,<span class="string">'s'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ('time cost', 2.09808349609375e-05, 's')</span></span><br><span class="line"><span class="comment"># ('time cost', 4.0531158447265625e-06, 's')</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="4-对原生不支持比较的对象排序-operator-attrgetter"><a href="#4-对原生不支持比较的对象排序-operator-attrgetter" class="headerlink" title="4.对原生不支持比较的对象排序(operator.attrgetter)"></a>4.对原生不支持比较的对象排序(operator.attrgetter)</h2><h3 id="operator-attrgetter"><a href="#operator-attrgetter" class="headerlink" title="operator.attrgetter"></a>operator.attrgetter</h3><h3 id="lambda-amp-attrgetter"><a href="#lambda-amp-attrgetter" class="headerlink" title="lambda &amp; attrgetter"></a>lambda &amp; attrgetter</h3><p><strong>attrgetter速度更快！！！</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">User</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self.user_id = user_id</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="string">'User(&#123;&#125;)'</span>.format(self.user_id)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>users = [User(<span class="number">22</span>), User(<span class="number">13</span>), User(<span class="number">99</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>users</span><br><span class="line">[User(<span class="number">22</span>), User(<span class="number">13</span>), User(<span class="number">99</span>)]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(users, key=<span class="keyword">lambda</span> r: r.user_id)</span><br><span class="line">[User(<span class="number">13</span>), User(<span class="number">22</span>), User(<span class="number">99</span>)]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> operator <span class="keyword">import</span> attrgetter</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(users, key=attrgetter(<span class="string">'user_id'</span>))</span><br><span class="line">[User(<span class="number">13</span>), User(<span class="number">22</span>), User(<span class="number">99</span>)]</span><br></pre></td></tr></table></figure></p>
-<p><strong>attrgetter可以获取多个字段值</strong></p>
-<h2 id="5-根据字段将记录分组"><a href="#5-根据字段将记录分组" class="headerlink" title="5.根据字段将记录分组"></a>5.根据字段将记录分组</h2><h3 id="itertools-groupby"><a href="#itertools-groupby" class="headerlink" title="itertools.groupby()"></a>itertools.groupby()</h3><p>使用groupby()必须首先将序列排序<br>因为groupby只能检查连续的项  </p>
-<p>groupby()创建的是迭代器，每次迭代会返回一个值和子迭代器， 子迭代器产生该分组内<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows = [</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'address'</span>:<span class="string">'shanghai'</span>,<span class="string">'date'</span>:<span class="string">'2018/01/08'</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'address'</span>:<span class="string">'hangzhou'</span>,<span class="string">'date'</span>:<span class="string">'2018/01/08'</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'address'</span>:<span class="string">'shenzhen'</span>,<span class="string">'date'</span>:<span class="string">'2018/08/08'</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'address'</span>:<span class="string">'guangzhou'</span>,<span class="string">'date'</span>:<span class="string">'2018/09/08'</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'address'</span>:<span class="string">'chengdu'</span>,<span class="string">'date'</span>:<span class="string">'2018/09/08'</span>&#125;]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> groupby</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> date,items <span class="keyword">in</span> groupby(rows, key=itemgetter(<span class="string">'date'</span>)):</span><br><span class="line"><span class="meta">... </span>    print(date)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">for</span> i <span class="keyword">in</span> items:</span><br><span class="line"><span class="meta">... </span>        print(<span class="string">' '</span>, i)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="number">2018</span>/<span class="number">01</span>/<span class="number">08</span></span><br><span class="line">  &#123;<span class="string">'date'</span>: <span class="string">'2018/01/08'</span>, <span class="string">'address'</span>: <span class="string">'shanghai'</span>&#125;</span><br><span class="line">  &#123;<span class="string">'date'</span>: <span class="string">'2018/01/08'</span>, <span class="string">'address'</span>: <span class="string">'hangzhou'</span>&#125;</span><br><span class="line"><span class="number">2018</span>/<span class="number">08</span>/<span class="number">08</span></span><br><span class="line">  &#123;<span class="string">'date'</span>: <span class="string">'2018/08/08'</span>, <span class="string">'address'</span>: <span class="string">'shenzhen'</span>&#125;</span><br><span class="line"><span class="number">2018</span>/<span class="number">09</span>/<span class="number">08</span></span><br><span class="line">  &#123;<span class="string">'date'</span>: <span class="string">'2018/09/08'</span>, <span class="string">'address'</span>: <span class="string">'guangzhou'</span>&#125;</span><br><span class="line">  &#123;<span class="string">'date'</span>: <span class="string">'2018/09/08'</span>, <span class="string">'address'</span>: <span class="string">'chengdu'</span>&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="其实用defaultdict也可以实现（多值字典），而且效率更高"><a href="#其实用defaultdict也可以实现（多值字典），而且效率更高" class="headerlink" title="其实用defaultdict也可以实现（多值字典），而且效率更高"></a>其实用defaultdict也可以实现（多值字典），而且效率更高</h3><h2 id="6-筛选序列中的元素（列表解析式-生成器-filter-）"><a href="#6-筛选序列中的元素（列表解析式-生成器-filter-）" class="headerlink" title="6.筛选序列中的元素（列表解析式/生成器/filter()）"></a>6.筛选序列中的元素（列表解析式/生成器/filter()）</h2><h3 id="列表解析式-list-comprehension"><a href="#列表解析式-list-comprehension" class="headerlink" title="列表解析式 list comprehension"></a>列表解析式 list comprehension</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_list = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">-5</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">11</span> ,<span class="number">4</span>, <span class="number">5</span>, <span class="number">677</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[n <span class="keyword">for</span> n <span class="keyword">in</span> my_list <span class="keyword">if</span> n//<span class="number">2</span> == <span class="number">1</span>]</span><br><span class="line">[<span class="number">3</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[n <span class="keyword">for</span> n <span class="keyword">in</span> my_list <span class="keyword">if</span> n&gt;<span class="number">0</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">11</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">677</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[n <span class="keyword">for</span> n <span class="keyword">in</span> my_list <span class="keyword">if</span> n&lt;<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-<p>列表解析式可能存在的问题：如果原始输入很大，则可能产生非常大的结果</p>
-<h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>po = (n <span class="keyword">for</span> n <span class="keyword">in</span> my_list <span class="keyword">if</span> n&gt;<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>po</span><br><span class="line">&lt;generator object &lt;genexpr&gt; at <span class="number">0x7f959745a5c8</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> p <span class="keyword">in</span> po:</span><br><span class="line"><span class="meta">... </span>    print(p)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">11</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">677</span></span><br></pre></td></tr></table></figure>
-<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p><strong>如果筛选的过程很复杂，可以考虑将筛选过程设为函数，用filter处理</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">-5</span>, <span class="string">'s'</span>, <span class="string">'-'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">is_int</span><span class="params">(val)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">try</span>:</span><br><span class="line"><span class="meta">... </span>        x = int(val)</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">except</span> ValueError:</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ivals = list(filter(is_int, values))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ivals</span><br><span class="line">[<span class="number">1</span>, <span class="number">3</span>, <span class="number">-5</span>]</span><br></pre></td></tr></table></figure></p>
-<h3 id="itertools-compress"><a href="#itertools-compress" class="headerlink" title="itertools.compress()"></a>itertools.compress()</h3><p><strong>通过布尔值筛选</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows</span><br><span class="line">[&#123;<span class="string">'date'</span>: <span class="string">'2018/01/08'</span>, <span class="string">'address'</span>: <span class="string">'shanghai'</span>&#125;, &#123;<span class="string">'date'</span>: <span class="string">'2018/01/08'</span>, <span class="string">'address'</span>: <span class="string">'hangzhou'</span>&#125;, &#123;<span class="string">'date'</span>: <span class="string">'2018/08/08'</span>, <span class="string">'address'</span>: <span class="string">'shenzhen'</span>&#125;, &#123;<span class="string">'date'</span>: <span class="string">'2018/09/08'</span>, <span class="string">'address'</span>: <span class="string">'guangzhou'</span>&#125;, &#123;<span class="string">'date'</span>: <span class="string">'2018/09/08'</span>, <span class="string">'address'</span>: <span class="string">'chengdu'</span>&#125;]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>counts = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>biger_3 = [n &gt; <span class="number">3</span> <span class="keyword">for</span> n <span class="keyword">in</span> counts]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>biger_3</span><br><span class="line">[<span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">True</span>, <span class="keyword">True</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> compress</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(compress(rows, biger_3))</span><br><span class="line">[&#123;<span class="string">'date'</span>: <span class="string">'2018/09/08'</span>, <span class="string">'address'</span>: <span class="string">'guangzhou'</span>&#125;, &#123;<span class="string">'date'</span>: <span class="string">'2018/09/08'</span>, <span class="string">'address'</span>: <span class="string">'chengdu'</span>&#125;]</span><br></pre></td></tr></table></figure></p>
-<h2 id="7-字典，提取子集"><a href="#7-字典，提取子集" class="headerlink" title="7.字典，提取子集"></a>7.字典，提取子集</h2><h3 id="字典解析式（dict-comprehension）"><a href="#字典解析式（dict-comprehension）" class="headerlink" title="字典解析式（dict comprehension）"></a>字典解析式（dict comprehension）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>prices = &#123;</span><br><span class="line"><span class="meta">... </span><span class="string">'APPL'</span>:<span class="number">199.9</span>,</span><br><span class="line"><span class="meta">... </span><span class="string">'GOOL'</span>:<span class="number">99.9</span>,</span><br><span class="line"><span class="meta">... </span><span class="string">'AMZO'</span>:<span class="number">299</span>,</span><br><span class="line"><span class="meta">... </span><span class="string">'FB'</span>:<span class="number">33</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;key:value <span class="keyword">for</span> key,value <span class="keyword">in</span> prices.items() <span class="keyword">if</span> value &gt; <span class="number">150</span>&#125;</span><br><span class="line">&#123;<span class="string">'AMZO'</span>: <span class="number">299</span>, <span class="string">'APPL'</span>: <span class="number">199.9</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>GREAT_COM = [<span class="string">'APPL'</span>,<span class="string">'GOOL'</span>,<span class="string">'AMZO'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;key:value <span class="keyword">for</span> key,value <span class="keyword">in</span> prices.items() <span class="keyword">if</span> key <span class="keyword">in</span> GREAT_COM&#125;</span><br><span class="line">&#123;<span class="string">'AMZO'</span>: <span class="number">299</span>, <span class="string">'APPL'</span>: <span class="number">199.9</span>, <span class="string">'GOOL'</span>: <span class="number">99.9</span>&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="8-将名称映射到序列中的元素"><a href="#8-将名称映射到序列中的元素" class="headerlink" title="8.将名称映射到序列中的元素"></a>8.将名称映射到序列中的元素</h2><h3 id="collections-nameedtuple"><a href="#collections-nameedtuple" class="headerlink" title="collections.nameedtuple()"></a>collections.nameedtuple()</h3><p><strong>nameedtuple</strong> 是一种工厂方法，需要为他提供类型名称和相应字段<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Subscriber = namedtuple(<span class="string">'Subscriber'</span>, [<span class="string">'addr'</span>,<span class="string">'joined'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sub = Subscriber(<span class="string">'jhon@google.com'</span>, <span class="string">'2018-8-8'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sub</span><br><span class="line">Subscriber(addr=<span class="string">'jhon@google.com'</span>, joined=<span class="string">'2018-8-8'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sub.addr</span><br><span class="line"><span class="string">'jhon@google.com'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sub.joined</span><br><span class="line"><span class="string">'2018-8-8'</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="nameedtuple的主要作用在于，将代码与元素位置解耦"><a href="#nameedtuple的主要作用在于，将代码与元素位置解耦" class="headerlink" title="nameedtuple的主要作用在于，将代码与元素位置解耦"></a>nameedtuple的主要作用在于，将代码与元素位置解耦</h3><p>若果出现大型的元组列表，那么在按照位置读取的情况下，增加数据的操作将会使代码崩溃</p>
-<h3 id="根据位置的引用常常会使得代码表达能力不足，而且也使代码依赖于记录的结构"><a href="#根据位置的引用常常会使得代码表达能力不足，而且也使代码依赖于记录的结构" class="headerlink" title="根据位置的引用常常会使得代码表达能力不足，而且也使代码依赖于记录的结构"></a>根据位置的引用常常会使得代码表达能力不足，而且也使代码依赖于记录的结构</h3><h3 id="namedtuple可以替代字典"><a href="#namedtuple可以替代字典" class="headerlink" title="namedtuple可以替代字典"></a>namedtuple可以替代字典</h3><p>在涉及到大型字典时，namedtuple会更高效  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Stock = namedtuple(<span class="string">'Stock'</span>, [<span class="string">'name'</span>,<span class="string">'shares'</span>,<span class="string">'price'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = Stock(<span class="string">'APPL'</span>,<span class="number">100</span>, <span class="number">123</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line">Stock(name=<span class="string">'APPL'</span>, shares=<span class="number">100</span>, price=<span class="number">123</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>namedtuple</strong> 同样是不可变的</p>
-<p><strong>如果需要修改任何属性，可以通过修改namedtuple的实例的_replace()方法实现</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line">Stock(name=<span class="string">'APPL'</span>, shares=<span class="number">100</span>, price=<span class="number">123</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.shares</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.shares = <span class="number">99</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">AttributeError: can<span class="string">'t set attribute</span></span><br><span class="line"><span class="string">&gt;&gt;&gt; s = s._replace(shares = 99)</span></span><br><span class="line"><span class="string">&gt;&gt;&gt; s</span></span><br><span class="line"><span class="string">Stock(name='</span>APPL<span class="string">', shares=99, price=123)</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="dict-to-namedtuple"><a href="#dict-to-namedtuple" class="headerlink" title="dict_to_namedtuple"></a>dict_to_namedtuple</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Stock = namedtuple(<span class="string">'Stock'</span>, [<span class="string">'name'</span>,<span class="string">'shares'</span>,<span class="string">'price'</span>,<span class="string">'date'</span>,<span class="string">'time'</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>stock_proto = Stock(<span class="string">''</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">None</span>,<span class="keyword">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">dict_2_namedtuple</span><span class="params">(s)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> stock_proto._replace(**s)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = &#123;<span class="string">'name'</span>:<span class="string">'APPL'</span>,<span class="string">'shares'</span>:<span class="number">199</span>, <span class="string">'price'</span>:<span class="number">123</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict_2_namedtuple(a)</span><br><span class="line">Stock(name=<span class="string">'APPL'</span>, shares=<span class="number">199</span>, price=<span class="number">123</span>, date=<span class="keyword">None</span>, time=<span class="keyword">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = &#123;<span class="string">'name'</span>:<span class="string">'GOOL'</span>,<span class="string">'shares'</span>:<span class="number">99</span>, <span class="string">'price'</span>:<span class="number">113</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict_2_namedtuple(b)</span><br><span class="line">Stock(name=<span class="string">'GOOL'</span>, shares=<span class="number">99</span>, price=<span class="number">113</span>, date=<span class="keyword">None</span>, time=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>注意，若需要一个高效的数据结构并且需要修改各种实例属性，namedtuple不是最佳选择</strong></p>
-<h2 id="9-对数据做转换和换算"><a href="#9-对数据做转换和换算" class="headerlink" title="9.对数据做转换和换算"></a>9.对数据做转换和换算</h2><h3 id="生成器，可以将转换和换算优雅的结合"><a href="#生成器，可以将转换和换算优雅的结合" class="headerlink" title="生成器，可以将转换和换算优雅的结合"></a>生成器，可以将转换和换算优雅的结合</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一个例子</span></span><br><span class="line">files = os.listdir(<span class="string">'dirpath'</span>)</span><br><span class="line"><span class="keyword">if</span> any(name.endwith(<span class="string">'.py'</span>) <span class="keyword">for</span> name <span class="keyword">in</span> files):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一个例子</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = (<span class="string">'apple'</span>,<span class="number">40</span>, <span class="number">209.9</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">','</span>.join(str(x) <span class="keyword">for</span> x <span class="keyword">in</span> s))</span><br><span class="line">apple,<span class="number">40</span>,<span class="number">209.9</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一个例子</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pro = [</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'name'</span>:<span class="string">'APPL'</span>,<span class="string">'shares'</span>:<span class="number">99</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'name'</span>:<span class="string">'GOOL'</span>,<span class="string">'shares'</span>:<span class="number">59</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'name'</span>:<span class="string">'FB'</span>,<span class="string">'shares'</span>:<span class="number">39</span>&#125;]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>min_share = min(s[<span class="string">'shares'</span>] <span class="keyword">for</span> s <span class="keyword">in</span> pro)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>min_share</span><br><span class="line"><span class="number">39</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>min_share = min(pro, key=<span class="keyword">lambda</span> s: s[<span class="string">'shares'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>min_share</span><br><span class="line">&#123;<span class="string">'shares'</span>: <span class="number">39</span>, <span class="string">'name'</span>: <span class="string">'FB'</span>&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="10-对个映射合并成单个映射"><a href="#10-对个映射合并成单个映射" class="headerlink" title="10.对个映射合并成单个映射"></a>10.对个映射合并成单个映射</h2><h3 id="collections-ChainMap"><a href="#collections-ChainMap" class="headerlink" title="collections.ChainMap()"></a>collections.ChainMap()</h3><p><strong>ChainMap接受多个映射，在逻辑上表现为单独映射</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> ChainMap</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = &#123;<span class="string">'a'</span>:<span class="number">1</span>, <span class="string">'c'</span>:<span class="number">3</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = &#123;<span class="string">'b'</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D = ChainMap(a, b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D</span><br><span class="line">ChainMap(&#123;<span class="string">'c'</span>: <span class="number">3</span>, <span class="string">'a'</span>: <span class="number">1</span>&#125;, &#123;<span class="string">'b'</span>: <span class="number">2</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D[<span class="string">'a'</span>]</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D[<span class="string">'c'</span>]</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
-<h3 id="ChainMap的表现会随着接受的映射变化而变化（浅复制，与ChainMap实现有关）"><a href="#ChainMap的表现会随着接受的映射变化而变化（浅复制，与ChainMap实现有关）" class="headerlink" title="ChainMap的表现会随着接受的映射变化而变化（浅复制，与ChainMap实现有关）"></a>ChainMap的表现会随着接受的映射变化而变化（浅复制，与ChainMap实现有关）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="string">'a'</span>] = <span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D</span><br><span class="line">ChainMap(&#123;<span class="string">'c'</span>: <span class="number">3</span>, <span class="string">'a'</span>: <span class="number">100</span>&#125;, &#123;<span class="string">'b'</span>: <span class="number">2</span>&#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="ChainMap在与带作用域的值一起工作时很有用"><a href="#ChainMap在与带作用域的值一起工作时很有用" class="headerlink" title="ChainMap在与带作用域的值一起工作时很有用"></a>ChainMap在与带作用域的值一起工作时很有用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = ChainMap()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>] = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = values.new_child()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>] = <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = values.new_child()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>] = <span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values</span><br><span class="line">ChainMap(&#123;<span class="string">'x'</span>: <span class="number">3</span>&#125;, &#123;<span class="string">'x'</span>: <span class="number">2</span>&#125;, &#123;<span class="string">'x'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>]</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = values.parents</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>]</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = values.parents</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>]</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values</span><br><span class="line">ChainMap(&#123;<span class="string">'x'</span>: <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2183,7 +2256,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
