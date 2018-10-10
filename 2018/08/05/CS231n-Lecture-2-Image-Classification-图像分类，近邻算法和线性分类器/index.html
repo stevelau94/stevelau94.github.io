@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="image classificationA core task in CV 对于计算机来说，图片是一个巨大的多维数字矩阵，这导致从其中提取特征很困难。 Semantic Gap(语义鸿沟) Semantic Gap(语义鸿沟): 图片的语义标签和计算机中的像素值之间的巨大差距  challenge：  viewpoint variation,每个像素的数值会随着视角变换而变化 illuminati">
+<meta name="description" content="CS231n的Lecture-2，主要讲授图像分类的需求和数据集，以及ML领域的图像分类算法:近邻算法以及近邻算法的升级版本，KNN和线性分类器；并且介绍了超参数的概念和工程中常用的拆分数据集的经验">
 <meta name="keywords" content="deeplearning,深度学习,cs231n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器">
 <meta property="og:url" content="http://yoursite.com/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="image classificationA core task in CV 对于计算机来说，图片是一个巨大的多维数字矩阵，这导致从其中提取特征很困难。 Semantic Gap(语义鸿沟) Semantic Gap(语义鸿沟): 图片的语义标签和计算机中的像素值之间的巨大差距  challenge：  viewpoint variation,每个像素的数值会随着视角变换而变化 illuminati">
+<meta property="og:description" content="CS231n的Lecture-2，主要讲授图像分类的需求和数据集，以及ML领域的图像分类算法:近邻算法以及近邻算法的升级版本，KNN和线性分类器；并且介绍了超参数的概念和工程中常用的拆分数据集的经验">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/L1_func.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/L2_func.png">
@@ -95,10 +95,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/Example_of_linearclassifier.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/Interpreting_LinearClassifier.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/Hardcases_for_linearclassifier.png">
-<meta property="og:updated_time" content="2018-10-05T11:06:26.687Z">
+<meta property="og:updated_time" content="2018-10-10T13:56:41.247Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器">
-<meta name="twitter:description" content="image classificationA core task in CV 对于计算机来说，图片是一个巨大的多维数字矩阵，这导致从其中提取特征很困难。 Semantic Gap(语义鸿沟) Semantic Gap(语义鸿沟): 图片的语义标签和计算机中的像素值之间的巨大差距  challenge：  viewpoint variation,每个像素的数值会随着视角变换而变化 illuminati">
+<meta name="twitter:description" content="CS231n的Lecture-2，主要讲授图像分类的需求和数据集，以及ML领域的图像分类算法:近邻算法以及近邻算法的升级版本，KNN和线性分类器；并且介绍了超参数的概念和工程中常用的拆分数据集的经验">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/05/CS231n-Lecture-2-Image-Classification-图像分类，近邻算法和线性分类器/L1_func.png">
 
 
@@ -362,7 +362,8 @@
       
 
       
-        <h2 id="image-classification"><a href="#image-classification" class="headerlink" title="image classification"></a>image classification</h2><p><strong>A core task in CV</strong></p>
+        <p>CS231n的Lecture-2，主要讲授图像分类的需求和数据集，以及ML领域的图像分类算法:近邻算法以及近邻算法的升级版本，KNN和线性分类器；并且介绍了超参数的概念和工程中常用的拆分数据集的经验<br><a id="more"></a></p>
+<h2 id="image-classification"><a href="#image-classification" class="headerlink" title="image classification"></a>image classification</h2><p><strong>A core task in CV</strong></p>
 <p>对于计算机来说，图片是一个巨大的多维数字矩阵，这导致从其中提取特征很困难。</p>
 <h2 id="Semantic-Gap-语义鸿沟"><a href="#Semantic-Gap-语义鸿沟" class="headerlink" title="Semantic Gap(语义鸿沟)"></a>Semantic Gap(语义鸿沟)</h2><blockquote>
 <p>Semantic Gap(语义鸿沟): 图片的语义标签和计算机中的像素值之间的巨大差距</p>
@@ -453,8 +454,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/01/CS231n-Lecture-1-Course-Introduction-深度学习发展历程/" rel="next" title="CS231n Lecture 1 Course Introduction(深度学习发展历程)">
-                <i class="fa fa-chevron-left"></i> CS231n Lecture 1 Course Introduction(深度学习发展历程)
+              <a href="/2018/08/01/CS231n-Lecture-1-Course-Introduction-深度学习发展历程/" rel="next" title="CS231n-Lecture-1-Course-Introduction-深度学习发展历程">
+                <i class="fa fa-chevron-left"></i> CS231n-Lecture-1-Course-Introduction-深度学习发展历程
               </a>
             
           </div>
@@ -463,8 +464,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/" rel="prev" title="CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)">
-                CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/" rel="prev" title="CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化">
+                CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -542,7 +543,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -564,7 +565,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

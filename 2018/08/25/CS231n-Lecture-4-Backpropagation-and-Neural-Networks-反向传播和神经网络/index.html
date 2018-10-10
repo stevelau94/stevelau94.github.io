@@ -79,22 +79,22 @@
 
 
 
-<meta name="description" content="这节课第一部分首先介绍了计算图模型的概念，可以用来直观感受计算过程，之后很长的时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)； 第二部分主要介绍了神经网络的概念和一些经常使用的激活函数 Computational graphs课程这里介绍了计算图的概念，使用计算图可以更加直观的解析复杂的运算。 Backpropagation 反向传播 : 递归的使用链式法则计算计算图中任意">
+<meta name="description" content="Lecture-4首先介绍了计算图模型的概念，可以用来直观感受计算过程，课程的很长时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)； 第二部分主要介绍了神经网络的概念并且初步引入了一些经常使用的激活函数">
 <meta name="keywords" content="deeplearning,深度学习,cs231n">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络)">
+<meta property="og:title" content="CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络">
 <meta property="og:url" content="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="这节课第一部分首先介绍了计算图模型的概念，可以用来直观感受计算过程，之后很长的时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)； 第二部分主要介绍了神经网络的概念和一些经常使用的激活函数 Computational graphs课程这里介绍了计算图的概念，使用计算图可以更加直观的解析复杂的运算。 Backpropagation 反向传播 : 递归的使用链式法则计算计算图中任意">
+<meta property="og:description" content="Lecture-4首先介绍了计算图模型的概念，可以用来直观感受计算过程，课程的很长时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)； 第二部分主要介绍了神经网络的概念并且初步引入了一些经常使用的激活函数">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/example_gradient.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/Patterns_in_backwardflow.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/vectorized_example.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/activation_function.png">
-<meta property="og:updated_time" content="2018-10-06T11:46:08.249Z">
+<meta property="og:updated_time" content="2018-10-10T13:58:22.569Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络)">
-<meta name="twitter:description" content="这节课第一部分首先介绍了计算图模型的概念，可以用来直观感受计算过程，之后很长的时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)； 第二部分主要介绍了神经网络的概念和一些经常使用的激活函数 Computational graphs课程这里介绍了计算图的概念，使用计算图可以更加直观的解析复杂的运算。 Backpropagation 反向传播 : 递归的使用链式法则计算计算图中任意">
+<meta name="twitter:title" content="CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络">
+<meta name="twitter:description" content="Lecture-4首先介绍了计算图模型的概念，可以用来直观感受计算过程，课程的很长时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)； 第二部分主要介绍了神经网络的概念并且初步引入了一些经常使用的激活函数">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/example_gradient.png">
 
 
@@ -131,7 +131,7 @@
 
 
 
-  <title>CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络) | Octopi</title>
+  <title>CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络 | Octopi</title>
   
 
 
@@ -275,7 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络)</h1>
+          <h1 class="post-title" itemprop="name headline">CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络</h1>
         
 
         <div class="post-meta">
@@ -358,8 +358,8 @@
       
 
       
-        <p>这节课第一部分首先介绍了计算图模型的概念，可以用来直观感受计算过程，之后很长的时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)；</p>
-<p>第二部分主要介绍了神经网络的概念和一些经常使用的激活函数</p>
+        <p>Lecture-4首先介绍了计算图模型的概念，可以用来直观感受计算过程，课程的很长时间都在详细解读反向传播的计算过程(由此可见这是DL的非常重点的知识)；</p>
+<p>第二部分主要介绍了神经网络的概念并且初步引入了一些经常使用的激活函数<br><a id="more"></a></p>
 <h2 id="Computational-graphs"><a href="#Computational-graphs" class="headerlink" title="Computational graphs"></a>Computational graphs</h2><p>课程这里介绍了计算图的概念，使用计算图可以更加直观的解析复杂的运算。</p>
 <h2 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h2><blockquote>
 <p>反向传播 : 递归的使用链式法则计算计算图中任意节点的梯度</p>
@@ -415,8 +415,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/" rel="next" title="CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)">
-                <i class="fa fa-chevron-left"></i> CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)
+              <a href="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/" rel="next" title="CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化">
+                <i class="fa fa-chevron-left"></i> CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化
               </a>
             
           </div>
@@ -425,8 +425,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/" rel="prev" title="CS231n Lecture 5: Convolutional Neural Networks(卷积神经网络)">
-                CS231n Lecture 5: Convolutional Neural Networks(卷积神经网络) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/" rel="prev" title="CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络">
+                CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -504,7 +504,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -526,7 +526,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

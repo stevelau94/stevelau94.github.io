@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="1.file,读写文本数据with open() as f:1234567891011121314151617181920212223242526272829# 读取# Read the entire file as a single stringwith open(&apos;somefile.txt&apos;, &apos;rt&apos;) as f:    data = f.read()# Iterate over the l">
+<meta name="description" content="python cookbook中关于处理文本和文件的章节的笔记">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python 处理文本和文件">
 <meta property="og:url" content="http://yoursite.com/2018/07/19/python-处理文本和文件/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="1.file,读写文本数据with open() as f:1234567891011121314151617181920212223242526272829# 读取# Read the entire file as a single stringwith open(&apos;somefile.txt&apos;, &apos;rt&apos;) as f:    data = f.read()# Iterate over the l">
+<meta property="og:description" content="python cookbook中关于处理文本和文件的章节的笔记">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-26T14:17:52.185Z">
+<meta property="og:updated_time" content="2018-10-10T13:45:23.597Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python 处理文本和文件">
-<meta name="twitter:description" content="1.file,读写文本数据with open() as f:1234567891011121314151617181920212223242526272829# 读取# Read the entire file as a single stringwith open(&apos;somefile.txt&apos;, &apos;rt&apos;) as f:    data = f.read()# Iterate over the l">
+<meta name="twitter:description" content="python cookbook中关于处理文本和文件的章节的笔记">
 
 
 
@@ -353,7 +353,8 @@
       
 
       
-        <h2 id="1-file-读写文本数据"><a href="#1-file-读写文本数据" class="headerlink" title="1.file,读写文本数据"></a>1.file,读写文本数据</h2><h3 id="with-open-as-f"><a href="#with-open-as-f" class="headerlink" title="with open() as f:"></a>with open() as f:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取</span></span><br><span class="line"><span class="comment"># Read the entire file as a single string</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Iterate over the lines of the file</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        <span class="comment"># process line</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入</span></span><br><span class="line"><span class="comment"># Write chunks of text data</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text1)</span><br><span class="line">    f.write(text2)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># Redirected print statement</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(line1, file=f)</span><br><span class="line">    print(line2, file=f)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 追加</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'at'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text1)</span><br><span class="line">    f.write(text2)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+        <p>python cookbook中关于处理文本和文件的章节的笔记<br><a id="more"></a></p>
+<h2 id="1-file-读写文本数据"><a href="#1-file-读写文本数据" class="headerlink" title="1.file,读写文本数据"></a>1.file,读写文本数据</h2><h3 id="with-open-as-f"><a href="#with-open-as-f" class="headerlink" title="with open() as f:"></a>with open() as f:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取</span></span><br><span class="line"><span class="comment"># Read the entire file as a single string</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Iterate over the lines of the file</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        <span class="comment"># process line</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入</span></span><br><span class="line"><span class="comment"># Write chunks of text data</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text1)</span><br><span class="line">    f.write(text2)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># Redirected print statement</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'wt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(line1, file=f)</span><br><span class="line">    print(line2, file=f)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 追加</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'at'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(text1)</span><br><span class="line">    f.write(text2)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 <h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>, encoding=<span class="string">'latin-1'</span>) <span class="keyword">as</span> f:</span><br></pre></td></tr></table></figure>
 <h3 id="wt-rt-at中的t指以文本文件的形式写入"><a href="#wt-rt-at中的t指以文本文件的形式写入" class="headerlink" title="wt,rt,at中的t指以文本文件的形式写入"></a>wt,rt,at中的t指以文本文件的形式写入</h3><p>在输出时会将换行符 \n 转换为系统默认的换行符</p>
 <p>如果不希望这种默认的处理方式，可以给 open() 函数传入参数 newline=’’<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Read with disabled newline translation</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'somefile.txt'</span>, <span class="string">'rt'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> f:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
@@ -460,8 +461,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/01/CS231n-Lecture-1-Course-Introduction-深度学习发展历程/" rel="prev" title="CS231n Lecture 1 Course Introduction(深度学习发展历程)">
-                CS231n Lecture 1 Course Introduction(深度学习发展历程) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/27/python可迭代对象，迭代器和生成器的剖析/" rel="prev" title="python可迭代对象，迭代器和生成器的剖析">
+                python可迭代对象，迭代器和生成器的剖析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -539,7 +540,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -561,7 +562,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

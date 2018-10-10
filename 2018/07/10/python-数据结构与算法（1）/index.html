@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="1.对象分解将含N个元素的元祖或序列分解成单独变量12data = [&apos;steve&apos;, 18, 100, (2017.7.7)]name, age, weight, date = data 一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分123s = &apos;hello&apos;# 可以使用 _ 方式丢弃指定值a, b, c, e, _ = s 2.任意长度对象分解分解对象长度太长‘*’表达式可以">
+<meta name="description" content="python cookbook中关于数据结构与算法的上半部分的笔记">
 <meta name="keywords" content="python,data structure,python数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python 数据结构与算法（1）">
 <meta property="og:url" content="http://yoursite.com/2018/07/10/python-数据结构与算法（1）/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="1.对象分解将含N个元素的元祖或序列分解成单独变量12data = [&apos;steve&apos;, 18, 100, (2017.7.7)]name, age, weight, date = data 一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分123s = &apos;hello&apos;# 可以使用 _ 方式丢弃指定值a, b, c, e, _ = s 2.任意长度对象分解分解对象长度太长‘*’表达式可以">
+<meta property="og:description" content="python cookbook中关于数据结构与算法的上半部分的笔记">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-13T13:44:18.700Z">
+<meta property="og:updated_time" content="2018-10-10T13:45:44.494Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python 数据结构与算法（1）">
-<meta name="twitter:description" content="1.对象分解将含N个元素的元祖或序列分解成单独变量12data = [&apos;steve&apos;, 18, 100, (2017.7.7)]name, age, weight, date = data 一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分123s = &apos;hello&apos;# 可以使用 _ 方式丢弃指定值a, b, c, e, _ = s 2.任意长度对象分解分解对象长度太长‘*’表达式可以">
+<meta name="twitter:description" content="python cookbook中关于数据结构与算法的上半部分的笔记">
 
 
 
@@ -353,7 +353,8 @@
       
 
       
-        <h2 id="1-对象分解"><a href="#1-对象分解" class="headerlink" title="1.对象分解"></a>1.对象分解</h2><h3 id="将含N个元素的元祖或序列分解成单独变量"><a href="#将含N个元素的元祖或序列分解成单独变量" class="headerlink" title="将含N个元素的元祖或序列分解成单独变量"></a>将含N个元素的元祖或序列分解成单独变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="string">'steve'</span>, <span class="number">18</span>, <span class="number">100</span>, (<span class="number">2017.7</span><span class="number">.7</span>)]</span><br><span class="line">name, age, weight, date = data</span><br></pre></td></tr></table></figure>
+        <p>python cookbook中关于数据结构与算法的上半部分的笔记<br><a id="more"></a></p>
+<h2 id="1-对象分解"><a href="#1-对象分解" class="headerlink" title="1.对象分解"></a>1.对象分解</h2><h3 id="将含N个元素的元祖或序列分解成单独变量"><a href="#将含N个元素的元祖或序列分解成单独变量" class="headerlink" title="将含N个元素的元祖或序列分解成单独变量"></a>将含N个元素的元祖或序列分解成单独变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="string">'steve'</span>, <span class="number">18</span>, <span class="number">100</span>, (<span class="number">2017.7</span><span class="number">.7</span>)]</span><br><span class="line">name, age, weight, date = data</span><br></pre></td></tr></table></figure>
 <h3 id="一切可迭代的对象-字符串，文件，迭代器，生成器-都可以这样拆分"><a href="#一切可迭代的对象-字符串，文件，迭代器，生成器-都可以这样拆分" class="headerlink" title="一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分"></a>一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'hello'</span></span><br><span class="line"><span class="comment"># 可以使用 _ 方式丢弃指定值</span></span><br><span class="line">a, b, c, e, _ = s</span><br></pre></td></tr></table></figure>
 <h2 id="2-任意长度对象分解"><a href="#2-任意长度对象分解" class="headerlink" title="2.任意长度对象分解"></a>2.任意长度对象分解</h2><h3 id="分解对象长度太长"><a href="#分解对象长度太长" class="headerlink" title="分解对象长度太长"></a>分解对象长度太长</h3><p><strong>‘*’表达式可以解决</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 适用于python3</span></span><br><span class="line">record = (<span class="string">'steve'</span>, <span class="string">'steve@gmail.com'</span>, <span class="string">'1234566-88'</span>, <span class="string">'9876543=99'</span>)</span><br><span class="line">name, email, *phone = record</span><br></pre></td></tr></table></figure></p>
 <h3 id="迭代变长序列"><a href="#迭代变长序列" class="headerlink" title="迭代变长序列"></a>迭代变长序列</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">records = [</span><br><span class="line">    (<span class="string">'foo'</span>, <span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line">    (<span class="string">'bar'</span>, <span class="string">'hello'</span>),</span><br><span class="line">    (<span class="string">'foo'</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_foo</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    print(<span class="string">'foo'</span>, x, y)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_bar</span><span class="params">(s)</span>:</span></span><br><span class="line">    print(<span class="string">'bar'</span>, s)</span><br><span class="line"><span class="keyword">for</span> tag, *args <span class="keyword">in</span> records:</span><br><span class="line">    <span class="keyword">if</span> tag == <span class="string">'foo'</span>:</span><br><span class="line">        do_foo(*args)</span><br><span class="line">    <span class="keyword">elif</span> tag == <span class="string">'bar'</span>:</span><br><span class="line">        do_bar(*args)</span><br></pre></td></tr></table></figure>
@@ -503,7 +504,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -525,7 +526,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

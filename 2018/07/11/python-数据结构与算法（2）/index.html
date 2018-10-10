@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="1.切片命名主要目的是为了减少硬编码 slice()slice会创建切片对象，可以用在任何允许切片的地方 1234567891011121314&amp;gt;&amp;gt;&amp;gt; items = [0, 1, 2, 3, 4, 5, 6]&amp;gt;&amp;gt;&amp;gt; a = slice(2, 4)&amp;gt;&amp;gt;&amp;gt; aslice(2, 4, None)&amp;gt;&amp;gt;&amp;gt; items[a][2, 3]">
+<meta name="description" content="python cookbook中关于数据结构与算法的下半部分的笔记">
 <meta name="keywords" content="python,data structure,python数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python 数据结构与算法（2）">
 <meta property="og:url" content="http://yoursite.com/2018/07/11/python-数据结构与算法（2）/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="1.切片命名主要目的是为了减少硬编码 slice()slice会创建切片对象，可以用在任何允许切片的地方 1234567891011121314&amp;gt;&amp;gt;&amp;gt; items = [0, 1, 2, 3, 4, 5, 6]&amp;gt;&amp;gt;&amp;gt; a = slice(2, 4)&amp;gt;&amp;gt;&amp;gt; aslice(2, 4, None)&amp;gt;&amp;gt;&amp;gt; items[a][2, 3]">
+<meta property="og:description" content="python cookbook中关于数据结构与算法的下半部分的笔记">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-13T13:44:17.172Z">
+<meta property="og:updated_time" content="2018-10-10T13:45:53.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python 数据结构与算法（2）">
-<meta name="twitter:description" content="1.切片命名主要目的是为了减少硬编码 slice()slice会创建切片对象，可以用在任何允许切片的地方 1234567891011121314&amp;gt;&amp;gt;&amp;gt; items = [0, 1, 2, 3, 4, 5, 6]&amp;gt;&amp;gt;&amp;gt; a = slice(2, 4)&amp;gt;&amp;gt;&amp;gt; aslice(2, 4, None)&amp;gt;&amp;gt;&amp;gt; items[a][2, 3]">
+<meta name="twitter:description" content="python cookbook中关于数据结构与算法的下半部分的笔记">
 
 
 
@@ -353,7 +353,8 @@
       
 
       
-        <h2 id="1-切片命名"><a href="#1-切片命名" class="headerlink" title="1.切片命名"></a>1.切片命名</h2><p><strong>主要目的是为了减少硬编码</strong></p>
+        <p>python cookbook中关于数据结构与算法的下半部分的笔记<br><a id="more"></a></p>
+<h2 id="1-切片命名"><a href="#1-切片命名" class="headerlink" title="1.切片命名"></a>1.切片命名</h2><p><strong>主要目的是为了减少硬编码</strong></p>
 <h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h3><p>slice会创建切片对象，可以用在任何允许切片的地方</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>items = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = slice(<span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">slice(<span class="number">2</span>, <span class="number">4</span>, <span class="keyword">None</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items[a]</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items[<span class="number">2</span>:<span class="number">4</span>]</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items[a] = [<span class="number">10</span>, <span class="number">11</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> items[a]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
 <h2 id="2-序列中，出现次数最多的元素"><a href="#2-序列中，出现次数最多的元素" class="headerlink" title="2.序列中，出现次数最多的元素"></a>2.序列中，出现次数最多的元素</h2><h3 id="collections-Counter"><a href="#collections-Counter" class="headerlink" title="collections.Counter"></a>collections.Counter</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>words = [<span class="string">'look'</span>,<span class="string">'into'</span>,<span class="string">'me'</span>,<span class="string">'look'</span>,<span class="string">'eye'</span>,<span class="string">'look'</span>,<span class="string">'me'</span>,<span class="string">'sleep'</span>,<span class="string">'into'</span>,<span class="string">'yes'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>word_counter = Counter(words)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>word_counter</span><br><span class="line">Counter(&#123;<span class="string">'look'</span>: <span class="number">3</span>, <span class="string">'into'</span>: <span class="number">2</span>, <span class="string">'me'</span>: <span class="number">2</span>, <span class="string">'yes'</span>: <span class="number">1</span>, <span class="string">'sleep'</span>: <span class="number">1</span>, <span class="string">'eye'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>top_3 = word_counter.most_common(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>top_3</span><br><span class="line">[(<span class="string">'look'</span>, <span class="number">3</span>), (<span class="string">'into'</span>, <span class="number">2</span>), (<span class="string">'me'</span>, <span class="number">2</span>)]</span><br></pre></td></tr></table></figure>
@@ -507,7 +508,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -529,7 +530,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

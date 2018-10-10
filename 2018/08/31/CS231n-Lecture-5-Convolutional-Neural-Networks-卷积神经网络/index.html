@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="History从50年代Frank Rosenblatt开始研究感知机, 到86年第一次出现反向传播, 到在经历一段时间的沉寂之后的2000年代。神经网络不断发展, 知道2012年才第一次取得惊人的成果(AlexNet)。 如今convnet有着广泛的应用：Classification, Retrieval, Detection, Segmentation, self-driving cars,">
+<meta name="description" content="Lecture-5从神经网络的发展历史开始介绍，详细介绍了卷积层和全连接层；并且介绍了卷积操作中重要的padding和pooling(也可视为pool层，不过我倾向于将pooling与卷积联系更紧密)">
 <meta name="keywords" content="deeplearning,深度学习,cs231n">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CS231n Lecture 5: Convolutional Neural Networks(卷积神经网络)">
+<meta property="og:title" content="CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络">
 <meta property="og:url" content="http://yoursite.com/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="History从50年代Frank Rosenblatt开始研究感知机, 到86年第一次出现反向传播, 到在经历一段时间的沉寂之后的2000年代。神经网络不断发展, 知道2012年才第一次取得惊人的成果(AlexNet)。 如今convnet有着广泛的应用：Classification, Retrieval, Detection, Segmentation, self-driving cars,">
+<meta property="og:description" content="Lecture-5从神经网络的发展历史开始介绍，详细介绍了卷积层和全连接层；并且介绍了卷积操作中重要的padding和pooling(也可视为pool层，不过我倾向于将pooling与卷积联系更紧密)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/filter.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/convolve_slide_over.png">
@@ -97,10 +97,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/max_pooling.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/common_pooling.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/Typical_architectures.png">
-<meta property="og:updated_time" content="2018-10-06T16:39:08.187Z">
+<meta property="og:updated_time" content="2018-10-10T14:00:34.307Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CS231n Lecture 5: Convolutional Neural Networks(卷积神经网络)">
-<meta name="twitter:description" content="History从50年代Frank Rosenblatt开始研究感知机, 到86年第一次出现反向传播, 到在经历一段时间的沉寂之后的2000年代。神经网络不断发展, 知道2012年才第一次取得惊人的成果(AlexNet)。 如今convnet有着广泛的应用：Classification, Retrieval, Detection, Segmentation, self-driving cars,">
+<meta name="twitter:title" content="CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络">
+<meta name="twitter:description" content="Lecture-5从神经网络的发展历史开始介绍，详细介绍了卷积层和全连接层；并且介绍了卷积操作中重要的padding和pooling(也可视为pool层，不过我倾向于将pooling与卷积联系更紧密)">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/filter.png">
 
 
@@ -137,7 +137,7 @@
 
 
 
-  <title>CS231n Lecture 5: Convolutional Neural Networks(卷积神经网络) | Octopi</title>
+  <title>CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络 | Octopi</title>
   
 
 
@@ -281,7 +281,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CS231n Lecture 5: Convolutional Neural Networks(卷积神经网络)</h1>
+          <h1 class="post-title" itemprop="name headline">CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络</h1>
         
 
         <div class="post-meta">
@@ -364,7 +364,8 @@
       
 
       
-        <h2 id="History"><a href="#History" class="headerlink" title="History"></a>History</h2><p>从50年代Frank Rosenblatt开始研究感知机, 到86年第一次出现反向传播, 到在经历一段时间的沉寂之后的2000年代。神经网络不断发展, 知道2012年才第一次取得惊人的成果(AlexNet)。</p>
+        <p>Lecture-5从神经网络的发展历史开始介绍，详细介绍了卷积层和全连接层；并且介绍了卷积操作中重要的padding和pooling(也可视为pool层，不过我倾向于将pooling与卷积联系更紧密)<br><a id="more"></a></p>
+<h2 id="History"><a href="#History" class="headerlink" title="History"></a>History</h2><p>从50年代Frank Rosenblatt开始研究感知机, 到86年第一次出现反向传播, 到在经历一段时间的沉寂之后的2000年代。神经网络不断发展, 知道2012年才第一次取得惊人的成果(AlexNet)。</p>
 <p>如今convnet有着广泛的应用：<br>Classification, Retrieval, Detection, Segmentation, self-driving cars, face-recognition, pose recognition, game, interpretation and diagnosis of medical images, classification of galaxies, street sign recognition etc.</p>
 <h2 id="Convolutional-Neural-Networks"><a href="#Convolutional-Neural-Networks" class="headerlink" title="Convolutional Neural Networks"></a>Convolutional Neural Networks</h2><h3 id="Convolution-Layer"><a href="#Convolution-Layer" class="headerlink" title="Convolution Layer"></a>Convolution Layer</h3><p>卷积层的特点是可以保持图片的结构(preserve spatial structure)</p>
 <p>首先选取一个filter(卷积核)<br><img src="/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/filter.png" alt="filter"></p>
@@ -425,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/" rel="next" title="CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络)">
-                <i class="fa fa-chevron-left"></i> CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络)
+              <a href="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/" rel="next" title="CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络">
+                <i class="fa fa-chevron-left"></i> CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络
               </a>
             
           </div>
@@ -435,8 +436,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/" rel="prev" title="CS231n Lecture 6 : Training Neural Networks, Part I(激活函数,数据预处理,BN和超参数设置)">
-                CS231n Lecture 6 : Training Neural Networks, Part I(激活函数,数据预处理,BN和超参数设置) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/" rel="prev" title="CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置">
+                CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -514,7 +515,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -536,7 +537,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

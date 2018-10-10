@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="deeplearning,深度学习,cs231n," />
 
 
 
@@ -79,12 +79,13 @@
 
 
 
-<meta name="description" content="Training Neural Networks Overview  Activation Functions(激活函数) Sigmoid公式:   图像：  效果: 每个元素被压缩到[0,1]之间 问题: Sigmoid导致梯度消失   当输入数值很大的正值或者很大的负值的时候，会导致梯度成为0，从而无法得到梯度flow的反馈  sigmoid是非零中心函数 如果输入数值全部大于零或全部小于零，">
+<meta name="description" content="Lecture-6是介绍如何训练神经网络的第一部分，详细介绍了各种激活函数，并且介绍了神经网络领域中常用的数据预处理方法，以及一些在训练之前的权重初始化经验，超参数设置的经验和网络训练的流程。这节课还有个重要的知识点是Batch Normalization">
+<meta name="keywords" content="deeplearning,深度学习,cs231n">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CS231n Lecture 6 : Training Neural Networks, Part I(激活函数,数据预处理,BN和超参数设置)">
+<meta property="og:title" content="CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置">
 <meta property="og:url" content="http://yoursite.com/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="Training Neural Networks Overview  Activation Functions(激活函数) Sigmoid公式:   图像：  效果: 每个元素被压缩到[0,1]之间 问题: Sigmoid导致梯度消失   当输入数值很大的正值或者很大的负值的时候，会导致梯度成为0，从而无法得到梯度flow的反馈  sigmoid是非零中心函数 如果输入数值全部大于零或全部小于零，">
+<meta property="og:description" content="Lecture-6是介绍如何训练神经网络的第一部分，详细介绍了各种激活函数，并且介绍了神经网络领域中常用的数据预处理方法，以及一些在训练之前的权重初始化经验，超参数设置的经验和网络训练的流程。这节课还有个重要的知识点是Batch Normalization">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Overview.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Part_1.png">
@@ -124,10 +125,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/learningh_rate.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/accuracy.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/TLDRs.png">
-<meta property="og:updated_time" content="2018-10-07T07:35:28.031Z">
+<meta property="og:updated_time" content="2018-10-10T14:04:41.623Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CS231n Lecture 6 : Training Neural Networks, Part I(激活函数,数据预处理,BN和超参数设置)">
-<meta name="twitter:description" content="Training Neural Networks Overview  Activation Functions(激活函数) Sigmoid公式:   图像：  效果: 每个元素被压缩到[0,1]之间 问题: Sigmoid导致梯度消失   当输入数值很大的正值或者很大的负值的时候，会导致梯度成为0，从而无法得到梯度flow的反馈  sigmoid是非零中心函数 如果输入数值全部大于零或全部小于零，">
+<meta name="twitter:title" content="CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置">
+<meta name="twitter:description" content="Lecture-6是介绍如何训练神经网络的第一部分，详细介绍了各种激活函数，并且介绍了神经网络领域中常用的数据预处理方法，以及一些在训练之前的权重初始化经验，超参数设置的经验和网络训练的流程。这节课还有个重要的知识点是Batch Normalization">
 <meta name="twitter:image" content="http://yoursite.com/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Overview.png">
 
 
@@ -164,7 +165,7 @@
 
 
 
-  <title>CS231n Lecture 6 : Training Neural Networks, Part I(激活函数,数据预处理,BN和超参数设置) | Octopi</title>
+  <title>CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置 | Octopi</title>
   
 
 
@@ -308,7 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CS231n Lecture 6 : Training Neural Networks, Part I(激活函数,数据预处理,BN和超参数设置)</h1>
+          <h1 class="post-title" itemprop="name headline">CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置</h1>
         
 
         <div class="post-meta">
@@ -330,6 +331,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deeplearning/" itemprop="url" rel="index">
+                    <span itemprop="name">deeplearning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deeplearning/cs231n/" itemprop="url" rel="index">
+                    <span itemprop="name">cs231n</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -358,7 +392,8 @@
       
 
       
-        <h2 id="Training-Neural-Networks-Overview"><a href="#Training-Neural-Networks-Overview" class="headerlink" title="Training Neural Networks Overview"></a>Training Neural Networks Overview</h2><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Overview.png" alt="Overview"></p>
+        <p>Lecture-6是介绍如何训练神经网络的第一部分，详细介绍了各种激活函数，并且介绍了神经网络领域中常用的数据预处理方法，以及一些在训练之前的权重初始化经验，超参数设置的经验和网络训练的流程。这节课还有个重要的知识点是Batch Normalization<br><a id="more"></a></p>
+<h2 id="Training-Neural-Networks-Overview"><a href="#Training-Neural-Networks-Overview" class="headerlink" title="Training Neural Networks Overview"></a>Training Neural Networks Overview</h2><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Overview.png" alt="Overview"></p>
 <p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Part_1.png" alt="PART I"></p>
 <h2 id="Activation-Functions-激活函数"><a href="#Activation-Functions-激活函数" class="headerlink" title="Activation Functions(激活函数)"></a>Activation Functions(激活函数)</h2><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/Activation_Functions.png" alt="Activation Functions"></p>
 <h3 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h3><p>公式: </p>
@@ -510,6 +545,16 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/deeplearning/" rel="tag"># deeplearning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/cs231n/" rel="tag"># cs231n</a>
+          
+        </div>
+      
 
       
       
@@ -519,8 +564,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/" rel="next" title="CS231n Lecture 5: Convolutional Neural Networks(卷积神经网络)">
-                <i class="fa fa-chevron-left"></i> CS231n Lecture 5: Convolutional Neural Networks(卷积神经网络)
+              <a href="/2018/08/31/CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络/" rel="next" title="CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络">
+                <i class="fa fa-chevron-left"></i> CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络
               </a>
             
           </div>
@@ -604,7 +649,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -626,7 +671,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

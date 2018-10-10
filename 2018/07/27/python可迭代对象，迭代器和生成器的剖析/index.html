@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/images/octopus_favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="感觉在python中，”迭代”是个很重要的关键词，而且python3将所有内置函数的返回都改成了迭代器。所以python的可迭代对象，迭代器和生成器这些知识，是时候进行一番详细的梳理了">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python可迭代对象，迭代器和生成器的剖析">
+<meta property="og:url" content="http://yoursite.com/2018/07/27/python可迭代对象，迭代器和生成器的剖析/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="感觉在python中，”迭代”是个很重要的关键词，而且python3将所有内置函数的返回都改成了迭代器。所以python的可迭代对象，迭代器和生成器这些知识，是时候进行一番详细的梳理了">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/python可迭代对象，迭代器和生成器的剖析/Iterable_vs_iterator.jpg">
+<meta property="og:updated_time" content="2018-10-10T14:13:05.360Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python可迭代对象，迭代器和生成器的剖析">
+<meta name="twitter:description" content="感觉在python中，”迭代”是个很重要的关键词，而且python3将所有内置函数的返回都改成了迭代器。所以python的可迭代对象，迭代器和生成器这些知识，是时候进行一番详细的梳理了">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/27/python可迭代对象，迭代器和生成器的剖析/Iterable_vs_iterator.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/27/python可迭代对象，迭代器和生成器的剖析/"/>
+
+
+
+
+
+  <title>python可迭代对象，迭代器和生成器的剖析 | Octopi</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/python可迭代对象，迭代器和生成器的剖析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python可迭代对象，迭代器和生成器的剖析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-27T22:06:56+08:00">
+                2018-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>感觉在python中，”迭代”是个很重要的关键词，而且python3将所有内置函数的返回都改成了迭代器。所以python的可迭代对象，迭代器和生成器这些知识，是时候进行一番详细的梳理了<br><a id="more"></a></p>
+<h2 id="关于”重复”的基本概念"><a href="#关于”重复”的基本概念" class="headerlink" title="关于”重复”的基本概念"></a>关于”重复”的基本概念</h2><p>一般程序语言中都有这样一些关于”重复”的概念，如loop、iterate、traversal 和 recursion，他们的通常的定义是:</p>
+<ul>
+<li>loop(循环): 在一定条件下，重复执行同一段代码，如python中的while;</li>
+<li>iterate(迭代): 按照某种顺序逐个访问容器中的每一项，如python中的for;</li>
+<li>traversal(递归): 不断调用自身，如斐波那契数列;</li>
+<li>recursion(遍历): 按照一定的规则访问结构中的每个节点，而且每个节点都只访问一次</li>
+</ul>
+<p>通过这些定义，我们会发现python中的for语句并不能够像别的编程语言那样实现for循环，python的循环都是while来实现的；python的for用来实现迭代。</p>
+<h2 id="关于”迭代”的基本概念"><a href="#关于”迭代”的基本概念" class="headerlink" title="关于”迭代”的基本概念"></a>关于”迭代”的基本概念</h2><p>那么在python中，关于”迭代”的概念，又有这些: iterable,iterator和generators</p>
+<ul>
+<li>iterable(可迭代对象): 定义了可以返回一个迭代器的<strong>iter</strong>方法，或者定义了可以支持下标索引的<strong>getitem</strong>方法</li>
+<li>iterator(迭代器): 定义了<strong>next</strong>方法</li>
+<li>generators(生成器): 含义yield的一种特殊的迭代器</li>
+</ul>
+<h2 id="可迭代对象与迭代器的关系"><a href="#可迭代对象与迭代器的关系" class="headerlink" title="可迭代对象与迭代器的关系"></a>可迭代对象与迭代器的关系</h2><p>那么他们之间的关系是这样的:</p>
+<p><strong>iter()这个函数，可以使可迭代对象转换为迭代器</strong></p>
+<p><img src="/2018/07/27/python可迭代对象，迭代器和生成器的剖析/Iterable_vs_iterator.jpg" alt="Iterable_vs_iterator"></p>
+<h2 id="详解可迭代对象和迭代器"><a href="#详解可迭代对象和迭代器" class="headerlink" title="详解可迭代对象和迭代器"></a>详解可迭代对象和迭代器</h2><p>下面稍微详细介绍一下他们</p>
+<h4 id="可迭代对象（Iterable）"><a href="#可迭代对象（Iterable）" class="headerlink" title="可迭代对象（Iterable）"></a>可迭代对象（Iterable）</h4><p>具有<strong>iter</strong> 方法，用于返回一个迭代器，或者定义了 <strong>getitem</strong> 方法，可以按 index 索引的对象（并且能够在没有值时抛出一个 IndexError 异常）</p>
+<p>可迭代对象可以通过for来迭代其中的每个元素；</p>
+<p>可迭代对象可以通过index索引里面的每个元素(<strong>getitem</strong>)；</p>
+<p>可迭代对象可以通过iter()返回迭代器(<strong>iter</strong>)；</p>
+<p>可以通过isinstance(obj, collections.Iterable) 来判断对象是否为可迭代对象<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> collections</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">'string is iterable'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(a, collections.Iterable)</span><br></pre></td></tr></table></figure></p>
+<h4 id="迭代器（Iterator）"><a href="#迭代器（Iterator）" class="headerlink" title="迭代器（Iterator）"></a>迭代器（Iterator）</h4><p>含有 next (Python 2) 或者 <strong>next</strong> (Python 3) 方法</p>
+<p>定义了<strong>next</strong>方法返回下一个值，在结尾处抛出StopIteration</p>
+<p>可以通过 isinstance(obj, collections.Iterator) 来判断对象是否为迭代器<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> collections</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">'string is iterable but not a iterator'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(a, collections.Iterator)</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>iter_a = iter(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(iter_a, collections.Iterator)</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="for语句原理"><a href="#for语句原理" class="headerlink" title="for语句原理"></a>for语句原理</h4><p>for语句在python中适用于迭代的，而while才是真正的循环  </p>
+<p>深究其差别在于，循环是可以增加跳过的条件的，但是迭代只能一个接着一个取值</p>
+<p>在for语句的内部，是调用可迭代对象的iter()方法将可迭代对象转化为迭代器，然后在调用迭代器中的next()方法进行的迭代。for语句会自动捕获迭代器结束时的StopIteration异常并终止迭代。</p>
+<h2 id="详解生成器"><a href="#详解生成器" class="headerlink" title="详解生成器"></a>详解生成器</h2><h4 id="生成器-generator"><a href="#生成器-generator" class="headerlink" title="生成器(generator)"></a>生成器(generator)</h4><p>一个特殊的迭代器</p>
+<p>任何包含 yield 语句的函数被称为生成器</p>
+<h4 id="惰性计算"><a href="#惰性计算" class="headerlink" title="惰性计算"></a>惰性计算</h4><p>生成器表达式有一个特点，就是 <strong>惰性计算</strong></p>
+<p>这里有一段代码，对理解生成器的惰性计算非常重要<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(s, x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> s + x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span>  i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">yield</span> i</span><br><span class="line"></span><br><span class="line">base = gen()</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">10</span>]:</span><br><span class="line">    base = (add(i, n) <span class="keyword">for</span> i <span class="keyword">in</span> base)</span><br><span class="line"></span><br><span class="line">print(list(base))</span><br><span class="line"></span><br><span class="line"><span class="comment">### 代码返回的是</span></span><br><span class="line"><span class="comment">### [20, 21, 22, 23]</span></span><br></pre></td></tr></table></figure></p>
+<p>有个python代码执行的<a href="http://pythontutor.com" target="_blank" rel="noopener">可视化网站</a>可以帮助对这段代码进行理解</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/19/python-处理文本和文件/" rel="next" title="python 处理文本和文件">
+                <i class="fa fa-chevron-left"></i> python 处理文本和文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/01/CS231n-Lecture-1-Course-Introduction-深度学习发展历程/" rel="prev" title="CS231n-Lecture-1-Course-Introduction-深度学习发展历程">
+                CS231n-Lecture-1-Course-Introduction-深度学习发展历程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://github.com/stevelau94/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于”重复”的基本概念"><span class="nav-number">1.</span> <span class="nav-text">关于”重复”的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于”迭代”的基本概念"><span class="nav-number">2.</span> <span class="nav-text">关于”迭代”的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可迭代对象与迭代器的关系"><span class="nav-number">3.</span> <span class="nav-text">可迭代对象与迭代器的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详解可迭代对象和迭代器"><span class="nav-number">4.</span> <span class="nav-text">详解可迭代对象和迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可迭代对象（Iterable）"><span class="nav-number">4.0.1.</span> <span class="nav-text">可迭代对象（Iterable）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代器（Iterator）"><span class="nav-number">4.0.2.</span> <span class="nav-text">迭代器（Iterator）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#for语句原理"><span class="nav-number">4.0.3.</span> <span class="nav-text">for语句原理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详解生成器"><span class="nav-number">5.</span> <span class="nav-text">详解生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成器-generator"><span class="nav-number">5.0.1.</span> <span class="nav-text">生成器(generator)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#惰性计算"><span class="nav-number">5.0.2.</span> <span class="nav-text">惰性计算</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

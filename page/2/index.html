@@ -249,6 +249,163 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/python-文本处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/13/python-文本处理/" itemprop="url">python 文本处理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-13T02:05:52+08:00">
+                2018-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/python-cookbook/" itemprop="url" rel="index">
+                    <span itemprop="name">python cookbook</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>python cookbook中关于文本处理部分的笔记<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/13/python-文本处理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/python-数据结构与算法（2）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -352,40 +509,14 @@
 
       
         
-          
-            <h2 id="1-切片命名"><a href="#1-切片命名" class="headerlink" title="1.切片命名"></a>1.切片命名</h2><p><strong>主要目的是为了减少硬编码</strong></p>
-<h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h3><p>slice会创建切片对象，可以用在任何允许切片的地方</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>items = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = slice(<span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">slice(<span class="number">2</span>, <span class="number">4</span>, <span class="keyword">None</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items[a]</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items[<span class="number">2</span>:<span class="number">4</span>]</span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items[a] = [<span class="number">10</span>, <span class="number">11</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> items[a]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>items</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
-<h2 id="2-序列中，出现次数最多的元素"><a href="#2-序列中，出现次数最多的元素" class="headerlink" title="2.序列中，出现次数最多的元素"></a>2.序列中，出现次数最多的元素</h2><h3 id="collections-Counter"><a href="#collections-Counter" class="headerlink" title="collections.Counter"></a>collections.Counter</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>words = [<span class="string">'look'</span>,<span class="string">'into'</span>,<span class="string">'me'</span>,<span class="string">'look'</span>,<span class="string">'eye'</span>,<span class="string">'look'</span>,<span class="string">'me'</span>,<span class="string">'sleep'</span>,<span class="string">'into'</span>,<span class="string">'yes'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>word_counter = Counter(words)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>word_counter</span><br><span class="line">Counter(&#123;<span class="string">'look'</span>: <span class="number">3</span>, <span class="string">'into'</span>: <span class="number">2</span>, <span class="string">'me'</span>: <span class="number">2</span>, <span class="string">'yes'</span>: <span class="number">1</span>, <span class="string">'sleep'</span>: <span class="number">1</span>, <span class="string">'eye'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>top_3 = word_counter.most_common(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>top_3</span><br><span class="line">[(<span class="string">'look'</span>, <span class="number">3</span>), (<span class="string">'into'</span>, <span class="number">2</span>), (<span class="string">'me'</span>, <span class="number">2</span>)]</span><br></pre></td></tr></table></figure>
-<h3 id="Counter-可以使用数学运算操作"><a href="#Counter-可以使用数学运算操作" class="headerlink" title="Counter 可以使用数学运算操作"></a>Counter 可以使用数学运算操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>words = [<span class="string">'look'</span>,<span class="string">'into'</span>,<span class="string">'me'</span>,<span class="string">'look'</span>,<span class="string">'eye'</span>,<span class="string">'look'</span>,<span class="string">'me'</span>,<span class="string">'sleep'</span>,<span class="string">'into'</span>,<span class="string">'yes'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = Counter(words)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>morewords = [<span class="string">'why'</span>,<span class="string">'are'</span>,<span class="string">'you'</span>,<span class="string">'not'</span>,<span class="string">'in'</span>,<span class="string">'this'</span>,<span class="string">'is'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = Counter(morewords)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">Counter(&#123;<span class="string">'look'</span>: <span class="number">3</span>, <span class="string">'into'</span>: <span class="number">2</span>, <span class="string">'me'</span>: <span class="number">2</span>, <span class="string">'yes'</span>: <span class="number">1</span>, <span class="string">'sleep'</span>: <span class="number">1</span>, <span class="string">'eye'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">Counter(&#123;<span class="string">'you'</span>: <span class="number">1</span>, <span class="string">'in'</span>: <span class="number">1</span>, <span class="string">'this'</span>: <span class="number">1</span>, <span class="string">'not'</span>: <span class="number">1</span>, <span class="string">'is'</span>: <span class="number">1</span>, <span class="string">'are'</span>: <span class="number">1</span>, <span class="string">'why'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = a+b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line">Counter(&#123;<span class="string">'look'</span>: <span class="number">3</span>, <span class="string">'into'</span>: <span class="number">2</span>, <span class="string">'me'</span>: <span class="number">2</span>, <span class="string">'yes'</span>: <span class="number">1</span>, <span class="string">'in'</span>: <span class="number">1</span>, <span class="string">'this'</span>: <span class="number">1</span>, <span class="string">'not'</span>: <span class="number">1</span>, <span class="string">'is'</span>: <span class="number">1</span>, <span class="string">'why'</span>: <span class="number">1</span>, <span class="string">'are'</span>: <span class="number">1</span>, <span class="string">'you'</span>: <span class="number">1</span>, <span class="string">'sleep'</span>: <span class="number">1</span>, <span class="string">'eye'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = a - b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">Counter(&#123;<span class="string">'look'</span>: <span class="number">3</span>, <span class="string">'into'</span>: <span class="number">2</span>, <span class="string">'me'</span>: <span class="number">2</span>, <span class="string">'yes'</span>: <span class="number">1</span>, <span class="string">'sleep'</span>: <span class="number">1</span>, <span class="string">'eye'</span>: <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
-<p><strong>任何需要对数据制表或者计算的问题，Counter都是优秀的工具</strong></p>
-<h2 id="3-字典组成的列表，根据字典的一个或多个值对列表进行排序-operator-itemgetter"><a href="#3-字典组成的列表，根据字典的一个或多个值对列表进行排序-operator-itemgetter" class="headerlink" title="3.字典组成的列表，根据字典的一个或多个值对列表进行排序 (operator.itemgetter)"></a>3.字典组成的列表，根据字典的一个或多个值对列表进行排序 (operator.itemgetter)</h2><h3 id="operator-itemgetter"><a href="#operator-itemgetter" class="headerlink" title="operator.itemgetter"></a>operator.itemgetter</h3><p>itemgetter接受的参数是可作为查询的标记</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows = [</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'fname'</span>:<span class="string">'steve'</span>, <span class="string">'lname'</span>:<span class="string">'jobs'</span>, <span class="string">'age'</span>:<span class="number">23</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'fname'</span>:<span class="string">'david'</span>, <span class="string">'lname'</span>:<span class="string">'jobs'</span>, <span class="string">'age'</span>:<span class="number">33</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'fname'</span>:<span class="string">'jhon'</span>, <span class="string">'lname'</span>:<span class="string">'cleese'</span>, <span class="string">'age'</span>:<span class="number">13</span>&#125;]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows_by_fname = sorted(rows, key=itemgetter(<span class="string">'fname'</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows_by_age = sorted(rows, key=itemgetter(<span class="string">'age'</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows_by_fname</span><br><span class="line">[&#123;<span class="string">'fname'</span>: <span class="string">'david'</span>, <span class="string">'lname'</span>: <span class="string">'jobs'</span>, <span class="string">'age'</span>: <span class="number">33</span>&#125;, </span><br><span class="line">&#123;<span class="string">'fname'</span>: <span class="string">'jhon'</span>, <span class="string">'lname'</span>: <span class="string">'cleese'</span>, <span class="string">'age'</span>: <span class="number">13</span>&#125;, </span><br><span class="line">&#123;<span class="string">'fname'</span>: <span class="string">'steve'</span>, <span class="string">'lname'</span>: <span class="string">'jobs'</span>, <span class="string">'age'</span>: <span class="number">23</span>&#125;]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows_by_age</span><br><span class="line">[&#123;<span class="string">'fname'</span>: <span class="string">'jhon'</span>, <span class="string">'lname'</span>: <span class="string">'cleese'</span>, <span class="string">'age'</span>: <span class="number">13</span>&#125;, </span><br><span class="line">&#123;<span class="string">'fname'</span>: <span class="string">'steve'</span>, <span class="string">'lname'</span>: <span class="string">'jobs'</span>, <span class="string">'age'</span>: <span class="number">23</span>&#125;, </span><br><span class="line">&#123;<span class="string">'fname'</span>: <span class="string">'david'</span>, <span class="string">'lname'</span>: <span class="string">'jobs'</span>, <span class="string">'age'</span>: <span class="number">33</span>&#125;]</span><br></pre></td></tr></table></figure>
-<h3 id="lambda-amp-itemgetter"><a href="#lambda-amp-itemgetter" class="headerlink" title="lambda &amp; itemgetter"></a>lambda &amp; itemgetter</h3><p><strong>itemgetter速度更快！！！</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> timeit <span class="keyword">import</span> timeit <span class="keyword">as</span> timeit </span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">    rows = [</span><br><span class="line">        &#123;<span class="string">'fname'</span>:<span class="string">'steve'</span>, <span class="string">'lname'</span>:<span class="string">'jobs'</span>, <span class="string">'age'</span>:<span class="number">23</span>&#125;,</span><br><span class="line">        &#123;<span class="string">'fname'</span>:<span class="string">'david'</span>, <span class="string">'lname'</span>:<span class="string">'jobs'</span>, <span class="string">'age'</span>:<span class="number">33</span>&#125;,</span><br><span class="line">        &#123;<span class="string">'fname'</span>:<span class="string">'jhon'</span>, <span class="string">'lname'</span>:<span class="string">'cleese'</span>, <span class="string">'age'</span>:<span class="number">13</span>&#125;</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">    time_start=time.time()</span><br><span class="line">    sorted(rows, key=itemgetter(<span class="string">'fname'</span>))</span><br><span class="line">    time_end=time.time()</span><br><span class="line">    print(<span class="string">'time cost'</span>,time_end-time_start,<span class="string">'s'</span>)</span><br><span class="line"></span><br><span class="line">    time_start=time.time()</span><br><span class="line">    sorted(rows, key=<span class="keyword">lambda</span> r:r[<span class="string">'fname'</span>])</span><br><span class="line">    time_end=time.time()</span><br><span class="line">    print(<span class="string">'time cost'</span>,time_end-time_start,<span class="string">'s'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ('time cost', 2.09808349609375e-05, 's')</span></span><br><span class="line"><span class="comment"># ('time cost', 4.0531158447265625e-06, 's')</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="4-对原生不支持比较的对象排序-operator-attrgetter"><a href="#4-对原生不支持比较的对象排序-operator-attrgetter" class="headerlink" title="4.对原生不支持比较的对象排序(operator.attrgetter)"></a>4.对原生不支持比较的对象排序(operator.attrgetter)</h2><h3 id="operator-attrgetter"><a href="#operator-attrgetter" class="headerlink" title="operator.attrgetter"></a>operator.attrgetter</h3><h3 id="lambda-amp-attrgetter"><a href="#lambda-amp-attrgetter" class="headerlink" title="lambda &amp; attrgetter"></a>lambda &amp; attrgetter</h3><p><strong>attrgetter速度更快！！！</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">User</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self.user_id = user_id</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="string">'User(&#123;&#125;)'</span>.format(self.user_id)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>users = [User(<span class="number">22</span>), User(<span class="number">13</span>), User(<span class="number">99</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>users</span><br><span class="line">[User(<span class="number">22</span>), User(<span class="number">13</span>), User(<span class="number">99</span>)]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(users, key=<span class="keyword">lambda</span> r: r.user_id)</span><br><span class="line">[User(<span class="number">13</span>), User(<span class="number">22</span>), User(<span class="number">99</span>)]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> operator <span class="keyword">import</span> attrgetter</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(users, key=attrgetter(<span class="string">'user_id'</span>))</span><br><span class="line">[User(<span class="number">13</span>), User(<span class="number">22</span>), User(<span class="number">99</span>)]</span><br></pre></td></tr></table></figure></p>
-<p><strong>attrgetter可以获取多个字段值</strong></p>
-<h2 id="5-根据字段将记录分组"><a href="#5-根据字段将记录分组" class="headerlink" title="5.根据字段将记录分组"></a>5.根据字段将记录分组</h2><h3 id="itertools-groupby"><a href="#itertools-groupby" class="headerlink" title="itertools.groupby()"></a>itertools.groupby()</h3><p>使用groupby()必须首先将序列排序<br>因为groupby只能检查连续的项  </p>
-<p>groupby()创建的是迭代器，每次迭代会返回一个值和子迭代器， 子迭代器产生该分组内<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows = [</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'address'</span>:<span class="string">'shanghai'</span>,<span class="string">'date'</span>:<span class="string">'2018/01/08'</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'address'</span>:<span class="string">'hangzhou'</span>,<span class="string">'date'</span>:<span class="string">'2018/01/08'</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'address'</span>:<span class="string">'shenzhen'</span>,<span class="string">'date'</span>:<span class="string">'2018/08/08'</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'address'</span>:<span class="string">'guangzhou'</span>,<span class="string">'date'</span>:<span class="string">'2018/09/08'</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'address'</span>:<span class="string">'chengdu'</span>,<span class="string">'date'</span>:<span class="string">'2018/09/08'</span>&#125;]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> groupby</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> date,items <span class="keyword">in</span> groupby(rows, key=itemgetter(<span class="string">'date'</span>)):</span><br><span class="line"><span class="meta">... </span>    print(date)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">for</span> i <span class="keyword">in</span> items:</span><br><span class="line"><span class="meta">... </span>        print(<span class="string">' '</span>, i)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="number">2018</span>/<span class="number">01</span>/<span class="number">08</span></span><br><span class="line">  &#123;<span class="string">'date'</span>: <span class="string">'2018/01/08'</span>, <span class="string">'address'</span>: <span class="string">'shanghai'</span>&#125;</span><br><span class="line">  &#123;<span class="string">'date'</span>: <span class="string">'2018/01/08'</span>, <span class="string">'address'</span>: <span class="string">'hangzhou'</span>&#125;</span><br><span class="line"><span class="number">2018</span>/<span class="number">08</span>/<span class="number">08</span></span><br><span class="line">  &#123;<span class="string">'date'</span>: <span class="string">'2018/08/08'</span>, <span class="string">'address'</span>: <span class="string">'shenzhen'</span>&#125;</span><br><span class="line"><span class="number">2018</span>/<span class="number">09</span>/<span class="number">08</span></span><br><span class="line">  &#123;<span class="string">'date'</span>: <span class="string">'2018/09/08'</span>, <span class="string">'address'</span>: <span class="string">'guangzhou'</span>&#125;</span><br><span class="line">  &#123;<span class="string">'date'</span>: <span class="string">'2018/09/08'</span>, <span class="string">'address'</span>: <span class="string">'chengdu'</span>&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="其实用defaultdict也可以实现（多值字典），而且效率更高"><a href="#其实用defaultdict也可以实现（多值字典），而且效率更高" class="headerlink" title="其实用defaultdict也可以实现（多值字典），而且效率更高"></a>其实用defaultdict也可以实现（多值字典），而且效率更高</h3><h2 id="6-筛选序列中的元素（列表解析式-生成器-filter-）"><a href="#6-筛选序列中的元素（列表解析式-生成器-filter-）" class="headerlink" title="6.筛选序列中的元素（列表解析式/生成器/filter()）"></a>6.筛选序列中的元素（列表解析式/生成器/filter()）</h2><h3 id="列表解析式-list-comprehension"><a href="#列表解析式-list-comprehension" class="headerlink" title="列表解析式 list comprehension"></a>列表解析式 list comprehension</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>my_list = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">-5</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">11</span> ,<span class="number">4</span>, <span class="number">5</span>, <span class="number">677</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[n <span class="keyword">for</span> n <span class="keyword">in</span> my_list <span class="keyword">if</span> n//<span class="number">2</span> == <span class="number">1</span>]</span><br><span class="line">[<span class="number">3</span>, <span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[n <span class="keyword">for</span> n <span class="keyword">in</span> my_list <span class="keyword">if</span> n&gt;<span class="number">0</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">11</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">677</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[n <span class="keyword">for</span> n <span class="keyword">in</span> my_list <span class="keyword">if</span> n&lt;<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-<p>列表解析式可能存在的问题：如果原始输入很大，则可能产生非常大的结果</p>
-<h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>po = (n <span class="keyword">for</span> n <span class="keyword">in</span> my_list <span class="keyword">if</span> n&gt;<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>po</span><br><span class="line">&lt;generator object &lt;genexpr&gt; at <span class="number">0x7f959745a5c8</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> p <span class="keyword">in</span> po:</span><br><span class="line"><span class="meta">... </span>    print(p)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">11</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">677</span></span><br></pre></td></tr></table></figure>
-<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p><strong>如果筛选的过程很复杂，可以考虑将筛选过程设为函数，用filter处理</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">-5</span>, <span class="string">'s'</span>, <span class="string">'-'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">is_int</span><span class="params">(val)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">try</span>:</span><br><span class="line"><span class="meta">... </span>        x = int(val)</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">except</span> ValueError:</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ivals = list(filter(is_int, values))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ivals</span><br><span class="line">[<span class="number">1</span>, <span class="number">3</span>, <span class="number">-5</span>]</span><br></pre></td></tr></table></figure></p>
-<h3 id="itertools-compress"><a href="#itertools-compress" class="headerlink" title="itertools.compress()"></a>itertools.compress()</h3><p><strong>通过布尔值筛选</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>rows</span><br><span class="line">[&#123;<span class="string">'date'</span>: <span class="string">'2018/01/08'</span>, <span class="string">'address'</span>: <span class="string">'shanghai'</span>&#125;, &#123;<span class="string">'date'</span>: <span class="string">'2018/01/08'</span>, <span class="string">'address'</span>: <span class="string">'hangzhou'</span>&#125;, &#123;<span class="string">'date'</span>: <span class="string">'2018/08/08'</span>, <span class="string">'address'</span>: <span class="string">'shenzhen'</span>&#125;, &#123;<span class="string">'date'</span>: <span class="string">'2018/09/08'</span>, <span class="string">'address'</span>: <span class="string">'guangzhou'</span>&#125;, &#123;<span class="string">'date'</span>: <span class="string">'2018/09/08'</span>, <span class="string">'address'</span>: <span class="string">'chengdu'</span>&#125;]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>counts = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>biger_3 = [n &gt; <span class="number">3</span> <span class="keyword">for</span> n <span class="keyword">in</span> counts]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>biger_3</span><br><span class="line">[<span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">True</span>, <span class="keyword">True</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> compress</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(compress(rows, biger_3))</span><br><span class="line">[&#123;<span class="string">'date'</span>: <span class="string">'2018/09/08'</span>, <span class="string">'address'</span>: <span class="string">'guangzhou'</span>&#125;, &#123;<span class="string">'date'</span>: <span class="string">'2018/09/08'</span>, <span class="string">'address'</span>: <span class="string">'chengdu'</span>&#125;]</span><br></pre></td></tr></table></figure></p>
-<h2 id="7-字典，提取子集"><a href="#7-字典，提取子集" class="headerlink" title="7.字典，提取子集"></a>7.字典，提取子集</h2><h3 id="字典解析式（dict-comprehension）"><a href="#字典解析式（dict-comprehension）" class="headerlink" title="字典解析式（dict comprehension）"></a>字典解析式（dict comprehension）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>prices = &#123;</span><br><span class="line"><span class="meta">... </span><span class="string">'APPL'</span>:<span class="number">199.9</span>,</span><br><span class="line"><span class="meta">... </span><span class="string">'GOOL'</span>:<span class="number">99.9</span>,</span><br><span class="line"><span class="meta">... </span><span class="string">'AMZO'</span>:<span class="number">299</span>,</span><br><span class="line"><span class="meta">... </span><span class="string">'FB'</span>:<span class="number">33</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;key:value <span class="keyword">for</span> key,value <span class="keyword">in</span> prices.items() <span class="keyword">if</span> value &gt; <span class="number">150</span>&#125;</span><br><span class="line">&#123;<span class="string">'AMZO'</span>: <span class="number">299</span>, <span class="string">'APPL'</span>: <span class="number">199.9</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>GREAT_COM = [<span class="string">'APPL'</span>,<span class="string">'GOOL'</span>,<span class="string">'AMZO'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;key:value <span class="keyword">for</span> key,value <span class="keyword">in</span> prices.items() <span class="keyword">if</span> key <span class="keyword">in</span> GREAT_COM&#125;</span><br><span class="line">&#123;<span class="string">'AMZO'</span>: <span class="number">299</span>, <span class="string">'APPL'</span>: <span class="number">199.9</span>, <span class="string">'GOOL'</span>: <span class="number">99.9</span>&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="8-将名称映射到序列中的元素"><a href="#8-将名称映射到序列中的元素" class="headerlink" title="8.将名称映射到序列中的元素"></a>8.将名称映射到序列中的元素</h2><h3 id="collections-nameedtuple"><a href="#collections-nameedtuple" class="headerlink" title="collections.nameedtuple()"></a>collections.nameedtuple()</h3><p><strong>nameedtuple</strong> 是一种工厂方法，需要为他提供类型名称和相应字段<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Subscriber = namedtuple(<span class="string">'Subscriber'</span>, [<span class="string">'addr'</span>,<span class="string">'joined'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sub = Subscriber(<span class="string">'jhon@google.com'</span>, <span class="string">'2018-8-8'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sub</span><br><span class="line">Subscriber(addr=<span class="string">'jhon@google.com'</span>, joined=<span class="string">'2018-8-8'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sub.addr</span><br><span class="line"><span class="string">'jhon@google.com'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sub.joined</span><br><span class="line"><span class="string">'2018-8-8'</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="nameedtuple的主要作用在于，将代码与元素位置解耦"><a href="#nameedtuple的主要作用在于，将代码与元素位置解耦" class="headerlink" title="nameedtuple的主要作用在于，将代码与元素位置解耦"></a>nameedtuple的主要作用在于，将代码与元素位置解耦</h3><p>若果出现大型的元组列表，那么在按照位置读取的情况下，增加数据的操作将会使代码崩溃</p>
-<h3 id="根据位置的引用常常会使得代码表达能力不足，而且也使代码依赖于记录的结构"><a href="#根据位置的引用常常会使得代码表达能力不足，而且也使代码依赖于记录的结构" class="headerlink" title="根据位置的引用常常会使得代码表达能力不足，而且也使代码依赖于记录的结构"></a>根据位置的引用常常会使得代码表达能力不足，而且也使代码依赖于记录的结构</h3><h3 id="namedtuple可以替代字典"><a href="#namedtuple可以替代字典" class="headerlink" title="namedtuple可以替代字典"></a>namedtuple可以替代字典</h3><p>在涉及到大型字典时，namedtuple会更高效  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Stock = namedtuple(<span class="string">'Stock'</span>, [<span class="string">'name'</span>,<span class="string">'shares'</span>,<span class="string">'price'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = Stock(<span class="string">'APPL'</span>,<span class="number">100</span>, <span class="number">123</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line">Stock(name=<span class="string">'APPL'</span>, shares=<span class="number">100</span>, price=<span class="number">123</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>namedtuple</strong> 同样是不可变的</p>
-<p><strong>如果需要修改任何属性，可以通过修改namedtuple的实例的_replace()方法实现</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s</span><br><span class="line">Stock(name=<span class="string">'APPL'</span>, shares=<span class="number">100</span>, price=<span class="number">123</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.shares</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.shares = <span class="number">99</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">AttributeError: can<span class="string">'t set attribute</span></span><br><span class="line"><span class="string">&gt;&gt;&gt; s = s._replace(shares = 99)</span></span><br><span class="line"><span class="string">&gt;&gt;&gt; s</span></span><br><span class="line"><span class="string">Stock(name='</span>APPL<span class="string">', shares=99, price=123)</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="dict-to-namedtuple"><a href="#dict-to-namedtuple" class="headerlink" title="dict_to_namedtuple"></a>dict_to_namedtuple</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Stock = namedtuple(<span class="string">'Stock'</span>, [<span class="string">'name'</span>,<span class="string">'shares'</span>,<span class="string">'price'</span>,<span class="string">'date'</span>,<span class="string">'time'</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>stock_proto = Stock(<span class="string">''</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">None</span>,<span class="keyword">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">dict_2_namedtuple</span><span class="params">(s)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> stock_proto._replace(**s)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = &#123;<span class="string">'name'</span>:<span class="string">'APPL'</span>,<span class="string">'shares'</span>:<span class="number">199</span>, <span class="string">'price'</span>:<span class="number">123</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict_2_namedtuple(a)</span><br><span class="line">Stock(name=<span class="string">'APPL'</span>, shares=<span class="number">199</span>, price=<span class="number">123</span>, date=<span class="keyword">None</span>, time=<span class="keyword">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = &#123;<span class="string">'name'</span>:<span class="string">'GOOL'</span>,<span class="string">'shares'</span>:<span class="number">99</span>, <span class="string">'price'</span>:<span class="number">113</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict_2_namedtuple(b)</span><br><span class="line">Stock(name=<span class="string">'GOOL'</span>, shares=<span class="number">99</span>, price=<span class="number">113</span>, date=<span class="keyword">None</span>, time=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>注意，若需要一个高效的数据结构并且需要修改各种实例属性，namedtuple不是最佳选择</strong></p>
-<h2 id="9-对数据做转换和换算"><a href="#9-对数据做转换和换算" class="headerlink" title="9.对数据做转换和换算"></a>9.对数据做转换和换算</h2><h3 id="生成器，可以将转换和换算优雅的结合"><a href="#生成器，可以将转换和换算优雅的结合" class="headerlink" title="生成器，可以将转换和换算优雅的结合"></a>生成器，可以将转换和换算优雅的结合</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一个例子</span></span><br><span class="line">files = os.listdir(<span class="string">'dirpath'</span>)</span><br><span class="line"><span class="keyword">if</span> any(name.endwith(<span class="string">'.py'</span>) <span class="keyword">for</span> name <span class="keyword">in</span> files):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一个例子</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = (<span class="string">'apple'</span>,<span class="number">40</span>, <span class="number">209.9</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">','</span>.join(str(x) <span class="keyword">for</span> x <span class="keyword">in</span> s))</span><br><span class="line">apple,<span class="number">40</span>,<span class="number">209.9</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一个例子</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pro = [</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'name'</span>:<span class="string">'APPL'</span>,<span class="string">'shares'</span>:<span class="number">99</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'name'</span>:<span class="string">'GOOL'</span>,<span class="string">'shares'</span>:<span class="number">59</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'name'</span>:<span class="string">'FB'</span>,<span class="string">'shares'</span>:<span class="number">39</span>&#125;]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>min_share = min(s[<span class="string">'shares'</span>] <span class="keyword">for</span> s <span class="keyword">in</span> pro)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>min_share</span><br><span class="line"><span class="number">39</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>min_share = min(pro, key=<span class="keyword">lambda</span> s: s[<span class="string">'shares'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>min_share</span><br><span class="line">&#123;<span class="string">'shares'</span>: <span class="number">39</span>, <span class="string">'name'</span>: <span class="string">'FB'</span>&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="10-对个映射合并成单个映射"><a href="#10-对个映射合并成单个映射" class="headerlink" title="10.对个映射合并成单个映射"></a>10.对个映射合并成单个映射</h2><h3 id="collections-ChainMap"><a href="#collections-ChainMap" class="headerlink" title="collections.ChainMap()"></a>collections.ChainMap()</h3><p><strong>ChainMap接受多个映射，在逻辑上表现为单独映射</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> ChainMap</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = &#123;<span class="string">'a'</span>:<span class="number">1</span>, <span class="string">'c'</span>:<span class="number">3</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = &#123;<span class="string">'b'</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D = ChainMap(a, b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D</span><br><span class="line">ChainMap(&#123;<span class="string">'c'</span>: <span class="number">3</span>, <span class="string">'a'</span>: <span class="number">1</span>&#125;, &#123;<span class="string">'b'</span>: <span class="number">2</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D[<span class="string">'a'</span>]</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D[<span class="string">'c'</span>]</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
-<h3 id="ChainMap的表现会随着接受的映射变化而变化（浅复制，与ChainMap实现有关）"><a href="#ChainMap的表现会随着接受的映射变化而变化（浅复制，与ChainMap实现有关）" class="headerlink" title="ChainMap的表现会随着接受的映射变化而变化（浅复制，与ChainMap实现有关）"></a>ChainMap的表现会随着接受的映射变化而变化（浅复制，与ChainMap实现有关）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="string">'a'</span>] = <span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>D</span><br><span class="line">ChainMap(&#123;<span class="string">'c'</span>: <span class="number">3</span>, <span class="string">'a'</span>: <span class="number">100</span>&#125;, &#123;<span class="string">'b'</span>: <span class="number">2</span>&#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="ChainMap在与带作用域的值一起工作时很有用"><a href="#ChainMap在与带作用域的值一起工作时很有用" class="headerlink" title="ChainMap在与带作用域的值一起工作时很有用"></a>ChainMap在与带作用域的值一起工作时很有用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = ChainMap()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>] = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = values.new_child()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>] = <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = values.new_child()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>] = <span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values</span><br><span class="line">ChainMap(&#123;<span class="string">'x'</span>: <span class="number">3</span>&#125;, &#123;<span class="string">'x'</span>: <span class="number">2</span>&#125;, &#123;<span class="string">'x'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>]</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = values.parents</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>]</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values = values.parents</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values[<span class="string">'x'</span>]</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>values</span><br><span class="line">ChainMap(&#123;<span class="string">'x'</span>: <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
-          
+          <p>python cookbook中关于数据结构与算法的下半部分的笔记<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/11/python-数据结构与算法（2）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -535,36 +666,14 @@
 
       
         
-          
-            <h2 id="1-对象分解"><a href="#1-对象分解" class="headerlink" title="1.对象分解"></a>1.对象分解</h2><h3 id="将含N个元素的元祖或序列分解成单独变量"><a href="#将含N个元素的元祖或序列分解成单独变量" class="headerlink" title="将含N个元素的元祖或序列分解成单独变量"></a>将含N个元素的元祖或序列分解成单独变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="string">'steve'</span>, <span class="number">18</span>, <span class="number">100</span>, (<span class="number">2017.7</span><span class="number">.7</span>)]</span><br><span class="line">name, age, weight, date = data</span><br></pre></td></tr></table></figure>
-<h3 id="一切可迭代的对象-字符串，文件，迭代器，生成器-都可以这样拆分"><a href="#一切可迭代的对象-字符串，文件，迭代器，生成器-都可以这样拆分" class="headerlink" title="一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分"></a>一切可迭代的对象(字符串，文件，迭代器，生成器)都可以这样拆分</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'hello'</span></span><br><span class="line"><span class="comment"># 可以使用 _ 方式丢弃指定值</span></span><br><span class="line">a, b, c, e, _ = s</span><br></pre></td></tr></table></figure>
-<h2 id="2-任意长度对象分解"><a href="#2-任意长度对象分解" class="headerlink" title="2.任意长度对象分解"></a>2.任意长度对象分解</h2><h3 id="分解对象长度太长"><a href="#分解对象长度太长" class="headerlink" title="分解对象长度太长"></a>分解对象长度太长</h3><p><strong>‘*’表达式可以解决</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 适用于python3</span></span><br><span class="line">record = (<span class="string">'steve'</span>, <span class="string">'steve@gmail.com'</span>, <span class="string">'1234566-88'</span>, <span class="string">'9876543=99'</span>)</span><br><span class="line">name, email, *phone = record</span><br></pre></td></tr></table></figure></p>
-<h3 id="迭代变长序列"><a href="#迭代变长序列" class="headerlink" title="迭代变长序列"></a>迭代变长序列</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">records = [</span><br><span class="line">    (<span class="string">'foo'</span>, <span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line">    (<span class="string">'bar'</span>, <span class="string">'hello'</span>),</span><br><span class="line">    (<span class="string">'foo'</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_foo</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    print(<span class="string">'foo'</span>, x, y)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_bar</span><span class="params">(s)</span>:</span></span><br><span class="line">    print(<span class="string">'bar'</span>, s)</span><br><span class="line"><span class="keyword">for</span> tag, *args <span class="keyword">in</span> records:</span><br><span class="line">    <span class="keyword">if</span> tag == <span class="string">'foo'</span>:</span><br><span class="line">        do_foo(*args)</span><br><span class="line">    <span class="keyword">elif</span> tag == <span class="string">'bar'</span>:</span><br><span class="line">        do_bar(*args)</span><br></pre></td></tr></table></figure>
-<h2 id="3-保存最后N个元素"><a href="#3-保存最后N个元素" class="headerlink" title="3.保存最后N个元素"></a>3.保存最后N个元素</h2><h3 id="保存有限的历史记录是collections-deuqe的完美使用场景"><a href="#保存有限的历史记录是collections-deuqe的完美使用场景" class="headerlink" title="保存有限的历史记录是collections.deuqe的完美使用场景"></a>保存有限的历史记录是collections.deuqe的完美使用场景</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 有匹配时就返回当前匹配行以及最后检查过得N行文本</span></span><br><span class="line"><span class="keyword">from</span> collection <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">(lines, pattern, histort=<span class="number">5</span>)</span>:</span></span><br><span class="line">    previous_lines = deque(maxlen=history)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">        <span class="keyword">if</span> pattern <span class="keyword">in</span> line:</span><br><span class="line">            <span class="keyword">yield</span> line, previous_lines</span><br><span class="line">        previous_lines.append(line)</span><br></pre></td></tr></table></figure>
-<h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = deque(maxlen=<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q</span><br><span class="line">deque([], maxlen=<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.append(<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.append(<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q</span><br><span class="line">deque([<span class="number">1</span>, <span class="number">2</span>], maxlen=<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.append(<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q</span><br><span class="line">deque([<span class="number">2</span>, <span class="number">4</span>], maxlen=<span class="number">2</span>)</span><br><span class="line">```    </span><br><span class="line">**deque 比 list 速度快的多**</span><br><span class="line">**deque可以从左右两边添加和弹出，两边的时间复杂度都是O(<span class="number">1</span>)**</span><br><span class="line">**list从头部插入或者移出的时间复杂度是O(N)**    </span><br><span class="line">```python</span><br><span class="line"><span class="comment"># deque 可以不指定长度</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = deque()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.append(<span class="number">999</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.append(<span class="number">888</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q</span><br><span class="line">deque([<span class="number">999</span>, <span class="number">888</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.appendleft(<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q</span><br><span class="line">deque([<span class="number">1</span>, <span class="number">999</span>, <span class="number">888</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.pop()</span><br><span class="line"><span class="number">888</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.popleft()</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q</span><br><span class="line">deque([<span class="number">999</span>])</span><br></pre></td></tr></table></figure>
-<h2 id="4-找到最大-小的N个元素"><a href="#4-找到最大-小的N个元素" class="headerlink" title="4.找到最大/小的N个元素"></a>4.找到最大/小的N个元素</h2><h3 id="heapq模块中的-nlargest-amp-nsmallest"><a href="#heapq模块中的-nlargest-amp-nsmallest" class="headerlink" title="heapq模块中的 nlargest() &amp; nsmallest()"></a>heapq模块中的 nlargest() &amp; nsmallest()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>nums = [<span class="number">1</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">44</span>, <span class="number">2323</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">54</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(heapq.nlargest(<span class="number">3</span>, nums))</span><br><span class="line">[<span class="number">2323</span>, <span class="number">54</span>, <span class="number">44</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(heapq.nsmallest(<span class="number">3</span>, nums))</span><br><span class="line">[<span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-<h3 id="两个函数可以通过key加lambda函数实现复杂功能"><a href="#两个函数可以通过key加lambda函数实现复杂功能" class="headerlink" title="两个函数可以通过key加lambda函数实现复杂功能"></a>两个函数可以通过key加lambda函数实现复杂功能</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>protofilo = [</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'name'</span>:<span class="string">'IBM'</span>, <span class="string">'shares'</span>:<span class="number">100</span>, <span class="string">'prices'</span>:<span class="number">99</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'name'</span>:<span class="string">'APP'</span>, <span class="string">'shares'</span>:<span class="number">1000</span>, <span class="string">'prices'</span>:<span class="number">999</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'name'</span>:<span class="string">'FB'</span>, <span class="string">'shares'</span>:<span class="number">88</span>, <span class="string">'prices'</span>:<span class="number">88</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'name'</span>:<span class="string">'BABA'</span>, <span class="string">'shares'</span>:<span class="number">111</span>, <span class="string">'prices'</span>:<span class="number">100</span>&#125;,</span><br><span class="line"><span class="meta">... </span>&#123;<span class="string">'name'</span>:<span class="string">'DIDI'</span>, <span class="string">'shares'</span>:<span class="number">99</span>, <span class="string">'prices'</span>:<span class="number">99.5</span>&#125;]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>cheap = heapq.nsmallest(<span class="number">3</span>, protofilo, key=<span class="keyword">lambda</span> s: s[<span class="string">'prices'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>cheap</span><br><span class="line">[&#123;<span class="string">'prices'</span>: <span class="number">88</span>, <span class="string">'shares'</span>: <span class="number">88</span>, <span class="string">'name'</span>: <span class="string">'FB'</span>&#125;, &#123;<span class="string">'prices'</span>: <span class="number">99</span>, <span class="string">'shares'</span>: <span class="number">100</span>, <span class="string">'name'</span>: <span class="string">'IBM'</span>&#125;, &#123;<span class="string">'prices'</span>: <span class="number">99.5</span>, <span class="string">'shares'</span>: <span class="number">99</span>, <span class="string">'name'</span>: <span class="string">'DIDI'</span>&#125;]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>exp = heapq.nlargest(<span class="number">3</span>, protofilo, key=<span class="keyword">lambda</span> s: s[<span class="string">'prices'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>exp</span><br><span class="line">[&#123;<span class="string">'prices'</span>: <span class="number">999</span>, <span class="string">'shares'</span>: <span class="number">1000</span>, <span class="string">'name'</span>: <span class="string">'APP'</span>&#125;, &#123;<span class="string">'prices'</span>: <span class="number">100</span>, <span class="string">'shares'</span>: <span class="number">111</span>, <span class="string">'name'</span>: <span class="string">'BABA'</span>&#125;, &#123;<span class="string">'prices'</span>: <span class="number">99.5</span>, <span class="string">'shares'</span>: <span class="number">99</span>, <span class="string">'name'</span>: <span class="string">'DIDI'</span>&#125;]</span><br></pre></td></tr></table></figure>
-<h2 id="5-优先级队列"><a href="#5-优先级队列" class="headerlink" title="5.优先级队列"></a>5.优先级队列</h2><blockquote>
-<p>优先级队列：按照优先级对元素排序，每次pop都返回优先级最高的元素<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">PriorityQueue</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self._queue = []</span><br><span class="line"><span class="meta">... </span>        self._index = <span class="number">0</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self, item, priority)</span>:</span></span><br><span class="line">            <span class="comment"># -priority为了按优先级从高到低排序</span></span><br><span class="line">            <span class="comment"># (pri, index, item)形式是为了避免在pri相同的情况下出错</span></span><br><span class="line"><span class="meta">... </span>        heapq.heappush(self._queue, (-priority, self._index, item))</span><br><span class="line"><span class="meta">... </span>        self._index += <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> heapq.heappop(self._queue)[<span class="number">-1</span>]</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Item</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self.name = name</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="string">'Item(&#123;!r&#125;)'</span>.format(self.name)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = PriorityQueue()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.push(Item(<span class="string">'foo'</span>), <span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.push(Item(<span class="string">'bar'</span>), <span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.push(Item(<span class="string">'spam'</span>), <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.push(Item(<span class="string">'grok'</span>), <span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.pop()</span><br><span class="line">Item(<span class="string">'bar'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.pop()</span><br><span class="line">Item(<span class="string">'spam'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.pop()</span><br><span class="line">Item(<span class="string">'foo'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.pop()</span><br><span class="line">Item(<span class="string">'grok'</span>)</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="6-字典，键映射到多个值"><a href="#6-字典，键映射到多个值" class="headerlink" title="6.字典，键映射到多个值"></a>6.字典，键映射到多个值</h2><h3 id="原生dict实现多值字典"><a href="#原生dict实现多值字典" class="headerlink" title="原生dict实现多值字典"></a>原生dict实现多值字典</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将多个值保存在list或者set中</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># list保持有序</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = &#123;</span><br><span class="line"><span class="meta">... </span>    <span class="string">'a'</span>:[<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>],</span><br><span class="line"><span class="meta">... </span>    <span class="string">'b'</span>:[<span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="meta">... </span>&#125;</span><br><span class="line"><span class="comment"># set保持去重</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>e = &#123;</span><br><span class="line"><span class="meta">... </span>    <span class="string">'a'</span>:&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>&#125;,</span><br><span class="line"><span class="meta">... </span>    <span class="string">'b'</span>:&#123;<span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line"><span class="meta">... </span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">&#123;<span class="string">'b'</span>: [<span class="number">4</span>, <span class="number">5</span>], <span class="string">'a'</span>: [<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>]&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>e</span><br><span class="line">&#123;<span class="string">'b'</span>: &#123;<span class="number">4</span>, <span class="number">5</span>&#125;, <span class="string">'a'</span>: &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="collections-defaultdict"><a href="#collections-defaultdict" class="headerlink" title="collections.defaultdict"></a>collections.defaultdict</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = defaultdict(list)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">defaultdict(&lt;class 'list'&gt;, &#123;&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="string">'a'</span>].append(<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="string">'a'</span>].append(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="string">'a'</span>].append(<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="string">'b'</span>].append(<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="string">'b'</span>].append(<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">defaultdict(&lt;class 'list'&gt;, &#123;'b': [4, 5], 'a': [1, 3, 2]&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>e = defaultdict(set)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>e</span><br><span class="line">defaultdict(&lt;class 'set'&gt;, &#123;&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>e[<span class="string">'a'</span>].add(<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>e[<span class="string">'a'</span>].add(<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>e[<span class="string">'a'</span>].add(<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>e</span><br><span class="line">defaultdict(&lt;class 'set'&gt;, &#123;'a': &#123;1, 2&#125;&#125;)</span><br></pre></td></tr></table></figure>
-<p>defaultdict优势在于，做初始化比较优雅</p>
-<h2 id="7-字典，保持有序"><a href="#7-字典，保持有序" class="headerlink" title="7.字典，保持有序"></a>7.字典，保持有序</h2><h3 id="collections-OrderedDict"><a href="#collections-OrderedDict" class="headerlink" title="collections.OrderedDict"></a>collections.OrderedDict</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = OrderedDict()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="string">'foo'</span>] = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="string">'bar'</span>] = <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="string">'spam'</span>] = <span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">OrderedDict([(<span class="string">'foo'</span>, <span class="number">1</span>), (<span class="string">'bar'</span>, <span class="number">2</span>), (<span class="string">'spam'</span>, <span class="number">3</span>)])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">OrderedDict([(<span class="string">'foo'</span>, <span class="number">1</span>), (<span class="string">'bar'</span>, <span class="number">2</span>), (<span class="string">'spam'</span>, <span class="number">3</span>)])</span><br></pre></td></tr></table></figure>
-<p><strong>OrderedDict特别适合构造JSON</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.dumps(d)</span><br><span class="line"><span class="string">'&#123;"foo": 1, "bar": 2, "spam": 3&#125;'</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="进一步理解-OrderedDict"><a href="#进一步理解-OrderedDict" class="headerlink" title="进一步理解 OrderedDict"></a>进一步理解 OrderedDict</h3><p>OrderedDict内部维护了双向链表，新加入的元素会存在链表末尾<br>OrderedDict对已存在的键会重新赋值而不会改变顺序<br>OrderedDict大小是普通dict的两倍多(由于额外的链表)   </p>
-<h2 id="8-字典，相关计算问题"><a href="#8-字典，相关计算问题" class="headerlink" title="8.字典，相关计算问题"></a>8.字典，相关计算问题</h2><h3 id="字典，最大值-最小值-排序"><a href="#字典，最大值-最小值-排序" class="headerlink" title="字典，最大值/最小值/排序"></a>字典，最大值/最小值/排序</h3><p><strong>最好的办法是使用zip()对字典进行键值互换</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 最值</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>prices = &#123;</span><br><span class="line"><span class="meta">... </span><span class="string">'APPL'</span>:<span class="number">654.2</span>,</span><br><span class="line"><span class="meta">... </span><span class="string">'FB'</span>:<span class="number">267.2</span>,</span><br><span class="line"><span class="meta">... </span><span class="string">'IBM'</span>:<span class="number">213.1</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>min(prices)</span><br><span class="line"><span class="string">'APPL'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>min_prices = min()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>min_prices</span><br><span class="line">(<span class="number">213.1</span>, <span class="string">'IBM'</span>)</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 排序</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>prices_sorted = sorted(zip(prices.values(), prices.keys()))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>prices_sorted</span><br><span class="line">[(<span class="number">213.1</span>, <span class="string">'IBM'</span>), (<span class="number">267.2</span>, <span class="string">'FB'</span>), (<span class="number">654.2</span>, <span class="string">'APPL'</span>)]</span><br></pre></td></tr></table></figure>
-<p><strong>注意：zip创建的是迭代器，只能消费一次</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>temp = zip(prices.values(), prices.keys())</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(min(temp))</span><br><span class="line">(<span class="number">213.1</span>, <span class="string">'IBM'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(max(temp))</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">ValueError: max() arg <span class="keyword">is</span> an empty sequence</span><br></pre></td></tr></table></figure></p>
-<h2 id="9-字典，找出相同-键-值"><a href="#9-字典，找出相同-键-值" class="headerlink" title="9.字典，找出相同(键/值)"></a>9.字典，找出相同(键/值)</h2><h3 id="对-keys-items-进行集合操作"><a href="#对-keys-items-进行集合操作" class="headerlink" title="对 keys/items 进行集合操作"></a>对 keys/items 进行集合操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = &#123;</span><br><span class="line"><span class="meta">... </span><span class="string">'x'</span>:<span class="number">1</span>,<span class="string">'y'</span>:<span class="number">2</span>,<span class="string">'z'</span>:<span class="number">3</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = &#123;<span class="string">'w'</span>:<span class="number">10</span>, <span class="string">'x'</span>:<span class="number">11</span>, <span class="string">'y'</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">&#123;<span class="string">'z'</span>: <span class="number">3</span>, <span class="string">'y'</span>: <span class="number">2</span>, <span class="string">'x'</span>: <span class="number">1</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">&#123;<span class="string">'w'</span>: <span class="number">10</span>, <span class="string">'y'</span>: <span class="number">2</span>, <span class="string">'x'</span>: <span class="number">11</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.keys() &amp; b.keys()</span><br><span class="line">&#123;<span class="string">'y'</span>, <span class="string">'x'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.keys() - b.keys()</span><br><span class="line">&#123;<span class="string">'z'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.items() &amp; b.items()</span><br><span class="line">&#123;(<span class="string">'y'</span>, <span class="number">2</span>)&#125;</span><br><span class="line"><span class="comment"># values是不可以操作的</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.values() &amp; b.values()</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: unsupported operand type(s) <span class="keyword">for</span> &amp;: <span class="string">'dict_values'</span> <span class="keyword">and</span> <span class="string">'dict_values'</span></span><br></pre></td></tr></table></figure>
-<h2 id="去除序列中重复项，保持元素间顺序不变"><a href="#去除序列中重复项，保持元素间顺序不变" class="headerlink" title="去除序列中重复项，保持元素间顺序不变"></a>去除序列中重复项，保持元素间顺序不变</h2><blockquote>
-<p>哈希：如果一个对象是可哈希的，那么在它的生命周期中是不可变的，需要有个hash()方法</p>
-</blockquote>
-<h3 id="如果序列中的值可哈希"><a href="#如果序列中的值可哈希" class="headerlink" title="如果序列中的值可哈希"></a>如果序列中的值可哈希</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">deduque</span><span class="params">(items)</span>:</span></span><br><span class="line"><span class="meta">... </span>    seen = set()</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">if</span> item <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">yield</span> item</span><br><span class="line"><span class="meta">... </span>            seen.add(item)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(deduque(a))</span><br><span class="line">[<span class="number">1</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br></pre></td></tr></table></figure>
-<h3 id="如果序列中的值不可哈希"><a href="#如果序列中的值不可哈希" class="headerlink" title="如果序列中的值不可哈希"></a>如果序列中的值不可哈希</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">deduque</span><span class="params">(items, key=None)</span>:</span></span><br><span class="line"><span class="meta">... </span>    seen = set()</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">            val = item <span class="keyword">if</span> key <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">else</span> key(item)</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">if</span> val <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">yield</span> item</span><br><span class="line"><span class="meta">... </span>            seen.add(val)</span><br></pre></td></tr></table></figure>
-<h3 id="如果只是去重"><a href="#如果只是去重" class="headerlink" title="如果只是去重"></a>如果只是去重</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>set(a)</span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">9</span>&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          <p>python cookbook中关于数据结构与算法的上半部分的笔记<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/10/python-数据结构与算法（1）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -703,14 +812,14 @@
 
       
         
-          
-            <h3 id="安装-uget-amp-aria2"><a href="#安装-uget-amp-aria2" class="headerlink" title="安装 uget &amp; aria2"></a>安装 uget &amp; aria2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install uget</span><br><span class="line"></span><br><span class="line">sudo apt-get install aria2</span><br></pre></td></tr></table></figure>
-<h3 id="将-uget-的下载设置为-aria2"><a href="#将-uget-的下载设置为-aria2" class="headerlink" title="将 uget 的下载设置为 aria2"></a>将 uget 的下载设置为 aria2</h3><p>open uget<br>edit –&gt; setting –&gt; plug-in<br>plug-in matching order: aria2</p>
-<h3 id="配置-firefox"><a href="#配置-firefox" class="headerlink" title="配置 firefox"></a>配置 firefox</h3><p>进入附加组件管理页面<br>搜索并安装flashgot  </p>
-<h3 id="配置-chrome"><a href="#配置-chrome" class="headerlink" title="配置 chrome"></a>配置 chrome</h3><p>安装 uGet Integration</p>
-<p><a href="https://blog.csdn.net/xiaohouye/article/details/54603198" target="_blank" rel="noopener">ref</a></p>
-
-          
+          <p>这篇文章介绍如何在Gnome Ubuntu 16.04上安装类似迅雷的下载软件uget &amp; aria2<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/05/Gnome-Ubuntu上安装下载工具uget-aria2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -849,18 +958,14 @@
 
       
         
-          
-            <p>安装sougou pinyin有点烦，因为网上的Ubuntu16.04安装sougou的教程都是unity图形界面的，而我是用的是gnome Ubuntu 16.04 所以安装搜狗不大一样</p>
-<p>我先在搜狗官网下载了deb包<br>然后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br></pre></td></tr></table></figure></p>
-<p>但是好像有error 没有装上</p>
-<p>然后我执行了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -f</span><br></pre></td></tr></table></figure></p>
-<p>显示安装了一堆东西，其中好像有fctix</p>
-<p>然后重启 我发现左下角就有fctix了（微懵）</p>
-<p>然后我在fctix的设置里面选择的sougou pinyin安装的 </p>
-<p>再重启就可以使用搜狗了</p>
-<p><a href="https://www.cnblogs.com/darklights/p/7722861.html" target="_blank" rel="noopener">ref</a></p>
-
-          
+          <p>这篇文章介绍如何在Gnome Ubuntu 16.04上安装搜狗拼音<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/03/Gnome-Ubuntu上安装搜狗拼音/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -999,12 +1104,14 @@
 
       
         
-          
-            <h3 id="获取-source-list"><a href="#获取-source-list" class="headerlink" title="获取 source list"></a>获取 source list</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/</span><br><span class="line"></span><br><span class="line">wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -</span><br></pre></td></tr></table></figure>
-<h3 id="然后直接安装就行"><a href="#然后直接安装就行" class="headerlink" title="然后直接安装就行"></a>然后直接安装就行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install google-chrome-stable</span><br></pre></td></tr></table></figure>
-<p><a href="https://blog.csdn.net/qq551551/article/details/78885704" target="_blank" rel="noopener">ref</a></p>
-
-          
+          <p>这篇文章介绍如何在Gnome Ubuntu 16.04上安装chrome<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/03/Gnome-Ubuntu上安装chrome/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1143,16 +1250,14 @@
 
       
         
-          
-            <h3 id="安装-git"><a href="#安装-git" class="headerlink" title="安装 git"></a>安装 git</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo add-apt-repository ppa:git-core/ppa</span><br><span class="line"></span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
-<p>验证是否安装成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure></p>
-<h3 id="Git-config-设置"><a href="#Git-config-设置" class="headerlink" title="Git config 设置"></a>Git config 设置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &apos;username&apos;</span><br><span class="line"></span><br><span class="line">git config --global user.email &apos;username@gmail.com&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="Git-SSH-Key-设置"><a href="#Git-SSH-Key-设置" class="headerlink" title="Git SSH Key 设置"></a>Git SSH Key 设置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># generate the sshkey</span><br><span class="line">ssh-keygen -t rsa -C &apos;username@gmail.com&apos;</span><br><span class="line"></span><br><span class="line"># 获取 public key</span><br><span class="line"># paste it to github</span><br><span class="line">cat ~/.ssh/id_rsa.pub </span><br><span class="line"></span><br><span class="line"># 这个是 priviate key</span><br><span class="line">cat ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
-<h3 id="测试-ssh-key-是否设置成功"><a href="#测试-ssh-key-是否设置成功" class="headerlink" title="测试 ssh key 是否设置成功"></a>测试 ssh key 是否设置成功</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<h3 id="如果成功连接上github会返回"><a href="#如果成功连接上github会返回" class="headerlink" title="如果成功连接上github会返回"></a>如果成功连接上github会返回</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;Hi username! You&apos;ve successfully authenticated&apos;</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.linuxidc.com/Linux/2016-11/136769.htm" target="_blank" rel="noopener">ref</a><br><a href="https://www.cnblogs.com/visugar/p/6821777.html" target="_blank" rel="noopener">ref</a></p>
-
-          
+          <p>这篇文章介绍如何在Gnome Ubuntu 16.04上安装git<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/03/Gnome-Ubuntu上安装git/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1291,296 +1396,14 @@
 
       
         
-          
-            <p>这算是自己第一个blog，其实以前也有写一些但是没有整理过<br>因为懒吧<br>终于不懒了，建个hexo也算是给自己一个记录的地方<br>把这次搭建的过程记录了下来，希望可以帮到读者  </p>
-<p>其实整个下来的步骤超级简单，无脑复制粘贴应该就能成  </p>
-<p>我使用的环境是：Ubuntu+git+github<br>之前我也在Windows10上面弄过，步骤基本一样  </p>
-<p>有一些前面需要注意的事：</p>
-<ol>
-<li>github的SSHKey需要配置好</li>
-<li>本地的git config需要配置好</li>
-</ol>
-<h3 id="安装-nvm"><a href="#安装-nvm" class="headerlink" title="安装 nvm"></a>安装 nvm</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 两种方法装nvm</span><br><span class="line"></span><br><span class="line"># cURL:</span><br><span class="line"></span><br><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash</span><br><span class="line"></span><br><span class="line"># Wget:</span><br><span class="line"></span><br><span class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash</span><br></pre></td></tr></table></figure>
-<p>检查下面两句是否加入环境变量 ~/.bashrc<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export NVM_DIR=&quot;$HOME/.nvm&quot;</span><br><span class="line">[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</span><br></pre></td></tr></table></figure></p>
-<p>记得环境变量修改之后需要激活一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure></p>
-<p>检查nvm是否安装成功，如果没有安装成功会有提醒<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command -v nvm</span><br></pre></td></tr></table></figure></p>
-<h3 id="安装-node"><a href="#安装-node" class="headerlink" title="安装 node"></a>安装 node</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install stable</span><br></pre></td></tr></table></figure>
-<p><strong>npm 安装 超级 慢！</strong></p>
-<h4 id="更改npm源（这步很重要）"><a href="#更改npm源（这步很重要）" class="headerlink" title="更改npm源（这步很重要）"></a>更改npm源（这步很重要）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 临时使用</span><br><span class="line">npm --registry https://registry.npm.taobao.org install express</span><br><span class="line"></span><br><span class="line"># 持久使用</span><br><span class="line">npm config set registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<h3 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<h3 id="初探-hexo"><a href="#初探-hexo" class="headerlink" title="初探 hexo"></a>初探 hexo</h3><p>新建个blog文件夹<br>在里面执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure></p>
-<p>就可以看到hexo在里面生成了很多博客文件，具体都是什么用途以后再讨论</p>
-<p>执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></p>
-<p>就可以在本地浏览器打开 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 页面了</p>
-<p>是不是很方便呢！</p>
-<h3 id="部署-hexo-到-github"><a href="#部署-hexo-到-github" class="headerlink" title="部署 hexo 到 github"></a>部署 hexo 到 github</h3><p>大概的步骤：  </p>
-<ol>
-<li>新建github同名项目</li>
-<li>安装hexo-deployer-git</li>
-<li>执行本地命令</li>
-</ol>
-<p>想在github上面部署，需要新建个以这个格式命名的项目</p>
-<blockquote>
-<p>username.github.io</p>
-</blockquote>
-<p>hexo 的部署功能需要安装，<strong>这步如果前面没有改成国内源会一直装不上</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
-<p>安装好之后 配置hexo博客根目录下的_config.yml文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: http://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:username/username.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-<p>记住这里要用git@github这种ssh格式（忘记从哪里看到说是hexo新版的要求）</p>
-<p>执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
-<p>就完成部署了   </p>
-<p>然后再username.github.io就可以看到自己的hexo blog了</p>
-<p>如果本地显示  git done<br>但是打开页面还是404的话<br>可能是浏览器缓存的问题  清一下缓存试试</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/first-test-blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Octopi Lau">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Octopi">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/01/first-test-blog/" itemprop="url">first test blog</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T23:30:25+08:00">
-                2018-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Here is my first hexo blog</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Octopi Lau">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Octopi">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/01/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T18:25:49+08:00">
-                2018-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          <p>这算是自己第一个blog，其实以前也有写一些但是没有整理过<br>因为懒吧<br>终于不懒了，建个hexo也算是给自己一个记录的地方<br>把这次搭建的过程记录了下来，希望可以帮到读者<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/02/hexo的安装与配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1664,7 +1487,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1686,7 +1509,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="0.可迭代对象，迭代器，生成器注意区分 可迭代对象 和 迭代器 可迭代对象,Iterable, iter,getitem迭代器,Iterator,next迭代,Iteration生成器,Generators   1.手动访问迭代器元素可迭代对象需要转换成迭代器之后，才可以执行next()操作1234567891011121314&amp;gt;&amp;gt;&amp;gt; items = [1, 2, 3]&amp;gt;&amp;">
+<meta name="description" content="python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解">
 <meta name="keywords" content="python,itertools">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python 迭代器和生成器">
 <meta property="og:url" content="http://yoursite.com/2018/07/17/python-迭代器和生成器/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="0.可迭代对象，迭代器，生成器注意区分 可迭代对象 和 迭代器 可迭代对象,Iterable, iter,getitem迭代器,Iterator,next迭代,Iteration生成器,Generators   1.手动访问迭代器元素可迭代对象需要转换成迭代器之后，才可以执行next()操作1234567891011121314&amp;gt;&amp;gt;&amp;gt; items = [1, 2, 3]&amp;gt;&amp;">
+<meta property="og:description" content="python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-20T16:01:58.209Z">
+<meta property="og:updated_time" content="2018-10-10T13:46:49.943Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python 迭代器和生成器">
-<meta name="twitter:description" content="0.可迭代对象，迭代器，生成器注意区分 可迭代对象 和 迭代器 可迭代对象,Iterable, iter,getitem迭代器,Iterator,next迭代,Iteration生成器,Generators   1.手动访问迭代器元素可迭代对象需要转换成迭代器之后，才可以执行next()操作1234567891011121314&amp;gt;&amp;gt;&amp;gt; items = [1, 2, 3]&amp;gt;&amp;">
+<meta name="twitter:description" content="python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解">
 
 
 
@@ -353,7 +353,8 @@
       
 
       
-        <h2 id="0-可迭代对象，迭代器，生成器"><a href="#0-可迭代对象，迭代器，生成器" class="headerlink" title="0.可迭代对象，迭代器，生成器"></a>0.可迭代对象，迭代器，生成器</h2><p><strong>注意区分 可迭代对象 和 迭代器</strong></p>
+        <p>python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解<br><a id="more"></a></p>
+<h2 id="0-可迭代对象，迭代器，生成器"><a href="#0-可迭代对象，迭代器，生成器" class="headerlink" title="0.可迭代对象，迭代器，生成器"></a>0.可迭代对象，迭代器，生成器</h2><p><strong>注意区分 可迭代对象 和 迭代器</strong></p>
 <p>可迭代对象,Iterable, <strong>iter</strong>,<strong>getitem</strong><br>迭代器,Iterator,<strong>next</strong><br>迭代,Iteration<br>生成器,Generators  </p>
 <h2 id="1-手动访问迭代器元素"><a href="#1-手动访问迭代器元素" class="headerlink" title="1.手动访问迭代器元素"></a>1.手动访问迭代器元素</h2><p><strong>可迭代对象需要转换成迭代器之后，才可以执行next()操作</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>items = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>it = iter(items)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>it</span><br><span class="line">&lt;list_iterator object at <span class="number">0x7f256ddc8d68</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure></p>
 <h2 id="2-创建迭代器，内部有可迭代对象，执行迭代"><a href="#2-创建迭代器，内部有可迭代对象，执行迭代" class="headerlink" title="2.创建迭代器，内部有可迭代对象，执行迭代"></a>2.创建迭代器，内部有可迭代对象，执行迭代</h2><p><strong>使自定义的容器实现迭代，就是实现<strong>iter</strong></strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self._value = value</span><br><span class="line"><span class="meta">... </span>        self._children = []</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="string">'Node (&#123;!r&#125;)'</span>.format(self._value)</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">add_child</span><span class="params">(self, node)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self._children.append(node)</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> iter(self._children)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root = Node(<span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>child1 = Node(<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>child2 = Node(<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root.add_child(child1)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root.add_child(child2)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> ch <span class="keyword">in</span> root: print(ch)</span><br><span class="line">...</span><br><span class="line">Node (<span class="number">1</span>)</span><br><span class="line">Node (<span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
@@ -510,7 +511,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -532,7 +533,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

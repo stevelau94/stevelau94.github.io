@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="loss function 简单理解就是衡量W的好坏的函数  损失函数的通用公式：   x : 图片(输入数据) y : 标签(输出结果)，通常是个表示标签的整数  损失函数计算所有样本损失的平均 Multiclass SVM loss公式：  详解一个多分类ＳＶＭ的计算过程： 首先问题是判断３张图片的分类，目前我们的算法得到了一些结果，我们由这些数据来进行loss func的计算　　  从图像来">
+<meta name="description" content="CS231n的Lecture-3，主要讲授损失函数和优化，介绍了SVM和softmax损失函数；以及为了防止过拟合的正则化方法；阐述了梯度的概念，并且引入了梯度下降法和随机梯度下降(SGD)">
 <meta name="keywords" content="deeplearning,深度学习,cs231n">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)">
+<meta property="og:title" content="CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化">
 <meta property="og:url" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="loss function 简单理解就是衡量W的好坏的函数  损失函数的通用公式：   x : 图片(输入数据) y : 标签(输出结果)，通常是个表示标签的整数  损失函数计算所有样本损失的平均 Multiclass SVM loss公式：  详解一个多分类ＳＶＭ的计算过程： 首先问题是判断３张图片的分类，目前我们的算法得到了一些结果，我们由这些数据来进行loss func的计算　　  从图像来">
+<meta property="og:description" content="CS231n的Lecture-3，主要讲授损失函数和优化，介绍了SVM和softmax损失函数；以及为了防止过拟合的正则化方法；阐述了梯度的概念，并且引入了梯度下降法和随机梯度下降(SGD)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/loss_function.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/MulticlassSVM_loss.png">
@@ -100,10 +100,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/Softmax.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/exp_of_softmax.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/derivative_of_1D.png">
-<meta property="og:updated_time" content="2018-10-05T11:06:28.359Z">
+<meta property="og:updated_time" content="2018-10-10T13:56:53.319Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)">
-<meta name="twitter:description" content="loss function 简单理解就是衡量W的好坏的函数  损失函数的通用公式：   x : 图片(输入数据) y : 标签(输出结果)，通常是个表示标签的整数  损失函数计算所有样本损失的平均 Multiclass SVM loss公式：  详解一个多分类ＳＶＭ的计算过程： 首先问题是判断３张图片的分类，目前我们的算法得到了一些结果，我们由这些数据来进行loss func的计算　　  从图像来">
+<meta name="twitter:title" content="CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化">
+<meta name="twitter:description" content="CS231n的Lecture-3，主要讲授损失函数和优化，介绍了SVM和softmax损失函数；以及为了防止过拟合的正则化方法；阐述了梯度的概念，并且引入了梯度下降法和随机梯度下降(SGD)">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/loss_function.png">
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <title>CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化) | Octopi</title>
+  <title>CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化 | Octopi</title>
   
 
 
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)</h1>
+          <h1 class="post-title" itemprop="name headline">CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化</h1>
         
 
         <div class="post-meta">
@@ -367,7 +367,8 @@
       
 
       
-        <h2 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function"></a>loss function</h2><p> 简单理解就是衡量W的好坏的函数</p>
+        <p>CS231n的Lecture-3，主要讲授损失函数和优化，介绍了SVM和softmax损失函数；以及为了防止过拟合的正则化方法；阐述了梯度的概念，并且引入了梯度下降法和随机梯度下降(SGD)<br><a id="more"></a></p>
+<h2 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function"></a>loss function</h2><p> 简单理解就是衡量W的好坏的函数</p>
 <p> 损失函数的通用公式：<br> <img src="/2018/08/15/CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化/loss_function.png" alt="loss function"></p>
 <p> x : 图片(输入数据)<br> y : 标签(输出结果)，通常是个表示标签的整数</p>
 <p> 损失函数计算所有样本损失的平均</p>
@@ -454,8 +455,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/" rel="prev" title="CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络)">
-                CS231n Lecture 4: Backpropagation and Neural Networks(反向传播和神经网络) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/25/CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络/" rel="prev" title="CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络">
+                CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,7 +534,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -555,7 +556,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
