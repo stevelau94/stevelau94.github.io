@@ -7,6 +7,8 @@ categories:
 tags: 
     - python
 ---
+python cookbook中关于处理文本和文件的章节的笔记
+<!--more-->
 ## 1.file,读写文本数据
 
 ### with open() as f:

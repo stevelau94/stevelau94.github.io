@@ -1,5 +1,5 @@
 ---
-title: CS231n Lecture 3 Loss Functions and Optimization(损失函数和优化)
+title: CS231n-Lecture-3-Loss-Functions-and-Optimization-损失函数和优化
 date: 2018-08-15 19:02:50
 tags: 
     - "deeplearning"
@@ -9,6 +9,8 @@ categories:
     - "deeplearning"
     - "cs231n"
 ---
+CS231n的Lecture-3，主要讲授损失函数和优化，介绍了SVM和softmax损失函数；以及为了防止过拟合的正则化方法；阐述了梯度的概念，并且引入了梯度下降法和随机梯度下降(SGD)
+<!--more-->
 
 ##  loss function
  简单理解就是衡量W的好坏的函数

@@ -5,7 +5,8 @@ categories: "Gnome Ubuntu"
 tags: 
     - ubuntu
 ---
-
+这篇文章介绍如何在Gnome Ubuntu 16.04上安装类似迅雷的下载软件uget & aria2
+<!--more-->
 ### 安装 uget & aria2
 ```
 sudo apt-get update

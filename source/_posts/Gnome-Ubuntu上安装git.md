@@ -5,6 +5,8 @@ categories: "Gnome Ubuntu"
 tags: 
     - ubuntu
 ---
+这篇文章介绍如何在Gnome Ubuntu 16.04上安装git
+<!--more-->
 ### 安装 git
 ```
 

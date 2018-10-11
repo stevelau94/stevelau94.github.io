@@ -9,6 +9,8 @@ categories:
     - "deeplearning"
     - "cs231n"
 ---
+CS231n的Lecture-2，主要讲授图像分类的需求和数据集，以及ML领域的图像分类算法:近邻算法以及近邻算法的升级版本，KNN和线性分类器；并且介绍了超参数的概念和工程中常用的拆分数据集的经验
+<!--more-->
 ## image classification
 
 **A core task in CV**

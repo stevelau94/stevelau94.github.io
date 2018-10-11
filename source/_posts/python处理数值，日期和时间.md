@@ -7,6 +7,8 @@ categories:
 tags: 
     - python
 ---
+python cookbook中关于处理数值，日期和时间部分的笔记
+<!--more-->
 ## 1.数值，取整
 
 ### round()

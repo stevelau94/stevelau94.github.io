@@ -1,5 +1,5 @@
 ---
-title: CS231n Lecture 1 Course Introduction(深度学习发展历程)
+title: CS231n-Lecture-1-Course-Introduction-深度学习发展历程
 date: 2018-08-01 21:38:03
 tags: 
     - "deeplearning"
@@ -11,6 +11,9 @@ categories:
 ---
 
 在上半年曾在刚进入工作的阶段听过cs231n，对我理解和掌握深度学习知识有着极大的帮助。最近打算再听一遍，希望留下一些类似与笔记的东西以备使用。
+
+这是CS231n的Lecture-1，主要讲授深度学习发展历程，是feifei亲自授课的(虽然人未到场是播放的视频^ ^)
+<!--more-->
 
 ## 为什么计算机视觉如此重要？
 ### 视觉信息处理是当今亟需解决的问题

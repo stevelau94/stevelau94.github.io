@@ -5,7 +5,8 @@ categories: "Gnome Ubuntu"
 tags: 
     - ubuntu
 ---
-
+这篇文章介绍如何在Gnome Ubuntu 16.04上安装chrome
+<!--more-->
 ### 获取 source list
 ```
 sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/

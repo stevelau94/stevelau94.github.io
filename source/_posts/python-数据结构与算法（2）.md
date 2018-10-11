@@ -9,7 +9,8 @@ tags:
     - data structure
     - python数据结构
 ---
-
+python cookbook中关于数据结构与算法的下半部分的笔记
+<!--more-->
 ## 1.切片命名
 **主要目的是为了减少硬编码**
 ### slice()

@@ -6,6 +6,8 @@ categories: "Gnome Ubuntu"
 tags: 
     - ubuntu
 ---
+这篇文章介绍如何在Gnome Ubuntu 16.04上安装搜狗拼音
+<!--more-->
 
 安装sougou pinyin有点烦，因为网上的Ubuntu16.04安装sougou的教程都是unity图形界面的，而我是用的是gnome Ubuntu 16.04 所以安装搜狗不大一样
 

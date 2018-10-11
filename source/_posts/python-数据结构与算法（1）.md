@@ -9,7 +9,8 @@ tags:
     - data structure
     - python数据结构
 ---
-
+python cookbook中关于数据结构与算法的上半部分的笔记
+<!--more-->
 ## 1.对象分解
 
 ### 将含N个元素的元祖或序列分解成单独变量

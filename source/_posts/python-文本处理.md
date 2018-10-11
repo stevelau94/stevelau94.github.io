@@ -7,7 +7,8 @@ categories:
 tags: 
     - python
 ---
-
+python cookbook中关于文本处理部分的笔记
+<!--more-->
 ## 1.处理任意分隔符，拆分字符串
 
 ### 字符串的split()无法处理多中分隔符的情况
