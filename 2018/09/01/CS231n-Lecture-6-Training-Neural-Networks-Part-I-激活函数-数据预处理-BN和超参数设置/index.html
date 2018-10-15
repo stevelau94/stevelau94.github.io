@@ -125,7 +125,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/learningh_rate.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/accuracy.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/TLDRs.png">
-<meta property="og:updated_time" content="2018-10-10T14:04:41.623Z">
+<meta property="og:updated_time" content="2018-10-14T12:22:11.851Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置">
 <meta name="twitter:description" content="Lecture-6是介绍如何训练神经网络的第一部分，详细介绍了各种激活函数，并且介绍了神经网络领域中常用的数据预处理方法，以及一些在训练之前的权重初始化经验，超参数设置的经验和网络训练的流程。这节课还有个重要的知识点是Batch Normalization">
@@ -524,7 +524,8 @@
 </ol>
 <h2 id="Hyperparameter-Optimization"><a href="#Hyperparameter-Optimization" class="headerlink" title="Hyperparameter Optimization"></a>Hyperparameter Optimization</h2><p>通常使用交叉验证来设置超参数或者学习率</p>
 <h3 id="Cross-validation-strategy"><a href="#Cross-validation-strategy" class="headerlink" title="Cross-validation strategy"></a>Cross-validation strategy</h3><p>在训练集上面使用超参数，然后在验证集上观察这些超参数的实验效果</p>
-<p>可以使用Random Search,在循环训练中，可以先初步的观察参数导致的交叉验证度，首先粗选一下，再进行细选。除了这种筛选方法之外还可以使用Grid Search</p>
+<p>可以使用Random Search,在循环训练中，可以先初步的观察参数导致的交叉验证度(Coarse to fine search)，首先粗选一下，再进行细选。除了这两种筛选方法之外还可以使用Grid Search</p>
+<p>Grid Search没有Random Search好</p>
 <p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/2_Search.png" alt="2 type search"></p>
 <h3 id="学习率"><a href="#学习率" class="headerlink" title="学习率"></a>学习率</h3><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/learningh_rate.png" alt="learningh_rate"></p>
 <h3 id="准确率"><a href="#准确率" class="headerlink" title="准确率"></a>准确率</h3><p><img src="/2018/09/01/CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/accuracy.png" alt="accuracy"></p>
@@ -573,6 +574,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/15/CS231n-Lecture-7-Training-Neural-Networks-Part-II-进一步优化的方法-dropout正则化和迁移学习/" rel="prev" title="CS231n Lecture 7 Training Neural Networks Part II 进一步优化的方法 dropout正则化和迁移学习">
+                CS231n Lecture 7 Training Neural Networks Part II 进一步优化的方法 dropout正则化和迁移学习 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -649,7 +654,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -671,7 +676,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
