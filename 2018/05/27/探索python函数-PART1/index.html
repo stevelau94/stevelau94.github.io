@@ -82,14 +82,14 @@
 <meta name="description" content="本文主要介绍了python一些需要注意的基础细节问题，包括作用域(global/nonlocal)和各种参数传递方法">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="探索python函数(上)">
-<meta property="og:url" content="http://yoursite.com/2018/05/27/探索python函数-上/index.html">
+<meta property="og:title" content="探索python函数 PART1">
+<meta property="og:url" content="http://yoursite.com/2018/05/27/探索python函数-PART1/index.html">
 <meta property="og:site_name" content="Octopi">
 <meta property="og:description" content="本文主要介绍了python一些需要注意的基础细节问题，包括作用域(global/nonlocal)和各种参数传递方法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-27T07:50:54.247Z">
+<meta property="og:updated_time" content="2018-11-11T05:13:12.533Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="探索python函数(上)">
+<meta name="twitter:title" content="探索python函数 PART1">
 <meta name="twitter:description" content="本文主要介绍了python一些需要注意的基础细节问题，包括作用域(global/nonlocal)和各种参数传递方法">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/27/探索python函数-上/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/27/探索python函数-PART1/"/>
 
 
 
 
 
-  <title>探索python函数(上) | Octopi</title>
+  <title>探索python函数 PART1 | Octopi</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/探索python函数-上/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/探索python函数-PART1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Octopi Lau">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">探索python函数(上)</h1>
+          <h1 class="post-title" itemprop="name headline">探索python函数 PART1</h1>
         
 
         <div class="post-meta">
@@ -439,12 +439,12 @@
 <li>lambda是一个表达式而非语句</li>
 <li>lambda是一个单个表达式而非代码块</li>
 </ol>
-<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>python3中map返回迭代器</p>
+<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>python3中map返回可迭代对象</p>
 <p>我感觉map能做的列表解析式一般也都能做</p>
 <p>但是某些情况map函数比列表解析式运行的快</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="comment"># 普通for循环</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l = []</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> numbers: l.append(x + <span class="number">100</span>)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l</span><br><span class="line">[<span class="number">101</span>, <span class="number">101</span>, <span class="number">101</span>, <span class="number">101</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># map+函数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">append_number</span><span class="params">(x)</span>:</span> <span class="keyword">return</span> x + <span class="number">10</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>map(append_number, numbers)</span><br><span class="line">&lt;map object at <span class="number">0x7f4bb7316ba8</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(map(append_number, numbers))</span><br><span class="line">[<span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># map+lambda</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(map(<span class="keyword">lambda</span> x : x+<span class="number">10</span>, numbers))</span><br><span class="line">[<span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表解析式</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[i + <span class="number">10</span> <span class="keyword">for</span> i <span class="keyword">in</span> numbers]</span><br><span class="line">[<span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>]</span><br></pre></td></tr></table></figure>
 <p>当然 map可以接受N个参数和N个序列<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(map(pow, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>]))</span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure></p>
-<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p>python3中filter返回迭代器<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(filter(<span class="keyword">lambda</span> x : x&gt;=<span class="number">5</span>, [<span class="number">4</span>, <span class="number">5</span> ,<span class="number">6</span>, <span class="number">1</span>]))</span><br><span class="line">[<span class="number">5</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure></p>
+<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p>python3中filter返回可迭代对象<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(filter(<span class="keyword">lambda</span> x : x&gt;=<span class="number">5</span>, [<span class="number">4</span>, <span class="number">5</span> ,<span class="number">6</span>, <span class="number">1</span>]))</span><br><span class="line">[<span class="number">5</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure></p>
 <h3 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h3><p>python3中reduce被放在了functools中</p>
 <p>python3中reduce返回迭代器</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>reduce((<span class="keyword">lambda</span> x,y :x+y), [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
