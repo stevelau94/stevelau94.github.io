@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/images/octopus_favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="deeplearning,Gnome Ubuntu," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="深度学习环境配置，安装Nvidia显卡驱动，CUDA以及cudnn">
+<meta name="keywords" content="deeplearning,Gnome Ubuntu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gnome Ubuntu16安装Nvidia显卡396驱动，CUDA9.2以及cudnn9.2">
+<meta property="og:url" content="http://yoursite.com/2018/04/06/Gnome-Ubuntu16安装Nvidia显卡396驱动，CUDA9-2以及cudnn9-2/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="深度学习环境配置，安装Nvidia显卡驱动，CUDA以及cudnn">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/06/Gnome-Ubuntu16安装Nvidia显卡396驱动，CUDA9-2以及cudnn9-2/nvidia-smi.png">
+<meta property="og:updated_time" content="2018-11-13T17:00:12.173Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gnome Ubuntu16安装Nvidia显卡396驱动，CUDA9.2以及cudnn9.2">
+<meta name="twitter:description" content="深度学习环境配置，安装Nvidia显卡驱动，CUDA以及cudnn">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/06/Gnome-Ubuntu16安装Nvidia显卡396驱动，CUDA9-2以及cudnn9-2/nvidia-smi.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/06/Gnome-Ubuntu16安装Nvidia显卡396驱动，CUDA9-2以及cudnn9-2/"/>
+
+
+
+
+
+  <title>Gnome Ubuntu16安装Nvidia显卡396驱动，CUDA9.2以及cudnn9.2 | Octopi</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/06/Gnome-Ubuntu16安装Nvidia显卡396驱动，CUDA9-2以及cudnn9-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Gnome Ubuntu16安装Nvidia显卡396驱动，CUDA9.2以及cudnn9.2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T00:58:51+08:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ToolBox/" itemprop="url" rel="index">
+                    <span itemprop="name">ToolBox</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>深度学习环境配置，安装Nvidia显卡驱动，CUDA以及cudnn<br><a id="more"></a></p>
+<p>OS:ubuntu 16.04;<br>driver: nvidia 396;<br>CUDA: 9.2<br>cudnn: 9.2</p>
+<h2 id="卸载原有Nvidia驱动"><a href="#卸载原有Nvidia驱动" class="headerlink" title="卸载原有Nvidia驱动"></a>卸载原有Nvidia驱动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 卸载原有Nvidia驱动</span><br><span class="line">sudo apt-get remove --purge nvidia-*</span><br></pre></td></tr></table></figure>
+<h2 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h2><p>apt-get安装而非下载安装，有一些博客说下载安装总有问题<br>然而，我两种方法都没装上（见处理 nouveau）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># apt-get安装</span><br><span class="line">sudo apt-get install nvidia-384 （之前装CUDA9.0的时候装384）</span><br><span class="line">sudo apt install nvidia-396 （现在CUDA9.2需要396）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 获取Kernel source（非常重要）：</span><br><span class="line">sudo apt-get install linux-source</span><br><span class="line">sudo apt-get install linux-headers-4.15.0-24-generic</span><br><span class="line"># linux-headers-4.15.0-24-generic　具体版本由第一步获取</span><br><span class="line"></span><br><span class="line"># 下载安装</span><br><span class="line">sudo chmod a+x NVIDIA-Linux-x86_64-384.90.run //获取权限</span><br><span class="line">sudo ./NVIDIA-Linux-x86_64-384.90.run -no-x-check -no-nouveau-check -no-opengl-files //安装驱动</span><br></pre></td></tr></table></figure></p>
+<h2 id="如果显卡驱动装不上，先处理-nouveau"><a href="#如果显卡驱动装不上，先处理-nouveau" class="headerlink" title="如果显卡驱动装不上，先处理 nouveau"></a>如果显卡驱动装不上，先处理 nouveau</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep nouveau</span><br></pre></td></tr></table></figure>
+<p>如果有输出则代表nouveau正在加载。则需要禁用nouveau</p>
+<p>/etc/modprobe.d中创建文件blacklist-nouveau.conf，再用gedit打开<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/modprobe.d</span><br><span class="line">/etc/modprobe.d$ sudo touch blacklist-nouveau.conf</span><br><span class="line">sudo gedit blacklist-nouveau.conf</span><br></pre></td></tr></table></figure></p>
+<p>在文件中输入以下内容并保存：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau  </span><br><span class="line">options nouveau modeset=0</span><br></pre></td></tr></table></figure></p>
+<p>之后更新<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-initramfs -u</span><br></pre></td></tr></table></figure></p>
+<p>再次查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep nouveau</span><br></pre></td></tr></table></figure></p>
+<p>这种方式也可能不能彻底禁用nouveau，在此基础上可以移除以下文件：nouveau.ko；nouveau.ko.org<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /lib/modules/4.4.0-83-generic/kernel/drivers/gpu/drm/nouveau </span><br><span class="line">sudo rm -rf nouveau.ko </span><br><span class="line">sudo rm -rf nouveau.ko.org</span><br></pre></td></tr></table></figure></p>
+<p>再更新<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-initramfs -u</span><br></pre></td></tr></table></figure></p>
+<p>时重启，再用终端检测一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep nouveau</span><br></pre></td></tr></table></figure></p>
+<p>没有输出即为禁用成功。</p>
+<p><strong>其实上面这些操作我做完之后，重启还是黑屏了；后来重新在命令行中删除Nvidia的东西再装驱动再重启才好的</strong></p>
+<p>nvidia驱动安装成功界面<br><img src="/2018/04/06/Gnome-Ubuntu16安装Nvidia显卡396驱动，CUDA9-2以及cudnn9-2/nvidia-smi.png" alt="nvidia-smi"></p>
+<h1 id="CUDA9-2安装"><a href="#CUDA9-2安装" class="headerlink" title="CUDA9.2安装"></a>CUDA9.2安装</h1><p><a href="https://developer.nvidia.com/cuda-92-download-archive?target_os=Linux&amp;target_arch=ppc64le&amp;target_distro=Ubuntu&amp;target_version=1604&amp;target_type=deblocal" target="_blank" rel="noopener">CUDA</a></p>
+<p>下载文件</p>
+<p>执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Installation Instructions:</span><br><span class="line">`sudo dpkg -i cuda-repo-ubuntu1604-9-2-local_9.2.148-1_ppc64el.deb`</span><br><span class="line">`sudo apt-key add /var/cuda-repo-&lt;version&gt;/7fa2af80.pub`</span><br><span class="line">`sudo apt-get update`</span><br><span class="line">`sudo apt-get install cuda`</span><br></pre></td></tr></table></figure></p>
+<p>看网上有人用deb安装会有问题，但是我这么装没事儿呀 </p>
+<p>检测CUDA是否安装好<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd  /usr/local/cuda-9.2/samples/1_Utilities/deviceQuery</span><br><span class="line"></span><br><span class="line">sudo make</span><br><span class="line"></span><br><span class="line">./deviceQuery</span><br></pre></td></tr></table></figure></p>
+<p>如果显示的是关于GPU的信息，则说明安装成功了。</p>
+<p>别人用runfile安装的时候 有几个步骤需要选择，其中有个选择是否安装nvidia驱动的要选N！我之前就在这里装错了，超烦</p>
+<p>还有有一些教程说要在~/.bashrc里面增加环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/usr/local/cuda-9.2/bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda-9.2/lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br><span class="line"></span><br><span class="line">在终端执行命令</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure></p>
+<h1 id="cuDNN安装"><a href="#cuDNN安装" class="headerlink" title="cuDNN安装"></a>cuDNN安装</h1><p><a href="https://developer.nvidia.com/rdp/cudnn-archive#a-collapse721-92" target="_blank" rel="noopener">cudnn</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf cudnn-9.2-linux-x64-v7.2.1.38.tgz</span><br><span class="line"></span><br><span class="line">sudo cp cuda/include/cudnn.h /usr/local/cuda/include</span><br><span class="line">sudo cp lib64/libcudnn* /usr/local/cuda/lib64</span><br><span class="line">sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*</span><br></pre></td></tr></table></figure>
+<p>然后可以执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc -V</span><br></pre></td></tr></table></figure></p>
+<p>查看是否成功</p>
+<h1 id="caffe"><a href="#caffe" class="headerlink" title="caffe"></a>caffe</h1><h1 id="pytorch"><a href="#pytorch" class="headerlink" title="pytorch"></a>pytorch</h1><h1 id="TF"><a href="#TF" class="headerlink" title="TF"></a>TF</h1><p>参考文章：<br><a href="https://blog.csdn.net/ksws0292756/article/details/79160742" target="_blank" rel="noopener">Ubuntu16.04 安装NVIDIA驱动常见Error的解决方案</a></p>
+<p><a href="https://www.cnblogs.com/pertor/p/8733010.html" target="_blank" rel="noopener">安装参考</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/deeplearning/" rel="tag"># deeplearning</a>
+          
+            <a href="/tags/Gnome-Ubuntu/" rel="tag"># Gnome Ubuntu</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/05/Gnome-Ubuntu上安装下载工具uget-aria2/" rel="next" title="Gnome Ubuntu上安装下载工具 uget+aria2">
+                <i class="fa fa-chevron-left"></i> Gnome Ubuntu上安装下载工具 uget+aria2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/07/Gnome-Ubuntu上安装-Anaconda3/" rel="prev" title="Gnome Ubuntu上安装 Anaconda3">
+                Gnome Ubuntu上安装 Anaconda3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://github.com/stevelau94/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载原有Nvidia驱动"><span class="nav-number">1.</span> <span class="nav-text">卸载原有Nvidia驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装驱动"><span class="nav-number">2.</span> <span class="nav-text">安装驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果显卡驱动装不上，先处理-nouveau"><span class="nav-number">3.</span> <span class="nav-text">如果显卡驱动装不上，先处理 nouveau</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA9-2安装"><span class="nav-number"></span> <span class="nav-text">CUDA9.2安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cuDNN安装"><span class="nav-number"></span> <span class="nav-text">cuDNN安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#caffe"><span class="nav-number"></span> <span class="nav-text">caffe</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pytorch"><span class="nav-number"></span> <span class="nav-text">pytorch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TF"><span class="nav-number"></span> <span class="nav-text">TF</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
