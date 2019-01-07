@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Gnome Ubuntu," />
+  <meta name="keywords" content="Machine Learning,机器学习,台大李宏毅," />
 
 
 
@@ -79,18 +79,30 @@
 
 
 
-<meta name="description" content="这篇文章介绍如何在Gnome Ubuntu 16.04上安装chrome">
-<meta name="keywords" content="Gnome Ubuntu">
+<meta name="description" content="主要介绍了Regression">
+<meta name="keywords" content="Machine Learning,机器学习,台大李宏毅">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Gnome Ubuntu上安装 chrome">
-<meta property="og:url" content="http://yoursite.com/2018/04/03/Gnome-Ubuntu上安装chrome/index.html">
+<meta property="og:title" content="台大ML Lecture 02 Regression">
+<meta property="og:url" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="这篇文章介绍如何在Gnome Ubuntu 16.04上安装chrome">
+<meta property="og:description" content="主要介绍了Regression">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-29T16:51:29.761Z">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/Linear_model.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/loss_func.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/GD.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/GD_f.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/GD_start.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/learning_rate.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/GD_weakness.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/Model_Selection.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/Overfitting.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/Regularization.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/Regularization_2.png">
+<meta property="og:updated_time" content="2019-01-07T15:56:44.291Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Gnome Ubuntu上安装 chrome">
-<meta name="twitter:description" content="这篇文章介绍如何在Gnome Ubuntu 16.04上安装chrome">
+<meta name="twitter:title" content="台大ML Lecture 02 Regression">
+<meta name="twitter:description" content="主要介绍了Regression">
+<meta name="twitter:image" content="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/Linear_model.png">
 
 
 
@@ -120,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/03/Gnome-Ubuntu上安装chrome/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/"/>
 
 
 
 
 
-  <title>Gnome Ubuntu上安装 chrome | Octopi</title>
+  <title>台大ML Lecture 02 Regression | Octopi</title>
   
 
 
@@ -253,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/Gnome-Ubuntu上安装chrome/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/21/台大ML-Lecture-02-Regression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Octopi Lau">
@@ -270,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Gnome Ubuntu上安装 chrome</h1>
+          <h1 class="post-title" itemprop="name headline">台大ML Lecture 02 Regression</h1>
         
 
         <div class="post-meta">
@@ -282,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T20:46:38+08:00">
-                2018-04-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-21T23:54:30+08:00">
+                2018-01-21
               </time>
             
 
@@ -305,8 +317,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ToolBox/" itemprop="url" rel="index">
-                    <span itemprop="name">ToolBox</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/台大李宏毅/" itemprop="url" rel="index">
+                    <span itemprop="name">台大李宏毅</span>
                   </a>
                 </span>
 
@@ -342,10 +365,27 @@
       
 
       
-        <p>这篇文章介绍如何在Gnome Ubuntu 16.04上安装chrome<br><a id="more"></a></p>
-<h3 id="获取-source-list"><a href="#获取-source-list" class="headerlink" title="获取 source list"></a>获取 source list</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/</span><br><span class="line"></span><br><span class="line">wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -</span><br></pre></td></tr></table></figure>
-<h3 id="然后直接安装就行"><a href="#然后直接安装就行" class="headerlink" title="然后直接安装就行"></a>然后直接安装就行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install google-chrome-stable</span><br></pre></td></tr></table></figure>
-<p><a href="https://blog.csdn.net/qq551551/article/details/78885704" target="_blank" rel="noopener">ref</a></p>
+        <p>主要介绍了Regression<br><a id="more"></a></p>
+<h3 id="Output-a-scalar"><a href="#Output-a-scalar" class="headerlink" title="Output a scalar"></a>Output a scalar</h3><h3 id="Step-1-Model"><a href="#Step-1-Model" class="headerlink" title="Step 1: Model"></a>Step 1: Model</h3><p>首先要寻求建立模型，由于是线性模型，所有参数有两w &amp; b<br>w : weight, b: bias  </p>
+<p><img src="/2018/01/21/台大ML-Lecture-02-Regression/Linear_model.png" alt="Linear_model"></p>
+<p>根据不同的w和b的组合，我们可以得到一批func，我们需要从中寻找出最佳的func作为我们的model</p>
+<h3 id="Step-2-Goodness-of-Function"><a href="#Step-2-Goodness-of-Function" class="headerlink" title="Step 2: Goodness of Function"></a>Step 2: Goodness of Function</h3><p>取得trainning data并且定义Loss function<br>由loss func计算出我们的模型所生成的结果与data的拟合程度<br>借此判断func的好坏<br><img src="/2018/01/21/台大ML-Lecture-02-Regression/loss_func.png" alt="loss func"></p>
+<h3 id="Step-3-Best-Function"><a href="#Step-3-Best-Function" class="headerlink" title="Step 3: Best Function"></a>Step 3: Best Function</h3><p>要想取得最佳的func<br>需要使用一些方法找到最佳的w和b</p>
+<h4 id="Step-3-Gradient-Descent"><a href="#Step-3-Gradient-Descent" class="headerlink" title="Step 3: Gradient Descent"></a>Step 3: Gradient Descent</h4><p>这里主要介绍的是GD(Gradient Descent)<br><img src="/2018/01/21/台大ML-Lecture-02-Regression/GD.png" alt="Gradient Descent"></p>
+<p>GD的公式是这样的：<br><img src="/2018/01/21/台大ML-Lecture-02-Regression/GD_f.png" alt="Gradient Descent func"></p>
+<p>在梯度下降的开始，我们需要随机选取一个w并计算w的梯度<br><img src="/2018/01/21/台大ML-Lecture-02-Regression/GD_start.png" alt="Gradient Descent start"></p>
+<p>根据梯度的情况，增大或减小w(图像上看就是向左或向右移动)</p>
+<p>在梯度下降的过程中，我们可以加入学习率控制步长<br><img src="/2018/01/21/台大ML-Lecture-02-Regression/learning_rate.png" alt="learning rate"></p>
+<p>GD可能会在一些情况”stack”<br><img src="/2018/01/21/台大ML-Lecture-02-Regression/GD_weakness.png" alt="GD weakness"></p>
+<p>不过在Linear Regression中我们不用担心这点，因为线性回归的loss是凸函数(“碗”状的)，肯定会落到最低(最佳)点</p>
+<h3 id="How’s-the-results"><a href="#How’s-the-results" class="headerlink" title="How’s the results?"></a>How’s the results?</h3><p>课程中使用的例子说明，在通过GD找到函数只有，误差依然较大<br>这时需要优化</p>
+<p>把函数变复杂不失为一种可行的办法，因为更复杂的函数变大能力更强<br><img src="/2018/01/21/台大ML-Lecture-02-Regression/Model_Selection.png" alt="Model_Selection"></p>
+<p>不过这带来的下面的问题</p>
+<h4 id="Overfitting"><a href="#Overfitting" class="headerlink" title="Overfitting"></a>Overfitting</h4><p>过拟合是常见的问题，主要就是函数太过于贴近训练数据了<br><img src="/2018/01/21/台大ML-Lecture-02-Regression/Overfitting.png" alt="Overfitting"></p>
+<h3 id="Back-to-step-1-Redesign-the-Model"><a href="#Back-to-step-1-Redesign-the-Model" class="headerlink" title="Back to step 1: Redesign the Model"></a>Back to step 1: Redesign the Model</h3><p>通过搜集更多数据的方法，可以一定程度上缓解过拟合的问题(因为可以找到更多影响结果的因素)</p>
+<h3 id="Back-to-step-2-Regularization"><a href="#Back-to-step-2-Regularization" class="headerlink" title="Back to step 2: Regularization"></a>Back to step 2: Regularization</h3><p>正则化，是一个帮助我们找到”平滑”曲线(通常来说，”平滑”的func是我们需要的，因为”平滑”一定程度上表示”稳定”)的好办法<br><img src="/2018/01/21/台大ML-Lecture-02-Regression/Regularization.png" alt="Regularization"></p>
+<p>当然Regularization也不是越大越好<br><img src="/2018/01/21/台大ML-Lecture-02-Regression/Regularization_2.png" alt="Regularization_2"></p>
+<p><a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses/ML_2017/Lecture/Regression.pdf" target="_blank" rel="noopener">PDF</a></p>
 
       
     </div>
@@ -363,7 +403,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Gnome-Ubuntu/" rel="tag"># Gnome Ubuntu</a>
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/台大李宏毅/" rel="tag"># 台大李宏毅</a>
           
         </div>
       
@@ -376,8 +420,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/03/Gnome-Ubuntu上安装git/" rel="next" title="Gnome Ubuntu上安装 git">
-                <i class="fa fa-chevron-left"></i> Gnome Ubuntu上安装 git
+              <a href="/2018/01/20/台大ML-Lecture-01-Intro/" rel="next" title="台大ML Lecture 01 Intro">
+                <i class="fa fa-chevron-left"></i> 台大ML Lecture 01 Intro
               </a>
             
           </div>
@@ -386,8 +430,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/03/Gnome-Ubuntu上安装搜狗拼音/" rel="prev" title="Gnome Ubuntu上安装 搜狗拼音">
-                Gnome Ubuntu上安装 搜狗拼音 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/02/hexo的安装与配置/" rel="prev" title="在GnomeUbuntu上安装hexo,配置及部署至gitpage">
+                在GnomeUbuntu上安装hexo,配置及部署至gitpage <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -530,7 +574,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-source-list"><span class="nav-number">1.</span> <span class="nav-text">获取 source list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#然后直接安装就行"><span class="nav-number">2.</span> <span class="nav-text">然后直接安装就行</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Output-a-scalar"><span class="nav-number">1.</span> <span class="nav-text">Output a scalar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-1-Model"><span class="nav-number">2.</span> <span class="nav-text">Step 1: Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-2-Goodness-of-Function"><span class="nav-number">3.</span> <span class="nav-text">Step 2: Goodness of Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-3-Best-Function"><span class="nav-number">4.</span> <span class="nav-text">Step 3: Best Function</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-3-Gradient-Descent"><span class="nav-number">4.1.</span> <span class="nav-text">Step 3: Gradient Descent</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How’s-the-results"><span class="nav-number">5.</span> <span class="nav-text">How’s the results?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Overfitting"><span class="nav-number">5.1.</span> <span class="nav-text">Overfitting</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Back-to-step-1-Redesign-the-Model"><span class="nav-number">6.</span> <span class="nav-text">Back to step 1: Redesign the Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Back-to-step-2-Regularization"><span class="nav-number">7.</span> <span class="nav-text">Back to step 2: Regularization</span></a></li></ol></div>
             
 
           </div>
