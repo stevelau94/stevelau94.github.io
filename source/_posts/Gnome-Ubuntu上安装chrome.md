@@ -1,9 +1,10 @@
 ---
 title: Gnome Ubuntu上安装 chrome
-date: 2018-07-03 20:46:38
-categories: "Gnome Ubuntu"
+date: 2018-04-03 20:46:38
+categories: 
+    - "ToolBox"
 tags: 
-    - ubuntu
+    - Gnome Ubuntu
 ---
 这篇文章介绍如何在Gnome Ubuntu 16.04上安装chrome
 <!--more-->

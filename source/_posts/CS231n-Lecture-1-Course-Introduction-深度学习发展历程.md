@@ -2,11 +2,11 @@
 title: CS231n-Lecture-1-Course-Introduction-深度学习发展历程
 date: 2018-08-01 21:38:03
 tags: 
-    - "deeplearning"
+    - "Deep Learning"
     - "深度学习"
     - "cs231n"
 categories: 
-    - "deeplearning"
+    - "Deep Learning"
     - "cs231n"
 ---
 

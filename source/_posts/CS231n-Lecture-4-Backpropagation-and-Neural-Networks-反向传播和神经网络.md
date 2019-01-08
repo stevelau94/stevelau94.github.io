@@ -2,11 +2,11 @@
 title: CS231n-Lecture-4-Backpropagation-and-Neural-Networks-反向传播和神经网络
 date: 2018-08-25 19:43:45
 tags: 
-    - "deeplearning"
+    - "Deep Learning"
     - "深度学习"
     - "cs231n"
 categories: 
-    - "deeplearning"
+    - "Deep Learning"
     - "cs231n"
 ---
 

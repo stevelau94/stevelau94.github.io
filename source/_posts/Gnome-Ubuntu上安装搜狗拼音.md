@@ -1,10 +1,11 @@
 ---
 title: Gnome Ubuntu上安装 搜狗拼音
-date: 2018-07-03 20:49:56
+date: 2018-04-03 20:49:56
 thumbnail: https://www.hdwallpapers.net/previews/hot-air-balloon-over-the-mountain-987.jpg
-categories: "Gnome Ubuntu"
+categories: 
+    - "ToolBox"
 tags: 
-    - ubuntu
+    - Gnome Ubuntu
 ---
 这篇文章介绍如何在Gnome Ubuntu 16.04上安装搜狗拼音
 <!--more-->

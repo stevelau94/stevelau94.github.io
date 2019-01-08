@@ -1,10 +1,11 @@
 ---
 title: 在GnomeUbuntu上安装hexo,配置及部署至gitpage
-date: 2018-07-02 21:49:15
-categories: "Gnome Ubuntu"
+date: 2018-04-02 21:49:15
+categories: 
+    - "ToolBox"
 tags: 
-    - ubuntu
-    - hexo
+    - Gnome Ubuntu
+    - Hexo
 ---
 这算是自己第一个blog，其实以前也有写一些但是没有整理过    
 因为懒吧  

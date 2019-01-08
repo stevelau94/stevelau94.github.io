@@ -2,11 +2,11 @@
 title: CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置
 date: 2018-09-01 15:33:05
 tags: 
-    - "deeplearning"
+    - "Deep Learning"
     - "深度学习"
     - "cs231n"
 categories: 
-    - "deeplearning"
+    - "Deep Learning"
     - "cs231n"
 ---
 Lecture-6是介绍如何训练神经网络的第一部分，详细介绍了各种激活函数，并且介绍了神经网络领域中常用的数据预处理方法，以及一些在训练之前的权重初始化经验，超参数设置的经验和网络训练的流程。这节课还有个重要的知识点是Batch Normalization
@@ -303,7 +303,9 @@ Step 2: Choose the architecture
 
 在训练集上面使用超参数，然后在验证集上观察这些超参数的实验效果
 
-可以使用Random Search,在循环训练中，可以先初步的观察参数导致的交叉验证度，首先粗选一下，再进行细选。除了这种筛选方法之外还可以使用Grid Search
+可以使用Random Search,在循环训练中，可以先初步的观察参数导致的交叉验证度(Coarse to fine search)，首先粗选一下，再进行细选。除了这两种筛选方法之外还可以使用Grid Search
+
+Grid Search没有Random Search好
 
 ![2 type search](CS231n-Lecture-6-Training-Neural-Networks-Part-I-激活函数-数据预处理-BN和超参数设置/2_Search.png)
 

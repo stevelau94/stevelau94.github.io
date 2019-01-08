@@ -1,12 +1,12 @@
 ---
-title: python 迭代器和生成器
+title: 探索python可迭代对象，迭代器和生成器(PART2)
 date: 2018-07-17 00:01:08
 categories: 
     - "python"
-    - "python cookbook"
+    - "explore python"
 tags: 
+    - "python cookbook"
     - python
-    - itertools
 ---
 python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解
 <!--more-->

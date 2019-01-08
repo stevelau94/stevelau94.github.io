@@ -2,11 +2,11 @@
 title: CS231n-Lecture-5-Convolutional-Neural-Networks-卷积神经网络
 date: 2018-08-31 19:36:57
 tags: 
-    - "deeplearning"
+    - "Deep Learning"
     - "深度学习"
     - "cs231n"
 categories: 
-    - "deeplearning"
+    - "Deep Learning"
     - "cs231n"
 ---
 Lecture-5从神经网络的发展历史开始介绍，详细介绍了卷积层和全连接层；并且介绍了卷积操作中重要的padding和pooling(也可视为pool层，不过我倾向于将pooling与卷积联系更紧密)

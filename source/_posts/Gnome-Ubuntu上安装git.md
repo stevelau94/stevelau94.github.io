@@ -1,9 +1,11 @@
 ---
 title: Gnome Ubuntu上安装 git
-date: 2018-07-03 20:32:41
-categories: "Gnome Ubuntu"
+date: 2018-04-03 20:32:41
+categories: 
+    - "ToolBox"
 tags: 
-    - ubuntu
+    - Gnome Ubuntu
+    - Git
 ---
 这篇文章介绍如何在Gnome Ubuntu 16.04上安装git
 <!--more-->

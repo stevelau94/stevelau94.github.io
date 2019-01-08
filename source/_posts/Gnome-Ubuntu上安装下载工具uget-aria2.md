@@ -1,9 +1,11 @@
 ---
 title: Gnome Ubuntu上安装下载工具 uget+aria2
-date: 2018-07-05 22:11:05
-categories: "Gnome Ubuntu"
+date: 2018-04-05 22:11:05
+categories: 
+    - "ToolBox"
 tags: 
-    - ubuntu
+    - Gnome Ubuntu
+    - Git
 ---
 这篇文章介绍如何在Gnome Ubuntu 16.04上安装类似迅雷的下载软件uget & aria2
 <!--more-->
