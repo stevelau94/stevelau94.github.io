@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Machine Learning,机器学习,NTU机器学习基石," />
 
 
 
@@ -79,14 +79,26 @@
 
 
 
+<meta name="description" content="本科的时候看过NG的ML视频，在毕业设计的时候完成了一个简单的电影推荐系统。 毕业工作之后，虽然一直做着python数据方面的工作，但是还是对ML/DL念念不忘。 最近在看NTU林軒田的ML课程《机器学习基石》 打算在ML的理论知识上更进一步 留下一些简单的笔记以备后用，也希望可以帮助新入坑的同仁 FIGHT！">
+<meta name="keywords" content="Machine Learning,机器学习,NTU机器学习基石">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习基石-01-The Learning Problem">
 <meta property="og:url" content="http://yoursite.com/2019/01/08/机器学习基石-01-The-Learning-Problem/index.html">
 <meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="本科的时候看过NG的ML视频，在毕业设计的时候完成了一个简单的电影推荐系统。 毕业工作之后，虽然一直做着python数据方面的工作，但是还是对ML/DL念念不忘。 最近在看NTU林軒田的ML课程《机器学习基石》 打算在ML的理论知识上更进一步 留下一些简单的笔记以备后用，也希望可以帮助新入坑的同仁 FIGHT！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-08T14:58:25.327Z">
+<meta property="og:image" content="http://yoursite.com/2019/01/08/机器学习基石-01-The-Learning-Problem/Learning.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/08/机器学习基石-01-The-Learning-Problem/ML.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/08/机器学习基石-01-The-Learning-Problem/when_ML.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/08/机器学习基石-01-The-Learning-Problem/Formalize.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/08/机器学习基石-01-The-Learning-Problem/hypothesis.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/08/机器学习基石-01-The-Learning-Problem/Practical_Definition.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/08/机器学习基石-01-The-Learning-Problem/learning_model.png">
+<meta property="og:updated_time" content="2019-01-08T15:02:10.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习基石-01-The Learning Problem">
+<meta name="twitter:description" content="本科的时候看过NG的ML视频，在毕业设计的时候完成了一个简单的电影推荐系统。 毕业工作之后，虽然一直做着python数据方面的工作，但是还是对ML/DL念念不忘。 最近在看NTU林軒田的ML课程《机器学习基石》 打算在ML的理论知识上更进一步 留下一些简单的笔记以备后用，也希望可以帮助新入坑的同仁 FIGHT！">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/08/机器学习基石-01-The-Learning-Problem/Learning.png">
 
 
 
@@ -289,6 +301,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/NTU机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">NTU机器学习基石</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -316,7 +361,45 @@
       
 
       
-        
+        <p>本科的时候看过NG的ML视频，在毕业设计的时候完成了一个简单的电影推荐系统。</p>
+<p>毕业工作之后，虽然一直做着python数据方面的工作，但是还是对ML/DL念念不忘。</p>
+<p>最近在看NTU林軒田的ML课程《机器学习基石》</p>
+<p>打算在ML的理论知识上更进一步</p>
+<p>留下一些简单的笔记以备后用，也希望可以帮助新入坑的同仁</p>
+<p>FIGHT！</p>
+<a id="more"></a>
+<h2 id="What-is-Machine-Learning"><a href="#What-is-Machine-Learning" class="headerlink" title="What is Machine Learning"></a>What is Machine Learning</h2><p>正如每个ML课程开始都会讲到的一样，田老师也阐述了“学习”的概念，并以人类作对比，介绍了ML的基本概念</p>
+<p><img src="/2019/01/08/机器学习基石-01-The-Learning-Problem/Learning.png" alt="Learning"></p>
+<p>人类通过“观察”来进行学习，而机器则通过“数据”进行学习</p>
+<p><img src="/2019/01/08/机器学习基石-01-The-Learning-Problem/ML.png" alt="ML"></p>
+<p>Machine Learning被定义为：improving some performance measure with experience computed from data<br>(其实在业界ML是没有被准确定义的，每本经典教材都会有个自己的定义方式)</p>
+<p>虽然ML应用广泛，但是还是要区分ML能否使用的场景：</p>
+<p><img src="/2019/01/08/机器学习基石-01-The-Learning-Problem/when_ML.png" alt="when_ML"></p>
+<p>简单来讲就是这三点：</p>
+<ol>
+<li>存在“潜在”规则</li>
+<li>不方便编程</li>
+<li>有数据</li>
+</ol>
+<h2 id="Applications-of-Machine-Learning"><a href="#Applications-of-Machine-Learning" class="headerlink" title="Applications of Machine Learning"></a>Applications of Machine Learning</h2><p>ML在众多领域有着出色的应用，田老师从“衣食住行”等方面进行了介绍</p>
+<h2 id="Components-of-Machine-Learning"><a href="#Components-of-Machine-Learning" class="headerlink" title="Components of Machine Learning"></a>Components of Machine Learning</h2><p>这部分介绍了ML的基本结构和大概流程：<br><img src="/2019/01/08/机器学习基石-01-The-Learning-Problem/Formalize.png" alt="Formalize"></p>
+<ol>
+<li>input</li>
+<li>output</li>
+<li>target function 就是我们想要找出的F</li>
+<li>data</li>
+<li>hypothesis 一些假设的集合</li>
+</ol>
+<p>我们通过ML想要得到的目标就是<br><img src="/2019/01/08/机器学习基石-01-The-Learning-Problem/hypothesis.png" alt="hypothesis"><br>对于这个未知的F，我们需要求得一个最接近F的近似g</p>
+<p>所有这里我们可以给出一个比较有应用价值的ML结构：<br><img src="/2019/01/08/机器学习基石-01-The-Learning-Problem/Practical_Definition.png" alt="Practical Definition"></p>
+<p>需要注意的：</p>
+<ol>
+<li>learning algorithm A 是演算法</li>
+<li>ypothesis set H 是假设的集合<br><img src="/2019/01/08/机器学习基石-01-The-Learning-Problem/learning_model.png" alt="learning model"></li>
+</ol>
+<h2 id="Machine-Learning-and-Other-Fields"><a href="#Machine-Learning-and-Other-Fields" class="headerlink" title="Machine Learning and Other Fields"></a>Machine Learning and Other Fields</h2><p>这部分比较简单，主要介绍了ML和 Data Mining, Artificial Intelligence, Statistics等领域的关系和差别</p>
+<p>最后 贴上<a href="https://www.csie.ntu.edu.tw/~htlin/" target="_blank" rel="noopener">课程的主页</a></p>
+
       
     </div>
     
@@ -330,6 +413,16 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/NTU机器学习基石/" rel="tag"># NTU机器学习基石</a>
+          
+        </div>
       
 
       
@@ -400,8 +493,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -427,7 +529,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -438,7 +540,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -471,6 +573,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Machine-Learning"><span class="nav-number">1.</span> <span class="nav-text">What is Machine Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Applications-of-Machine-Learning"><span class="nav-number">2.</span> <span class="nav-text">Applications of Machine Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Components-of-Machine-Learning"><span class="nav-number">3.</span> <span class="nav-text">Components of Machine Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Machine-Learning-and-Other-Fields"><span class="nav-number">4.</span> <span class="nav-text">Machine Learning and Other Fields</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
