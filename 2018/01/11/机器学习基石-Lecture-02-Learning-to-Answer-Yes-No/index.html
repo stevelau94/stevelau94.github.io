@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/images/octopus_favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Machine Learning,机器学习,NTU机器学习基石," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这节主要介绍了解决“是/否”问题(二分问题)的一种方法，PLA。 由上节课我们可以知道，在ML的整个流程中主要是这样一些步骤：  找到一批模型H 使用演算法A， 在训练样本D(data)上做训练 得到最好的h h所对应的g一般接近于目标函数f，这个g就是最后得到的机器学习的模型函数">
+<meta name="keywords" content="Machine Learning,机器学习,NTU机器学习基石">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基石-Lecture 02-Learning to Answer Yes&#x2F;No">
+<meta property="og:url" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="这节主要介绍了解决“是/否”问题(二分问题)的一种方法，PLA。 由上节课我们可以知道，在ML的整个流程中主要是这样一些步骤：  找到一批模型H 使用演算法A， 在训练样本D(data)上做训练 得到最好的h h所对应的g一般接近于目标函数f，这个g就是最后得到的机器学习的模型函数">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Lecture01.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Lecture02.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Perceptron_H.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/linear_classifiers.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/select_g.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/PLA_process.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Cyclic_PLA.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/PLA_start.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/PLA_modify.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/PLA_finish.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/PLA_Issues.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/linear_separable.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/w_f.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/w_t_w_f_inner.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/w_t_w_f_len.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/PLA.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/noise.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Noise_Tolerance.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Pocket_Algorithm.png">
+<meta property="og:updated_time" content="2019-01-11T13:51:30.354Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习基石-Lecture 02-Learning to Answer Yes&#x2F;No">
+<meta name="twitter:description" content="这节主要介绍了解决“是/否”问题(二分问题)的一种方法，PLA。 由上节课我们可以知道，在ML的整个流程中主要是这样一些步骤：  找到一批模型H 使用演算法A， 在训练样本D(data)上做训练 得到最好的h h所对应的g一般接近于目标函数f，这个g就是最后得到的机器学习的模型函数">
+<meta name="twitter:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Lecture01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/"/>
+
+
+
+
+
+  <title>机器学习基石-Lecture 02-Learning to Answer Yes/No | Octopi</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习基石-Lecture 02-Learning to Answer Yes/No</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T21:49:10+08:00">
+                2018-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/NTU机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">NTU机器学习基石</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这节主要介绍了解决“是/否”问题(二分问题)的一种方法，PLA。</p>
+<p>由上节课我们可以知道，在ML的整个流程中<br>主要是这样一些步骤：</p>
+<ol>
+<li>找到一批模型H</li>
+<li>使用演算法A，</li>
+<li>在训练样本D(data)上做训练</li>
+<li>得到最好的h</li>
+<li>h所对应的g一般接近于目标函数f，这个g就是最后得到的机器学习的模型函数</li>
+</ol>
+<p><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Lecture01.png" alt="Lecture01"><br><a id="more"></a></p>
+<p>那么第二节课，主要会介绍这样一些问题<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Lecture02.png" alt="Lecture02"></p>
+<h2 id="Perceptron-Hypothesis-Set"><a href="#Perceptron-Hypothesis-Set" class="headerlink" title="Perceptron Hypothesis Set"></a>Perceptron Hypothesis Set</h2><p>这部分主要介绍感知机的模型集合，并由此逐步介绍到PLA算法。</p>
+<p>首先假设一个“银行是否办理信用卡”的经典ML问题<br>我们有“用户”的一些信息，这些信息对于“办理信用卡”这个问题的影响可能是正向也可能是反向的，在实际问题中，对于信息中的不同项，我们一般会赋予不同大小的权重值w，但是在此例中，我们将其简化为+1/-1</p>
+<p>由此我们可以得到，在连加整个“权值x数据项”的结果后，在于一个“阈值”进行比较，最后得到“是/否”的结果，帮助我们进行判断</p>
+<p><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Perceptron_H.png" alt="Perceptron_H"></p>
+<p>那么这样的一个Hypothesis Set，我们称其为Perceptron Hypothesis Set(感知机模型)</p>
+<p>为了更好的展示Perceptron_H，我们将其转化为平面中，用“将数据分为两部分的线”来理解Perceptron</p>
+<p><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/linear_classifiers.png" alt="linear_classifiers"></p>
+<p>由此我们可以知道，“感知机问题”就是线性可分问题</p>
+<h2 id="Perceptron-Learning-Algorithm-PLA"><a href="#Perceptron-Learning-Algorithm-PLA" class="headerlink" title="Perceptron Learning Algorithm (PLA)"></a>Perceptron Learning Algorithm (PLA)</h2><p>那么如何在H中找到最符合PLA结果的ｇ呢？<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/select_g.png" alt="select_g"></p>
+<p>需要我们不断的通过数据来“纠正”</p>
+<p><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/PLA_process.png" alt="PLA_process"></p>
+<p>这个问题PLA的过程可以简单理解为：</p>
+<ol>
+<li>首先选择一条随机直线将区域划分为两部分</li>
+<li>找到一个分类错误的点，用这个点帮助修正</li>
+<li>如果这个点本应是正，被误分为负，即w_t ^ x_n(t) &lt; 0即表示w和x夹角大于90度，其中w是随机直线的法向量，说明x被误分在直线的下侧(法向量方向视为正)</li>
+<li>修正：使w和x的夹角小于90度</li>
+<li>同理，如果是误分为正类的点，即w_t ^ x_n(t) &gt; 0那表示w和x夹角小于90度修正的方法就是使w和x夹角大于90度</li>
+</ol>
+<p><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Cyclic_PLA.png" alt="Cyclic_PLA"></p>
+<p>使用这个办法，逐步循环下去，就可以将(线性可分)问题解决</p>
+<p>可见此例：<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/PLA_start.png" alt="PLA_start"><br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/PLA_modify.png" alt="PLA_modify"><br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/PLA_finish.png" alt="PLA_finish"></p>
+<p>最后，我们还要思考：</p>
+<ol>
+<li>PLA一定会停止么，如果线性不可分应该怎么办？</li>
+<li>如果停下了，能否保证g与f尽可能的接近？<br>如果没停下来，是否能找到与f尽可能相似的g？<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/PLA_Issues.png" alt="PLA_Issues"></li>
+</ol>
+<h2 id="Guarantee-of-PLA"><a href="#Guarantee-of-PLA" class="headerlink" title="Guarantee of PLA"></a>Guarantee of PLA</h2><p>PLA什么时候会停下来？</p>
+<p>正如上面所讲的PLA算法的过程，在找到一条直线可以将界限内所有的点恰好分为两部分的时候，即面对的问题是linear separable(线性可分)的时候<br>PLA会停下来<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/linear_separable.png" alt="linear_separable"></p>
+<p>如果可以找到直线将区域内所有点都区分开，即<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/w_f.png" alt="w_f"></p>
+<p>那么我们所找到的w_t必然是与w_f越来越相近的，即<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/w_t_w_f_inner.png" alt="w_t_w_f_inner"><br>可以看出相比于w(t),w(t+1)与w(f)的內积更大</p>
+<p>当然这并不能完全说明w(t+1)与w(f)的接近程度<br>那么我们再计算一下w(t+1)与w(f)向量长度的关系，即<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/w_t_w_f_len.png" alt="w_t_w_f_len"></p>
+<p>由此可见，w(t)的增长是被限制的，所以w(t+1)与w(f)向量长度不会相差太大</p>
+<p>最后我们可以总结出：<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/PLA.png" alt="PLA"></p>
+<h2 id="Non-Separable-Data"><a href="#Non-Separable-Data" class="headerlink" title="Non-Separable Data"></a>Non-Separable Data</h2><p>很多时候，我们面对的问题是现行不可分的</p>
+<p>当问题是现行不可分的时候，PLA就无法顺利停止，因为不存在那么一条可将区域分开的线</p>
+<p>所以，面对这种情况</p>
+<p>我们可以当做在数据中混入了“噪音”<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/noise.png" alt="noise"></p>
+<p>而把PLA的条件放松<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Noise_Tolerance.png" alt="Noise_Tolerance"></p>
+<p>进而，我们得到了PLA算法的改进版本：Pocket Algorithm</p>
+<p><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Pocket_Algorithm.png" alt="Pocket_Algorithm"></p>
+<p>Pocket_Algorithm算法与PLA算法大体相同，不过多了一些记录“noise”个数的步骤，这样在经过N此迭代以后，我们选取“noise”个数最小的那条直线即可以作为与w(f)最相似的g</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/NTU机器学习基石/" rel="tag"># NTU机器学习基石</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/20/台大ML-Lecture-01-Intro/" rel="prev" title="台大ML Lecture 01 Intro">
+                台大ML Lecture 01 Intro <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://github.com/stevelau94/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Perceptron-Hypothesis-Set"><span class="nav-number">1.</span> <span class="nav-text">Perceptron Hypothesis Set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perceptron-Learning-Algorithm-PLA"><span class="nav-number">2.</span> <span class="nav-text">Perceptron Learning Algorithm (PLA)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Guarantee-of-PLA"><span class="nav-number">3.</span> <span class="nav-text">Guarantee of PLA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Non-Separable-Data"><span class="nav-number">4.</span> <span class="nav-text">Non-Separable Data</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
