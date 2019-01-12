@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="这节主要介绍了解决“是/否”问题(二分问题)的一种方法，PLA。 由上节课我们可以知道，在ML的整个流程中主要是这样一些步骤：  找到一批模型H 使用演算法A， 在训练样本D(data)上做训练 得到最好的h h所对应的g一般接近于目标函数f，这个g就是最后得到的机器学习的模型函数">
+<meta name="description" content="这节主要介绍了解决“是/否”问题(二分问题)的一种方法，PLA。 由上节课我们可以知道，在ML的整个流程中主要是这样一些步骤：  找到一批模型H 使用演算法A， 在训练样本D(data)上做训练 得到最好的h h所对应的g一般接近于目标函数f，这个g就是最后得到的机器学习的模型函数   那么第二节课，主要会介绍这样一些问题">
 <meta name="keywords" content="Machine Learning,机器学习,NTU机器学习基石">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习基石-Lecture 02-Learning to Answer Yes&#x2F;No">
 <meta property="og:url" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="这节主要介绍了解决“是/否”问题(二分问题)的一种方法，PLA。 由上节课我们可以知道，在ML的整个流程中主要是这样一些步骤：  找到一批模型H 使用演算法A， 在训练样本D(data)上做训练 得到最好的h h所对应的g一般接近于目标函数f，这个g就是最后得到的机器学习的模型函数">
+<meta property="og:description" content="这节主要介绍了解决“是/否”问题(二分问题)的一种方法，PLA。 由上节课我们可以知道，在ML的整个流程中主要是这样一些步骤：  找到一批模型H 使用演算法A， 在训练样本D(data)上做训练 得到最好的h h所对应的g一般接近于目标函数f，这个g就是最后得到的机器学习的模型函数   那么第二节课，主要会介绍这样一些问题">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Lecture01.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Lecture02.png">
@@ -106,10 +106,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/noise.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Noise_Tolerance.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Pocket_Algorithm.png">
-<meta property="og:updated_time" content="2019-01-11T13:51:30.354Z">
+<meta property="og:updated_time" content="2019-01-12T11:37:58.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习基石-Lecture 02-Learning to Answer Yes&#x2F;No">
-<meta name="twitter:description" content="这节主要介绍了解决“是/否”问题(二分问题)的一种方法，PLA。 由上节课我们可以知道，在ML的整个流程中主要是这样一些步骤：  找到一批模型H 使用演算法A， 在训练样本D(data)上做训练 得到最好的h h所对应的g一般接近于目标函数f，这个g就是最后得到的机器学习的模型函数">
+<meta name="twitter:description" content="这节主要介绍了解决“是/否”问题(二分问题)的一种方法，PLA。 由上节课我们可以知道，在ML的整个流程中主要是这样一些步骤：  找到一批模型H 使用演算法A， 在训练样本D(data)上做训练 得到最好的h h所对应的g一般接近于目标函数f，这个g就是最后得到的机器学习的模型函数   那么第二节课，主要会介绍这样一些问题">
 <meta name="twitter:image" content="http://yoursite.com/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Lecture01.png">
 
 
@@ -382,8 +382,8 @@
 <li>得到最好的h</li>
 <li>h所对应的g一般接近于目标函数f，这个g就是最后得到的机器学习的模型函数</li>
 </ol>
-<p><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Lecture01.png" alt="Lecture01"><br><a id="more"></a></p>
-<p>那么第二节课，主要会介绍这样一些问题<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Lecture02.png" alt="Lecture02"></p>
+<p><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Lecture01.png" alt="Lecture01"></p>
+<p>那么第二节课，主要会介绍这样一些问题<br><img src="/2018/01/11/机器学习基石-Lecture-02-Learning-to-Answer-Yes-No/Lecture02.png" alt="Lecture02"><br><a id="more"></a></p>
 <h2 id="Perceptron-Hypothesis-Set"><a href="#Perceptron-Hypothesis-Set" class="headerlink" title="Perceptron Hypothesis Set"></a>Perceptron Hypothesis Set</h2><p>这部分主要介绍感知机的模型集合，并由此逐步介绍到PLA算法。</p>
 <p>首先假设一个“银行是否办理信用卡”的经典ML问题<br>我们有“用户”的一些信息，这些信息对于“办理信用卡”这个问题的影响可能是正向也可能是反向的，在实际问题中，对于信息中的不同项，我们一般会赋予不同大小的权重值w，但是在此例中，我们将其简化为+1/-1</p>
 <p>由此我们可以得到，在连加整个“权值x数据项”的结果后，在于一个“阈值”进行比较，最后得到“是/否”的结果，帮助我们进行判断</p>
