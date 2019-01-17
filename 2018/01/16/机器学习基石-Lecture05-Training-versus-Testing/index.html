@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/images/octopus_favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Machine Learning,机器学习,NTU机器学习基石," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="从上节课我们可以知道  当样本数据足够大并且hypothesis数量有限时，ML是可以成立的 那么本节我们将讨论，为什么机器可以学习 (哇，这节要认真听第一遍不是那么特别好理解的)  Hoeffding’s inequality是ML的理论基础，可以推导出机器学习在理论上的可行性">
+<meta name="keywords" content="Machine Learning,机器学习,NTU机器学习基石">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基石-Lecture05: Training versus Testing">
+<meta property="og:url" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="从上节课我们可以知道  当样本数据足够大并且hypothesis数量有限时，ML是可以成立的 那么本节我们将讨论，为什么机器可以学习 (哇，这节要认真听第一遍不是那么特别好理解的)  Hoeffding’s inequality是ML的理论基础，可以推导出机器学习在理论上的可行性">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Lecture04.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Lecture05.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/flow.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/learning_possible.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Recap.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/central_questions.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/M.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/infinite_M.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/bad_event.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/over_estimating.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/2kinds.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/4kinds.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/8kinds.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/lewer8kinds.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/14kinds.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/EffectiveNumberofLines.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/pattern.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/possible.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/dichotomy.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Growth_Function.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/PositiveRays.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/PositiveIntervals.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/ConvexSets.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/shattered.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/4_Growth_Function.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Break_Point.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/4_Break_Point.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Summary.png">
+<meta property="og:updated_time" content="2019-01-17T17:21:38.822Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习基石-Lecture05: Training versus Testing">
+<meta name="twitter:description" content="从上节课我们可以知道  当样本数据足够大并且hypothesis数量有限时，ML是可以成立的 那么本节我们将讨论，为什么机器可以学习 (哇，这节要认真听第一遍不是那么特别好理解的)  Hoeffding’s inequality是ML的理论基础，可以推导出机器学习在理论上的可行性">
+<meta name="twitter:image" content="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Lecture04.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/"/>
+
+
+
+
+
+  <title>机器学习基石-Lecture05: Training versus Testing | Octopi</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习基石-Lecture05: Training versus Testing</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T01:20:12+08:00">
+                2018-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/NTU机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">NTU机器学习基石</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>从上节课我们可以知道</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Lecture04.png" alt="Lecture04"></p>
+<p>当样本数据足够大并且hypothesis数量有限时，ML是可以成立的</p>
+<p>那么本节我们将讨论，为什么机器可以学习</p>
+<p>(哇，这节要认真听第一遍不是那么特别好理解的)</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Lecture05.png" alt="Lecture05"></p>
+<p><strong>Hoeffding’s inequality是ML的理论基础，可以推导出机器学习在理论上的可行性</strong></p>
+<a id="more"></a>
+<h2 id="Recap-and-Preview"><a href="#Recap-and-Preview" class="headerlink" title="Recap and Preview"></a>Recap and Preview</h2><p>回顾ML的flow图</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/flow.png" alt="flow"></p>
+<p>当样本数据足够大并且hypothesis数量有限时，能保证E_in_and_E_out PAC</p>
+<p>而此时ML是可行的<br><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/learning_possible.png" alt="learning_possible"></p>
+<p>回顾前四节课我们所学到的知识</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Recap.png" alt="Recap"></p>
+<ol>
+<li>Lecture1，ML的目标是找出合适的g≈f，即保证E_out(g)≈0</li>
+<li>Lecture2，介绍PLA和pocket算法，演示如何E_in≈0</li>
+<li>Lecture3，介绍了ML的分类情况，当前ML最基本的，监督式批量数据二元分类法</li>
+<li>Lecture4，把E_in(g)，E_out(g)联系起来，得知在一定条件下会有E_in(g)≈E_out(g)</li>
+</ol>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/central_questions.png" alt="central_questions"><br>所以总的看下来，ML的两个关键问题：</p>
+<ol>
+<li>如何使E_in(g)≈E_out(g)</li>
+<li>如何使E_in足够小</li>
+</ol>
+<p>对这两个关键问题来说，hypothesis的数量M与他们有什么关系呢？</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/M.png" alt="M"></p>
+<p>可以想见  </p>
+<p>当M很小时(hypothesis数量很少)，可以满足第一个问题，但是无法确定能找到最小的E_in</p>
+<p>当M很大时(hypothesis数量很多)，可以满足第二个条件，但是又无法保证E_in_and_E_out PAC</p>
+<p>所以可以知道，选择正确的M很重要</p>
+<p>那么，当M是无穷的，会发生什么？</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/infinite_M.png" alt="infinite_M"></p>
+<p>为什么当选择无穷的M，PLA居然可以顺利的解决了？</p>
+<p>我们会在接下来三节课中深入研究这个谜团</p>
+<h2 id="Effective-Number-of-Lines"><a href="#Effective-Number-of-Lines" class="headerlink" title="Effective Number of Lines"></a>Effective Number of Lines</h2><p>尝试算出bad event的整个数量<br>当把所有的bad_event情况做联集(union bound)时，会发现<br>可能会导致无限大<br>所以边界看起来会失效<br><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/bad_event.png" alt="bad_event"></p>
+<p>不过，我们继续看bad_event情况<br>会发现其实所有的bad_event彼此之间重叠的部分非常大(彼此相近)<br>所以使用union bound会导致我们对bound过度的估计<br><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/over_estimating.png" alt="over_estimating"></p>
+<p>那么，接下来重要的问题就是：如何找到bad_event彼此之间重叠的部分<br>(可以理解为，将无数个hypothesis分成有限个类别)</p>
+<h4 id="Effective-Number-of-Lines-examples"><a href="#Effective-Number-of-Lines-examples" class="headerlink" title="Effective Number of Lines examples"></a>Effective Number of Lines examples</h4><p>下面通过一系列举例来探索这个问题</p>
+<ol>
+<li>首先，平面中有1个点，可以使用直线将平面切割，对直线来说，平面上所有点的情况只有2种</li>
+</ol>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/2kinds.png" alt="2kinds"></p>
+<ol start="2">
+<li>当平面中有2个点，会有4种情况</li>
+</ol>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/4kinds.png" alt="4kinds"></p>
+<ol start="3">
+<li>当平面中有3个点，会有8种情况</li>
+</ol>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/8kinds.png" alt="8kinds"></p>
+<ol start="4">
+<li>再次思考3个点的情况，会有少于8中分割的情况(有点共线时)</li>
+</ol>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/lewer8kinds.png" alt="lewer8kinds"></p>
+<ol start="5">
+<li>当平面中有4个点，会有14种情况(有一种情况线性不可分)</li>
+</ol>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/14kinds.png" alt="14kinds"></p>
+<p>所以，我们引入Effective Number of Lines(有效线)</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/EffectiveNumberofLines.png" alt="EffectiveNumberofLines"></p>
+<h4 id="Effective-Number-of-Lines-pattern"><a href="#Effective-Number-of-Lines-pattern" class="headerlink" title="Effective Number of Lines pattern"></a>Effective Number of Lines pattern</h4><p>我们会发现有效线存在一定的规律</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/pattern.png" alt="pattern"></p>
+<ol>
+<li>一定小于2^N</li>
+<li>通过分组可以使得这些分割线是有限的</li>
+</ol>
+<p>最终推理出，学习可能的有效性</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/possible.png" alt="possible"></p>
+<h2 id="Effective-Number-of-Hypotheses"><a href="#Effective-Number-of-Hypotheses" class="headerlink" title="Effective Number of Hypotheses"></a>Effective Number of Hypotheses</h2><p>一个新名词：二分类(dichotomy)</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/dichotomy.png" alt="dichotomy"></p>
+<p>dichotomy set可不可以取代掉M？</p>
+<h4 id="Growth-Function"><a href="#Growth-Function" class="headerlink" title="Growth_Function"></a>Growth_Function</h4><p>进一步的</p>
+<p>前例可以看出前面的dichotomy set依赖于输入的数据</p>
+<p>那么如何去除这个限制呢？</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Growth_Function.png" alt="Growth_Function"></p>
+<p>取得dichotomy最大的情况(Growth_Function),记为m_h(N)</p>
+<p>也就是前面所提的Effective Number of Lines的最大值</p>
+<h4 id="求得Growth-Function"><a href="#求得Growth-Function" class="headerlink" title="求得Growth_Function"></a>求得Growth_Function</h4><ol>
+<li>Positive Rays的 growth func</li>
+</ol>
+<p>对于一维直线来说，存在N个点对直线做切割，会存在N+1个部分</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/PositiveRays.png" alt="PositiveRays"></p>
+<p>可以知道m_h(N) = N + 1</p>
+<p>即，通过m_h(N)取代M，会极大的减小M的值</p>
+<ol start="2">
+<li>Positive Intervals的 growth func</li>
+</ol>
+<p>再看一种一维空间的情况</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/PositiveIntervals.png" alt="PositiveIntervals"></p>
+<p>我们依旧会得到m_h(N)极大的减小M的值</p>
+<ol start="3">
+<li>Convex Sets的 growth func</li>
+</ol>
+<p>那么对二维空间   </p>
+<p>定义一个hypothesis set是在空间的Convex(凸多边形)空间</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/ConvexSets.png" alt="ConvexSets"></p>
+<p>那么对于这个ConvexSets的growth func</p>
+<p>可以使用多边形，将所有点连接起来</p>
+<p>所以每次产生一个dichotomy都可以使用这种办法生成一个凸多边形</p>
+<p>这样凸多边形内外就是分割平面的dichotomy</p>
+<p>这样，所有的dichotomy都可以做出来</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/shattered.png" alt="shattered"></p>
+<h2 id="Break-Point"><a href="#Break-Point" class="headerlink" title="Break Point"></a>Break Point</h2><p>到这里，已经介绍了4种Growth_Function</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/4_Growth_Function.png" alt="4_Growth_Function"></p>
+<p>positive rays和positive intervals的成长函数都是polynomial(多项式)的<br>那么这两种情况下，是可以使用Growth_Function替代M的</p>
+<p>但是convex sets的成长函数是exponential(指数)的，如果使用这个m_h(N)替代M，依旧不能保证ML的可行性</p>
+<p>那么，对于2D perceptrons的问题，它的成长函数究竟是什么呢？</p>
+<h4 id="Break-Point-1"><a href="#Break-Point-1" class="headerlink" title="Break Point"></a>Break Point</h4><p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Break_Point.png" alt="Break_Point"></p>
+<p>引入新概念：Break Point</p>
+<p>即最先使得m_k(h) &lt; 2^K 的 那个数字</p>
+<p>所以可以得到，上述4种Break_Point</p>
+<p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/4_Break_Point.png" alt="4_Break_Point"></p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p><img src="/2018/01/16/机器学习基石-Lecture05-Training-versus-Testing/Summary.png" alt="Summary"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/NTU机器学习基石/" rel="tag"># NTU机器学习基石</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/13/机器学习基石-Lecture04-Feasibility-of-Learning/" rel="next" title="机器学习基石-Lecture04: Feasibility of Learning">
+                <i class="fa fa-chevron-left"></i> 机器学习基石-Lecture04: Feasibility of Learning
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/20/台大ML-Lecture-01-Intro/" rel="prev" title="台大ML Lecture 01 Intro">
+                台大ML Lecture 01 Intro <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://github.com/stevelau94/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Recap-and-Preview"><span class="nav-number">1.</span> <span class="nav-text">Recap and Preview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Effective-Number-of-Lines"><span class="nav-number">2.</span> <span class="nav-text">Effective Number of Lines</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Effective-Number-of-Lines-examples"><span class="nav-number">2.0.1.</span> <span class="nav-text">Effective Number of Lines examples</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Effective-Number-of-Lines-pattern"><span class="nav-number">2.0.2.</span> <span class="nav-text">Effective Number of Lines pattern</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Effective-Number-of-Hypotheses"><span class="nav-number">3.</span> <span class="nav-text">Effective Number of Hypotheses</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Growth-Function"><span class="nav-number">3.0.1.</span> <span class="nav-text">Growth_Function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#求得Growth-Function"><span class="nav-number">3.0.2.</span> <span class="nav-text">求得Growth_Function</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Break-Point"><span class="nav-number">4.</span> <span class="nav-text">Break Point</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Break-Point-1"><span class="nav-number">4.0.1.</span> <span class="nav-text">Break Point</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">5.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
