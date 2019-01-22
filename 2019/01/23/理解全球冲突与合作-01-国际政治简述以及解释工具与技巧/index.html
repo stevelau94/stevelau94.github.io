@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/images/octopus_favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="international relations,国际关系,理解全球冲突与合作," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这篇的内容，不是关于python的也不是关于DL/ML的而是对一本书前两章的笔记与理解的记录这本书是Understanding global conflict and cooperation: an introduction to theory and history  《理解全球冲突与合作:理论与历史(第九版)》是一部关于国际政治的经典教材 我个人对这个领域颇有性趣，所以">
+<meta name="keywords" content="international relations,国际关系,理解全球冲突与合作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解全球冲突与合作 01: 国际政治简述以及解释工具与技巧">
+<meta property="og:url" content="http://yoursite.com/2019/01/23/理解全球冲突与合作-01-国际政治简述以及解释工具与技巧/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="这篇的内容，不是关于python的也不是关于DL/ML的而是对一本书前两章的笔记与理解的记录这本书是Understanding global conflict and cooperation: an introduction to theory and history  《理解全球冲突与合作:理论与历史(第九版)》是一部关于国际政治的经典教材 我个人对这个领域颇有性趣，所以">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/01/23/理解全球冲突与合作-01-国际政治简述以及解释工具与技巧/cover.png">
+<meta property="og:updated_time" content="2019-01-22T17:55:06.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解全球冲突与合作 01: 国际政治简述以及解释工具与技巧">
+<meta name="twitter:description" content="这篇的内容，不是关于python的也不是关于DL/ML的而是对一本书前两章的笔记与理解的记录这本书是Understanding global conflict and cooperation: an introduction to theory and history  《理解全球冲突与合作:理论与历史(第九版)》是一部关于国际政治的经典教材 我个人对这个领域颇有性趣，所以">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/23/理解全球冲突与合作-01-国际政治简述以及解释工具与技巧/cover.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/23/理解全球冲突与合作-01-国际政治简述以及解释工具与技巧/"/>
+
+
+
+
+
+  <title>理解全球冲突与合作 01: 国际政治简述以及解释工具与技巧 | Octopi</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/23/理解全球冲突与合作-01-国际政治简述以及解释工具与技巧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">理解全球冲突与合作 01: 国际政治简述以及解释工具与技巧</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T01:53:52+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/international-relations/" itemprop="url" rel="index">
+                    <span itemprop="name">international relations</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/international-relations/理解全球冲突与合作/" itemprop="url" rel="index">
+                    <span itemprop="name">理解全球冲突与合作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇的内容，不是关于python的也不是关于DL/ML的<br>而是对一本书前两章的笔记与理解的记录<br>这本书是<br><em>Understanding global conflict and cooperation: an introduction to theory and history</em></p>
+<p><img src="/2019/01/23/理解全球冲突与合作-01-国际政治简述以及解释工具与技巧/cover.png" alt="cover"></p>
+<p>《理解全球冲突与合作:理论与历史(第九版)》是一部关于国际政治的经典教材</p>
+<p>我个人对这个领域颇有性趣，所以</p>
+<a id="more"></a>
+<h2 id="chapter-01-世界政治中存在永久的冲突与合作逻辑么？"><a href="#chapter-01-世界政治中存在永久的冲突与合作逻辑么？" class="headerlink" title="chapter 01 世界政治中存在永久的冲突与合作逻辑么？"></a>chapter 01 世界政治中存在永久的冲突与合作逻辑么？</h2><p>“世界正在变小”，是这本书的第一句话。纵然，如今这个时代科技极大的改变人们的生活，但是古往今来，国际政治中的很多东西一直都没有发生变化。</p>
+<p>学习国际关系的任务在于，借鉴历史以理解延续性和变迁性。观察国际关系不应被过去所累。需要足够的知识框架，为深刻理解问题打下基础。</p>
+<h3 id="国际政治"><a href="#国际政治" class="headerlink" title="国际政治"></a>国际政治</h3><p>关于国际政治，从古至今都有几种主要的存在模式。</p>
+<ol>
+<li>world imperial system(世界帝国模式)，如西方世界曾经辉煌的罗马帝国</li>
+<li>fedual system(封建模式)，这种模式主要是说欧洲历史上存在过得“贵族领地”的模式</li>
+<li>anarchic system of states(无政府国家体系)，如古希腊的城邦国家</li>
+</ol>
+<blockquote>
+<p>1648,威斯特法利亚合约使得主权国家成为国际行为体的主要形式</p>
+</blockquote>
+<p>我们今天所说的国际体系，通常指领土主权国家体系，这个体系也被成为威斯特法利亚体系。</p>
+<p>国际政治，常被定义为缺少一个共同主权者的体系，也即是在各个行为体之上没有统治者的政治</p>
+<blockquote>
+<p>Thomas Hobbes: state of nature(形容国际政治的无政府体系为“自然状态”)</p>
+</blockquote>
+<p>国家之上没有更高的权威，而国家彼此之间法律，政治和社会上存在着重大差别，导致国际法并不像国内法有效。而且，国际政治中的武力也不同与国内政治的武力，国内政府垄断着合法使用武力的权利，而在国际政治中，无人可以垄断武力的权利。与国内政治差别还在于，国际政治并不存在一个“共同体”观念。</p>
+<h4 id="关于无政府政治的观点"><a href="#关于无政府政治的观点" class="headerlink" title="关于无政府政治的观点"></a>关于无政府政治的观点</h4><p>国际政治是无政府的</p>
+<p>对于无政府政治，有两个先驱人物，各自的观点形成了如今国际政治中最重要的两个观点的源泉。</p>
+<ol>
+<li>Thomas Hobbes，强调不安全，武力和生存，任务人类总是处于战争状态</li>
+<li>Jhon Locke，强调无政府状态，人们也可以发展关系</li>
+</ol>
+<p>这两种观念形成了后来的：现实主义(realism)和自由主义(liberalism)</p>
+<p>现实主义是比较悲观的，自由主义是比较乐观的</p>
+<p><strong>现实主义一直占据着国际政治思想的主导</strong></p>
+<p>对现实主义者来说，国际政治的中心问题是战争和武力的使用问题，国际政治的主要行为体是国家。</p>
+<p>而自由主义者的观念比较丰富，认为无政府状态的危害可以被跨国组织和跨国交流抵消。在20世纪70年代复兴的自由主义者认为，国家可以通过领土征服或者和平贸易的两种途径增强自己的实力(日本为例)。而一些远光更远的自由主义者认为，未来国内政治和国际政治的边界将会模糊，人类将会逐步共同抵御生存的问题，跨国组织的影响会越来越大，正在逐渐瓦解威斯特法利亚体系，会为人类带来新的国际政治。</p>
+<p>对于国际政治的门派不只这两种，马克思主义(marxism)也是很多人的选择，不过马克思主要更多的关注资本主义财富问题，而对民族主义，国家权力以及地缘政治的重要性有一定缺乏。</p>
+<p>构建主义者(constructivist)是最近产生的一个门派。构建主义者强调观念(idea)和文化(culture)在塑造国际政治中有重要作用。并且关注认同(identities)，规范(norms)，文化(culture)，国家利益(national interests)以及国际治理(international governance)。他们眼里政治家的行为动机不止于物质利益，也在于认同感，道义观念和社会文化所认可的行为。构建主义者眼中，国际关系虽然是无政府的，但是是存在多种模式的。</p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>行为体(actor)，目标(goal)和手段(instrument)是国际政治理论的三个基本概念</p>
+<p>行为体(actor),国家长久以来被现实主义者认定为唯一的重要行为体。不过，如今的国际社会，各种非国家行为体也占据着舞台，如大型的跨国公司，以及联合国等</p>
+<p>国家目标，一直都是军事安全。不过随着科技的发展，威胁也在一直发生变化。比如如今的网络攻击</p>
+<p>国际政治的手段也在发生变化。在二战之前，军事力量一直被认定为真正重要的手段。不过，在核武器诞生之后，军事冲突的代价变得过分巨大，导致军事力量与目标实现的关系变淡。对于如今的世界，武力虽然还是国际政治的重要手段，不过已经不是唯一的手段了。</p>
+<p><strong>下一次霸权战争也许是最后一次霸权战争了</strong></p>
+<h3 id="伯罗奔尼撒战争"><a href="#伯罗奔尼撒战争" class="headerlink" title="伯罗奔尼撒战争"></a>伯罗奔尼撒战争</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/international-relations/" rel="tag"># international relations</a>
+          
+            <a href="/tags/国际关系/" rel="tag"># 国际关系</a>
+          
+            <a href="/tags/理解全球冲突与合作/" rel="tag"># 理解全球冲突与合作</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/07/CS231n-Lecture-7-Training-Neural-Networks-Part-II-进一步优化的方法-dropout正则化和迁移学习/" rel="next" title="CS231n Lecture 7 Training Neural Networks Part II 进一步优化的方法 dropout正则化和迁移学习">
+                <i class="fa fa-chevron-left"></i> CS231n Lecture 7 Training Neural Networks Part II 进一步优化的方法 dropout正则化和迁移学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://github.com/stevelau94/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-01-世界政治中存在永久的冲突与合作逻辑么？"><span class="nav-number">1.</span> <span class="nav-text">chapter 01 世界政治中存在永久的冲突与合作逻辑么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#国际政治"><span class="nav-number">1.1.</span> <span class="nav-text">国际政治</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于无政府政治的观点"><span class="nav-number">1.1.1.</span> <span class="nav-text">关于无政府政治的观点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.2.</span> <span class="nav-text">基本概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伯罗奔尼撒战争"><span class="nav-number">1.2.</span> <span class="nav-text">伯罗奔尼撒战争</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
