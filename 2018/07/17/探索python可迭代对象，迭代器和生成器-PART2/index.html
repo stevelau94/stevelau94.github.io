@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python,python cookbook," />
+  <meta name="keywords" content="Python,Python cookbook," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解">
-<meta name="keywords" content="python,python cookbook">
+<meta name="description" content="Python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解">
+<meta name="keywords" content="Python,Python cookbook">
 <meta property="og:type" content="article">
-<meta property="og:title" content="探索python可迭代对象，迭代器和生成器(PART2)">
+<meta property="og:title" content="探索Python可迭代对象，迭代器和生成器(PART2)">
 <meta property="og:url" content="http://yoursite.com/2018/07/17/探索python可迭代对象，迭代器和生成器-PART2/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解">
+<meta property="og:description" content="Python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-27T08:16:38.020Z">
+<meta property="og:updated_time" content="2019-01-28T18:03:25.449Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="探索python可迭代对象，迭代器和生成器(PART2)">
-<meta name="twitter:description" content="python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解">
+<meta name="twitter:title" content="探索Python可迭代对象，迭代器和生成器(PART2)">
+<meta name="twitter:description" content="Python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>探索python可迭代对象，迭代器和生成器(PART2) | Octopi</title>
+  <title>探索Python可迭代对象，迭代器和生成器(PART2) | Octopi</title>
   
 
 
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">探索python可迭代对象，迭代器和生成器(PART2)</h1>
+          <h1 class="post-title" itemprop="name headline">探索Python可迭代对象，迭代器和生成器(PART2)</h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -316,8 +316,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/explore-python/" itemprop="url" rel="index">
-                    <span itemprop="name">explore python</span>
+                  <a href="/categories/Python/explore-Python/" itemprop="url" rel="index">
+                    <span itemprop="name">explore Python</span>
                   </a>
                 </span>
 
@@ -353,7 +353,7 @@
       
 
       
-        <p>python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解<br><a id="more"></a></p>
+        <p>Python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解<br><a id="more"></a></p>
 <h2 id="0-可迭代对象，迭代器，生成器"><a href="#0-可迭代对象，迭代器，生成器" class="headerlink" title="0.可迭代对象，迭代器，生成器"></a>0.可迭代对象，迭代器，生成器</h2><p><strong>注意区分 可迭代对象 和 迭代器</strong></p>
 <p>可迭代对象,Iterable, <strong>iter</strong>,<strong>getitem</strong><br>迭代器,Iterator,<strong>next</strong><br>迭代,Iteration<br>生成器,Generators  </p>
 <h2 id="1-手动访问迭代器元素"><a href="#1-手动访问迭代器元素" class="headerlink" title="1.手动访问迭代器元素"></a>1.手动访问迭代器元素</h2><p><strong>可迭代对象需要转换成迭代器之后，才可以执行next()操作</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>items = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>it = iter(items)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>it</span><br><span class="line">&lt;list_iterator object at <span class="number">0x7f256ddc8d68</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(it)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">StopIteration</span><br></pre></td></tr></table></figure></p>
@@ -407,9 +407,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/Python/" rel="tag"># Python</a>
           
-            <a href="/tags/python-cookbook/" rel="tag"># python cookbook</a>
+            <a href="/tags/Python-cookbook/" rel="tag"># Python cookbook</a>
           
         </div>
       

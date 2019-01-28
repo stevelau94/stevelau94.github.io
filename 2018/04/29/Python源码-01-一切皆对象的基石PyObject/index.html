@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="最近工作涉及到C、C++等底层语言，一方面回顾了相关语法应对工作需求，一方面也满足了自己一直想读读python源码的渴望 终于有机会了 这篇主要介绍python源码中最底层的”对象”-PyObject +++++++++++++++话说这部分未完待续  c代码未添加 关于PyType_Type部分缺少详述">
+<meta name="description" content="最近工作涉及到C、C++等底层语言，一方面回顾了相关语法应对工作需求，一方面也满足了自己一直想读读Python源码的渴望 终于有机会了 这篇主要介绍Python源码中最底层的”对象”-PyObject +++++++++++++++话说这部分未完待续  c代码未添加 关于PyType_Type部分缺少详述">
 <meta name="keywords" content="Python,Python源码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python源码 01 一切皆对象的基石PyObject">
 <meta property="og:url" content="http://yoursite.com/2018/04/29/Python源码-01-一切皆对象的基石PyObject/index.html">
 <meta property="og:site_name" content="Octopi">
-<meta property="og:description" content="最近工作涉及到C、C++等底层语言，一方面回顾了相关语法应对工作需求，一方面也满足了自己一直想读读python源码的渴望 终于有机会了 这篇主要介绍python源码中最底层的”对象”-PyObject +++++++++++++++话说这部分未完待续  c代码未添加 关于PyType_Type部分缺少详述">
+<meta property="og:description" content="最近工作涉及到C、C++等底层语言，一方面回顾了相关语法应对工作需求，一方面也满足了自己一直想读读Python源码的渴望 终于有机会了 这篇主要介绍Python源码中最底层的”对象”-PyObject +++++++++++++++话说这部分未完待续  c代码未添加 关于PyType_Type部分缺少详述">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/04/29/Python源码-01-一切皆对象的基石PyObject/release_def_PyObject.png">
 <meta property="og:image" content="http://yoursite.com/2018/04/29/Python源码-01-一切皆对象的基石PyObject/def_PyVarObject.png">
 <meta property="og:image" content="http://yoursite.com/2018/04/29/Python源码-01-一切皆对象的基石PyObject/PyVarObject_HEAD.png">
-<meta property="og:updated_time" content="2019-01-28T18:01:55.172Z">
+<meta property="og:updated_time" content="2019-01-28T18:03:02.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python源码 01 一切皆对象的基石PyObject">
-<meta name="twitter:description" content="最近工作涉及到C、C++等底层语言，一方面回顾了相关语法应对工作需求，一方面也满足了自己一直想读读python源码的渴望 终于有机会了 这篇主要介绍python源码中最底层的”对象”-PyObject +++++++++++++++话说这部分未完待续  c代码未添加 关于PyType_Type部分缺少详述">
+<meta name="twitter:description" content="最近工作涉及到C、C++等底层语言，一方面回顾了相关语法应对工作需求，一方面也满足了自己一直想读读Python源码的渴望 终于有机会了 这篇主要介绍Python源码中最底层的”对象”-PyObject +++++++++++++++话说这部分未完待续  c代码未添加 关于PyType_Type部分缺少详述">
 <meta name="twitter:image" content="http://yoursite.com/2018/04/29/Python源码-01-一切皆对象的基石PyObject/release_def_PyObject.png">
 
 
@@ -357,18 +357,18 @@
       
 
       
-        <p>最近工作涉及到C、C++等底层语言，一方面回顾了相关语法应对工作需求，一方面也满足了自己一直想读读python源码的渴望</p>
+        <p>最近工作涉及到C、C++等底层语言，一方面回顾了相关语法应对工作需求，一方面也满足了自己一直想读读Python源码的渴望</p>
 <p>终于有机会了</p>
-<p>这篇主要介绍python源码中最底层的”对象”-PyObject</p>
+<p>这篇主要介绍Python源码中最底层的”对象”-PyObject</p>
 <p>+++++++++++++++话说这部分未完待续</p>
 <ol>
 <li>c代码未添加</li>
 <li>关于PyType_Type部分缺少详述</li>
 </ol>
 <a id="more"></a>
-<p>对象是python中最核心的概念，在python中一切都是对象</p>
-<p>这句话几乎在所有python的书里面都存在</p>
-<p>不过，为什么说python中一切皆是对象呢？</p>
+<p>对象是Python中最核心的概念，在Python中一切都是对象</p>
+<p>这句话几乎在所有Python的书里面都存在</p>
+<p>不过，为什么说Python中一切皆是对象呢？</p>
 <h2 id="PyObject"><a href="#PyObject" class="headerlink" title="PyObject"></a>PyObject</h2><p>在object.h头文件中</p>
 <p>定义了PyObject</p>
 <p>其核心是PyObject_HEAD<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def_PyObject</span><br></pre></td></tr></table></figure></p>
@@ -380,13 +380,13 @@
 <li>ob_refcnt，计数信息</li>
 <li>_typeobject *ob_type，类型信息</li>
 </ol>
-<h3 id="ob-refcnt"><a href="#ob-refcnt" class="headerlink" title="ob_refcnt"></a>ob_refcnt</h3><p>ob_refcnt与python的内存管理机制相关</p>
+<h3 id="ob-refcnt"><a href="#ob-refcnt" class="headerlink" title="ob_refcnt"></a>ob_refcnt</h3><p>ob_refcnt与Python的内存管理机制相关</p>
 <h3 id="typeobject-ob-type"><a href="#typeobject-ob-type" class="headerlink" title="_typeobject *ob_type"></a>_typeobject *ob_type</h3><p>*ob_type是一个指向_typeobject结构体的指针</p>
-<p>结构体_typeobject则是python内部的一种特殊对象</p>
+<p>结构体_typeobject则是Python内部的一种特殊对象</p>
 <p>用来指定一个对象类型的类型对象</p>
-<p>PyObject定义了python中每个对象都一定含有的内容，即计数信息和类型信息</p>
-<p>这两个信息会出现在每个python对象所占内存的最开始的字节中</p>
-<h2 id="PyVarObject"><a href="#PyVarObject" class="headerlink" title="PyVarObject"></a>PyVarObject</h2><p>PyVarObject是python中为不定长对象提供的”基类”</p>
+<p>PyObject定义了Python中每个对象都一定含有的内容，即计数信息和类型信息</p>
+<p>这两个信息会出现在每个Python对象所占内存的最开始的字节中</p>
+<h2 id="PyVarObject"><a href="#PyVarObject" class="headerlink" title="PyVarObject"></a>PyVarObject</h2><p>PyVarObject是Python中为不定长对象提供的”基类”</p>
 <p>看源码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def_PyVarObject</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2018/04/29/Python源码-01-一切皆对象的基石PyObject/def_PyVarObject.png" alt="def_PyVarObject"></p>
 <p>和PyObject的结构很相似，里面有个核心的东西叫PyVarObject_HEAD</p>
@@ -400,12 +400,12 @@
 <p>所以定义了ob_size来指明对象容纳元素的个数(这里不是字节的数量哦！是元素的个数！)</p>
 <p>那么也就可以得出结论，其实 PyVarObject 也就是 PyObject 的一个拓展</p>
 <h2 id="定长对象和变长对象"><a href="#定长对象和变长对象" class="headerlink" title="定长对象和变长对象"></a>定长对象和变长对象</h2><p>上面介绍了 PyObject 和 PyVarObject</p>
-<p>python中最基本的几个类型int,list,string和dict都是什么对象呢</p>
+<p>Python中最基本的几个类型int,list,string和dict都是什么对象呢</p>
 <p>其实很容易想到</p>
 <p>int一定是定长对象，它的内存开始位置有ob_refcnt和ob_type信息</p>
 <p>string和list一定是变长对象，它的内存开始位置除了有ob_refcnt和ob_type信息之外，还会有ob_size信息</p>
 <p>dict呢？(等我读到了再来解答。。。哈哈哈)</p>
-<h2 id="ob-refcnt-1"><a href="#ob-refcnt-1" class="headerlink" title="ob_refcnt"></a>ob_refcnt</h2><p>引用计数，是python中管理和维护对象在内存中存在与否的变量</p>
+<h2 id="ob-refcnt-1"><a href="#ob-refcnt-1" class="headerlink" title="ob_refcnt"></a>ob_refcnt</h2><p>引用计数，是Python中管理和维护对象在内存中存在与否的变量</p>
 <p>ob_refcnt 主要通过 Py_INCREF(op) 和 Py_DECREF(op) 两个宏来实现增加和减少对象的引用计数的</p>
 <p>当引用计数减小到0的时候，Py_DECREF会调用析构函数释放资源<br>实际就是调用 tp_dealloc</p>
 <p>每次创建一个新的对象的时候，都会使用 _Py_NewReference(op)宏将对象的引用计数初始化为1</p>
@@ -414,7 +414,7 @@
 <p>我们可以看到，很多关于对象的类型信息以及内存开辟的信息(这些常被称为元信息)都在_typeobject中</p>
 <h3 id="对象分配内存空间"><a href="#对象分配内存空间" class="headerlink" title="对象分配内存空间"></a>对象分配内存空间</h3><p>创建类型对象时分配内存空间大小的信息，是 tp_basicsize 和 tp_itemsize 决定的</p>
 <h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = int(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(a)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">int</span>'&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">int</span>.<span class="title">__base__</span></span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">object</span>'&gt;</span></span><br></pre></td></tr></table></figure>
-<p>创建int对象的时候，调用的是python内部的PyInt_Type</p>
+<p>创建int对象的时候，调用的是Python内部的PyInt_Type</p>
 <p>而int继承自object,即 PyBaseObject_Type</p>
 <p>那么就可以大概简述一下a被创建的过程:</p>
 <ol>
@@ -486,8 +486,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/27/探索python函数-PART1/" rel="prev" title="探索python函数 (PART1)">
-                探索python函数 (PART1) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/27/探索python函数-PART1/" rel="prev" title="探索Python函数 (PART1)">
+                探索Python函数 (PART1) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
