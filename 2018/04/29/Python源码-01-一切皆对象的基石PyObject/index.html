@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/images/octopus_favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,Python源码," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近工作涉及到C、C++等底层语言，一方面回顾了相关语法应对工作需求，一方面也满足了自己一直想读读python源码的渴望 终于有机会了 这篇主要介绍python源码中最底层的”对象”-PyObject +++++++++++++++话说这部分未完待续  c代码未添加 关于PyType_Type部分缺少详述">
+<meta name="keywords" content="Python,Python源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python源码 01 一切皆对象的基石PyObject">
+<meta property="og:url" content="http://yoursite.com/2018/04/29/Python源码-01-一切皆对象的基石PyObject/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="最近工作涉及到C、C++等底层语言，一方面回顾了相关语法应对工作需求，一方面也满足了自己一直想读读python源码的渴望 终于有机会了 这篇主要介绍python源码中最底层的”对象”-PyObject +++++++++++++++话说这部分未完待续  c代码未添加 关于PyType_Type部分缺少详述">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/29/Python源码-01-一切皆对象的基石PyObject/release_def_PyObject.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/29/Python源码-01-一切皆对象的基石PyObject/def_PyVarObject.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/29/Python源码-01-一切皆对象的基石PyObject/PyVarObject_HEAD.png">
+<meta property="og:updated_time" content="2019-01-28T18:01:55.172Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python源码 01 一切皆对象的基石PyObject">
+<meta name="twitter:description" content="最近工作涉及到C、C++等底层语言，一方面回顾了相关语法应对工作需求，一方面也满足了自己一直想读读python源码的渴望 终于有机会了 这篇主要介绍python源码中最底层的”对象”-PyObject +++++++++++++++话说这部分未完待续  c代码未添加 关于PyType_Type部分缺少详述">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/29/Python源码-01-一切皆对象的基石PyObject/release_def_PyObject.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/29/Python源码-01-一切皆对象的基石PyObject/"/>
+
+
+
+
+
+  <title>Python源码 01 一切皆对象的基石PyObject | Octopi</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/29/Python源码-01-一切皆对象的基石PyObject/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python源码 01 一切皆对象的基石PyObject</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-29T02:01:17+08:00">
+                2018-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/Python-source-code/" itemprop="url" rel="index">
+                    <span itemprop="name">Python source code</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近工作涉及到C、C++等底层语言，一方面回顾了相关语法应对工作需求，一方面也满足了自己一直想读读python源码的渴望</p>
+<p>终于有机会了</p>
+<p>这篇主要介绍python源码中最底层的”对象”-PyObject</p>
+<p>+++++++++++++++话说这部分未完待续</p>
+<ol>
+<li>c代码未添加</li>
+<li>关于PyType_Type部分缺少详述</li>
+</ol>
+<a id="more"></a>
+<p>对象是python中最核心的概念，在python中一切都是对象</p>
+<p>这句话几乎在所有python的书里面都存在</p>
+<p>不过，为什么说python中一切皆是对象呢？</p>
+<h2 id="PyObject"><a href="#PyObject" class="headerlink" title="PyObject"></a>PyObject</h2><p>在object.h头文件中</p>
+<p>定义了PyObject</p>
+<p>其核心是PyObject_HEAD<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def_PyObject</span><br></pre></td></tr></table></figure></p>
+<p>看看PyObject_HEAD有什么<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PyObject_HEAD</span><br></pre></td></tr></table></figure></p>
+<p>在release模式下，PyObject定义的更为简洁<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">release_def_PyObject</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/04/29/Python源码-01-一切皆对象的基石PyObject/release_def_PyObject.png" alt="release_def_PyObject"></p>
+<p>就有最核心的两项</p>
+<ol>
+<li>ob_refcnt，计数信息</li>
+<li>_typeobject *ob_type，类型信息</li>
+</ol>
+<h3 id="ob-refcnt"><a href="#ob-refcnt" class="headerlink" title="ob_refcnt"></a>ob_refcnt</h3><p>ob_refcnt与python的内存管理机制相关</p>
+<h3 id="typeobject-ob-type"><a href="#typeobject-ob-type" class="headerlink" title="_typeobject *ob_type"></a>_typeobject *ob_type</h3><p>*ob_type是一个指向_typeobject结构体的指针</p>
+<p>结构体_typeobject则是python内部的一种特殊对象</p>
+<p>用来指定一个对象类型的类型对象</p>
+<p>PyObject定义了python中每个对象都一定含有的内容，即计数信息和类型信息</p>
+<p>这两个信息会出现在每个python对象所占内存的最开始的字节中</p>
+<h2 id="PyVarObject"><a href="#PyVarObject" class="headerlink" title="PyVarObject"></a>PyVarObject</h2><p>PyVarObject是python中为不定长对象提供的”基类”</p>
+<p>看源码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def_PyVarObject</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/04/29/Python源码-01-一切皆对象的基石PyObject/def_PyVarObject.png" alt="def_PyVarObject"></p>
+<p>和PyObject的结构很相似，里面有个核心的东西叫PyVarObject_HEAD</p>
+<p>再看PyVarObject_HEAD<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PyVarObject_HEAD</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/04/29/Python源码-01-一切皆对象的基石PyObject/PyVarObject_HEAD.png" alt="PyVarObject_HEAD"></p>
+<p>发现了猫腻</p>
+<p>原来 PyVarObject_HEAD 就是 PyObject_HEAD 的拓展而已</p>
+<p>多了一项 ob_size</p>
+<p>这就很好理解了</p>
+<p>由于变长对象的特性，为了保证定义对象的内存空间不用经常”搬迁”</p>
+<p>所以定义了ob_size来指明对象容纳元素的个数(这里不是字节的数量哦！是元素的个数！)</p>
+<p>那么也就可以得出结论，其实 PyVarObject 也就是 PyObject 的一个拓展</p>
+<h2 id="定长对象和变长对象"><a href="#定长对象和变长对象" class="headerlink" title="定长对象和变长对象"></a>定长对象和变长对象</h2><p>上面介绍了 PyObject 和 PyVarObject</p>
+<p>python中最基本的几个类型int,list,string和dict都是什么对象呢</p>
+<p>其实很容易想到</p>
+<p>int一定是定长对象，它的内存开始位置有ob_refcnt和ob_type信息</p>
+<p>string和list一定是变长对象，它的内存开始位置除了有ob_refcnt和ob_type信息之外，还会有ob_size信息</p>
+<p>dict呢？(等我读到了再来解答。。。哈哈哈)</p>
+<h2 id="ob-refcnt-1"><a href="#ob-refcnt-1" class="headerlink" title="ob_refcnt"></a>ob_refcnt</h2><p>引用计数，是python中管理和维护对象在内存中存在与否的变量</p>
+<p>ob_refcnt 主要通过 Py_INCREF(op) 和 Py_DECREF(op) 两个宏来实现增加和减少对象的引用计数的</p>
+<p>当引用计数减小到0的时候，Py_DECREF会调用析构函数释放资源<br>实际就是调用 tp_dealloc</p>
+<p>每次创建一个新的对象的时候，都会使用 _Py_NewReference(op)宏将对象的引用计数初始化为1</p>
+<h2 id="typeobject和PyTypeObject"><a href="#typeobject和PyTypeObject" class="headerlink" title="_typeobject和PyTypeObject"></a>_typeobject和PyTypeObject</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_typeobject</span><br></pre></td></tr></table></figure>
+<!-- PyTypeObject -->
+<p>我们可以看到，很多关于对象的类型信息以及内存开辟的信息(这些常被称为元信息)都在_typeobject中</p>
+<h3 id="对象分配内存空间"><a href="#对象分配内存空间" class="headerlink" title="对象分配内存空间"></a>对象分配内存空间</h3><p>创建类型对象时分配内存空间大小的信息，是 tp_basicsize 和 tp_itemsize 决定的</p>
+<h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = int(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(a)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">int</span>'&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">int</span>.<span class="title">__base__</span></span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">object</span>'&gt;</span></span><br></pre></td></tr></table></figure>
+<p>创建int对象的时候，调用的是python内部的PyInt_Type</p>
+<p>而int继承自object,即 PyBaseObject_Type</p>
+<p>那么就可以大概简述一下a被创建的过程:</p>
+<ol>
+<li>PyInt_Type 中调用 tp_new</li>
+<li>(若这层找不到)进而 tp_base 会在基类中寻找 tp_new</li>
+<li>因为所有类的基类最终都是PyBaseObject_Type， 所以最终一定会找到 tp_new</li>
+<li>PyBaseObject_Type 中的 tp_new 指向的是 object_new</li>
+<li>object_new 会访问 PyInt_Type 中记录的 tp_basicsize 信息，完成内存申请</li>
+<li>tp_new 完成之后，会在 PyInt_Type 中调用 tp_init 完成创建</li>
+</ol>
+<h3 id="对象行为"><a href="#对象行为" class="headerlink" title="对象行为"></a>对象行为</h3><p>PyTypeObject 中定义了很多函数指针</p>
+<p>这些函数指针就是类型对象中所定义的操作，决定这个对象表现的行为</p>
+<p>如我们之前所看到的 tp_new 和 tp_init 可以完成对象被创建并初始化</p>
+<p>这些操作信息中有三个非常重要的操作族:</p>
+<ol>
+<li>tp_as_number -&gt; PyNumberMethods</li>
+<li>tp_as_sequence -&gt; PySequenceMethods</li>
+<li>tp_as_mapping -&gt; PyMappingMethods</li>
+</ol>
+<p>这三个操作族其实可以从字面意思理解</p>
+<p>就是为对象提供支持的操作类型</p>
+<p>如 tp_as_number.nb_add 就是为对象提供了add功能</p>
+<p>不过需要注意的是，PyTypeObject是允许一种类型制定两/三种行为的</p>
+<p>举个有趣的例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">MyFloat</span><span class="params">(float)</span>:</span></span><br><span class="line"><span class="meta">... </span>  <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, key)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> key+str(self)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = MyFloat(<span class="number">100</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = MyFloat(<span class="number">88</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">100.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line"><span class="number">88.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a+b</span><br><span class="line"><span class="number">188.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="string">'key'</span>]</span><br><span class="line"><span class="string">'key100.0'</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到 PyTypeObject 是允许一种类型同时拥有 PyNumberMethods 和 PyMappingMethods 的行为</p>
+<h3 id="类型的类型"><a href="#类型的类型" class="headerlink" title="类型的类型"></a>类型的类型</h3><p>这部分很容易让人产生困惑</p>
+<p>PyTypeObject 开始的部分，囊括了 PyVarObject_HEAD</p>
+<p>也就是说明，PyTypeObject 本身也是一个对象</p>
+<!-- 未完待续 -->
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Python源码/" rel="tag"># Python源码</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/07/解决conda命令的CondaHTTPError网络问题/" rel="next" title="解决conda命令的CondaHTTPError网络问题">
+                <i class="fa fa-chevron-left"></i> 解决conda命令的CondaHTTPError网络问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/27/探索python函数-PART1/" rel="prev" title="探索python函数 (PART1)">
+                探索python函数 (PART1) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://github.com/stevelau94/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PyObject"><span class="nav-number">1.</span> <span class="nav-text">PyObject</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ob-refcnt"><span class="nav-number">1.1.</span> <span class="nav-text">ob_refcnt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#typeobject-ob-type"><span class="nav-number">1.2.</span> <span class="nav-text">_typeobject *ob_type</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PyVarObject"><span class="nav-number">2.</span> <span class="nav-text">PyVarObject</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定长对象和变长对象"><span class="nav-number">3.</span> <span class="nav-text">定长对象和变长对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ob-refcnt-1"><span class="nav-number">4.</span> <span class="nav-text">ob_refcnt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typeobject和PyTypeObject"><span class="nav-number">5.</span> <span class="nav-text">_typeobject和PyTypeObject</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象分配内存空间"><span class="nav-number">5.1.</span> <span class="nav-text">对象分配内存空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象创建"><span class="nav-number">5.2.</span> <span class="nav-text">对象创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象行为"><span class="nav-number">5.3.</span> <span class="nav-text">对象行为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型的类型"><span class="nav-number">5.4.</span> <span class="nav-text">类型的类型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
