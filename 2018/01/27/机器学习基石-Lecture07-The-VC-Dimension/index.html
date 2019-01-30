@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/images/octopus_favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Machine Learning,机器学习,NTU机器学习基石," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="上节课介绍了break point   并且得出结论说只要break point存在，则M有上界，一定存在 E_out ≈ E_in  这节课介绍ML领域一个特别重要的概念，VC Dimension">
+<meta name="keywords" content="Machine Learning,机器学习,NTU机器学习基石">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基石-Lecture07: The VC Dimension">
+<meta property="og:url" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="上节课介绍了break point   并且得出结论说只要break point存在，则M有上界，一定存在 E_out ≈ E_in  这节课介绍ML领域一个特别重要的概念，VC Dimension">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Lecture06.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Lecture07.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Bound_function.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/loosely.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/VCbound.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/VC_Dimension.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/4_VC_Dimension.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/VC_Dimension_learning.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/degree_of_freedom.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/M.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Rephrase.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Message.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Sample_Complexity.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Looseness.png">
+<meta property="og:updated_time" content="2019-01-30T12:43:35.670Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习基石-Lecture07: The VC Dimension">
+<meta name="twitter:description" content="上节课介绍了break point   并且得出结论说只要break point存在，则M有上界，一定存在 E_out ≈ E_in  这节课介绍ML领域一个特别重要的概念，VC Dimension">
+<meta name="twitter:image" content="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Lecture06.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/"/>
+
+
+
+
+
+  <title>机器学习基石-Lecture07: The VC Dimension | Octopi</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习基石-Lecture07: The VC Dimension</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T20:39:46+08:00">
+                2018-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/NTU机器学习基石/" itemprop="url" rel="index">
+                    <span itemprop="name">NTU机器学习基石</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上节课介绍了break point  </p>
+<p>并且得出结论说只要break point存在，则M有上界，一定存在 E_out ≈ E_in</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Lecture06.png" alt="Lecture06"></p>
+<p>这节课介绍ML领域一个特别重要的概念，VC Dimension</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Lecture07.png" alt="Lecture07"></p>
+<a id="more"></a>
+<h2 id="Definition-of-VC-Dimension"><a href="#Definition-of-VC-Dimension" class="headerlink" title="Definition of VC Dimension"></a>Definition of VC Dimension</h2><p>由之前的课程我们知道，一个H，如果它有break point k的话，那它的growth func就是有界的。上界称为Bound function<br><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Bound_function.png" alt="Bound_function"></p>
+<p>而Bound function也是有界的，且上界为N^(k-1)</p>
+<p>从数据上看，N(k−1)比B(N,k)松弛很多</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/loosely.png" alt="loosely"></p>
+<p>VC bound就可以转换为:</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/VCbound.png" alt="VCbound"></p>
+<p>有结论:</p>
+<ol>
+<li>有break point k\</li>
+<li>N 足够大</li>
+<li>E_out ≈ E_in</li>
+<li>选择一个矩g，使E_in ≈ 0，即能够学习</li>
+</ol>
+<h3 id="VC-Dimension"><a href="#VC-Dimension" class="headerlink" title="VC Dimension"></a>VC Dimension</h3><p>就是最多能够分类的个数，也可以说shatter最多的inputs个数</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/VC_Dimension.png" alt="VC_Dimension"></p>
+<p>四种情况的VC Dimension</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/4_VC_Dimension.png" alt="4_VC_Dimension"></p>
+<p>d_vc 代替 k，那么 VC bound 的问题也就转换为与 d_vc 和 N 相关了</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/VC_Dimension_learning.png" alt="VC_Dimension_learning"></p>
+<h2 id="VC-Dimension-of-Perceptrons"><a href="#VC-Dimension-of-Perceptrons" class="headerlink" title="VC Dimension of Perceptrons"></a>VC Dimension of Perceptrons</h2><p>这部分主要介绍d_vc = d+1</p>
+<h2 id="Physical-Intuition-of-VC-Dimension"><a href="#Physical-Intuition-of-VC-Dimension" class="headerlink" title="Physical Intuition of VC Dimension"></a>Physical Intuition of VC Dimension</h2><p>VD dimension 可以被当成是 H 的分类能力。</p>
+<p>如图中W表示自由度</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/degree_of_freedom.png" alt="degree_of_freedom"></p>
+<p>M 和 d_vc 的关系</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/M.png" alt="M"></p>
+<h2 id="Interpreting-VC-Dimension"><a href="#Interpreting-VC-Dimension" class="headerlink" title="Interpreting VC Dimension"></a>Interpreting VC Dimension</h2><p>深入地探讨VC Dimension的意义</p>
+<p>重新推导</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Rephrase.png" alt="Rephrase"></p>
+<p>ϵ表现了假设空间H的泛化能力，ϵ越小，泛化能力越大。</p>
+<p>推导出泛化误差 E_out 的边界</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Message.png" alt="Message"></p>
+<p>样本复杂度（Sample Complexity）</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Sample_Complexity.png" alt="Sample_Complexity"></p>
+<p>从实践来看，N ≈ 10 d_VC 就OK了</p>
+<p>10倍的d_VC</p>
+<p>VC Bound基本上对所有模型的宽松程度是基本一致的，所以，不同模型之间还是可以横向比较。</p>
+<p><img src="/2018/01/27/机器学习基石-Lecture07-The-VC-Dimension/Looseness.png" alt="Looseness"></p>
+<p>VC Bound宽松对ML的可行性还是没有太大影响</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/NTU机器学习基石/" rel="tag"># NTU机器学习基石</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/23/机器学习基石-Lecture06-Theory-of-Generalization/" rel="next" title="机器学习基石-Lecture06: Theory of Generalization">
+                <i class="fa fa-chevron-left"></i> 机器学习基石-Lecture06: Theory of Generalization
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/02/hexo的安装与配置/" rel="prev" title="在GnomeUbuntu上安装hexo,配置及部署至gitpage">
+                在GnomeUbuntu上安装hexo,配置及部署至gitpage <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://github.com/stevelau94/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-of-VC-Dimension"><span class="nav-number">1.</span> <span class="nav-text">Definition of VC Dimension</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VC-Dimension"><span class="nav-number">1.1.</span> <span class="nav-text">VC Dimension</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VC-Dimension-of-Perceptrons"><span class="nav-number">2.</span> <span class="nav-text">VC Dimension of Perceptrons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Physical-Intuition-of-VC-Dimension"><span class="nav-number">3.</span> <span class="nav-text">Physical Intuition of VC Dimension</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interpreting-VC-Dimension"><span class="nav-number">4.</span> <span class="nav-text">Interpreting VC Dimension</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
