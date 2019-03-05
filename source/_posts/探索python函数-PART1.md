@@ -1,27 +1,27 @@
 ---
-title: 探索python函数 (PART1)
+title: 探索Python函数 (PART1)
 date: 2018-05-27 15:39:28
 categories: 
-    - "python"
-    - "explore python"
+    - "Python"
+    - "explore Python"
 tags: 
-    - python
+    - Python
 ---
-本文主要介绍了python一些需要注意的基础细节问题，包括作用域(global/nonlocal)和各种参数传递方法
+本文主要介绍了Python一些需要注意的基础细节问题，包括作用域(global/nonlocal)和各种参数传递方法
 
 <!--more-->
 
 ## Basic
 关于函数基础部分，虽然像def，return这些语句很简单，但是还是有一些需要留意的地方。
 
-### python函数是实时执行的  
+### Python函数是实时执行的  
 def语句实际上是一个可执行语句(当然，py里面的所有语句都是实时运行的)，在运行的时候会创建一个新的函数对象并将其赋值给一个变量。
 
 明确一些：def在运行时候才会进行评估，而def中的代码实在函数调用后才会进行评估
 
 因此我们可以不用像C那样提前定义好所有的一切
 
-```python
+```Python
 def func():
     pass
 
@@ -31,11 +31,11 @@ call_func = func
 call_func()
 ```
 
-### python函数是对象
-def就像python中的其他语句一样，函数也是对象
+### Python函数是对象
+def就像Python中的其他语句一样，函数也是对象
 
 所以函数允许任意的属性附加到已经定义好的函数中(这点有点儿神奇，而且其实可能会不符合一些设计规范，但是有时候还挺有用的)
-```python
+```Python
 def func():
     pass
 
@@ -44,13 +44,13 @@ func.attr = 1
 ```
 
 ### 多态
-python是动态类型的编程语言，所以多态在py中随处可见，这给py带来了极大的灵活性
+Python是动态类型的编程语言，所以多态在py中随处可见，这给py带来了极大的灵活性
 
 那么应该如何理解多态呢
 
 简单来说就是py不关心特定的数据类型(和C++，java他们大不相同)
 
-```python
+```Python
 def mul_func(x, y):
     return x * y
 
@@ -62,13 +62,13 @@ def mul_func(x, y):
 '123123'
 ```
 
-多态的实现是个很有意思的话题，python在底层如何实现这种神奇的操作的(提示：py中一切都是对象噢！)，我以后也会再探索一下
+多态的实现是个很有意思的话题，Python在底层如何实现这种神奇的操作的(提示：py中一切都是对象噢！)，我以后也会再探索一下
 
 ## 作用域
 
-python创建，改变和查找变量名都是在命名空间中进行的。也就是说，在说到变量对应代码中的值的时候提到的作用域就是这个命名空间。
+Python创建，改变和查找变量名都是在命名空间中进行的。也就是说，在说到变量对应代码中的值的时候提到的作用域就是这个命名空间。
 
-所有的变量名，包括作用域在内的概念都是在python赋值的时候生成的
+所有的变量名，包括作用域在内的概念都是在Python赋值的时候生成的
 
 在代码中赋值的位置决定了这个变量名的作用域
 
@@ -78,11 +78,11 @@ python创建，改变和查找变量名都是在命名空间中进行的。也�
 
 ### 作用域法则
 
-在python中，有一套变量名的解析原则：LEGB
+在Python中，有一套变量名的解析原则：LEGB
 简单来说就是从变量名最近的def或者lambda作用域中查找这个变量名的关联值(local function)，
 如果找不到就去上层(嵌套def或者lambda)继续查找(Enclosing function locals),
 如果本地函数和外层嵌套函数中都不存在的话就继续向外部查找(Global module),
-如果全局作用域中还是没有，那么python会在内置作用域中查找(Built-in),
+如果全局作用域中还是没有，那么Python会在内置作用域中查找(Built-in),
 最后如果还是找不到的话会报错
 
 ##### 需要注意的是：
@@ -90,7 +90,7 @@ python创建，改变和查找变量名都是在命名空间中进行的。也�
 内层变量名会覆盖掉外层的变量(这点倒没什么)  
 **全局变量名不要覆盖掉内置变量名**  
 
-```python
+```Python
 >>> print(1, 2)
 1 2
 >>> def print(a, b):
@@ -108,7 +108,7 @@ python创建，改变和查找变量名都是在命名空间中进行的。也�
 
 这就需要global了
 
-```python
+```Python
 >>> a = 99
 # local变量不影响全局变量
 >>> def func():
@@ -135,7 +135,7 @@ python创建，改变和查找变量名都是在命名空间中进行的。也�
 要在真的有需要的情况下才设置全局变量(通常情况下没这个需要 --)
 
 还有一种类似访问局变量的方法，通过模块访问
-```python
+```Python
 # 1st.py
 var = 999
 
@@ -158,7 +158,7 @@ def func_a():
 
 那么来看看工厂函数吧
 
-```python
+```Python
 
 >>> def maker(x):
 ...     def action(y):
@@ -175,7 +175,7 @@ def func_a():
 或许上个例子也还好  
 
 那么再看看有lambda的情况
-```python
+```Python
 >>> def func():
 ...     x = 4
 ...     action = (lambda n: x ** n)
@@ -191,7 +191,7 @@ def func_a():
 
 ### nonlocal语句
 
-nonlocal是python3中新添加的语句
+nonlocal是Python3中新添加的语句
 
 nonlocal提供了嵌套def对嵌套函数中的名称进行读取和写入的功能
 
@@ -206,7 +206,7 @@ nonlocal对其后的变量名查找直接从嵌套的def作用域开始，而非
 
 **nonlocal主要作用在于，对允许嵌套的作用域中的名称进行修改而非只是引用**
 
-```python
+```Python
 # 这是通常的情况
 >>> def tester(start):
 ...     state = start
@@ -262,7 +262,7 @@ second 1
 
 这点通过例子来阐述比较清楚
 
-```python
+```Python
 
 >>> def func(a):
 ...     a = 999
@@ -289,7 +289,7 @@ second 1
 
 可以这样传递可变参数(copy)
 
-```python
+```Python
 
 l = [1, 2]
 changer(x, l[:])
@@ -308,7 +308,7 @@ changer(x, l[:])
 *args,接受元祖并匹配
 **kargs,接受字典进行关键字匹配
 
-```python
+```Python
 # 任意参数匹配
 >>> def func(*args, **kargs):
 ...     print(args)
@@ -327,7 +327,7 @@ changer(x, l[:])
 ##### 需要注意的是：
 
 ***args接受的不仅仅是元祖，而是可迭代对象**
-```python
+```Python
 # 也就是说可以这样操作
 func(*open('filename'))
 ```
@@ -340,7 +340,7 @@ keyword-Only却是放在*后面的
 
 要求，函数必须接受keyword-Only参数才行
 
-```python
+```Python
 >>> def kwonly(a, *b, c):
 ...     print(a, b, c)
 ...
@@ -357,7 +357,7 @@ TypeError: kwonly() missing 1 required keyword-only argument: 'c'
 **keyword-Only放在*后面，但是必须放在**前面**
 
 这些情况会导致语法错误
-```python
+```Python
 >>> def kwonly(a, **args, b, c): pass
   File "<stdin>", line 1
     def kwonly(a, **args, b, c): pass
@@ -378,7 +378,7 @@ SyntaxError: invalid syntax
 看一个各种参数种类混在一起的例子吧  
 
 会发现keyword-Only可以在**参数中被赋值
-```python
+```Python
 >>> def func(a, *b, c=999, **d):
 ...     print(a, b, c, d)
 ...
@@ -394,7 +394,7 @@ SyntaxError: invalid syntax
 ## 浅析高级话题
 
 ### 函数设计观念
-这些建议来自*learning python*
+这些建议来自*learning Python*
 1. 耦合性，函数独立于外部
 2. 全局变量，真正需要的时候才用
 3. 通常不要改变可变参数
@@ -404,13 +404,13 @@ SyntaxError: invalid syntax
 
 ### 函数注解
 
-python3中新增加的功能
+Python3中新增加的功能
 
 可以__annotations__查看
 
 直接看例子
 
-```python
+```Python
 
 def func(a:'sss', b:(1,2), c:float) -> int:
     return a + b +c
@@ -430,13 +430,13 @@ def func(a:'sss', b:(1,2), c:float) -> int:
 
 ### map
 
-python3中map返回可迭代对象
+Python3中map返回可迭代对象
 
 我感觉map能做的列表解析式一般也都能做
 
 但是某些情况map函数比列表解析式运行的快
 
-```python
+```Python
 >>> numbers = [1, 2, 3, 4]
 # 普通for循环
 >>> l = []
@@ -465,25 +465,25 @@ python3中map返回可迭代对象
 ```
 
 当然 map可以接受N个参数和N个序列
-```python
+```Python
 >>> list(map(pow, [1,2,3], [3, 2, 1]))
 [1, 4, 3]
 ```
 
 ### filter
-python3中filter返回可迭代对象
-```python
+Python3中filter返回可迭代对象
+```Python
 >>> list(filter(lambda x : x>=5, [4, 5 ,6, 1]))
 [5, 6]
 ```
 
 
 ### reduce
-python3中reduce被放在了functools中
+Python3中reduce被放在了functools中
 
-python3中reduce返回迭代器
+Python3中reduce返回迭代器
 
-```python
+```Python
 >>> reduce((lambda x,y :x+y), [1,2,3,4,5])
 15
 ```

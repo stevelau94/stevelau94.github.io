@@ -1,30 +1,30 @@
 ---
-title: 探索python可迭代对象，迭代器和生成器(PART1)
+title: 探索Python可迭代对象，迭代器和生成器(PART1)
 date: 2018-06-27 22:06:56
 categories: 
-    - "python"
-    - "explore python"
+    - "Python"
+    - "explore Python"
 tags: 
-    - python
+    - Python
 ---
 
-感觉在python中，"迭代"是个很重要的关键词，而且python3将所有内置函数的返回都改成了迭代器。所以python的可迭代对象，迭代器和生成器这些知识，是时候进行一番详细的梳理了
+感觉在Python中，"迭代"是个很重要的关键词，而且Python3将所有内置函数的返回都改成了迭代器。所以Python的可迭代对象，迭代器和生成器这些知识，是时候进行一番详细的梳理了
 <!--more-->
 
 ## 关于"重复"的基本概念
 
 一般程序语言中都有这样一些关于"重复"的概念，如loop、iterate、traversal 和 recursion，他们的通常的定义是:
 
-- loop(循环): 在一定条件下，重复执行同一段代码，如python中的while;
-- iterate(迭代): 按照某种顺序逐个访问容器中的每一项，如python中的for;
+- loop(循环): 在一定条件下，重复执行同一段代码，如Python中的while;
+- iterate(迭代): 按照某种顺序逐个访问容器中的每一项，如Python中的for;
 - traversal(递归): 不断调用自身，如斐波那契数列;
 - recursion(遍历): 按照一定的规则访问结构中的每个节点，而且每个节点都只访问一次
 
-通过这些定义，我们会发现python中的for语句并不能够像别的编程语言那样实现for循环，python的循环都是while来实现的；python的for用来实现迭代。
+通过这些定义，我们会发现Python中的for语句并不能够像别的编程语言那样实现for循环，Python的循环都是while来实现的；Python的for用来实现迭代。
 
 ## 关于"迭代"的基本概念
 
-那么在python中，关于"迭代"的概念，又有这些: iterable,iterator和generators
+那么在Python中，关于"迭代"的概念，又有这些: iterable,iterator和generators
 
 - iterable(可迭代对象): 定义了可以返回一个迭代器的\_\_iter\_\_方法，或者定义了可以支持下标索引的\_\_getitem\_\_方法
 - iterator(迭代器): 定义了\_\_next\_\_方法
@@ -36,7 +36,7 @@ tags:
 
 **iter()这个函数，可以使可迭代对象转换为迭代器**
 
-![](探索python可迭代对象，迭代器和生成器-PART1/Iterable_vs_iterator.jpg)
+![](探索Python可迭代对象，迭代器和生成器-PART1/Iterable_vs_iterator.jpg)
 
 ## 详解可迭代对象和迭代器
 
@@ -52,7 +52,7 @@ tags:
 可迭代对象可以通过iter()返回迭代器(\_\_iter\_\_)；
 
 可以通过isinstance(obj, collections.Iterable) 来判断对象是否为可迭代对象
-```python
+```Python
 >>> import collections
 >>> a = 'string is iterable'
 >>> isinstance(a, collections.Iterable)
@@ -64,7 +64,7 @@ tags:
 定义了\_\_next\_\_方法返回下一个值，在结尾处抛出StopIteration
 
 可以通过 isinstance(obj, collections.Iterator) 来判断对象是否为迭代器
-```python
+```Python
 >>> import collections
 >>> a = 'string is iterable but not a iterator'
 >>> isinstance(a, collections.Iterator)
@@ -76,21 +76,21 @@ True
 
 #### for语句原理
 
-for语句在python中适用于迭代的，而while才是真正的循环  
+for语句在Python中适用于迭代的，而while才是真正的循环  
 
 深究其差别在于，循环是可以增加跳过的条件的，但是迭代只能一个接着一个取值
 
 在for语句的内部，是调用可迭代对象的iter()方法将可迭代对象转化为迭代器，然后在调用迭代器中的next()方法进行的迭代。for语句会自动捕获迭代器结束时的StopIteration异常并终止迭代。
 
 
-## python的“迭代”
-python尤其是python3之后，给人感觉尤其重视“迭代”。
+## Python的“迭代”
+Python尤其是Python3之后，给人感觉尤其重视“迭代”。
 
 我们可以看到有很多内置函数的返回都变成了迭代器，而且不止于此。
 
 #### 文件迭代器
 
-```python
+```Python
 f = open('test.txt', 'r')
 # 返回第一行
 f.readline()
@@ -106,7 +106,7 @@ f.readline()
 
 #### list和dict是可迭代对象不是迭代器
 他们可以通过iter转换成迭代器
-```python
+```Python
 >>> a = [1,2]
 >>> a
 [1, 2]
@@ -136,7 +136,7 @@ StopIteration
 
 dict.keys,dict.values和dict.items都是可迭代对象非迭代器
 
-```python
+```Python
 >>> d = dict(a=1, b=5)
 >>> type(d)
 <class 'dict'>
@@ -164,7 +164,7 @@ TypeError: 'builtin_function_or_method' object is not an iterator
 
 #### enumerate()返回的是迭代器
 
-```python
+```Python
 >>> a = [1,2]
 >>> type(enumerate(a))
 <class 'enumerate'>
@@ -178,7 +178,7 @@ TypeError: 'builtin_function_or_method' object is not an iterator
 #### map(),zip()和filter()返回的是迭代器
 
 map
-```python
+```Python
 >>> map(abs, [-1,-2,1])
 <map object at 0x7f69063648d0>
 >>> abs_ = map(abs, [-1,-2,1])
@@ -189,7 +189,7 @@ map
 ```
 
 zip
-```python
+```Python
 >>> zip([1,2,3], [7,8,9])
 <zip object at 0x7f6906368208>
 >>> zip_ = zip([1,2,3], [7,8,9])
@@ -198,7 +198,7 @@ zip
 ```
 
 filter
-```python
+```Python
 >>> filter(bool, [True, 1, 0, 's'])
 <filter object at 0x7f6906364b00>
 >>> filter_ = filter(bool, [True, 1, 0, 's'])
@@ -226,7 +226,7 @@ True
 生成器表达式有一个特点，就是 **惰性计算**
 
 这里有一段代码，对理解生成器的惰性计算非常重要
-```python
+```Python
 def add(s, x):
     return s + x
 
@@ -244,4 +244,4 @@ print(list(base))
 ### [20, 21, 22, 23]
 ```
 
-有个python代码执行的[可视化网站](http://pythontutor.com)可以帮助对这段代码进行理解
+有个Python代码执行的[可视化网站](http://Pythontutor.com)可以帮助对这段代码进行理解

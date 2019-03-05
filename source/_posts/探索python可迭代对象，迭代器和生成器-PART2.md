@@ -1,14 +1,14 @@
 ---
-title: 探索python可迭代对象，迭代器和生成器(PART2)
+title: 探索Python可迭代对象，迭代器和生成器(PART2)
 date: 2018-07-17 00:01:08
 categories: 
-    - "python"
-    - "explore python"
+    - "Python"
+    - "explore Python"
 tags: 
-    - "python cookbook"
-    - python
+    - "Python cookbook"
+    - Python
 ---
-python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解
+Python cookbook中关于迭代器和生成器部分的笔记，比较偏向与应用层面而非对概念的理解
 <!--more-->
 ## 0.可迭代对象，迭代器，生成器
 
@@ -23,7 +23,7 @@ python cookbook中关于迭代器和生成器部分的笔记，比较偏向与�
 
 ## 1.手动访问迭代器元素
 **可迭代对象需要转换成迭代器之后，才可以执行next()操作**
-```python
+```Python
 >>> items = [1, 2, 3]
 >>> it = iter(items)
 >>> it
@@ -43,7 +43,7 @@ StopIteration
 ## 2.创建迭代器，内部有可迭代对象，执行迭代
 
 **使自定义的容器实现迭代，就是实现__iter__**
-```python
+```Python
 >>> class Node:
 ...     def __init__(self, value):
 ...         self._value = value
@@ -71,7 +71,7 @@ iter(s)实际上是调用s.__iter()来返回底层迭代器的　　
 ## 3.生成器，新的迭代模式
 **有yield就会变成生成器**
 
-```python
+```Python
 >>> def countdown(n):
 ...     print('Starting to count from', n)
 ...     while n > 0:
@@ -104,7 +104,7 @@ StopIteration
 
 因为，如果直接自定义迭代器，需要维护内部的__next__状态，非常繁琐
 
-```python
+```Python
 >>> class Node:
 ...     def __init__(self, value):
 ...         self._value = value
@@ -144,7 +144,7 @@ Node (2)
 否则需要将对象转换为list
 
 ### reversed()反向迭代
-```python
+```Python
 >>> a = [1, 2, 3, 4,5]
 >>> a
 [1, 2, 3, 4, 5]
@@ -157,7 +157,7 @@ Node (2)
 1
 ```
 ### 自定义类使用__reversed__()实现反向迭代
-```python
+```Python
 >>> class Countdown:
 ...     def __init__(self, start):
 ...         self.start = start
@@ -189,7 +189,7 @@ Node (2)
 
 ## 6.生成器函数，有额外状态
 
-```python
+```Python
 >>> class linehistory:
 ...     def __init__(self, lines, histlen=3):
 ...         self.lines = lines
@@ -211,7 +211,7 @@ islice()会消耗原迭代器中的数据　　
 
 如果之后需要重新使用之前的数据，需要提前将数据转入list中
 
-```python
+```Python
 >>> def count(n):
 ...     while True:
 ...         yield n
@@ -243,7 +243,7 @@ TypeError: 'generator' object is not subscriptable
 满足条件的都会丢弃知道有元素不满足为止
 ### itertools.islice()
 在知道需要剔除的数量的时候，可以使用这个函数
-```python
+```Python
 >>> from itertools import islice
 
 >>> it = ['a', 'b', 'c', 'd', 1, 4, 65, 2]
@@ -259,7 +259,7 @@ TypeError: 'generator' object is not subscriptable
 
 ### itertools.permutations()
 接受一个元素序列，将其中所有的元素重新排列为所有可能的情况
-```python
+```Python
 >>> from itertools import permutations
 >>> items = ['a', 'b', 'c']
 >>> for p in permutations(items):print(p)
@@ -281,7 +281,7 @@ TypeError: 'generator' object is not subscriptable
 ```
 ### itertools.combinations()
 可产生输入序列中的所有元素的全部组合（与顺序无关）
-```python
+```Python
 >>> from itertools import combinations
 >>> for p in combinations(items, 3):print(p)
 ...
@@ -294,7 +294,7 @@ TypeError: 'generator' object is not subscriptable
 ```
 ### itertools.combinations_with_replacement()
 可产生输入序列中的所有元素的全部组合（相同元素可以得到多次选择）
-```python
+```Python
 >>> from itertools import combinations_with_replacement
 >>> for p in combinations_with_replacement(items, 2):print(p)
 ...
@@ -309,7 +309,7 @@ TypeError: 'generator' object is not subscriptable
 ## 10.迭代序列，并记录索引
 
 ### enumerate()
-```python
+```Python
 >>> for index,value in enumerate(items):print(index,value)
 ...
 0 a
@@ -327,7 +327,7 @@ enumerate()返回是一个enumerate对象实例，是一个迭代器，可返回
 元祖由索引值和传入调用next()得到的值组成
 
 ### 处理嵌套序列
-```python
+```Python
 >>> data = [[1, 2], [3, 4]]
 >>> for i, (x,y) in enumerate(data):print(i,(x,y))
 ...
@@ -338,7 +338,7 @@ enumerate()返回是一个enumerate对象实例，是一个迭代器，可返回
 ## 11.同时迭代多个序列
 
 ### zip() 按照短的序列迭代
-```python
+```Python
 >>> a
 [1, 4, 7, 5, 3, 5357, 13]
 >>> b
@@ -372,7 +372,7 @@ enumerate()返回是一个enumerate对象实例，是一个迭代器，可返回
 ```
 
 可以接受多于两个序列
-```python
+```Python
 >>> for x,y,z in zip(a,c,b):print(x,y,z)
 ...
 1 1 234
@@ -384,7 +384,7 @@ enumerate()返回是一个enumerate对象实例，是一个迭代器，可返回
 13 67 100
 ```
 ### itertools.zip_longest() 按照长的迭代
-```python
+```Python
 >>> for x,y in zip_longest(a,c):print(x,y)
 ...
 1 1
@@ -410,7 +410,7 @@ None 100
 ```
 ## 12.迭代不同的容器
 ### itertools.chain()
-```python
+```Python
 >>> from itertools import chain
 >>> a = [1, 2, 3]
 >>> b = ['x', 'f', 's']
@@ -436,7 +436,7 @@ chain()可接受多个可迭代对象作为参数，然后会创建一个迭代�
 ## 15.合并多个有序序列，并迭代整个有序序列
 
 ### heapq.merge()
-```python
+```Python
 >>> a = [1,2,3]
 >>> b=[2,5,8]
 >>> for c in heapq.merge(a, b):print(c)
