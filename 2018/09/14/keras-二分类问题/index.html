@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/images/octopus_favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Deep Learning,深度学习,Tensorflow,Keras," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这篇是keras的demo算法记录 使用keras内部的IMDB数据解决电影两极评论的2分类问题">
+<meta name="keywords" content="Deep Learning,深度学习,Tensorflow,Keras">
+<meta property="og:type" content="article">
+<meta property="og:title" content="keras-二分类问题">
+<meta property="og:url" content="http://yoursite.com/2018/09/14/keras-二分类问题/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="这篇是keras的demo算法记录 使用keras内部的IMDB数据解决电影两极评论的2分类问题">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/09/14/keras-二分类问题/loss.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/14/keras-二分类问题/acc.png">
+<meta property="og:updated_time" content="2019-03-13T17:05:27.568Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="keras-二分类问题">
+<meta name="twitter:description" content="这篇是keras的demo算法记录 使用keras内部的IMDB数据解决电影两极评论的2分类问题">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/14/keras-二分类问题/loss.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/14/keras-二分类问题/"/>
+
+
+
+
+
+  <title>keras-二分类问题 | Octopi</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/14/keras-二分类问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">keras-二分类问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-14T01:02:57+08:00">
+                2018-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/Tensorflow/" itemprop="url" rel="index">
+                    <span itemprop="name">Tensorflow</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇是keras的demo算法记录</p>
+<p>使用keras内部的IMDB数据解决电影两极评论的2分类问题</p>
+<a id="more"></a>
+<h2 id="Keras-IMDB"><a href="#Keras-IMDB" class="headerlink" title="Keras IMDB"></a>Keras IMDB</h2><p>是keras内部集成的demo数据，包含IMDB的50000条两极分化的评论</p>
+<h2 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> imdb</span><br><span class="line"></span><br><span class="line">(train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=<span class="number">10000</span>)</span><br></pre></td></tr></table></figure>
+<p>这样就可以获取到IMDB数据，不过第一次加载需要下载，网络如果很慢的话，可以修改keras里面imdb.load_data中的代码，让keras直接读取网上下载的imdb.npz文件</p>
+<h2 id="处理数据"><a href="#处理数据" class="headerlink" title="处理数据"></a>处理数据</h2><p>由于imdb数据是整数序列，无法直接输入神经网络。</p>
+<p>需要将列表转化为张量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">vectorize_sequences</span><span class="params">(sequences, dimension=<span class="number">10000</span>)</span>:</span></span><br><span class="line">    result = np.zeros((len(sequences), dimension))</span><br><span class="line">    <span class="keyword">for</span> i, sequence <span class="keyword">in</span> enumerate(sequences):</span><br><span class="line">        result[i, sequence] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x_train = vectorize_sequence(train_data)</span><br><span class="line">x_test = vectorize_sequence(test_data)</span><br><span class="line"></span><br><span class="line">x_train[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">y_train = np.asarray(train_labels).astype(<span class="string">'float32'</span>)</span><br><span class="line">y_test = np.asarray(test_labels).astype(<span class="string">'float32'</span>)</span><br></pre></td></tr></table></figure>
+<p>建立的vectorize_sequences是使用 one-hot方法进行的数据向量化</p>
+<p>后面的标签直接asarray就好了</p>
+<h2 id="构建网络"><a href="#构建网络" class="headerlink" title="构建网络"></a>构建网络</h2><p>使用keras构建一个小网络</p>
+<p>里面有两层有激活函数的Dense，以及最后用sigmoid的输出层</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = models.Sequential()</span><br><span class="line"></span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>, input_shape=(<span class="number">10000</span>,)))</span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line"></span><br><span class="line">model.add(layers.Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="编译模型"><a href="#编译模型" class="headerlink" title="编译模型"></a>编译模型</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model.compile(optimizer=<span class="string">'rmsprop'</span>,</span><br><span class="line">             loss=<span class="string">'binary_crossentropy'</span>,</span><br><span class="line">             metrics=[<span class="string">'accuracy'</span>])</span><br></pre></td></tr></table></figure>
+<h2 id="将数据拆出验证集"><a href="#将数据拆出验证集" class="headerlink" title="将数据拆出验证集"></a>将数据拆出验证集</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x_val = x_train[:<span class="number">10000</span>]</span><br><span class="line">partial_x_train = x_train[<span class="number">10000</span>:]</span><br><span class="line"></span><br><span class="line">y_val = y_train[:<span class="number">10000</span>]</span><br><span class="line">partial_y_train = y_train[<span class="number">10000</span>:]</span><br></pre></td></tr></table></figure>
+<h2 id="进行训练"><a href="#进行训练" class="headerlink" title="进行训练"></a>进行训练</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">history = model.fit(partial_x_train,</span><br><span class="line">                   partial_y_train,</span><br><span class="line">                   epochs=<span class="number">20</span>,</span><br><span class="line">                   batch_size=<span class="number">512</span>,</span><br><span class="line">                   validation_data=(x_val, y_val))</span><br></pre></td></tr></table></figure>
+<h2 id="审视结果"><a href="#审视结果" class="headerlink" title="审视结果"></a>审视结果</h2><p>model.fit返回的结果被我们存在了history中</p>
+<p>让我们查看这个dict</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">his_dict = history.history</span><br><span class="line"></span><br><span class="line">his_dict.keys()</span><br></pre></td></tr></table></figure>
+<p>会返回：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict_keys([&apos;val_loss&apos;, &apos;val_acc&apos;, &apos;loss&apos;, &apos;acc&apos;])</span><br></pre></td></tr></table></figure></p>
+<p>里面保存着训练过程中的数据</p>
+<p>我们可以使用matplotlib查看训练数据的情况，以便判断我们的模型是否出现问题</p>
+<p>比如”过拟合”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 查看训练损失和验证损失</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line">loss_value = his_dict[&apos;loss&apos;]</span><br><span class="line">val_loss_values = his_dict[&apos;val_loss&apos;]</span><br><span class="line"></span><br><span class="line">epochs = range(1, len(loss_value) + 1)</span><br><span class="line"></span><br><span class="line">plt.plot(epochs, loss_value, &apos;bo&apos;, label=&apos;Training loss&apos;)</span><br><span class="line">plt.plot(epochs, val_loss_values ,&apos;b&apos;, label=&apos;Validation loss&apos;)</span><br><span class="line"></span><br><span class="line">plt.title(&apos;Training and Validation loss&apos;)</span><br><span class="line"></span><br><span class="line">plt.xlabel(&apos;Epochs&apos;)</span><br><span class="line">plt.ylabel(&apos;Loss&apos;)</span><br><span class="line"></span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/09/14/keras-二分类问题/loss.png" alt="loss"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 查看训练精度和验证精度</span><br><span class="line">acc = his_dict[&apos;acc&apos;]</span><br><span class="line">val_acc = his_dict[&apos;val_acc&apos;]</span><br><span class="line"></span><br><span class="line">plt.plot(epochs, acc, &apos;bo&apos;, label=&apos;Training acc&apos;)</span><br><span class="line">plt.plot(epochs, val_acc ,&apos;b&apos;, label=&apos;Validation acc&apos;)</span><br><span class="line"></span><br><span class="line">plt.title(&apos;Training and Validation acc&apos;)</span><br><span class="line"></span><br><span class="line">plt.xlabel(&apos;Epochs&apos;)</span><br><span class="line">plt.ylabel(&apos;Acc&apos;)</span><br><span class="line"></span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/09/14/keras-二分类问题/acc.png" alt="loss"></p>
+<p>我们可以看到，在进行到第4论左右时，模型出现了过拟合现象</p>
+<h2 id="重新训练"><a href="#重新训练" class="headerlink" title="重新训练"></a>重新训练</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">model = models.Sequential()</span><br><span class="line"></span><br><span class="line">model.add(layers.Dense(16, activation=&apos;relu&apos;, input_shape=(10000,)))</span><br><span class="line">model.add(layers.Dense(16, activation=&apos;relu&apos;))</span><br><span class="line"></span><br><span class="line">model.add(layers.Dense(1, activation=&apos;sigmoid&apos;))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">model.compile(optimizer=&apos;rmsprop&apos;,</span><br><span class="line">             loss=&apos;binary_crossentropy&apos;,</span><br><span class="line">             metrics=[&apos;acc&apos;])</span><br><span class="line"></span><br><span class="line">model.fit(x_train, y_train, epochs=4, batch_size=512)</span><br><span class="line">results = model.evaluate(x_test, y_test)</span><br></pre></td></tr></table></figure>
+<p>这次我们就训练4次，以防止出现过拟合</p>
+<p>查看result可以知道模型的精度如何</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/Tensorflow/" rel="tag"># Tensorflow</a>
+          
+            <a href="/tags/Keras/" rel="tag"># Keras</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/07/CS231n-Lecture-7-Training-Neural-Networks-Part-II-进一步优化的方法-dropout正则化和迁移学习/" rel="next" title="CS231n Lecture 7 Training Neural Networks Part II 进一步优化的方法 dropout正则化和迁移学习">
+                <i class="fa fa-chevron-left"></i> CS231n Lecture 7 Training Neural Networks Part II 进一步优化的方法 dropout正则化和迁移学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/23/理解全球冲突与合作-01-国际政治简述以及解释工具与技巧/" rel="prev" title="理解全球冲突与合作 01: 国际政治简述以及解释工具与技巧">
+                理解全球冲突与合作 01: 国际政治简述以及解释工具与技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://github.com/stevelau94/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras-IMDB"><span class="nav-number">1.</span> <span class="nav-text">Keras IMDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载数据"><span class="nav-number">2.</span> <span class="nav-text">加载数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理数据"><span class="nav-number">3.</span> <span class="nav-text">处理数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建网络"><span class="nav-number">4.</span> <span class="nav-text">构建网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译模型"><span class="nav-number">5.</span> <span class="nav-text">编译模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将数据拆出验证集"><span class="nav-number">6.</span> <span class="nav-text">将数据拆出验证集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进行训练"><span class="nav-number">7.</span> <span class="nav-text">进行训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#审视结果"><span class="nav-number">8.</span> <span class="nav-text">审视结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新训练"><span class="nav-number">9.</span> <span class="nav-text">重新训练</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
