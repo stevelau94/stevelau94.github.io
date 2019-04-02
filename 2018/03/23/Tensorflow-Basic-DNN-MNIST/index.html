@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/images/octopus_favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Deep Learning,深度学习,Tensorflow," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="MNIST 是做DL或者ML都很熟悉的问题，可以算是‘Hello world’了 这篇介绍一段使用 TF 实现的２层全连接网络，解决MNIST问题">
+<meta name="keywords" content="Deep Learning,深度学习,Tensorflow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tensorflow Basic DNN_MNIST">
+<meta property="og:url" content="http://yoursite.com/2018/03/23/Tensorflow-Basic-DNN-MNIST/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="MNIST 是做DL或者ML都很熟悉的问题，可以算是‘Hello world’了 这篇介绍一段使用 TF 实现的２层全连接网络，解决MNIST问题">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-02T17:49:41.918Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tensorflow Basic DNN_MNIST">
+<meta name="twitter:description" content="MNIST 是做DL或者ML都很熟悉的问题，可以算是‘Hello world’了 这篇介绍一段使用 TF 实现的２层全连接网络，解决MNIST问题">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/23/Tensorflow-Basic-DNN-MNIST/"/>
+
+
+
+
+
+  <title>Tensorflow Basic DNN_MNIST | Octopi</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/Tensorflow-Basic-DNN-MNIST/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Tensorflow Basic DNN_MNIST</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-23T01:41:33+08:00">
+                2018-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/Tensorflow/" itemprop="url" rel="index">
+                    <span itemprop="name">Tensorflow</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>MNIST 是做DL或者ML都很熟悉的问题，可以算是‘Hello world’了</p>
+<p>这篇介绍一段使用 TF 实现的２层全连接网络，解决MNIST问题</p>
+<a id="more"></a>
+<h2 id="设置输入和输出节点的个数-配置神经网络的参数"><a href="#设置输入和输出节点的个数-配置神经网络的参数" class="headerlink" title="设置输入和输出节点的个数,配置神经网络的参数"></a>设置输入和输出节点的个数,配置神经网络的参数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置输入和输出节点的个数,配置神经网络的参数</span></span><br><span class="line">INPUT_NODE = <span class="number">784</span>     <span class="comment"># 输入节点，对MNIST问题来说就是图片像素</span></span><br><span class="line">OUTPUT_NODE = <span class="number">10</span>     <span class="comment"># 输出节点，类别数量</span></span><br><span class="line">LAYER1_NODE = <span class="number">500</span>    <span class="comment"># 隐藏层的节点数量  </span></span><br><span class="line">                              </span><br><span class="line">BATCH_SIZE = <span class="number">100</span>     <span class="comment"># 每个batch训练的样本数量      </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型相关的参数</span></span><br><span class="line">LEARNING_RATE_BASE = <span class="number">0.8</span>        <span class="comment"># 基础的学习率</span></span><br><span class="line">LEARNING_RATE_DECAY = <span class="number">0.99</span>    <span class="comment"># 学习衰减率</span></span><br><span class="line">REGULARAZTION_RATE = <span class="number">0.0001</span>   <span class="comment"># 正则化项在loss func的系数</span></span><br><span class="line">TRAINING_STEPS = <span class="number">5000</span>       <span class="comment"># 训练轮数 </span></span><br><span class="line">MOVING_AVERAGE_DECAY = <span class="number">0.99</span>  <span class="comment"># 滑动平均衰减率</span></span><br></pre></td></tr></table></figure>
+<h2 id="前向传播计算函数"><a href="#前向传播计算函数" class="headerlink" title="前向传播计算函数"></a>前向传播计算函数</h2><ol>
+<li>使用Relu激活函数</li>
+<li>加上2层的全连接网络</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inference</span><span class="params">(input_tensor, avg_class, weights1, biases1, weights2, biases2)</span>:</span></span><br><span class="line">    <span class="comment"># 不使用滑动平均类</span></span><br><span class="line">    <span class="keyword">if</span> avg_class == <span class="keyword">None</span>:</span><br><span class="line">        layer1 = tf.nn.relu(tf.matmul(input_tensor, weights1) + biases1)</span><br><span class="line">        <span class="keyword">return</span> tf.matmul(layer1, weights2) + biases2</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 使用滑动平均类</span></span><br><span class="line">        layer1 = tf.nn.relu(tf.matmul(input_tensor, avg_class.average(weights1)) + avg_class.average(biases1))</span><br><span class="line">        <span class="keyword">return</span> tf.matmul(layer1, avg_class.average(weights2)) + avg_class.average(biases2)</span><br></pre></td></tr></table></figure>
+<h2 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h2><ol>
+<li>定义占位符placeholder</li>
+<li>按照网络指定的shape，随机生成参数</li>
+<li>需要注意的是，通常训练轮数不被作为网络训练的参数</li>
+<li>计算使用滑动平均的前向结果</li>
+<li>loss是交叉熵和正则化的和</li>
+<li>计算正则化损失的时候注意，通常模型只计算权重的正则化所示，不计算偏移量的</li>
+<li>学习率设置的是指数衰减</li>
+<li>使用随机梯度下降作为优化算法</li>
+<li>训练要在会话中进行</li>
+<li></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(mnist)</span>:</span></span><br><span class="line">    x = tf.placeholder(tf.float32, [<span class="keyword">None</span>, INPUT_NODE], name=<span class="string">'x-input'</span>)</span><br><span class="line">    y_ = tf.placeholder(tf.float32, [<span class="keyword">None</span>, OUTPUT_NODE], name=<span class="string">'y-input'</span>)</span><br><span class="line">    <span class="comment"># 生成隐藏层的参数。</span></span><br><span class="line">    weights1 = tf.Variable(tf.truncated_normal([INPUT_NODE, LAYER1_NODE], stddev=<span class="number">0.1</span>))</span><br><span class="line">    biases1 = tf.Variable(tf.constant(<span class="number">0.1</span>, shape=[LAYER1_NODE]))</span><br><span class="line">    <span class="comment"># 生成输出层的参数。</span></span><br><span class="line">    weights2 = tf.Variable(tf.truncated_normal([LAYER1_NODE, OUTPUT_NODE], stddev=<span class="number">0.1</span>))</span><br><span class="line">    biases2 = tf.Variable(tf.constant(<span class="number">0.1</span>, shape=[OUTPUT_NODE]))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算不含滑动平均类的前向传播结果</span></span><br><span class="line">    y = inference(x, <span class="keyword">None</span>, weights1, biases1, weights2, biases2)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 定义训练轮数</span></span><br><span class="line">    <span class="comment"># 这里需要注意的是，通常训练轮数不被作为网络训练的参数</span></span><br><span class="line">    global_step = tf.Variable(<span class="number">0</span>, trainable=<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 初始化滑动平均类</span></span><br><span class="line">    variable_averages = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY, global_step)</span><br><span class="line">    <span class="comment"># 在所有参数上使用滑动平均</span></span><br><span class="line">    variables_averages_op = variable_averages.apply(tf.trainable_variables())</span><br><span class="line">    <span class="comment"># 使用了滑动平均的前向结果</span></span><br><span class="line">    average_y = inference(x, variable_averages, weights1, biases1, weights2, biases2)</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算交叉熵及其平均值</span></span><br><span class="line">    cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y, labels=tf.argmax(y_, <span class="number">1</span>))</span><br><span class="line">    cross_entropy_mean = tf.reduce_mean(cross_entropy)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 损失函数的计算</span></span><br><span class="line">    regularizer = tf.contrib.layers.l2_regularizer(REGULARAZTION_RATE)</span><br><span class="line">    <span class="comment"># 通常模型只计算权重的正则化所示，不计算偏移量的</span></span><br><span class="line">    regularaztion = regularizer(weights1) + regularizer(weights2)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># loss是交叉熵和正则化的和</span></span><br><span class="line">    loss = cross_entropy_mean + regularaztion</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 设置指数衰减的学习率。</span></span><br><span class="line">    learning_rate = tf.train.exponential_decay(</span><br><span class="line">        LEARNING_RATE_BASE,</span><br><span class="line">        global_step,</span><br><span class="line">        mnist.train.num_examples / BATCH_SIZE,</span><br><span class="line">        LEARNING_RATE_DECAY,</span><br><span class="line">        staircase=<span class="keyword">True</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 优化损失函数</span></span><br><span class="line">    train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss, global_step=global_step)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 反向传播更新参数和更新每一个参数的滑动平均值</span></span><br><span class="line">    <span class="keyword">with</span> tf.control_dependencies([train_step, variables_averages_op]):</span><br><span class="line">        train_op = tf.no_op(name=<span class="string">'train'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算正确率</span></span><br><span class="line">    <span class="comment"># 通过滑动平均和无滑动平均两个结果的比较</span></span><br><span class="line">    correct_prediction = tf.equal(tf.argmax(average_y, <span class="number">1</span>), tf.argmax(y_, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 首先将数据转换为实数，然后计算平均值</span></span><br><span class="line">    <span class="comment"># 这个平均值就是模型在这个batch数据的正确率</span></span><br><span class="line">    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 初始化会话，并开始训练过程。</span></span><br><span class="line">    <span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">        tf.global_variables_initializer().run()</span><br><span class="line">        validate_feed = &#123;x: mnist.validation.images, y_: mnist.validation.labels&#125;</span><br><span class="line">        test_feed = &#123;x: mnist.test.images, y_: mnist.test.labels&#125; </span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 循环的训练神经网络。</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(TRAINING_STEPS):</span><br><span class="line">            <span class="keyword">if</span> i % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">                validate_acc = sess.run(accuracy, feed_dict=validate_feed)</span><br><span class="line">                print(<span class="string">"After %d training step(s), validation accuracy using average model is %g "</span> % (i, validate_acc))</span><br><span class="line">            </span><br><span class="line">            xs,ys=mnist.train.next_batch(BATCH_SIZE)</span><br><span class="line">            sess.run(train_op,feed_dict=&#123;x:xs,y_:ys&#125;)</span><br><span class="line"></span><br><span class="line">        test_acc=sess.run(accuracy,feed_dict=test_feed)</span><br><span class="line">        print((<span class="string">"After %d training step(s), test accuracy using average model is %g"</span> %(TRAINING_STEPS, test_acc)))</span><br></pre></td></tr></table></figure>
+<h2 id="网络训练结果"><a href="#网络训练结果" class="headerlink" title="网络训练结果"></a>网络训练结果</h2><p>可以看到带有隐藏层的神经网络已经将这个问题解决的很好了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">After 0 training step(s), validation accuracy using average model is 0.0574 </span><br><span class="line">After 1000 training step(s), validation accuracy using average model is 0.9798 </span><br><span class="line">After 2000 training step(s), validation accuracy using average model is 0.9814 </span><br><span class="line">After 3000 training step(s), validation accuracy using average model is 0.9838 </span><br><span class="line">After 4000 training step(s), validation accuracy using average model is 0.9832 </span><br><span class="line">After 5000 training step(s), test accuracy using average model is 0.9823</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<p><a href="">Tensorflow实战Google深度学习框架</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/Tensorflow/" rel="tag"># Tensorflow</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/11/Tensorflow-Basic-03-会话-Session/" rel="next" title="Tensorflow Basic 03 会话 Session">
+                <i class="fa fa-chevron-left"></i> Tensorflow Basic 03 会话 Session
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/29/ubuntu假死解决/" rel="prev" title="ubuntu假死解决">
+                ubuntu假死解决 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://github.com/stevelau94/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置输入和输出节点的个数-配置神经网络的参数"><span class="nav-number">1.</span> <span class="nav-text">设置输入和输出节点的个数,配置神经网络的参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前向传播计算函数"><span class="nav-number">2.</span> <span class="nav-text">前向传播计算函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练过程"><span class="nav-number">3.</span> <span class="nav-text">训练过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络训练结果"><span class="nav-number">4.</span> <span class="nav-text">网络训练结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
