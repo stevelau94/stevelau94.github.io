@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/images/octopus_favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Deep Learning,深度学习,Pytorch," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Pytorch 基本数据类型 和 随机初始化">
+<meta name="keywords" content="Deep Learning,深度学习,Pytorch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pytorch 基本数据类型 和 随机初始化">
+<meta property="og:url" content="http://yoursite.com/2018/10/17/Pytorch-基本数据类型-和-随机初始化/index.html">
+<meta property="og:site_name" content="Octopi">
+<meta property="og:description" content="Pytorch 基本数据类型 和 随机初始化">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-08T15:25:29.007Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Pytorch 基本数据类型 和 随机初始化">
+<meta name="twitter:description" content="Pytorch 基本数据类型 和 随机初始化">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/17/Pytorch-基本数据类型-和-随机初始化/"/>
+
+
+
+
+
+  <title>Pytorch 基本数据类型 和 随机初始化 | Octopi</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Octopi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/17/Pytorch-基本数据类型-和-随机初始化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Octopi Lau">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Octopi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Pytorch 基本数据类型 和 随机初始化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-17T23:22:37+08:00">
+                2018-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/Pytorch/" itemprop="url" rel="index">
+                    <span itemprop="name">Pytorch</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Pytorch 基本数据类型 和 随机初始化</p>
+<a id="more"></a>
+<h2 id="关于-string-类型"><a href="#关于-string-类型" class="headerlink" title="关于 string 类型"></a>关于 string 类型</h2><p>string 在pytorch中没有数据类型</p>
+<p>所以需要一些编码方法将string转换为数字</p>
+<ol>
+<li><p>one-hot</p>
+</li>
+<li><p>Embedding<br>(Word2vec, glove)</p>
+</li>
+</ol>
+<h2 id="基本数据类型-及各Dim-情况数据"><a href="#基本数据类型-及各Dim-情况数据" class="headerlink" title="基本数据类型 及各Dim 情况数据"></a>基本数据类型 及各Dim 情况数据</h2><h3 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">a = torch.randn(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">a.type()</span><br><span class="line"></span><br><span class="line">type(a)</span><br><span class="line">&gt; torch.Tensor 不会再进一步显示具体类型</span><br><span class="line"></span><br><span class="line">isinstance(a, torch.FloatTensor)</span><br></pre></td></tr></table></figure>
+<h3 id="标量-常用于-loss"><a href="#标量-常用于-loss" class="headerlink" title="标量 (常用于 loss)"></a>标量 (常用于 loss)</h3><h4 id="tensor-创建"><a href="#tensor-创建" class="headerlink" title="tensor() 创建"></a>tensor() 创建</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">torch.tensor(<span class="number">1.</span>)</span><br><span class="line"></span><br><span class="line">torch.tensor(<span class="number">1.3</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="Dim-0"><a href="#Dim-0" class="headerlink" title="Dim=0"></a>Dim=0</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = torch.tensor(<span class="number">2.2</span>)</span><br><span class="line"></span><br><span class="line">a.shape</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检测Dim=0</span></span><br><span class="line">len(a.shape)</span><br><span class="line"></span><br><span class="line">a.size()</span><br></pre></td></tr></table></figure>
+<h3 id="向量-常用于-Bias，-CNN的输入"><a href="#向量-常用于-Bias，-CNN的输入" class="headerlink" title="向量 (常用于 Bias， CNN的输入 )"></a>向量 (常用于 Bias， CNN的输入 )</h3><h4 id="tensor-创建，-传入具体数据"><a href="#tensor-创建，-传入具体数据" class="headerlink" title="tensor([]) 创建， 传入具体数据"></a>tensor([]) 创建， 传入具体数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">torch.tensor([<span class="number">1.1</span>])</span><br><span class="line"></span><br><span class="line">torch.tensor([<span class="number">1.1</span>, <span class="number">2.2</span>])</span><br></pre></td></tr></table></figure>
+<h4 id="FloatTensor-等-创建，-传入数据shape"><a href="#FloatTensor-等-创建，-传入数据shape" class="headerlink" title="FloatTensor 等 创建， 传入数据shape"></a>FloatTensor 等 创建， 传入数据shape</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">torch.FloatTensor(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">torch.FloatTensor(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="from-numpy-创建"><a href="#from-numpy-创建" class="headerlink" title="from_numpy 创建"></a>from_numpy 创建</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = np.ones(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">data</span><br><span class="line"></span><br><span class="line">torch.from_numpy(data)</span><br></pre></td></tr></table></figure>
+<h3 id="矩阵-常用于-有batch的CNN的输入"><a href="#矩阵-常用于-有batch的CNN的输入" class="headerlink" title="矩阵 (常用于 有batch的CNN的输入 )"></a>矩阵 (常用于 有batch的CNN的输入 )</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">a = torch.rand(<span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Dim3-常用于-有batch的RNN的输入"><a href="#Dim3-常用于-有batch的RNN的输入" class="headerlink" title="Dim3 (常用于 有batch的RNN的输入 )"></a>Dim3 (常用于 有batch的RNN的输入 )</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">a = torch.rand(<span class="number">2</span>, <span class="number">3</span>， <span class="number">28</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Dim4-常用于-CNN"><a href="#Dim4-常用于-CNN" class="headerlink" title="Dim4 (常用于 CNN )"></a>Dim4 (常用于 CNN )</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">a = torch.rand(<span class="number">2</span>, <span class="number">3</span>， <span class="number">28</span>， <span class="number">28</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="查看数据规模"><a href="#查看数据规模" class="headerlink" title="查看数据规模"></a>查看数据规模</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">a = torch.rand(<span class="number">2</span>, <span class="number">3</span>， <span class="number">28</span>， <span class="number">28</span>)</span><br><span class="line"></span><br><span class="line">a.shape</span><br><span class="line"></span><br><span class="line"><span class="comment"># number of elems</span></span><br><span class="line">a.numel()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a.dim()</span><br></pre></td></tr></table></figure>
+<h2 id="创建tensor"><a href="#创建tensor" class="headerlink" title="创建tensor"></a>创建tensor</h2><h3 id="from-numpy"><a href="#from-numpy" class="headerlink" title="from numpy"></a>from numpy</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">torch.from_numpy(a)</span><br><span class="line"></span><br><span class="line">a = np.ones([<span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">torch.from_numpy(a)</span><br></pre></td></tr></table></figure>
+<h3 id="from-list"><a href="#from-list" class="headerlink" title="from list"></a>from list</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">torch.tensor([<span class="number">2.</span>, <span class="number">3.2</span>])</span><br><span class="line"></span><br><span class="line">torch.FloatTensor([<span class="number">2.</span>, <span class="number">3.2</span>])</span><br><span class="line"></span><br><span class="line">torch.FloatTensor(<span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>注意，FloatTensor可接受[]传入真实数据，也可以接受shape信息，不要混淆</strong></p>
+<h3 id="未初始化的数据"><a href="#未初始化的数据" class="headerlink" title="未初始化的数据"></a>未初始化的数据</h3><p>torch.empty() 可以接受shape</p>
+<p>torch.FloatTensor(),接受shape参数</p>
+<h3 id="设置默认值"><a href="#设置默认值" class="headerlink" title="设置默认值"></a>设置默认值</h3><p>torch.set_default_tensor_type(torch.DoubleTensor)</p>
+<p>可以设置pytorch的默认tensor类型</p>
+<h2 id="随机初始化"><a href="#随机初始化" class="headerlink" title="随机初始化"></a>随机初始化</h2><h4 id="rand，-rand-like"><a href="#rand，-rand-like" class="headerlink" title="rand， rand_like"></a>rand， rand_like</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.rand(<span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([[<span class="number">0.5573</span>, <span class="number">0.6133</span>, <span class="number">0.8952</span>],</span><br><span class="line">        [<span class="number">0.5106</span>, <span class="number">0.5976</span>, <span class="number">0.6970</span>],</span><br><span class="line">        [<span class="number">0.5869</span>, <span class="number">0.5441</span>, <span class="number">0.9428</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.rand_like(a)</span><br><span class="line">tensor([[<span class="number">0.7489</span>, <span class="number">0.8934</span>, <span class="number">0.5070</span>],</span><br><span class="line">        [<span class="number">0.9490</span>, <span class="number">0.4509</span>, <span class="number">0.8781</span>],</span><br><span class="line">        [<span class="number">0.7509</span>, <span class="number">0.5982</span>, <span class="number">0.4644</span>]])</span><br></pre></td></tr></table></figure>
+<h4 id="randint-min-max"><a href="#randint-min-max" class="headerlink" title="randint(min, max)"></a>randint(min, max)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.randint(<span class="number">1</span>, <span class="number">100</span>, [<span class="number">2</span>,<span class="number">2</span>])</span><br><span class="line">tensor([[<span class="number">40</span>, <span class="number">98</span>],</span><br><span class="line">        [<span class="number">82</span>, <span class="number">41</span>]])</span><br></pre></td></tr></table></figure>
+<h4 id="randn-正态分布"><a href="#randn-正态分布" class="headerlink" title="randn 正态分布"></a>randn 正态分布</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.randn(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">tensor([[ <span class="number">0.0890</span>,  <span class="number">1.4360</span>, <span class="number">-1.8264</span>],</span><br><span class="line">        [ <span class="number">0.3095</span>, <span class="number">-2.5038</span>,  <span class="number">0.7875</span>],</span><br><span class="line">        [ <span class="number">0.0301</span>, <span class="number">-0.4933</span>, <span class="number">-1.6007</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.normal(mean=torch.full([<span class="number">10</span>],<span class="number">0</span>),std=torch.arange(<span class="number">1</span>, <span class="number">0</span>, <span class="number">-0.1</span>))</span><br><span class="line">tensor([ <span class="number">0.3565</span>,  <span class="number">1.3306</span>, <span class="number">-0.3407</span>,  <span class="number">0.0620</span>,  <span class="number">0.3054</span>, <span class="number">-0.1875</span>,  <span class="number">0.4820</span>, <span class="number">-0.1032</span>,</span><br><span class="line">         <span class="number">0.0705</span>,  <span class="number">0.1138</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="full"><a href="#full" class="headerlink" title="full"></a>full</h3><p>注意标量和向量的赋值不同</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.full([<span class="number">2</span>, <span class="number">3</span>], <span class="number">100</span>)</span><br><span class="line">tensor([[<span class="number">100.</span>, <span class="number">100.</span>, <span class="number">100.</span>],</span><br><span class="line">        [<span class="number">100.</span>, <span class="number">100.</span>, <span class="number">100.</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.full([], <span class="number">100</span>)</span><br><span class="line">tensor(<span class="number">100.</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.full([<span class="number">1</span>], <span class="number">100</span>)</span><br><span class="line">tensor([<span class="number">100.</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="arange"><a href="#arange" class="headerlink" title="arange"></a>arange</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.arange(<span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">tensor([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.arange(<span class="number">0</span>, <span class="number">10</span>, <span class="number">2</span>)</span><br><span class="line">tensor([<span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="linspace"><a href="#linspace" class="headerlink" title="linspace"></a>linspace</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.linspace(<span class="number">0</span>, <span class="number">10</span>, steps=<span class="number">4</span>)</span><br><span class="line">tensor([ <span class="number">0.0000</span>,  <span class="number">3.3333</span>,  <span class="number">6.6667</span>, <span class="number">10.0000</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.linspace(<span class="number">0</span>, <span class="number">10</span>, steps=<span class="number">10</span>)</span><br><span class="line">tensor([ <span class="number">0.0000</span>,  <span class="number">1.1111</span>,  <span class="number">2.2222</span>,  <span class="number">3.3333</span>,  <span class="number">4.4444</span>,  <span class="number">5.5556</span>,  <span class="number">6.6667</span>,  <span class="number">7.7778</span>,</span><br><span class="line">         <span class="number">8.8889</span>, <span class="number">10.0000</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.linspace(<span class="number">0</span>, <span class="number">10</span>, steps=<span class="number">11</span>)</span><br><span class="line">tensor([ <span class="number">0.</span>,  <span class="number">1.</span>,  <span class="number">2.</span>,  <span class="number">3.</span>,  <span class="number">4.</span>,  <span class="number">5.</span>,  <span class="number">6.</span>,  <span class="number">7.</span>,  <span class="number">8.</span>,  <span class="number">9.</span>, <span class="number">10.</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.linspace(<span class="number">0</span>, <span class="number">-1</span>, steps=<span class="number">10</span>)</span><br><span class="line">tensor([ <span class="number">0.0000</span>, <span class="number">-0.1111</span>, <span class="number">-0.2222</span>, <span class="number">-0.3333</span>, <span class="number">-0.4444</span>, <span class="number">-0.5556</span>, <span class="number">-0.6667</span>, <span class="number">-0.7778</span>,</span><br><span class="line">        <span class="number">-0.8889</span>, <span class="number">-1.0000</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.linspace(<span class="number">0</span>, <span class="number">1</span>, steps=<span class="number">10</span>)</span><br><span class="line">tensor([<span class="number">0.0000</span>, <span class="number">0.1111</span>, <span class="number">0.2222</span>, <span class="number">0.3333</span>, <span class="number">0.4444</span>, <span class="number">0.5556</span>, <span class="number">0.6667</span>, <span class="number">0.7778</span>, <span class="number">0.8889</span>,</span><br><span class="line">        <span class="number">1.0000</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="logspace"><a href="#logspace" class="headerlink" title="logspace"></a>logspace</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.logspace(<span class="number">0</span>, <span class="number">-1</span>, steps=<span class="number">10</span>)</span><br><span class="line">tensor([<span class="number">1.0000</span>, <span class="number">0.7743</span>, <span class="number">0.5995</span>, <span class="number">0.4642</span>, <span class="number">0.3594</span>, <span class="number">0.2783</span>, <span class="number">0.2154</span>, <span class="number">0.1668</span>, <span class="number">0.1292</span>,</span><br><span class="line">        <span class="number">0.1000</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.logspace(<span class="number">0</span>, <span class="number">1</span>, steps=<span class="number">10</span>)</span><br><span class="line">tensor([ <span class="number">1.0000</span>,  <span class="number">1.2915</span>,  <span class="number">1.6681</span>,  <span class="number">2.1544</span>,  <span class="number">2.7826</span>,  <span class="number">3.5938</span>,  <span class="number">4.6416</span>,  <span class="number">5.9948</span>,</span><br><span class="line">         <span class="number">7.7426</span>, <span class="number">10.0000</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="ones-zeros-eye"><a href="#ones-zeros-eye" class="headerlink" title="ones / zeros / eye"></a>ones / zeros / eye</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.ones(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">tensor([[<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.zeros(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">tensor([[<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.eye(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">tensor([[<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.zeros(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.zeros_like(a)</span><br><span class="line">tensor([[<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">        [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>]])</span><br></pre></td></tr></table></figure>
+<h3 id="randperm"><a href="#randperm" class="headerlink" title="randperm"></a>randperm</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.randperm(<span class="number">10</span>)</span><br><span class="line">tensor([<span class="number">4</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.randperm(<span class="number">10</span>)</span><br><span class="line">tensor([<span class="number">8</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">9</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.randperm(<span class="number">10</span>)</span><br><span class="line">tensor([<span class="number">9</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">5</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.randperm(<span class="number">10</span>)</span><br><span class="line">tensor([<span class="number">2</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">7</span>])</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/Pytorch/" rel="tag"># Pytorch</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/05/Pytorch线性回归的梯度求解样例/" rel="next" title="Pytorch线性回归的梯度求解样例">
+                <i class="fa fa-chevron-left"></i> Pytorch线性回归的梯度求解样例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/24/Pytorch-索引-与-切片/" rel="prev" title="Pytorch 索引 与 切片">
+                Pytorch 索引 与 切片 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Octopi Lau</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://github.com/stevelau94/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于-string-类型"><span class="nav-number">1.</span> <span class="nav-text">关于 string 类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据类型-及各Dim-情况数据"><span class="nav-number">2.</span> <span class="nav-text">基本数据类型 及各Dim 情况数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类型推断"><span class="nav-number">2.1.</span> <span class="nav-text">类型推断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标量-常用于-loss"><span class="nav-number">2.2.</span> <span class="nav-text">标量 (常用于 loss)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tensor-创建"><span class="nav-number">2.2.1.</span> <span class="nav-text">tensor() 创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dim-0"><span class="nav-number">2.2.2.</span> <span class="nav-text">Dim=0</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向量-常用于-Bias，-CNN的输入"><span class="nav-number">2.3.</span> <span class="nav-text">向量 (常用于 Bias， CNN的输入 )</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tensor-创建，-传入具体数据"><span class="nav-number">2.3.1.</span> <span class="nav-text">tensor([]) 创建， 传入具体数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FloatTensor-等-创建，-传入数据shape"><span class="nav-number">2.3.2.</span> <span class="nav-text">FloatTensor 等 创建， 传入数据shape</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#from-numpy-创建"><span class="nav-number">2.3.3.</span> <span class="nav-text">from_numpy 创建</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵-常用于-有batch的CNN的输入"><span class="nav-number">2.4.</span> <span class="nav-text">矩阵 (常用于 有batch的CNN的输入 )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dim3-常用于-有batch的RNN的输入"><span class="nav-number">2.5.</span> <span class="nav-text">Dim3 (常用于 有batch的RNN的输入 )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dim4-常用于-CNN"><span class="nav-number">2.6.</span> <span class="nav-text">Dim4 (常用于 CNN )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看数据规模"><span class="nav-number">2.7.</span> <span class="nav-text">查看数据规模</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建tensor"><span class="nav-number">3.</span> <span class="nav-text">创建tensor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#from-numpy"><span class="nav-number">3.1.</span> <span class="nav-text">from numpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#from-list"><span class="nav-number">3.2.</span> <span class="nav-text">from list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未初始化的数据"><span class="nav-number">3.3.</span> <span class="nav-text">未初始化的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置默认值"><span class="nav-number">3.4.</span> <span class="nav-text">设置默认值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机初始化"><span class="nav-number">4.</span> <span class="nav-text">随机初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rand，-rand-like"><span class="nav-number">4.0.1.</span> <span class="nav-text">rand， rand_like</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#randint-min-max"><span class="nav-number">4.0.2.</span> <span class="nav-text">randint(min, max)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#randn-正态分布"><span class="nav-number">4.0.3.</span> <span class="nav-text">randn 正态分布</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#full"><span class="nav-number">4.1.</span> <span class="nav-text">full</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arange"><span class="nav-number">4.2.</span> <span class="nav-text">arange</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linspace"><span class="nav-number">4.3.</span> <span class="nav-text">linspace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#logspace"><span class="nav-number">4.4.</span> <span class="nav-text">logspace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ones-zeros-eye"><span class="nav-number">4.5.</span> <span class="nav-text">ones / zeros / eye</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#randperm"><span class="nav-number">4.6.</span> <span class="nav-text">randperm</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Octopi Lau</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
